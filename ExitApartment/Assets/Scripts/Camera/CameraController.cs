@@ -74,7 +74,7 @@ public class CameraController : MonoBehaviour
     void Update()
     {
         CheckWall();
-        switch ((int)cameraMgr.EPlayerState)
+        switch ((int)cameraMgr.ECameraState)
         {
             case 0:
                 FollowCamera(S_speed, S_shake);

@@ -7,6 +7,7 @@ public class InputManager : MonoBehaviour
     [Header("플레이어 컨트롤러"), SerializeField]
     private PlayerController playerCtr;
 
+
     Vector3 inputDir;
     public Vector3 InputDir => inputDir;
     Vector3 cameraInputDir;

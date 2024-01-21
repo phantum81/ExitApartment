@@ -10,8 +10,11 @@ public class CameraManager : MonoBehaviour
 
     public CameraController CameraCtr=> cameraCtr;
 
-    EcameraState ePlayerState = EcameraState.FollowStand;
-    public EcameraState EPlayerState => ePlayerState;
+    EcameraState eCameraState = EcameraState.FollowStand;
+    public EcameraState ECameraState => eCameraState;  //카메라 스테이트 좀잘못쓴듯 캐릭터랑 겹침 구분할것
+
+    EplayerState ePlayerState = EplayerState.Stand;
+    
     void Start()
     {
         
@@ -23,21 +26,25 @@ public class CameraManager : MonoBehaviour
 
 
     }
-    public void ChangeState(int _state)
+    public void ChangeCameraState(int _state)
     {
         switch (_state)
         {
             case 0:
-                ePlayerState= EcameraState.FollowStand;
+                eCameraState = EcameraState.FollowStand;
+                ePlayerState = EplayerState.Stand;
                 break;
             case 1:
-                ePlayerState= EcameraState.FollowWalk;
+                eCameraState = EcameraState.FollowWalk;
+                ePlayerState = EplayerState.Walk;
                 break;
             case 2:
-                ePlayerState= EcameraState.FollowRun;
+                eCameraState = EcameraState.FollowRun;
+                ePlayerState = EplayerState.Run;
                 break;
             default:
-                ePlayerState = EcameraState.FollowStand;
+                eCameraState = EcameraState.FollowStand;
+                ePlayerState = EplayerState.Stand;
                 break;
 
         }

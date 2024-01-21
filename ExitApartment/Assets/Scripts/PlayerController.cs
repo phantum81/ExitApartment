@@ -17,39 +17,86 @@ public class PlayerController : MonoBehaviour
     public float RunSpeed => _runSpeed;
 
     private Rigidbody rigd;
-
-
     private float rotateY = 0f;
+
+
+    private Vector3 reserveGravity = new Vector3(0, 0, 1f);
+
 
     private InputManager inputMgr;
     private CameraManager cameraMgr;
+
+
+
+
+
     private EplayerState ePlayerState = EplayerState.Stand;
+    private EstageEventState eStageState = EstageEventState.None;
     
     void Start()
     {
         inputMgr = GameManager.Instance.inputMgr;
         cameraMgr = GameManager.Instance.cameraMgr;
+        reserveGravity.Normalize();
     }
 
     void Update()
     {
 
+        //if (inputMgr.InputDir != Vector3.zero)
+        //{
+        //    if (inputMgr.IsShift)
+        //    {
+        //        Move(inputMgr.InputDir, RunSpeed, EplayerState.Run);
+
+        //    }
+        //    else
+        //        Move(inputMgr.InputDir, WalkSpeed, EplayerState.Walk);
+        //}
+        //else if(ePlayerState== EplayerState.Fall)
+        //    ePlayerState = EplayerState.Stand;
+
+
+
         if (inputMgr.InputDir != Vector3.zero)
         {
+            ePlayerState = EplayerState.Walk;
             if (inputMgr.IsShift)
-            {
-                Move(inputMgr.InputDir, RunSpeed, EplayerState.Run);
-
-            }
-            else
-                Move(inputMgr.InputDir, WalkSpeed, EplayerState.Walk);
+                ePlayerState = EplayerState.Run;
         }
-        else
+        else if (ePlayerState != EplayerState.Fall)
             ePlayerState = EplayerState.Stand;
-        cameraMgr.ChangeState((int)ePlayerState);
+
+
+
+
+        switch (ePlayerState)
+        {
+            case EplayerState.Stand:
+                break;
+            case EplayerState.Walk:
+                Move(inputMgr.InputDir, WalkSpeed, EplayerState.Walk);
+                break;
+            case EplayerState.Run:
+                Move(inputMgr.InputDir, RunSpeed, EplayerState.Run);
+                break;
+            case EplayerState.Fall:
+                break;
+
+        }
+
+        cameraMgr.ChangeCameraState((int)ePlayerState);
         Rotate();
 
 
+    }
+
+    private void FixedUpdate()
+    {
+        if((int)eStageState == 1)
+        {
+            ChangeGravity(rigd);
+        }
     }
 
 
@@ -74,6 +121,36 @@ public class PlayerController : MonoBehaviour
         rotateY = rotateY + inputMgr.CameraInputDir.y * cameraMgr.CameraCtr.Sensitivity;
         Quaternion quat = Quaternion.Euler(new Vector3(0, rotateY, 0));
         player.rotation = quat;
+    }
+
+    private void GravityRotate()
+    {
+
+    }
+
+
+
+    public void ChangeStageState(int _state)
+    {
+        switch (_state)
+        {
+            case 0:
+            eStageState = EstageEventState.None;
+            break;
+            case 1:
+                eStageState = EstageEventState.GravityReverse;
+                
+                break;
+            
+        }
+    }
+
+    public void ChangeGravity(Rigidbody _rigd)
+    {
+        _rigd.useGravity= false;
+        _rigd.AddForce(reserveGravity * 9.81f * _rigd.mass , ForceMode.Acceleration);
+        
+        
     }
 
 }
