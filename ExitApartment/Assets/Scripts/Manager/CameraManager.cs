@@ -10,20 +10,29 @@ public class CameraManager : MonoBehaviour
 
     public CameraController CameraCtr=> cameraCtr;
 
+    
+
+    private Dictionary<int, Camera> camDic= new Dictionary<int, Camera>();
+
+
     EcameraState eCameraState = EcameraState.FollowStand;
-    public EcameraState ECameraState => eCameraState;  //카메라 스테이트 좀잘못쓴듯 캐릭터랑 겹침 구분할것
+    public EcameraState ECameraState => eCameraState;
 
     EplayerMoveState eMovewState = EplayerMoveState.Stand;
-    
+
+    EstageEventState eStageState = EstageEventState.None;
+
+
     void Start()
     {
+        camDic.Add(0, Camera.main);
         
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
 
     }
     public void ChangeCameraState(int _state)
@@ -49,5 +58,7 @@ public class CameraManager : MonoBehaviour
 
         }
     }
+
+    
 
 }

@@ -18,7 +18,7 @@ public enum EcameraState
     FollowWalk,
     FollowRun,
     FollowGravity,
-    
+    None,
 };
 public enum EstageEventState
 {

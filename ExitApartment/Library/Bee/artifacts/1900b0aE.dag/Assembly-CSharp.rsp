@@ -405,6 +405,7 @@
 "Assets/Resources/Mimic/Scripts/Mimic.cs"
 "Assets/Resources/Mimic/Scripts/Movement.cs"
 "Assets/Scripts/Camera/CameraController.cs"
+"Assets/Scripts/Camera/OnDeadCamera.cs"
 "Assets/Scripts/ElevatorController.cs"
 "Assets/Scripts/EnumIn.cs"
 "Assets/Scripts/EventListener.cs"

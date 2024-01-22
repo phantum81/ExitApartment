@@ -27,9 +27,10 @@ public class PlayerController : MonoBehaviour
     private InputManager inputMgr;
     private CameraManager cameraMgr;
     private EventManager eventMgr;
+    private UnitManager unitMgr;
 
     [SerializeField]
-    private UnityEvent onDead;
+    private UnityEvent onDead12F;
 
     private EplayerState ePlayerState = EplayerState.None;
     private EplayerMoveState eMoveState = EplayerMoveState.Stand;
@@ -43,6 +44,8 @@ public class PlayerController : MonoBehaviour
         inputMgr = GameManager.Instance.inputMgr;
         cameraMgr = GameManager.Instance.cameraMgr;
         eventMgr = GameManager.Instance.eventMgr;
+        unitMgr= GameManager.Instance.unitMgr;
+
         reserveGravity.Normalize();
        
 
@@ -65,21 +68,32 @@ public class PlayerController : MonoBehaviour
         switch (eMoveState)
         {
             case EplayerMoveState.Stand:
+                
                 break;
             case EplayerMoveState.Walk:
                 Move(inputMgr.InputDir, WalkSpeed);
+                
                 break;
             case EplayerMoveState.Run:
                 Move(inputMgr.InputDir, RunSpeed);
+                
                 break;
             case EplayerMoveState.Fall:
+                
                 break;
 
         }
 
+
+        if(eventMgr.eStageState== EstageEventState.Die12F)
+        {
+            eventMgr.OnDead12F(onDead12F);
+        }
+
+
         cameraMgr.ChangeCameraState((int)eMoveState);
-        
         Rotate();
+
 
 
     }
@@ -88,7 +102,8 @@ public class PlayerController : MonoBehaviour
     {
         if((int)eventMgr.eStageState == 1)
         {
-            eventMgr.ChangeGravity(rigd,reserveGravity);
+            unitMgr.ChangeGravity(rigd,reserveGravity);
+
         }
     }
 
@@ -116,11 +131,8 @@ public class PlayerController : MonoBehaviour
         player.rotation = quat;
     }
 
-    public void OnDead12F()
-    {
-        onDead.Invoke();
-    }
 
+    
 
 
 

@@ -78,15 +78,19 @@ public class CameraController : MonoBehaviour
         {
             case 0:
                 FollowCamera(S_speed, S_shake);
+                RotateCamera();
                 break;
             case 1:
                 FollowCamera(W_speed, W_shake);
+                RotateCamera();
                 break;
             case 2:
                 FollowCamera(R_speed, R_shake);
+                RotateCamera();
                 break;
             default:
                 FollowCamera(S_speed, S_shake);
+                RotateCamera();
                 break;
         }
 
@@ -99,7 +103,7 @@ public class CameraController : MonoBehaviour
         //v.y += 0.0002f / (2f * Mathf.PI / 4f) * Mathf.Sin(Time.time * 4f);        
         v.y += _shake / (2f * Mathf.PI / _speed) * Mathf.Sin(Time.time * _speed);
         transform.position = v;
-        RotateCamera();
+        
     }
 
     public void RotateCamera() // 마우스 기반 X축 회전, 플레이어의 Y축 회전도 영향

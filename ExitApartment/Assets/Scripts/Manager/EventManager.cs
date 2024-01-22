@@ -31,7 +31,7 @@ public class EventManager : MonoBehaviour
                 break;
             case 2:
                 eStageState = EstageEventState.Die12F;
-                GameManager.Instance.unitMgr.PlayerCtr.OnDead12F();
+                
                 break;
 
 
@@ -40,13 +40,7 @@ public class EventManager : MonoBehaviour
     }
 
 
-    public void ChangeGravity(Rigidbody _rigd, Vector3 _gravity)
-    {
-        _rigd.useGravity = false;
-        _rigd.AddForce(_gravity * 9.81f * _rigd.mass, ForceMode.Acceleration);
 
-
-    }
 
     public void OnDead12F(UnityEvent _event)
     {

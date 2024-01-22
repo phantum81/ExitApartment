@@ -26,4 +26,13 @@ public class UnitManager : MonoBehaviour
     }
 
 
+    public void ChangeGravity(Rigidbody _rigd, Vector3 _gravity)
+    {
+        _rigd.useGravity = false;
+        _rigd.AddForce(_gravity * 9.81f * _rigd.mass, ForceMode.Acceleration);
+
+    }
+
+
+
 }
