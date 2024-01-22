@@ -47,9 +47,6 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public void ChangeStageState(int _state)
-    {
-        unitMgr.PlayerCtr.ChangeStageState(_state);
-    }
+
     
 }

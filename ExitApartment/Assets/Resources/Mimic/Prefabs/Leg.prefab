@@ -232,8 +232,8 @@ MonoBehaviour:
   legResolution: 0
   legLine: {fileID: 0}
   handlesCount: 8
-  legMinHeight: 0.6
-  legMaxHeight: 1.2
+  legMinHeight: 0.28
+  legMaxHeight: 0.92
   handles: []
   handleOffsetMinRadius: 0.2
   handleOffsetMaxRadius: 0.65

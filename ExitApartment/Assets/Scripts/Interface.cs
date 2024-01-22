@@ -2,7 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface Iliseten
+public interface IState<T>
 {
+    void OperateEnter(T sender);
+    void OperateUdate(T sender);
+    void OperateExit(T sender);
+
+}
+public interface IContect
+{
+    void OnContect();
+
 
 }

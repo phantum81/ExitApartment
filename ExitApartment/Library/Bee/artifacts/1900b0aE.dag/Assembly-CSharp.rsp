@@ -409,6 +409,7 @@
 "Assets/Scripts/EnumIn.cs"
 "Assets/Scripts/EventListener.cs"
 "Assets/Scripts/Floor12F/GravityCollider.cs"
+"Assets/Scripts/Floor12F/GravityDieCollider.cs"
 "Assets/Scripts/GameEvent.cs"
 "Assets/Scripts/Interface.cs"
 "Assets/Scripts/Manager/CameraManager.cs"
@@ -417,7 +418,9 @@
 "Assets/Scripts/Manager/InputManager.cs"
 "Assets/Scripts/Manager/UnitManager.cs"
 "Assets/Scripts/MosterController.cs"
-"Assets/Scripts/PlayerController.cs"
+"Assets/Scripts/Player/PlayerColliderTrigger.cs"
+"Assets/Scripts/Player/PlayerController.cs"
+"Assets/Scripts/Player/PlayerMoveMachine.cs"
 "Assets/Scripts/PlayerPostProcess.cs"
 -langversion:9.0
 

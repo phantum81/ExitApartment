@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EplayerState
+public enum EplayerMoveState
 {
+    
     Stand,
     Walk,
     Run,
     Fall,
-    Damaged,
+    None,
 
 };
 public enum EcameraState
@@ -16,10 +17,20 @@ public enum EcameraState
     FollowStand,
     FollowWalk,
     FollowRun,
-    FollowGravity
+    FollowGravity,
+    
 };
 public enum EstageEventState
 {
     None,
-    GravityReverse
+    GravityReverse,
+    Die12F,
+};
+
+public enum EplayerState
+{
+    None,
+    MentalDamage,
+    Damage,
+    Die,
 };

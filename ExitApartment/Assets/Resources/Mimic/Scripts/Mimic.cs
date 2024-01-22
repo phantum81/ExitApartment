@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEngine;
 
 namespace MimicSpace
@@ -52,6 +53,8 @@ namespace MimicSpace
 
         [Tooltip("This must be updates as the Mimin moves to assure great leg placement")]
         public Vector3 velocity;
+
+        private bool isChase = false;
 
         void Start()
         {
@@ -122,11 +125,15 @@ namespace MimicSpace
                 if (Vector3.Angle(velocity, newLegPosition - transform.position) > 45)
                     newLegPosition = transform.position + ((newLegPosition - transform.position) + velocity.normalized * (newLegPosition - transform.position).magnitude) / 2f;
 
+                
                 RaycastHit hit;
-                Physics.Raycast(newLegPosition + Vector3.up * 10f, -Vector3.up, out hit);
+                Physics.Raycast(newLegPosition + Vector3.back , -Vector3.back, out hit);
                 Vector3 myHit = hit.point;
                 if (Physics.Linecast(transform.position, hit.point, out hit))
                     myHit = hit.point;
+
+
+
 
                 float lifeTime = Random.Range(minLegLifetime, maxLegLifetime);
 
@@ -163,6 +170,18 @@ namespace MimicSpace
             availableLegPool.Add(leg);
             leg.SetActive(false);
         }
+
+        public Vector3 ReverseVector(Vector3 _newLeg )
+        {
+            RaycastHit hit;
+            Physics.Raycast(_newLeg + Vector3.up*1f, -Vector3.up, out hit);
+            Vector3 myHit = hit.point;
+            if (Physics.Linecast(transform.position, hit.point, out hit))
+                myHit = hit.point;
+            return myHit;
+        }
     }
+
+    
 
 }
