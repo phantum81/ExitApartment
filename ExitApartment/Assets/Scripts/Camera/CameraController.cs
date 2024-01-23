@@ -74,35 +74,64 @@ public class CameraController : MonoBehaviour
     void Update()
     {
         CheckWall();
+
         switch ((int)cameraMgr.ECameraState)
         {
             case 0:
-                FollowCamera(S_speed, S_shake);
+                FollowCamera(main_cam,target, S_speed, S_shake, 1);
                 RotateCamera();
                 break;
             case 1:
-                FollowCamera(W_speed, W_shake);
+                FollowCamera(main_cam, target, W_speed, W_shake,1);
                 RotateCamera();
                 break;
             case 2:
-                FollowCamera(R_speed, R_shake);
+                FollowCamera(main_cam, target, R_speed, R_shake,1);
                 RotateCamera();
                 break;
+            case 3:
+                break; 
+            case 4:
+                break;
+
             default:
-                FollowCamera(S_speed, S_shake);
+                FollowCamera(main_cam, target ,S_speed, S_shake,1);
                 RotateCamera();
                 break;
         }
 
     }
 
-    public void FollowCamera(float _speed, float _shake)
+    /// <summary>
+    /// _version 은 0 :x 1: y 2:z
+    /// </summary>
+    /// <param 카메라="_cam"></param>
+    /// <param 타겟="_target"></param>
+    /// <param 속도="_speed"></param>
+    /// <param amount="_shake"></param>
+    /// <param xyz버전="_version"></param>
+    public void FollowCamera(Camera _cam,Transform _target, float _speed, float _shake, int _version)
     {
         
-        Vector3 v = new Vector3(target.position.x+ offSetX, transform.position.y, target.position.z + offSetZ);
-        //v.y += 0.0002f / (2f * Mathf.PI / 4f) * Mathf.Sin(Time.time * 4f);        
-        v.y += _shake / (2f * Mathf.PI / _speed) * Mathf.Sin(Time.time * _speed);
-        transform.position = v;
+        Vector3 v = new Vector3(_target.position.x+ offSetX, _cam.transform.position.y, _target.position.z + offSetZ);
+        //v.y += 0.0002f / (2f * Mathf.PI / 4f) * Mathf.Sin(Time.time * 4f); 
+
+        switch( _version )
+        {
+            case 0:
+                v.x += _shake / (2f * Mathf.PI / _speed) * Mathf.Sin(Time.time * _speed);
+                _cam.transform.position = v;
+                break;
+            case 1:
+                v.y += _shake / (2f * Mathf.PI / _speed) * Mathf.Sin(Time.time * _speed);
+                _cam.transform.position = v;
+                break;
+            case 2:
+                v.z += _shake / (2f * Mathf.PI / _speed) * Mathf.Sin(Time.time * _speed);
+                _cam.transform.position = v;
+                break;
+
+        }
         
     }
 
@@ -141,6 +170,20 @@ public class CameraController : MonoBehaviour
 
     }
 
+
+
+    public IEnumerator CameraShake(Camera _cam,float _shakeTime, float _shakeAmount)
+    {
+        float _timer = 0;
+        Vector3 origin = _cam.transform.position;
+        while (_timer <= _shakeTime)
+        {
+            _cam.transform.position = origin + Random.insideUnitSphere * _shakeAmount;
+            _timer += Time.deltaTime;
+            yield return null;
+        }
+        _cam.transform.position = origin;
+    }
 
 
 }

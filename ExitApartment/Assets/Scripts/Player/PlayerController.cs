@@ -28,13 +28,16 @@ public class PlayerController : MonoBehaviour
     private CameraManager cameraMgr;
     private EventManager eventMgr;
     private UnitManager unitMgr;
+    private PlayerPostProcess playerProcess;
+
 
     [SerializeField]
     private UnityEvent onDead12F;
 
     private EplayerState ePlayerState = EplayerState.None;
     private EplayerMoveState eMoveState = EplayerMoveState.Stand;
-    
+
+
 
 
 
@@ -45,7 +48,7 @@ public class PlayerController : MonoBehaviour
         cameraMgr = GameManager.Instance.cameraMgr;
         eventMgr = GameManager.Instance.eventMgr;
         unitMgr= GameManager.Instance.unitMgr;
-
+        playerProcess = gameObject.GetComponent<PlayerPostProcess>();
         reserveGravity.Normalize();
        
 
@@ -68,32 +71,32 @@ public class PlayerController : MonoBehaviour
         switch (eMoveState)
         {
             case EplayerMoveState.Stand:
-                
+                Rotate();
                 break;
             case EplayerMoveState.Walk:
-                Move(inputMgr.InputDir, WalkSpeed);
-                
+                Move(inputMgr.InputDir, WalkSpeed);                
                 break;
             case EplayerMoveState.Run:
-                Move(inputMgr.InputDir, RunSpeed);
-                
+                Move(inputMgr.InputDir, RunSpeed);                
                 break;
             case EplayerMoveState.Fall:
-                
+                Rotate();
+                break;
+            case EplayerMoveState.None:
                 break;
 
         }
 
-
-        if(eventMgr.eStageState== EstageEventState.Die12F)
+        if(eventMgr.eStageState == EstageEventState.Die12F)
         {
-            eventMgr.OnDead12F(onDead12F);
+            OnDead12F();
+            eventMgr.ChangeStageState(3);
         }
+
 
 
         cameraMgr.ChangeCameraState((int)eMoveState);
-        Rotate();
-
+        playerProcess.ChangePlayerState((int)ePlayerState);
 
 
     }
@@ -103,7 +106,7 @@ public class PlayerController : MonoBehaviour
         if((int)eventMgr.eStageState == 1)
         {
             unitMgr.ChangeGravity(rigd,reserveGravity);
-
+            
         }
     }
 
@@ -116,7 +119,7 @@ public class PlayerController : MonoBehaviour
 
         rigd.MovePosition(player.position + velocity * _speed * Time.deltaTime);
 
-        
+        Rotate();
 
     }
 
@@ -132,12 +135,15 @@ public class PlayerController : MonoBehaviour
     }
 
 
+
+
+    public void OnDead12F()
+    {
+        onDead12F?.Invoke();
+    }
+
+
     
-
-
-
-
-
 
 
 }

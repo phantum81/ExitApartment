@@ -19,6 +19,11 @@ public class EventManager : MonoBehaviour
     {
         
     }
+
+    /// <summary>
+    /// 스테이지 상태변경
+    /// 0: none 1: gravityReverse 2: Die12F 3: Eventing
+    /// </summary>
     public void ChangeStageState(int _state)
     {
         switch (_state)
@@ -30,20 +35,22 @@ public class EventManager : MonoBehaviour
                 eStageState = EstageEventState.GravityReverse;
                 break;
             case 2:
-                eStageState = EstageEventState.Die12F;
-                
+                eStageState = EstageEventState.Die12F;                
                 break;
-
+            case 3:
+                eStageState = EstageEventState.Eventing;
+                break;
 
 
         }
     }
 
-
-
-
-    public void OnDead12F(UnityEvent _event)
+    public void OnDead12F()
     {
-        _event.Invoke();
+        GameManager.Instance.unitMgr.PlayerCtr.OnDead12F();
     }
+
+
+
+
 }

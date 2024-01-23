@@ -34,6 +34,8 @@ public class GameManager : MonoBehaviour
     public InputManager inputMgr;
     public EventManager eventMgr;
 
+    
+
     void Start()
     {
         //GameObject go = new GameObject("CameraMgr");
@@ -48,5 +50,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    
+
+
+
 }
