@@ -48,11 +48,11 @@ public class OnDeadCameraController : MonoBehaviour
         Quaternion _secondTarget = Quaternion.Euler(new Vector3(0, 220f, -90f));
         Quaternion _thirdTarget = Quaternion.Euler(new Vector3(0, 30f, -90f));
         yield return lookMonsterWait;
-        StartCoroutine(CamLookAt(cameraMgr.CameraDic[1] ,_target, rotateSpeed, 0));
+        StartCoroutine(CamLookAt(cameraMgr.CameraDic[1] ,_target, rotateSpeed, 2));
         yield return lookMonsterWait;
-        StartCoroutine(CamLookAt(cameraMgr.CameraDic[1], _secondTarget , rotateSpeed*2,1));
+        StartCoroutine(CamLookAt(cameraMgr.CameraDic[1], _secondTarget , rotateSpeed*2,0));
         yield return lookMonsterWait;
-        StartCoroutine(CamLookAt(cameraMgr.CameraDic[1], _thirdTarget, rotateSpeed*3,0));
+        StartCoroutine(CamLookAt(cameraMgr.CameraDic[1], _thirdTarget, rotateSpeed*3,2));
         while (true)
         {
             cameraCtr.FollowCamera(cameraMgr.CameraDic[1], transform, _d_speed, _d_shake, 0);
