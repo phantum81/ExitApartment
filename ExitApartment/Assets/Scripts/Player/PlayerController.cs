@@ -103,11 +103,8 @@ public class PlayerController : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        if((int)eventMgr.eStageState == 1)
-        {
-            unitMgr.ChangeGravity(rigd,reserveGravity);
-            
-        }
+
+
     }
 
 

@@ -26,13 +26,22 @@ public class UnitManager : MonoBehaviour
     }
 
 
-    public void ChangeGravity(Rigidbody _rigd, Vector3 _gravity)
+
+
+    public IEnumerator ChangeGravity(Rigidbody _rigd, Vector3 _gravity)
     {
-        _rigd.useGravity = false;
-        _rigd.AddForce(_gravity * 9.81f * _rigd.mass, ForceMode.Acceleration);
-
+        EventManager evMgr = GameManager.Instance.eventMgr;
+        yield return new WaitUntil(() => evMgr.eStageState == EstageEventState.GravityReverse);
+        float speed = 0;
+        while(evMgr.eStageState == EstageEventState.Eventing)
+        {
+            _rigd.useGravity = false;
+            speed = Mathf.Clamp(speed, 0, 9.81f);
+            speed += Time.deltaTime;
+            _rigd.AddForce(_gravity * speed * _rigd.mass, ForceMode.Acceleration);
+            yield return null;
+        }
     }
-
 
 
 }

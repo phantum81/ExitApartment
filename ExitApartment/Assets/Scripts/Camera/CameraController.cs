@@ -175,14 +175,14 @@ public class CameraController : MonoBehaviour
     public IEnumerator CameraShake(Camera _cam,float _shakeTime, float _shakeAmount)
     {
         float _timer = 0;
-        Vector3 origin = _cam.transform.position;
+        float y = _cam.transform.position.y;
         while (_timer <= _shakeTime)
         {
-            _cam.transform.position = origin + Random.insideUnitSphere * _shakeAmount;
+            _cam.transform.position = _cam.transform.position + Random.insideUnitSphere * _shakeAmount;
             _timer += Time.deltaTime;
             yield return null;
         }
-        _cam.transform.position = origin;
+        _cam.transform.position = new Vector3(transform.position.x, y, transform.position.z);
     }
 
 

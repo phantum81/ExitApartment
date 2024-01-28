@@ -52,6 +52,8 @@ public class CameraManager : MonoBehaviour
             case EstageEventState.None:
                 break;
             case EstageEventState.GravityReverse:
+                StartCoroutine(cameraCtr.CameraShake(camDic[0], 0.2f, 0.8f));
+                
                 break;
             case EstageEventState.Die12F:                
                 StartCoroutine(cameraCtr.CameraShake(camDic[0], 0.5f, 0.1f));
