@@ -2,19 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerWalk : IState<PlayerController>
+public class PlayerWalk<T> : IState<T> where T : MonoBehaviour
 {
-    public void OperateEnter(PlayerController _player)
+    public void OperateEnter(T _player)
     {
 
     }
 
-    public void OperateUdate(PlayerController _player)
+    public void OperateUdate(T _player)
     {
 
     }
 
-    public void OperateExit(PlayerController _player)
+    public void OperateExit(T _player)
     {
 
     }
