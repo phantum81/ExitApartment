@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 
-public class HFSM<TState, T> where TState : struct, System.Enum where T : MonoBehaviour
+public class HFSM<TState, T> where TState : System.Enum where T : MonoBehaviour
 {
     private static HFSM<TState,T> instance;
     public static HFSM<TState, T> Instance
