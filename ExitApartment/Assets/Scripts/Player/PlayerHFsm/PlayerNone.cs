@@ -7,7 +7,7 @@ public class PlayerNone<T> : IState<T> where T : MonoBehaviour
     public void OperateEnter(T _player)
     {
         
-        
+
     }
 
     public void OperateUdate(T _player)

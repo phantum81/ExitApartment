@@ -64,6 +64,8 @@ public class PlayerPostProcess : MonoBehaviour
                 break;
             case 3:
                 playerState = EplayerState.Die;
+                OnMentalDamage();
+                OnDamageVignette();
                 break;
             default:
                 playerState = EplayerState.None;

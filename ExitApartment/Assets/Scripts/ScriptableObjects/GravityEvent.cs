@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 [CreateAssetMenu(menuName = "Scriptable Object/Gravity Scriptable ", order = int.MaxValue)]
-public class GameEvent : ScriptableObject
+public class GravityEvent : ScriptableObject
 {
     private List<EventListener> gravityListener = new List<EventListener>();
     

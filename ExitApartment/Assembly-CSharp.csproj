@@ -66,7 +66,6 @@
     <Compile Include="Assets\Scripts\Player\PlayerHFsm\PlayerRun.cs" />
     <Compile Include="Assets\Scripts\Interface.cs" />
     <Compile Include="Assets\Brick Project Studio\_BPS Basic Assets\Common\Scripts and Animations\Drawer\Z Axis\Drawer_Pull_Z.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerMoveMachine.cs" />
     <Compile Include="Assets\Scripts\Manager\EventManager.cs" />
     <Compile Include="Assets\Resources\Enviroment\enviroment\Office building\scripts\evelator_controll.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraController.cs" />
@@ -77,9 +76,11 @@
     <Compile Include="Assets\Brick Project Studio\_BPS Basic Assets\Common\Scripts and Animations\Doors\opencloseDoor.cs" />
     <Compile Include="Assets\Brick Project Studio\_BPS Basic Assets\Common\Scripts and Animations\Windows\opencloseWindow.cs" />
     <Compile Include="Assets\Brick Project Studio\_BPS Basic Assets\Common\Scripts and Animations\First Person Player\MouseLook.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerHFsm\PlayerFall.cs" />
     <Compile Include="Assets\Brick Project Studio\Apartment Kit\Common\Scripts &amp; Animation\Z Axis -1\Drawer_Pull_Zopp.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerColliderTrigger.cs" />
     <Compile Include="Assets\Brick Project Studio\Apartment Kit\Common\Scripts &amp; Animation\TableFlip\TableFlipR.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerHFsm\PlayerHFSMMachine.cs" />
     <Compile Include="Assets\Scripts\ElevatorController.cs" />
     <Compile Include="Assets\Scripts\Manager\GameManager.cs" />
     <Compile Include="Assets\Brick Project Studio\_BPS Basic Assets\Common\Scripts and Animations\First Person Player\PlayerMovement.cs" />
@@ -97,9 +98,11 @@
     <Compile Include="Assets\Resources\Enviroment\enviroment\Office building\scripts\Door.cs" />
     <Compile Include="Assets\Brick Project Studio\_BPS Basic Assets\Common\Scripts and Animations\Doors\opencloseDoor1.cs" />
     <Compile Include="Assets\Scripts\Camera\OnDeadCameraController.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\Die12FEvent.cs" />
     <Compile Include="Assets\Brick Project Studio\Apartment Kit\Common\Scripts &amp; Animation\TableFlip\TableFlipL.cs" />
     <Compile Include="Assets\Scripts\Manager\UnitManager.cs" />
     <Compile Include="Assets\Scripts\Manager\InputManager.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\GravityEvent.cs" />
     <Compile Include="Assets\Resources\Mimic\Scripts\Movement.cs" />
     <Compile Include="Assets\Brick Project Studio\Apartment Kit\Common\Scripts &amp; Animation\Closet\ClosetopencloseDoor.cs" />
     <Compile Include="Assets\3d-character_animeGirlAkane\DemoScene\Scripts\Akane_CharacterController.cs" />
@@ -107,7 +110,6 @@
     <Compile Include="Assets\Resources\Mimic\Scripts\Leg.cs" />
     <Compile Include="Assets\3d-character_animeGirlAkane\DemoScene\Scripts\Akane_CameraScript.cs" />
     <Compile Include="Assets\Brick Project Studio\Apartment Kit\Common\Scripts &amp; Animation\Windows\opencloseWindowApt.cs" />
-    <Compile Include="Assets\Scripts\GameEvent.cs" />
     <Compile Include="Assets\Resources\Enviroment\enviroment\Office building\scripts\pass_on_parent.cs" />
     <Compile Include="Assets\Scripts\EventListener.cs" />
     <Compile Include="Assets\Brick Project Studio\Apartment Kit\Common\Scripts &amp; Animation\OvenOpen\OvenFlip.cs" />

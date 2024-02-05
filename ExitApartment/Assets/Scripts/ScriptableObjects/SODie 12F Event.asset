@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6b7dcb3f204cf74d8f83d84a24ef39e, type: 3}
-  m_Name: SOGravity
+  m_Script: {fileID: 11500000, guid: 15cff3c561fb4904ba6ede152899744f, type: 3}
+  m_Name: SODie 12F Event
   m_EditorClassIdentifier: 

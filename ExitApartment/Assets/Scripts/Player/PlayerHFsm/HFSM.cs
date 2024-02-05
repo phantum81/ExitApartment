@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class HFSM<TState, T> where TState : System.Enum where T : MonoBehaviour
 {
-    private static HFSM<TState,T> instance;
+    private static HFSM<TState, T> instance;
     public static HFSM<TState, T> Instance
     {
         get
@@ -21,6 +21,7 @@ public class HFSM<TState, T> where TState : System.Enum where T : MonoBehaviour
     }
 
     private TState curState;
+    public TState CurState => curState;
     private Dictionary<TState, IState<T>> stateDic;
 
     private HFSM()
@@ -53,9 +54,9 @@ public class HFSM<TState, T> where TState : System.Enum where T : MonoBehaviour
                 return new PlayerRun<T>();
             case EstageEventState.None:
                 
-            case EstageEventState.GravityReverse:
+            //case EstageEventState.GravityReverse:
 
-            case EstageEventState.Die12F:
+            //case EstageEventState.Die12F:
 
             case EstageEventState.Eventing:
 
@@ -84,7 +85,7 @@ public class HFSM<TState, T> where TState : System.Enum where T : MonoBehaviour
 
     public void Update(T _obj)
     {
-        stateDic[curState].OperateEnter(_obj);
+        stateDic[curState].OperateUdate(_obj);
     }
 
 }

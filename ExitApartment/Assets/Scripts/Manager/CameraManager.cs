@@ -51,14 +51,14 @@ public class CameraManager : MonoBehaviour
         {
             case EstageEventState.None:
                 break;
-            case EstageEventState.GravityReverse:
-                StartCoroutine(cameraCtr.CameraShake(camDic[0], 0.2f, 0.8f));
+            //case EstageEventState.GravityReverse:
+            //    StartCoroutine(cameraCtr.CameraShake(camDic[0], 0.2f, 0.8f));
                 
-                break;
-            case EstageEventState.Die12F:                
-                StartCoroutine(cameraCtr.CameraShake(camDic[0], 0.5f, 0.1f));
-                StartCoroutine(ChangeCamera(camDic[1], 0.5f));
-                break;
+            //    break;
+            //case EstageEventState.Die12F:                
+            //    StartCoroutine(cameraCtr.CameraShake(camDic[0], 0.5f, 0.1f));
+            //    StartCoroutine(ChangeCamera(camDic[1], 0.5f));
+                //break;
             case EstageEventState.Eventing:
                 
                 break;
@@ -86,7 +86,7 @@ public class CameraManager : MonoBehaviour
 
             case 3:
                 eMovewState = EplayerMoveState.Fall;
-                eCameraState = EcameraState.FollowStand;
+                eCameraState = EcameraState.FollowFall;
                 break;
             case 4:
                 eMovewState = EplayerMoveState.None;

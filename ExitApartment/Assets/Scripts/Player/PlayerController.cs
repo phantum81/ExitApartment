@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
     private InputManager inputMgr;
     private CameraManager cameraMgr;
     private EventManager eventMgr;
-    private UnitManager unitMgr;
+
     private PlayerPostProcess playerProcess;
 
 
@@ -35,73 +35,43 @@ public class PlayerController : MonoBehaviour
     private UnityEvent onDead12F;
 
     private EplayerState ePlayerState = EplayerState.None;
-    private EplayerMoveState eMoveState = EplayerMoveState.Stand;
 
 
 
 
 
 
-    protected virtual void  Start()
+
+    private  void  Start()
     {
         inputMgr = GameManager.Instance.inputMgr;
         cameraMgr = GameManager.Instance.cameraMgr;
         eventMgr = GameManager.Instance.eventMgr;
-        unitMgr= GameManager.Instance.unitMgr;
+
         playerProcess = gameObject.GetComponent<PlayerPostProcess>();
         reserveGravity.Normalize();
        
 
     }
 
-    protected virtual void Update()
+    private void Update()
     {
-       
-        if (inputMgr.InputDir != Vector3.zero && eventMgr.eStageState == EstageEventState.None)
-        {
-            eMoveState = EplayerMoveState.Walk;
-            if (inputMgr.IsShift)
-                eMoveState = EplayerMoveState.Run;
-        }
-        else
-            eMoveState = EplayerMoveState.Stand;
+       InputDir = inputMgr.InputDir;
+
+        //if(eventMgr.eStageState == EstageEventState.Die12F)
+        //{
+        //    OnDead12F();
+        //    eventMgr.ChangeStageState(3);
+        //}
 
 
 
-        switch (eMoveState)
-        {
-            case EplayerMoveState.Stand:
-                Rotate();
-                break;
-            case EplayerMoveState.Walk:
-                Move(inputMgr.InputDir, WalkSpeed);                
-                break;
-            case EplayerMoveState.Run:
-                Move(inputMgr.InputDir, RunSpeed);                
-                break;
-            case EplayerMoveState.Fall:
-                Rotate();
-                break;
-            case EplayerMoveState.None:
-                break;
-
-        }
-
-        if(eventMgr.eStageState == EstageEventState.Die12F)
-        {
-            OnDead12F();
-            eventMgr.ChangeStageState(3);
-        }
-
-
-
-        cameraMgr.ChangeCameraState((int)eMoveState);
         playerProcess.ChangePlayerState((int)ePlayerState);
 
 
     }
 
-    protected virtual void FixedUpdate()
+    private void FixedUpdate()
     {
 
 
@@ -137,6 +107,7 @@ public class PlayerController : MonoBehaviour
     public void OnDead12F()
     {
         onDead12F?.Invoke();
+
     }
 
 

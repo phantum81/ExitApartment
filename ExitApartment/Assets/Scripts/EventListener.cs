@@ -5,15 +5,16 @@ using UnityEngine.Events;
 
 public class EventListener : MonoBehaviour
 {
-    public GameEvent eventSo;
+    public GravityEvent eventSo;
     public UnityEvent response;
 
     private void OnEnable()
-    {
+    {        
         eventSo.RegisterListener(this);
     }
     private void OnDisable()
     {
+        
         eventSo.UnregisterListener(this);
     }
 

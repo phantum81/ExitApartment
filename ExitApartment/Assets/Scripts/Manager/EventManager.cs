@@ -32,12 +32,6 @@ public class EventManager : MonoBehaviour
                 eStageState = EstageEventState.None;
                 break;
             case 1:
-                eStageState = EstageEventState.GravityReverse;
-                break;
-            case 2:
-                eStageState = EstageEventState.Die12F;                
-                break;
-            case 3:
                 eStageState = EstageEventState.Eventing;
                 break;
 

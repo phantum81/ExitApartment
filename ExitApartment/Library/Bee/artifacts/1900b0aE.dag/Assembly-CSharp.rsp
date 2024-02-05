@@ -420,6 +420,7 @@
 "Assets/Scripts/Player/PlayerColliderTrigger.cs"
 "Assets/Scripts/Player/PlayerController.cs"
 "Assets/Scripts/Player/PlayerHFsm/HFSM.cs"
+"Assets/Scripts/Player/PlayerHFsm/PlayerHFSMMachine.cs"
 "Assets/Scripts/Player/PlayerHFsm/PlayerNone.cs"
 "Assets/Scripts/Player/PlayerHFsm/PlayerRun.cs"
 "Assets/Scripts/Player/PlayerHFsm/PlayerStand.cs"
