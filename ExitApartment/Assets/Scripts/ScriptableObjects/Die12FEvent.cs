@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Scriptable Object/SODie12F Scriptable ")]
 public class Die12FEvent : ScriptableObject
 {
-    private List<EventListener> Die12FListener = new List<EventListener>();
+    public List<EventListener> Die12FListener = new List<EventListener>();
 
 
     public void Raise()

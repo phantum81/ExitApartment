@@ -789,7 +789,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8675915457954794080, guid: 3fc537e92bf3d2449b5be72cfd6cb447, type: 3}
   m_PrefabInstance: {fileID: 1853744832}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &275724984
+--- !u!114 &275724988
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -801,17 +801,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83f03c80104fdc541aec7e3e1764c956, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventSo: {fileID: 11400000, guid: 6f015f090eb466143ac74da0155c7bc0, type: 2}
+  eventSo: {fileID: 11400000, guid: 1078ccb9bd214fe40ac1c1a8e21bcaeb, type: 2}
   response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 6f015f090eb466143ac74da0155c7bc0, type: 2}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 0
+      - m_Target: {fileID: 1735829894}
+        m_TargetAssemblyTypeName: PlayerPostProcess, Assembly-CSharp
+        m_MethodName: Die
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1253,6 +1253,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eStageState: 0
+  eventList:
+  - {fileID: 11400000, guid: 76a67b5c7c463ef4989196a87e49c58d, type: 2}
+  - {fileID: 11400000, guid: 1078ccb9bd214fe40ac1c1a8e21bcaeb, type: 2}
 --- !u!4 &402160029
 Transform:
   m_ObjectHideFlags: 0
@@ -5142,9 +5145,9 @@ GameObject:
   - component: {fileID: 1735829887}
   - component: {fileID: 1735829888}
   - component: {fileID: 1735829889}
-  - component: {fileID: 1735829891}
   - component: {fileID: 1735829892}
   - component: {fileID: 1735829893}
+  - component: {fileID: 1735829894}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -5181,8 +5184,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 3850880387058471502}
-  _walkSpeed: 4
-  _runSpeed: 8
+  _walkSpeed: 7
+  _runSpeed: 13
   onDead12F:
     m_PersistentCalls:
       m_Calls:
@@ -5210,11 +5213,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83f03c80104fdc541aec7e3e1764c956, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventSo: {fileID: 11400000, guid: 6f015f090eb466143ac74da0155c7bc0, type: 2}
+  eventSo: {fileID: 11400000, guid: 1078ccb9bd214fe40ac1c1a8e21bcaeb, type: 2}
   response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1735829891}
+      - m_Target: {fileID: 1735829894}
         m_TargetAssemblyTypeName: PlayerPostProcess, Assembly-CSharp
         m_MethodName: On12FDead
         m_Mode: 1
@@ -5226,19 +5229,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1735829891
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1735829886}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db4deec1ef46ea749ad197cf449bc3d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  post: {fileID: 43635522}
 --- !u!114 &1735829892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5263,6 +5253,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a73a19f53ce0154bb100f8c042d3a9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1735829894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1735829886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db4deec1ef46ea749ad197cf449bc3d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  post: {fileID: 43635522}
+  mi: {fileID: 275724980}
 --- !u!1 &1737993438
 GameObject:
   m_ObjectHideFlags: 0
@@ -5531,11 +5535,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8675915457954794083, guid: 3fc537e92bf3d2449b5be72cfd6cb447, type: 3}
       propertyPath: velocity.x
-      value: -0.8979655
+      value: 0.19393414
       objectReference: {fileID: 0}
     - target: {fileID: 8675915457954794083, guid: 3fc537e92bf3d2449b5be72cfd6cb447, type: 3}
       propertyPath: velocity.z
-      value: -0.25884822
+      value: -0.21661717
       objectReference: {fileID: 0}
     - target: {fileID: 8675915457954794083, guid: 3fc537e92bf3d2449b5be72cfd6cb447, type: 3}
       propertyPath: maxGrowCoef
@@ -5623,7 +5627,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8675915457954794080, guid: 3fc537e92bf3d2449b5be72cfd6cb447, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 275724984}
+      addedObject: {fileID: 275724988}
   m_SourcePrefab: {fileID: 100100000, guid: 3fc537e92bf3d2449b5be72cfd6cb447, type: 3}
 --- !u!1 &1865009160
 GameObject:

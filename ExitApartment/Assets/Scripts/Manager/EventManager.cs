@@ -9,9 +9,21 @@ public class EventManager : MonoBehaviour
     
 
     public EstageEventState eStageState = EstageEventState.None;
+
+    [SerializeField]
+    ScriptableObject[] eventList;
+
+    private Dictionary<string, ScriptableObject> soEventDic = new Dictionary<string, ScriptableObject>();
+    public Dictionary<string, ScriptableObject> SoEventDic => soEventDic;
+
+    private void Awake()
+    {
+        soEventDic.Add("Gravity", eventList[0]);
+        soEventDic.Add("Die12F", eventList[1]);
+    }
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame

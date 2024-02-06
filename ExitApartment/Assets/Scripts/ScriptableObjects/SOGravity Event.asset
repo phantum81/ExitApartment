@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6b7dcb3f204cf74d8f83d84a24ef39e, type: 3}
   m_Name: SOGravity Event
   m_EditorClassIdentifier: 
+  gravityListener: []

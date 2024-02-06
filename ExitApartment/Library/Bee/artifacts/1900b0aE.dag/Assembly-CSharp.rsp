@@ -409,7 +409,6 @@
 "Assets/Scripts/EventListener.cs"
 "Assets/Scripts/Floor12F/GravityCollider.cs"
 "Assets/Scripts/Floor12F/GravityDieCollider.cs"
-"Assets/Scripts/GameEvent.cs"
 "Assets/Scripts/Interface.cs"
 "Assets/Scripts/Manager/CameraManager.cs"
 "Assets/Scripts/Manager/EventManager.cs"
@@ -420,14 +419,16 @@
 "Assets/Scripts/Player/PlayerColliderTrigger.cs"
 "Assets/Scripts/Player/PlayerController.cs"
 "Assets/Scripts/Player/PlayerHFsm/HFSM.cs"
+"Assets/Scripts/Player/PlayerHFsm/PlayerFall.cs"
 "Assets/Scripts/Player/PlayerHFsm/PlayerHFSMMachine.cs"
 "Assets/Scripts/Player/PlayerHFsm/PlayerNone.cs"
 "Assets/Scripts/Player/PlayerHFsm/PlayerRun.cs"
 "Assets/Scripts/Player/PlayerHFsm/PlayerStand.cs"
 "Assets/Scripts/Player/PlayerHFsm/PlayerWalk.cs"
-"Assets/Scripts/Player/PlayerMoveMachine.cs"
 "Assets/Scripts/Player/PlayerPostProcess.cs"
 "Assets/Scripts/Player/PlayerSound.cs"
+"Assets/Scripts/ScriptableObjects/Die12FEvent.cs"
+"Assets/Scripts/ScriptableObjects/GravityEvent.cs"
 -langversion:9.0
 
 /deterministic
