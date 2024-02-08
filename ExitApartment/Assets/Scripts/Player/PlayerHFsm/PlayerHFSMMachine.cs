@@ -5,9 +5,10 @@ using UnityEngine;
 public class PlayerHFSMMachine : MonoBehaviour
 {
     private HFSM<EplayerMoveState, PlayerController> MoveHFSM;    
-    private HFSM<EstageEventState, EventManager> eventHFSM;
+    //private HFSM<EstageEventState, EventManager> eventHFSM;
 
-    private InputManager inputMgr;    
+    private InputManager inputMgr;
+    private EventManager eventMgr;
     private PlayerController playerCtr;
     
     void Start()
@@ -18,7 +19,7 @@ public class PlayerHFSMMachine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(eventHFSM.CurState == EstageEventState.None)
+        if(eventMgr.eStageState == EstageEventState.None)
         {
             if (inputMgr.InputDir != Vector3.zero)
             {
@@ -42,9 +43,9 @@ public class PlayerHFSMMachine : MonoBehaviour
         playerCtr = GameManager.Instance.unitMgr.PlayerCtr;
         MoveHFSM = HFSM<EplayerMoveState, PlayerController>.Instance;
         
-        eventHFSM = HFSM<EstageEventState, EventManager>.Instance;
+        //eventHFSM = HFSM<EstageEventState, EventManager>.Instance;
 
-
+        eventMgr = GameManager.Instance.eventMgr;
         MoveHFSM.ChangeState(EplayerMoveState.None, playerCtr);
         
     }

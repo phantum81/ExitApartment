@@ -9,9 +9,18 @@ public class GravityDieCollider : MonoBehaviour, IContect
     private float shake = 1f;
     [SerializeField]
     private float amount = 1f;
+    [Header("트리거 이벤트"), SerializeField]
+    private UnityEvent onDead12F;
     public void OnContect()
     {
-        GameManager.Instance.eventMgr.OnDead12F();
-        
+        OnDead12F();
+        GameManager.Instance.eventMgr.ChangeStageState(1);
+        GameManager.Instance.eventMgr.ChangeEventType(1);
     }
+
+    public void OnDead12F()
+    {
+        onDead12F?.Invoke();
+    }
+
 }

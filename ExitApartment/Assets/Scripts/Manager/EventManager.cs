@@ -9,17 +9,11 @@ public class EventManager : MonoBehaviour
     
 
     public EstageEventState eStageState = EstageEventState.None;
+    public ESOEventType eCurEvent = ESOEventType.OnGravity;
 
-    [SerializeField]
-    ScriptableObject[] eventList;
-
-    private Dictionary<string, ScriptableObject> soEventDic = new Dictionary<string, ScriptableObject>();
-    public Dictionary<string, ScriptableObject> SoEventDic => soEventDic;
 
     private void Awake()
     {
-        soEventDic.Add("Gravity", eventList[0]);
-        soEventDic.Add("Die12F", eventList[1]);
     }
     void Start()
     {
@@ -34,7 +28,7 @@ public class EventManager : MonoBehaviour
 
     /// <summary>
     /// 스테이지 상태변경
-    /// 0: none 1: gravityReverse 2: Die12F 3: Eventing
+    /// 0: none 1: Eventing
     /// </summary>
     public void ChangeStageState(int _state)
     {
@@ -50,12 +44,20 @@ public class EventManager : MonoBehaviour
 
         }
     }
-
-    public void OnDead12F()
+    public void ChangeEventType(int _state)
     {
-        GameManager.Instance.unitMgr.PlayerCtr.OnDead12F();
-    }
+        switch (_state)
+        {
+            case 0:
+                eCurEvent = ESOEventType.OnGravity;
+                break;
+            case 1:
+                eCurEvent = ESOEventType.OnDie12F;
+                break;
 
+
+        }
+    }
 
 
 

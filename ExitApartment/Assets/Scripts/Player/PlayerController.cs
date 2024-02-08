@@ -26,13 +26,12 @@ public class PlayerController : MonoBehaviour
 
     private InputManager inputMgr;
     private CameraManager cameraMgr;
-    private EventManager eventMgr;
+    private UnitManager unitMgr;
 
     private PlayerPostProcess playerProcess;
 
 
-    [SerializeField]
-    private UnityEvent onDead12F;
+
 
     private EplayerState ePlayerState = EplayerState.None;
 
@@ -46,7 +45,7 @@ public class PlayerController : MonoBehaviour
     {
         inputMgr = GameManager.Instance.inputMgr;
         cameraMgr = GameManager.Instance.cameraMgr;
-        eventMgr = GameManager.Instance.eventMgr;
+        unitMgr = GameManager.Instance.unitMgr;
 
         playerProcess = gameObject.GetComponent<PlayerPostProcess>();
         reserveGravity.Normalize();
@@ -104,14 +103,10 @@ public class PlayerController : MonoBehaviour
 
 
 
-    public void OnDead12F()
+    public void ChangeGravity()
     {
-        onDead12F?.Invoke();
-
+       StartCoroutine(unitMgr.ChangeGravity(rigd,reserveGravity));
     }
-
-
-    
 
 
 }

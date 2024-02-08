@@ -11,8 +11,6 @@ public class PlayerPostProcess : MonoBehaviour
 
     private Vignette vignette;
     private Grain grain;
-
-    public GameObject mi;
     void Start()
     {
         
@@ -43,7 +41,7 @@ public class PlayerPostProcess : MonoBehaviour
         }
     }
 
-    public void On12FDead()
+    public void On12FDeadState()
     {
         OnDamageVignette();
         OnMentalDamage();
@@ -77,8 +75,5 @@ public class PlayerPostProcess : MonoBehaviour
     }
 
 
-    public void Die()
-    {
-        Destroy(mi);
-    }
+
 }

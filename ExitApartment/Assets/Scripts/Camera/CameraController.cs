@@ -75,6 +75,8 @@ public class CameraController : MonoBehaviour
     {
         CheckWall();
 
+
+
         switch ((int)cameraMgr.ECameraState)
         {
             case 0:
@@ -184,6 +186,19 @@ public class CameraController : MonoBehaviour
         }
         _cam.transform.position = new Vector3(transform.position.x, y, transform.position.z);
     }
+
+    IEnumerator OnGravityFallCamera()
+    {
+        EventManager eventMgr = GameManager.Instance.eventMgr;
+        
+        yield return new WaitUntil(() => eventMgr.eCurEvent == ESOEventType.OnGravity);
+        while(eventMgr.eCurEvent == ESOEventType.OnGravity&& eventMgr.eStageState == EstageEventState.Eventing)
+        {
+            
+        }
+    }
+
+
 
 
 }

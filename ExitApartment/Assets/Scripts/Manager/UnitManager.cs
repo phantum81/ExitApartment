@@ -28,11 +28,11 @@ public class UnitManager : MonoBehaviour
 
 
 
-    public IEnumerator ChangeGravity(Rigidbody _rigd, Vector3 _gravity)
+    public IEnumerator ChangeGravity (Rigidbody _rigd, Vector3 _gravity)
     {
         EventManager evMgr = GameManager.Instance.eventMgr;
-        //yield return new WaitUntil(() => evMgr.eStageState == EstageEventState.GravityReverse);
-        float speed = 0;
+        float speed = 2f;
+        yield return new WaitUntil (()=> evMgr.eStageState == EstageEventState.Eventing);
         while(evMgr.eStageState == EstageEventState.Eventing)
         {
             _rigd.useGravity = false;

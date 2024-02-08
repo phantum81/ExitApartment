@@ -427,8 +427,7 @@
 "Assets/Scripts/Player/PlayerHFsm/PlayerWalk.cs"
 "Assets/Scripts/Player/PlayerPostProcess.cs"
 "Assets/Scripts/Player/PlayerSound.cs"
-"Assets/Scripts/ScriptableObjects/Die12FEvent.cs"
-"Assets/Scripts/ScriptableObjects/GravityEvent.cs"
+"Assets/Scripts/ScriptableObjects/GameEvent.cs"
 -langversion:9.0
 
 /deterministic
