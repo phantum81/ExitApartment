@@ -44,6 +44,10 @@ public class EventManager : MonoBehaviour
 
         }
     }
+    /// <summary>
+    /// 이벤트 타입 0: 그래비티 폴 1: 12층사망
+    /// </summary>
+    /// <param name="_state"></param>
     public void ChangeEventType(int _state)
     {
         switch (_state)

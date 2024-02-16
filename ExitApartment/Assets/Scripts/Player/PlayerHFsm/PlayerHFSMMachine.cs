@@ -29,11 +29,17 @@ public class PlayerHFSMMachine : MonoBehaviour
                     MoveHFSM.ChangeState(EplayerMoveState.Run, playerCtr);
             }
             else
-                MoveHFSM.ChangeState(EplayerMoveState.Stand, playerCtr);            
+                MoveHFSM.ChangeState(EplayerMoveState.Stand, playerCtr);
+
+            
+        }
+        else
+        {
+            MoveHFSM.ChangeState(EplayerMoveState.None, playerCtr);
         }
 
-
         MoveHFSM.Update(playerCtr);
+
     }
 
     private void Init()

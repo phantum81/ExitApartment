@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -36,10 +37,10 @@ public class CameraController : MonoBehaviour
     private Camera main_cam;
     private CameraManager cameraMgr;
     private InputManager inputMgr;
+    private EventManager eventMgr;
 
-   
 
-
+    public GameObject onj;
 
     private float _w_speed = 8f;
     public float W_speed => _w_speed;
@@ -68,39 +69,46 @@ public class CameraController : MonoBehaviour
         main_cam = gameObject.GetComponent<Camera>();
         inputMgr = GameManager.Instance.inputMgr;
         cameraMgr = GameManager.Instance.cameraMgr;
+        eventMgr = GameManager.Instance.eventMgr;
     }
 
     
     void Update()
     {
-        CheckWall();
-
+        
 
 
         switch ((int)cameraMgr.ECameraState)
         {
             case 0:
-                FollowCamera(main_cam,target, S_speed, S_shake, 1);
+                FollowCamera(main_cam, target, S_speed, S_shake, 1);
                 RotateCamera();
+                CheckWall();
                 break;
             case 1:
-                FollowCamera(main_cam, target, W_speed, W_shake,1);
+                FollowCamera(main_cam, target, W_speed, W_shake, 1);
                 RotateCamera();
+                CheckWall();
                 break;
             case 2:
-                FollowCamera(main_cam, target, R_speed, R_shake,1);
+                FollowCamera(main_cam, target, R_speed, R_shake, 1);
                 RotateCamera();
+                CheckWall();
                 break;
             case 3:
-                break; 
+                break;
             case 4:
                 break;
 
             default:
-                FollowCamera(main_cam, target ,S_speed, S_shake,1);
+                FollowCamera(main_cam, target, S_speed, S_shake, 1);
                 RotateCamera();
+                CheckWall();
                 break;
         }
+
+
+
 
     }
 
@@ -179,26 +187,58 @@ public class CameraController : MonoBehaviour
         float _timer = 0;
         float y = _cam.transform.position.y;
         while (_timer <= _shakeTime)
+        {            
+            _cam.transform.localPosition = _cam.transform.localPosition + Random.insideUnitSphere * _shakeAmount;            
+            _timer += Time.deltaTime;
+            yield return null;
+        }
+        _cam.transform.position = new Vector3(onj.transform.position.x, y, onj.transform.position.z);
+    }
+
+    public IEnumerator Shake(Camera _cam, float _shakeTime, float _shakeAmount)
+    {
+        float _timer = 0;
+        float y = _cam.transform.position.y;
+        Vector3 originalLocalPosition = _cam.transform.localPosition;
+        _cam.transform.parent = target;
+        while (_timer <= _shakeTime)
         {
-            _cam.transform.position = _cam.transform.position + Random.insideUnitSphere * _shakeAmount;
+            onj.transform.position = target.position;
+            _cam.transform.localPosition = originalLocalPosition + Random.insideUnitSphere * _shakeAmount;
+
             _timer += Time.deltaTime;
             yield return null;
         }
         _cam.transform.position = new Vector3(transform.position.x, y, transform.position.z);
     }
 
+
+
+
+
     IEnumerator OnGravityFallCamera()
     {
         EventManager eventMgr = GameManager.Instance.eventMgr;
         
         yield return new WaitUntil(() => eventMgr.eCurEvent == ESOEventType.OnGravity);
-        while(eventMgr.eCurEvent == ESOEventType.OnGravity&& eventMgr.eStageState == EstageEventState.Eventing)
+        if(eventMgr.eCurEvent == ESOEventType.OnGravity&& eventMgr.eStageState == EstageEventState.Eventing)
         {
-            
+            StartCoroutine(CameraShake(main_cam, 2f, 0.8f));
+            StartCoroutine(Move());
         }
     }
 
+    public void ShakeCam()
+    {
+        StartCoroutine(OnGravityFallCamera());
+    }
 
-
-
+    IEnumerator Move()
+    {
+        while (true)
+        {
+            onj.transform.position = target.position;
+            yield return null;
+        }
+    }
 }

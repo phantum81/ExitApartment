@@ -405,11 +405,10 @@
 "Assets/Scripts/Camera/CameraController.cs"
 "Assets/Scripts/Camera/OnDeadCameraController.cs"
 "Assets/Scripts/ElevatorController.cs"
-"Assets/Scripts/EnumIn.cs"
-"Assets/Scripts/EventListener.cs"
 "Assets/Scripts/Floor12F/GravityCollider.cs"
 "Assets/Scripts/Floor12F/GravityDieCollider.cs"
-"Assets/Scripts/Interface.cs"
+"Assets/Scripts/Interface&Enum/EnumIn.cs"
+"Assets/Scripts/Interface&Enum/Interface.cs"
 "Assets/Scripts/Manager/CameraManager.cs"
 "Assets/Scripts/Manager/EventManager.cs"
 "Assets/Scripts/Manager/GameManager.cs"
@@ -427,6 +426,7 @@
 "Assets/Scripts/Player/PlayerHFsm/PlayerWalk.cs"
 "Assets/Scripts/Player/PlayerPostProcess.cs"
 "Assets/Scripts/Player/PlayerSound.cs"
+"Assets/Scripts/ScriptableObjects/EventListener.cs"
 "Assets/Scripts/ScriptableObjects/GameEvent.cs"
 -langversion:9.0
 

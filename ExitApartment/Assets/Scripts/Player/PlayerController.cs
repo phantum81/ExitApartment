@@ -55,15 +55,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-       InputDir = inputMgr.InputDir;
-
-        //if(eventMgr.eStageState == EstageEventState.Die12F)
-        //{
-        //    OnDead12F();
-        //    eventMgr.ChangeStageState(3);
-        //}
-
-
+        InputDir = inputMgr.InputDir;
 
         playerProcess.ChangePlayerState((int)ePlayerState);
 

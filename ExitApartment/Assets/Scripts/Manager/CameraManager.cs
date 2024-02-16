@@ -27,10 +27,11 @@ public class CameraManager : MonoBehaviour
 
 
 
-
+    [SerializeField]
     EcameraState eCameraState = EcameraState.FollowStand;
     public EcameraState ECameraState => eCameraState;
 
+    [SerializeField]
     EplayerMoveState eMovewState = EplayerMoveState.Stand;
 
     EstageEventState eStageState = EstageEventState.None;

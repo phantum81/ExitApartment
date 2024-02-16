@@ -31,7 +31,7 @@ public class UnitManager : MonoBehaviour
     public IEnumerator ChangeGravity (Rigidbody _rigd, Vector3 _gravity)
     {
         EventManager evMgr = GameManager.Instance.eventMgr;
-        float speed = 2f;
+        float speed = 0f;
         yield return new WaitUntil (()=> evMgr.eStageState == EstageEventState.Eventing);
         while(evMgr.eStageState == EstageEventState.Eventing)
         {
@@ -43,5 +43,6 @@ public class UnitManager : MonoBehaviour
         }
     }
 
+    
 
 }
