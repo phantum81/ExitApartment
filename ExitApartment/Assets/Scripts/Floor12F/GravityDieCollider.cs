@@ -16,6 +16,7 @@ public class GravityDieCollider : MonoBehaviour, IContect
         OnDead12F();
         GameManager.Instance.eventMgr.ChangeStageState(1);
         GameManager.Instance.eventMgr.ChangeEventType(1);
+
     }
 
     public void OnDead12F()

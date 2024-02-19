@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static UnityEngine.UI.Image;
 
 public class CameraController : MonoBehaviour
 {
@@ -40,7 +42,14 @@ public class CameraController : MonoBehaviour
     private EventManager eventMgr;
 
 
-    public GameObject onj;
+
+
+    Vector3 shakeDir = new Vector3(10f,10f,10f);
+    
+
+
+
+
 
     private float _w_speed = 8f;
     public float W_speed => _w_speed;
@@ -76,8 +85,6 @@ public class CameraController : MonoBehaviour
     void Update()
     {
         
-
-
         switch ((int)cameraMgr.ECameraState)
         {
             case 0:
@@ -182,63 +189,70 @@ public class CameraController : MonoBehaviour
 
 
 
-    public IEnumerator CameraShake(Camera _cam,float _shakeTime, float _shakeAmount)
+    public IEnumerator CameraShake(Camera _cam, float _shakeTime, float _shakeAmount)
     {
-        float _timer = 0;
-        float y = _cam.transform.position.y;
-        while (_timer <= _shakeTime)
-        {            
-            _cam.transform.localPosition = _cam.transform.localPosition + Random.insideUnitSphere * _shakeAmount;            
-            _timer += Time.deltaTime;
-            yield return null;
-        }
-        _cam.transform.position = new Vector3(onj.transform.position.x, y, onj.transform.position.z);
-    }
-
-    public IEnumerator Shake(Camera _cam, float _shakeTime, float _shakeAmount)
-    {
-        float _timer = 0;
-        float y = _cam.transform.position.y;
-        Vector3 originalLocalPosition = _cam.transform.localPosition;
         _cam.transform.parent = target;
+        float _timer = 0;
+        Vector3 originalPosition = _cam.transform.localPosition;
+
         while (_timer <= _shakeTime)
         {
-            onj.transform.position = target.position;
-            _cam.transform.localPosition = originalLocalPosition + Random.insideUnitSphere * _shakeAmount;
-
+            _cam.transform.localPosition = originalPosition + Random.insideUnitSphere * _shakeAmount;
             _timer += Time.deltaTime;
             yield return null;
         }
-        _cam.transform.position = new Vector3(transform.position.x, y, transform.position.z);
-    }
 
-
-
-
-
-    IEnumerator OnGravityFallCamera()
-    {
-        EventManager eventMgr = GameManager.Instance.eventMgr;
-        
-        yield return new WaitUntil(() => eventMgr.eCurEvent == ESOEventType.OnGravity);
-        if(eventMgr.eCurEvent == ESOEventType.OnGravity&& eventMgr.eStageState == EstageEventState.Eventing)
+        _cam.transform.localPosition = originalPosition;
+        while (eventMgr.eCurEvent == ESOEventType.OnGravity)
         {
-            StartCoroutine(CameraShake(main_cam, 2f, 0.8f));
-            StartCoroutine(Move());
-        }
-    }
-
-    public void ShakeCam()
-    {
-        StartCoroutine(OnGravityFallCamera());
-    }
-
-    IEnumerator Move()
-    {
-        while (true)
-        {
-            onj.transform.position = target.position;
             yield return null;
         }
+        yield return new WaitForSeconds(1f);
+        _cam.transform.parent = null;
     }
+
+
+
+    public IEnumerator OnGravityFallCamera(Camera _cam, float _shakeTime, float _shakeAmount)
+    {
+        _cam.transform.parent = target;
+        float _timer = 0f;
+        Quaternion originRotate = _cam.transform.localRotation;
+        float shake = 0f;
+        while (_timer <= _shakeTime)
+        {
+            float rotX = Random.Range(-shakeDir.x, shakeDir.x);
+            float rotY = Random.Range(-shakeDir.y, shakeDir.y);
+            float rotZ = Random.Range(-shakeDir.z, shakeDir.z);
+
+            Vector3 rotationV = originRotate.eulerAngles + new Vector3(rotX, rotY, rotZ);
+            Quaternion rotationQ = Quaternion.Euler(rotationV);
+            while (Quaternion.Angle(transform.rotation, rotationQ) > 0.1f)
+            {
+                shake += Time.deltaTime * 50f;
+                Mathf.Clamp(shake, 5f, _shakeAmount);
+                transform.rotation =  Quaternion.RotateTowards(transform.rotation, rotationQ, shake * Time.deltaTime);
+                _timer += Time.deltaTime;
+                yield return null;
+            }
+
+            yield return null;
+
+        }
+        while(eventMgr.eCurEvent == ESOEventType.OnGravity)
+        {
+            yield return null;
+        }
+        yield return new WaitForSeconds(0.5f);
+        _cam.transform.parent = null;
+
+    }
+
+
+
+    public void OnGravityCam()
+    {        
+        StartCoroutine(OnGravityFallCamera(main_cam, 2.5f, 100f));
+    }
+
 }

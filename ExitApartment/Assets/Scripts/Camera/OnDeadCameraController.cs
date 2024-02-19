@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class OnDeadCameraController : MonoBehaviour
 {
-    [Header("회전기다림"),SerializeField]
+    
     private WaitForSeconds lookMonsterWait;
-
+    [Header("회전기다림"), SerializeField]
     private float lookMonster_time=4f;
-    private float validAngle = 0.2f;
+    private float validAngle = 0.4f;
 
 
 
@@ -33,7 +33,7 @@ public class OnDeadCameraController : MonoBehaviour
         cameraCtr = GameManager.Instance.cameraMgr.CameraCtr;
         cameraMgr = GameManager.Instance.cameraMgr;
 
-        StartCoroutine(DieCam12F());
+        
     }
 
     // Update is called once per frame
@@ -44,20 +44,18 @@ public class OnDeadCameraController : MonoBehaviour
 
     IEnumerator DieCam12F()
     {
+
+        yield return new WaitUntil(() => cameraMgr.CameraDic[1].enabled == true);
         Quaternion _target = Quaternion.Euler(new Vector3(0, 90f, -90f));
         Quaternion _secondTarget = Quaternion.Euler(new Vector3(0, 220f, -90f));
         Quaternion _thirdTarget = Quaternion.Euler(new Vector3(0, 30f, -90f));
         yield return lookMonsterWait;
-        StartCoroutine(CamLookAt(cameraMgr.CameraDic[1] ,_target, rotateSpeed, 2));
+        StartCoroutine(CamLookAt(cameraMgr.CameraDic[1], _target, rotateSpeed, 2));
         yield return lookMonsterWait;
-        StartCoroutine(CamLookAt(cameraMgr.CameraDic[1], _secondTarget , rotateSpeed*2,0));
+        StartCoroutine(CamLookAt(cameraMgr.CameraDic[1], _secondTarget, rotateSpeed * 2, 0));
         yield return lookMonsterWait;
-        StartCoroutine(CamLookAt(cameraMgr.CameraDic[1], _thirdTarget, rotateSpeed*3,2));
-        while (true)
-        {
-            cameraCtr.FollowCamera(cameraMgr.CameraDic[1], transform, _d_speed, _d_shake, 0);
-            yield return null;
-        }
+        StartCoroutine(CamLookAt(cameraMgr.CameraDic[1], _thirdTarget, rotateSpeed * 3, 2));
+
     }
 
     IEnumerator CamLookAt(Camera _cam , Quaternion _target, float _rotSpeed, int _version)
@@ -71,8 +69,11 @@ public class OnDeadCameraController : MonoBehaviour
         }
 
 
-
     }
 
+    public void Die12FDeadCam()
+    {
+        StartCoroutine(DieCam12F());
+    }
 
 }

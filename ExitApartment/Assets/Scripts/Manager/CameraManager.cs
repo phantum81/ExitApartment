@@ -42,26 +42,19 @@ public class CameraManager : MonoBehaviour
         camDic.Add(0, Camera.main);
         camDic.Add(1, deadCamCtr.GetComponent<Camera>());
         curCamera = camDic[0];
+        camDic[1].enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         
-        switch (GameManager.Instance.eventMgr.eStageState)
+        switch (GameManager.Instance.eventMgr.eCurEvent)
         {
-            case EstageEventState.None:
+            case ESOEventType.OnGravity:
                 break;
-            //case EstageEventState.GravityReverse:
-            //    StartCoroutine(cameraCtr.CameraShake(camDic[0], 0.2f, 0.8f));
-                
-            //    break;
-            //case EstageEventState.Die12F:                
-            //    StartCoroutine(cameraCtr.CameraShake(camDic[0], 0.5f, 0.1f));
-            //    StartCoroutine(ChangeCamera(camDic[1], 0.5f));
-                //break;
-            case EstageEventState.Eventing:
-                
+            case ESOEventType.OnDie12F:
+                StartCoroutine(ChangeCamera(camDic[1], 2f));
                 break;
         }
 
@@ -105,9 +98,9 @@ public class CameraManager : MonoBehaviour
     IEnumerator ChangeCamera(Camera _cam, float _time)
     {
 
-        yield return new WaitForSeconds(_time);
-        curCamera.gameObject.SetActive(false);
-        _cam.gameObject.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        curCamera.enabled=false;
+        _cam.enabled=true;
 
         curCamera = _cam;
 
