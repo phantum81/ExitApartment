@@ -28,7 +28,7 @@ public enum EcameraState  // 캐릭터 움직임에 따라 달라짐.
 };
 
 /// <summary>
-/// 스테이지 상태 0:None 1:GravityReverse 2:Die12F 3:Gravity 4:Eventing
+/// 스테이지 상태 0:None  1:Eventing
 /// </summary>
 public enum EstageEventState
 {

@@ -36,13 +36,16 @@ public class CameraManager : MonoBehaviour
 
     EstageEventState eStageState = EstageEventState.None;
 
-
-    void Start()
+    private void Awake()
     {
         camDic.Add(0, Camera.main);
         camDic.Add(1, deadCamCtr.GetComponent<Camera>());
         curCamera = camDic[0];
         camDic[1].enabled = false;
+    }
+    void Start()
+    {
+
     }
 
     // Update is called once per frame

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,14 +8,17 @@ public class OnDeadCameraController : MonoBehaviour
     
     private WaitForSeconds lookMonsterWait;
     [Header("회전기다림"), SerializeField]
-    private float lookMonster_time=4f;
+    private float lookMonster_time=2f;
     private float validAngle = 0.4f;
-
-
 
 
     [Header("회전속도"), SerializeField]
     private float rotateSpeed = 4f;
+    [Header("최소 회전속도"), SerializeField]
+    private float min_rotateSpeed = 3f;
+    [Header("최대 회전속도"), SerializeField]
+    private float max_rotateSpeed = 8f;
+
     [Header("상하 움직임 속도"), SerializeField]
     private float _d_speed = 12f;
     public float  D_speed => _d_speed;
@@ -22,9 +26,13 @@ public class OnDeadCameraController : MonoBehaviour
     private float _d_shake = 0.0008f;
     public float D_shake => _d_shake;
 
+
+    private Vector3 shakeDir = new Vector3(7f, 30f, 7f);
+
+
+
     private CameraController cameraCtr;
     private CameraManager cameraMgr;
-
 
 
     void Start()
@@ -46,30 +54,53 @@ public class OnDeadCameraController : MonoBehaviour
     {
 
         yield return new WaitUntil(() => cameraMgr.CameraDic[1].enabled == true);
-        Quaternion _target = Quaternion.Euler(new Vector3(0, 90f, -90f));
-        Quaternion _secondTarget = Quaternion.Euler(new Vector3(0, 220f, -90f));
-        Quaternion _thirdTarget = Quaternion.Euler(new Vector3(0, 30f, -90f));
+        Quaternion _firstTarget = Quaternion.Euler(new Vector3(0, 90f, 0f));
+        Quaternion _secondTarget = Quaternion.Euler(new Vector3(0, 90f, -90f));
+        Quaternion _thirdTarget = Quaternion.Euler(new Vector3(0, 173f, -90f));
+        Quaternion _forthTarget = Quaternion.Euler(new Vector3(0, 90f, -90f));
+
+        
         yield return lookMonsterWait;
-        StartCoroutine(CamLookAt(cameraMgr.CameraDic[1], _target, rotateSpeed, 2));
+        StartCoroutine(FollowCam(cameraMgr.CameraDic[1], transform, _d_speed, _d_shake, 2));
+        yield return StartCoroutine(CamLookAt(cameraMgr.CameraDic[1], _firstTarget, rotateSpeed, min_rotateSpeed, max_rotateSpeed));
+
         yield return lookMonsterWait;
-        StartCoroutine(CamLookAt(cameraMgr.CameraDic[1], _secondTarget, rotateSpeed * 2, 0));
+        yield return StartCoroutine(cameraCtr.ShakeRotateCam(cameraMgr.CameraDic[1], 2.5f, 40f, shakeDir, 12f));
+        yield return StartCoroutine(CamLookAt(cameraMgr.CameraDic[1], _secondTarget, rotateSpeed*2f, min_rotateSpeed, max_rotateSpeed));
+
         yield return lookMonsterWait;
-        StartCoroutine(CamLookAt(cameraMgr.CameraDic[1], _thirdTarget, rotateSpeed * 3, 2));
+        yield return StartCoroutine(CamLookAt(cameraMgr.CameraDic[1], _thirdTarget, rotateSpeed, min_rotateSpeed, max_rotateSpeed));
+
+        yield return lookMonsterWait;
+        yield return StartCoroutine(CamLookAt(cameraMgr.CameraDic[1], _forthTarget, rotateSpeed , min_rotateSpeed, max_rotateSpeed));
+        
 
     }
 
-    IEnumerator CamLookAt(Camera _cam , Quaternion _target, float _rotSpeed, int _version)
+    IEnumerator CamLookAt(Camera _cam , Quaternion _target, float _rotSpeed, float _minSpeed, float _maxSpeed)
     {
-
+        float speed=0f;
         while (Quaternion.Angle(_cam.transform.rotation, _target) > validAngle)
         {
-            _cam.transform.rotation = Quaternion.Lerp(transform.rotation, _target, _rotSpeed * Time.deltaTime);
-            cameraCtr.FollowCamera(_cam, transform, _d_speed, _d_shake, _version);
+            speed += Time.deltaTime * _rotSpeed;
+            Mathf.Clamp(speed, _minSpeed, _maxSpeed);
+            _cam.transform.rotation = Quaternion.RotateTowards(transform.rotation, _target, speed * Time.deltaTime);
+            
             yield return null;
         }
 
 
     }
+
+    IEnumerator FollowCam(Camera _cam, Transform _target, float _speed, float _shake, int _version)
+    {
+        while (true)
+        {
+            cameraCtr.FollowCamera( _cam, _target, _speed, _shake, _version);
+            yield return null;
+        }
+    }
+
 
     public void Die12FDeadCam()
     {

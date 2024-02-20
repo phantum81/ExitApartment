@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerHFSMMachine : MonoBehaviour
 {
     private HFSM<EplayerMoveState, PlayerController> MoveHFSM;    
-    //private HFSM<EstageEventState, EventManager> eventHFSM;
+    
 
     private InputManager inputMgr;
     private EventManager eventMgr;
@@ -49,7 +49,7 @@ public class PlayerHFSMMachine : MonoBehaviour
         playerCtr = GameManager.Instance.unitMgr.PlayerCtr;
         MoveHFSM = HFSM<EplayerMoveState, PlayerController>.Instance;
         
-        //eventHFSM = HFSM<EstageEventState, EventManager>.Instance;
+        
 
         eventMgr = GameManager.Instance.eventMgr;
         MoveHFSM.ChangeState(EplayerMoveState.None, playerCtr);

@@ -52,13 +52,14 @@ public class HFSM<TState, T> where TState : System.Enum where T : MonoBehaviour
                 return new PlayerWalk<T>();
             case EplayerMoveState.Run:
                 return new PlayerRun<T>();
-            case EstageEventState.None:
-                
-            //case EstageEventState.GravityReverse:
-
-            //case EstageEventState.Die12F:
-
-            case EstageEventState.Eventing:
+            case EplayerState.None:
+                return new PlayerStateNone<T>();
+            case EplayerState.MentalDamage:
+                return new PlayerStateMentalDamage<T>();
+            case EplayerState.Damage:
+                return new PlayerStateDamage<T>();
+            case EplayerState.Die:
+                return new PlayerStateDie<T>();
 
 
             default:

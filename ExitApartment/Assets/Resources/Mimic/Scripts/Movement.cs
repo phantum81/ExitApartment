@@ -19,26 +19,74 @@ namespace MimicSpace
         public float velocityLerpCoef = 4f;
         Mimic myMimic;
 
+        [Header("鸥百"),SerializeField]
+        private Transform target;
+        [Header("鸥百苞狼 力茄芭府"), SerializeField]
+        private float validDis = 0.4f;
+
         private void Start()
         {
             myMimic = GetComponent<Mimic>();
+            StartCoroutine( GravityDead());
         }
 
         void Update()
         {
-            velocity = Vector3.Lerp(velocity, new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized * speed, velocityLerpCoef * Time.deltaTime);
 
-            // Assigning velocity to the mimic to assure great leg placement
-            myMimic.velocity = velocity;
 
-            transform.position = transform.position + velocity * Time.deltaTime;
+
+        }
+
+        IEnumerator GravityDead()
+        {
+            
+            Vector3 dir = Vector3.zero;
+            Camera onDeadCam= GameManager.Instance.cameraMgr.CameraDic[1];
+            while (Vector3.Distance(transform.position, onDeadCam.transform.position) > validDis)
+            {
+                ChaseTarget(transform, onDeadCam.transform, dir);
+                yield return null;
+            }
+
+
+        }
+        
+        IEnumerator KillTarget()
+        {
+            while (true)
+            {
+
+                yield return null;
+            }
+        }
+
+
+        public void ChaseTarget(Transform _chaser,Transform _target, Vector3 _dir )
+        {
+            _dir = (_target.position - _chaser.position).normalized;
+            _chaser.rotation = Quaternion.LookRotation(_dir);
+            velocity = _chaser.forward;
+            //myMimic.velocity = velocity;
+
+
+            _chaser.position = _chaser.position + velocity * Time.deltaTime;
+
             RaycastHit hit;
-            Vector3 destHeight = transform.position;
-            if (Physics.Raycast(transform.position + Vector3.up , -Vector3.up, out hit))
-                destHeight = new Vector3(transform.position.x, hit.point.y + height, transform.position.z);
-            transform.position = Vector3.Lerp(transform.position, destHeight, velocityLerpCoef * Time.deltaTime);
+
+            Vector3 destHeight = _chaser.position;
+
+            if (Physics.Raycast(_chaser.position + Vector3.up, -Vector3.up, out hit))
+                destHeight = new Vector3(_chaser.position.x, hit.point.y + height, _chaser.position.z);
+
+            _chaser.position = Vector3.Lerp(_chaser.position, destHeight, velocityLerpCoef * Time.deltaTime);
+            
+        }
 
 
+
+        public void OnDead12F()
+        {
+            StartCoroutine(GravityDead());
         }
     }
 

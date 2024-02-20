@@ -16,10 +16,7 @@ public class InputManager : MonoBehaviour
     
     private bool isShift = false;
     public bool IsShift => isShift;
-    void Start()
-    {
-        
-    }
+
 
     // Update is called once per frame
     void Update()
