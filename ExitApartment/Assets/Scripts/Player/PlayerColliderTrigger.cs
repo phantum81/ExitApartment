@@ -19,6 +19,7 @@ public class PlayerColliderTrigger : MonoBehaviour
     {
         
         IContect col = other.GetComponent<IContect>();
+        
         col?.OnContect();
     }
 

@@ -15,3 +15,10 @@ public interface IContect
 
 
 }
+
+public interface IEnemyContect
+{
+    void OnContect();
+
+
+}

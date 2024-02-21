@@ -11,8 +11,9 @@ public class UnitManager : MonoBehaviour
     private ElevatorController elevatorCtr;
     public ElevatorController ElevatorCtr => elevatorCtr;
 
-
-
+    [Header("충돌한 에너미 타겟"), SerializeField]
+    private Transform contectTarget;
+    public Transform ContectTarget => contectTarget;
 
     void Start()
     {
@@ -43,6 +44,11 @@ public class UnitManager : MonoBehaviour
         }
     }
 
-    
+
+    public void GetContectTarget(Transform _target)
+    {
+        contectTarget = _target;
+    }
+
 
 }

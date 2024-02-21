@@ -30,13 +30,10 @@ public class PlayerController : MonoBehaviour
 
     private PlayerPostProcess playerProcess;
 
-
-
-
     private EplayerState ePlayerState = EplayerState.None;
 
-
-
+    
+    
 
 
 
@@ -97,7 +94,7 @@ public class PlayerController : MonoBehaviour
 
     public void ChangeGravity()
     {
-       StartCoroutine(unitMgr.ChangeGravity(rigd,reserveGravity));
+        StartCoroutine(unitMgr.ChangeGravity(rigd,reserveGravity));
     }
 
 

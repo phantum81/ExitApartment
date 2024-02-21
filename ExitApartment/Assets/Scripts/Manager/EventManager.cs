@@ -11,6 +11,8 @@ public class EventManager : MonoBehaviour
     public EstageEventState eStageState = EstageEventState.None;
     public ESOEventType eCurEvent = ESOEventType.OnGravity;
 
+    [SerializeField]
+    private PlayerStateHFSMMachine playerStateHFSM;
 
     private void Awake()
     {
@@ -64,5 +66,9 @@ public class EventManager : MonoBehaviour
     }
 
 
+    public void ChangePlayerState(EplayerState _state)
+    {
+        playerStateHFSM.ChangePlayerState(_state);
+    }
 
 }

@@ -35,7 +35,7 @@ public class PlayerHFSMMachine : MonoBehaviour
         }
         else
         {
-            MoveHFSM.ChangeState(EplayerMoveState.None, playerCtr);
+             MoveHFSM.ChangeState(EplayerMoveState.None, playerCtr);
         }
 
         MoveHFSM.Update(playerCtr);

@@ -21,13 +21,14 @@ namespace MimicSpace
 
         [Header("鸥百"),SerializeField]
         private Transform target;
+
         [Header("鸥百苞狼 力茄芭府"), SerializeField]
         private float validDis = 0.4f;
 
         private void Start()
         {
             myMimic = GetComponent<Mimic>();
-            StartCoroutine( GravityDead());
+            
         }
 
         void Update()
@@ -42,6 +43,7 @@ namespace MimicSpace
             
             Vector3 dir = Vector3.zero;
             Camera onDeadCam= GameManager.Instance.cameraMgr.CameraDic[1];
+            yield return new WaitForSeconds(18f);
             while (Vector3.Distance(transform.position, onDeadCam.transform.position) > validDis)
             {
                 ChaseTarget(transform, onDeadCam.transform, dir);

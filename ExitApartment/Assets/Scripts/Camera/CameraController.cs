@@ -44,7 +44,7 @@ public class CameraController : MonoBehaviour
 
 
 
-    Vector3 shakeDir = new Vector3(10f,10f,10f);
+    Vector3 shakeDir = new Vector3(30f,30f,30f);
     
 
 
@@ -191,7 +191,6 @@ public class CameraController : MonoBehaviour
 
     public IEnumerator CameraShake(Camera _cam, float _shakeTime, float _shakeAmount)
     {
-        _cam.transform.parent = target;
         float _timer = 0;
         Vector3 originalPosition = _cam.transform.localPosition;
 
@@ -203,12 +202,7 @@ public class CameraController : MonoBehaviour
         }
 
         _cam.transform.localPosition = originalPosition;
-        while (eventMgr.eCurEvent == ESOEventType.OnGravity)
-        {
-            yield return null;
-        }
-        yield return new WaitForSeconds(1f);
-        _cam.transform.parent = null;
+
     }
 
 
@@ -227,11 +221,11 @@ public class CameraController : MonoBehaviour
 
             Vector3 rotationV = originRotate.eulerAngles + new Vector3(rotX, rotY, rotZ);
             Quaternion rotationQ = Quaternion.Euler(rotationV);
-            while (Quaternion.Angle(_cam.transform.rotation, rotationQ) > 0.1f)
+            while (Quaternion.Angle(_cam.transform.localRotation, rotationQ) > 0.1f)
             {
                 shake += Time.deltaTime * _shakingTime;
                 Mathf.Clamp(shake, 5f, _shakeAmount);
-                _cam.transform.rotation = Quaternion.RotateTowards(_cam.transform.rotation, rotationQ, shake * Time.deltaTime);
+                _cam.transform.localRotation = Quaternion.RotateTowards(_cam.transform.localRotation, rotationQ, shake * Time.deltaTime);
                 _timer += Time.deltaTime;
                 yield return null;
             }

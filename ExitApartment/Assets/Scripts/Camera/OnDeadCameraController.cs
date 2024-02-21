@@ -27,9 +27,9 @@ public class OnDeadCameraController : MonoBehaviour
     public float D_shake => _d_shake;
 
 
+
     private Vector3 shakeDir = new Vector3(7f, 30f, 7f);
-
-
+    
 
     private CameraController cameraCtr;
     private CameraManager cameraMgr;
@@ -40,7 +40,7 @@ public class OnDeadCameraController : MonoBehaviour
         lookMonsterWait = new WaitForSeconds(lookMonster_time);
         cameraCtr = GameManager.Instance.cameraMgr.CameraCtr;
         cameraMgr = GameManager.Instance.cameraMgr;
-
+        
         
     }
 
@@ -61,8 +61,8 @@ public class OnDeadCameraController : MonoBehaviour
 
         
         yield return lookMonsterWait;
-        StartCoroutine(FollowCam(cameraMgr.CameraDic[1], transform, _d_speed, _d_shake, 2));
         yield return StartCoroutine(CamLookAt(cameraMgr.CameraDic[1], _firstTarget, rotateSpeed, min_rotateSpeed, max_rotateSpeed));
+        StartCoroutine(FollowCam(cameraMgr.CameraDic[1], transform, _d_speed, _d_shake, 2));
 
         yield return lookMonsterWait;
         yield return StartCoroutine(cameraCtr.ShakeRotateCam(cameraMgr.CameraDic[1], 2.5f, 40f, shakeDir, 12f));
@@ -72,7 +72,7 @@ public class OnDeadCameraController : MonoBehaviour
         yield return StartCoroutine(CamLookAt(cameraMgr.CameraDic[1], _thirdTarget, rotateSpeed, min_rotateSpeed, max_rotateSpeed));
 
         yield return lookMonsterWait;
-        yield return StartCoroutine(CamLookAt(cameraMgr.CameraDic[1], _forthTarget, rotateSpeed , min_rotateSpeed, max_rotateSpeed));
+        yield return StartCoroutine(CamLookAt(cameraMgr.CameraDic[1], _forthTarget, rotateSpeed*4f , min_rotateSpeed, max_rotateSpeed));
         
 
     }
@@ -92,11 +92,13 @@ public class OnDeadCameraController : MonoBehaviour
 
     }
 
+
     IEnumerator FollowCam(Camera _cam, Transform _target, float _speed, float _shake, int _version)
     {
         while (true)
         {
             cameraCtr.FollowCamera( _cam, _target, _speed, _shake, _version);
+            
             yield return null;
         }
     }
@@ -106,5 +108,32 @@ public class OnDeadCameraController : MonoBehaviour
     {
         StartCoroutine(DieCam12F());
     }
+
+
+
+    public IEnumerator DeadCam()
+    {
+        Transform _target = GameManager.Instance.unitMgr.ContectTarget;
+        yield return new WaitUntil(()=> _target != null);
+        Vector3 dir = _target.position - cameraMgr.CameraDic[1].transform.position;
+        Quaternion rotateDir =  Quaternion.LookRotation(dir);
+
+        yield return StartCoroutine(CamLookAt(cameraMgr.CameraDic[1], rotateDir, 1000f,1000f,1000f));
+
+        cameraMgr.CameraDic[1].transform.position = _target.position + _target.forward * 0.6f;
+
+        yield return StartCoroutine(cameraCtr.CameraShake(cameraMgr.CameraDic[1], 0.5f, 0.8f));
+        
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+
+        IEnemyContect col = other.GetComponent<IEnemyContect>();
+
+        col?.OnContect();
+    }
+
+
 
 }
