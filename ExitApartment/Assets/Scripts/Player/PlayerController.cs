@@ -32,11 +32,7 @@ public class PlayerController : MonoBehaviour
 
     private EplayerState ePlayerState = EplayerState.None;
 
-    
-    
-
-
-
+   
 
     private  void  Start()
     {
@@ -59,11 +55,6 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void FixedUpdate()
-    {
-
-
-    }
 
 
     public void Move(Vector3 _inputDir, float _speed)

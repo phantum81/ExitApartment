@@ -57,7 +57,7 @@ public class CameraManager : MonoBehaviour
             case ESOEventType.OnGravity:
                 break;
             case ESOEventType.OnDie12F:
-                StartCoroutine(ChangeCamera(camDic[1], 2f));
+                StartCoroutine(ChangeCamera(camDic[1], 0f));
                 break;
         }
 
@@ -101,7 +101,7 @@ public class CameraManager : MonoBehaviour
     IEnumerator ChangeCamera(Camera _cam, float _time)
     {
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(_time);
         curCamera.enabled=false;
         _cam.enabled=true;
 

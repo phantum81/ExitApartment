@@ -58,19 +58,19 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2023.1.3f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\3d-character_animeGirlAkane\DemoScene\Shader\MToon\Scripts\Utils.cs" />
-    <Compile Include="Assets\3d-character_animeGirlAkane\DemoScene\Shader\MToon\Scripts\UtilsVersion.cs" />
-    <Compile Include="Assets\3d-character_animeGirlAkane\DemoScene\Shader\MToon\Scripts\Enums.cs" />
-    <Compile Include="Assets\3d-character_animeGirlAkane\DemoScene\Shader\MToon\Scripts\UtilsSetter.cs" />
-    <Compile Include="Assets\3d-character_animeGirlAkane\DemoScene\Shader\MToon\Scripts\UtilsGetter.cs" />
-    <Compile Include="Assets\3d-character_animeGirlAkane\DemoScene\Shader\MToon\Scripts\MToonDefinition.cs" />
+    <Compile Include="Assets\Resources\DownAssets\3d-character_animeGirlAkane\DemoScene\Shader\MToon\Scripts\Utils.cs" />
+    <Compile Include="Assets\Resources\DownAssets\3d-character_animeGirlAkane\DemoScene\Shader\MToon\Scripts\MToonDefinition.cs" />
+    <Compile Include="Assets\Resources\DownAssets\3d-character_animeGirlAkane\DemoScene\Shader\MToon\Scripts\UtilsSetter.cs" />
+    <Compile Include="Assets\Resources\DownAssets\3d-character_animeGirlAkane\DemoScene\Shader\MToon\Scripts\UtilsGetter.cs" />
+    <Compile Include="Assets\Resources\DownAssets\3d-character_animeGirlAkane\DemoScene\Shader\MToon\Scripts\UtilsVersion.cs" />
+    <Compile Include="Assets\Resources\DownAssets\3d-character_animeGirlAkane\DemoScene\Shader\MToon\Scripts\Enums.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\3d-character_animeGirlAkane\DemoScene\Shader\MToon\Resources\Shaders\MToon.shader" />
-    <None Include="Assets\3d-character_animeGirlAkane\DemoScene\Shader\MToon\MToon.asmdef" />
-    <None Include="Assets\3d-character_animeGirlAkane\DemoScene\Shader\MToon\Resources\Shaders\MToonSM4.cginc" />
-    <None Include="Assets\3d-character_animeGirlAkane\DemoScene\Shader\MToon\Resources\Shaders\MToonSM3.cginc" />
-    <None Include="Assets\3d-character_animeGirlAkane\DemoScene\Shader\MToon\Resources\Shaders\MToonCore.cginc" />
+    <None Include="Assets\Resources\DownAssets\3d-character_animeGirlAkane\DemoScene\Shader\MToon\Resources\Shaders\MToon.shader" />
+    <None Include="Assets\Resources\DownAssets\3d-character_animeGirlAkane\DemoScene\Shader\MToon\MToon.asmdef" />
+    <None Include="Assets\Resources\DownAssets\3d-character_animeGirlAkane\DemoScene\Shader\MToon\Resources\Shaders\MToonSM4.cginc" />
+    <None Include="Assets\Resources\DownAssets\3d-character_animeGirlAkane\DemoScene\Shader\MToon\Resources\Shaders\MToonSM3.cginc" />
+    <None Include="Assets\Resources\DownAssets\3d-character_animeGirlAkane\DemoScene\Shader\MToon\Resources\Shaders\MToonCore.cginc" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

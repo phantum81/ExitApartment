@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
     public CameraManager cameraMgr;
     public InputManager inputMgr;
     public EventManager eventMgr;
-
+    public ItemManager itemMgr;
     
 
     void Start()

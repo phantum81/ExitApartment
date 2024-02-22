@@ -69,12 +69,28 @@ public class OnDeadCameraController : MonoBehaviour
         yield return StartCoroutine(CamLookAt(cameraMgr.CameraDic[1], _secondTarget, rotateSpeed*2f, min_rotateSpeed, max_rotateSpeed));
 
         yield return lookMonsterWait;
-        yield return StartCoroutine(CamLookAt(cameraMgr.CameraDic[1], _thirdTarget, rotateSpeed, min_rotateSpeed, max_rotateSpeed));
+        yield return StartCoroutine(CamLookAt(cameraMgr.CameraDic[1], _thirdTarget, rotateSpeed*3f, min_rotateSpeed, max_rotateSpeed));
 
         yield return lookMonsterWait;
-        yield return StartCoroutine(CamLookAt(cameraMgr.CameraDic[1], _forthTarget, rotateSpeed*4f , min_rotateSpeed, max_rotateSpeed));
+        yield return StartCoroutine(CamLookAt(cameraMgr.CameraDic[1], _forthTarget, rotateSpeed*6f , min_rotateSpeed, max_rotateSpeed));
         
 
+    }
+    public IEnumerator DeadCam()
+    {
+        
+        Transform _target = GameManager.Instance.unitMgr.ContectTarget;
+        yield return new WaitUntil(()=> _target != null);
+
+        Vector3 dir = _target.position - cameraMgr.CameraDic[1].transform.position;
+        Quaternion rotateDir =  Quaternion.LookRotation(dir);
+
+        cameraMgr.CameraDic[1].transform.position = _target.position + _target.forward * 0.4f;
+        cameraMgr.CameraDic[1].transform.rotation = rotateDir;
+        StartCoroutine(cameraCtr.CameraShake(cameraMgr.CameraDic[1], 0.5f, 0.8f));
+
+
+        
     }
 
     IEnumerator CamLookAt(Camera _cam , Quaternion _target, float _rotSpeed, float _minSpeed, float _maxSpeed)
@@ -111,20 +127,6 @@ public class OnDeadCameraController : MonoBehaviour
 
 
 
-    public IEnumerator DeadCam()
-    {
-        Transform _target = GameManager.Instance.unitMgr.ContectTarget;
-        yield return new WaitUntil(()=> _target != null);
-        Vector3 dir = _target.position - cameraMgr.CameraDic[1].transform.position;
-        Quaternion rotateDir =  Quaternion.LookRotation(dir);
-
-        yield return StartCoroutine(CamLookAt(cameraMgr.CameraDic[1], rotateDir, 1000f,1000f,1000f));
-
-        cameraMgr.CameraDic[1].transform.position = _target.position + _target.forward * 0.6f;
-
-        yield return StartCoroutine(cameraCtr.CameraShake(cameraMgr.CameraDic[1], 0.5f, 0.8f));
-        
-    }
 
     private void OnTriggerEnter(Collider other)
     {

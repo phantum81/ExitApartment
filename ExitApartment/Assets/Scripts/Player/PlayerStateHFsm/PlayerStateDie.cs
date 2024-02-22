@@ -16,6 +16,7 @@ public class PlayerStateDie<T> : IState<T> where T : MonoBehaviour
         else if (_send is OnDeadCameraController)
         {
             OnDeadCameraController _deadCam = _send as OnDeadCameraController;
+            _deadCam.StopAllCoroutines();
             _deadCam.StartCoroutine(_deadCam.DeadCam());
         }
 

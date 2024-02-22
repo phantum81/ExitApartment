@@ -39,12 +39,12 @@ public class CameraController : MonoBehaviour
     private Camera main_cam;
     private CameraManager cameraMgr;
     private InputManager inputMgr;
-    private EventManager eventMgr;
+    
 
 
 
 
-    Vector3 shakeDir = new Vector3(30f,30f,30f);
+    Vector3 shakeDir = new Vector3(30f,60f,40f);
     
 
 
@@ -78,7 +78,7 @@ public class CameraController : MonoBehaviour
         main_cam = gameObject.GetComponent<Camera>();
         inputMgr = GameManager.Instance.inputMgr;
         cameraMgr = GameManager.Instance.cameraMgr;
-        eventMgr = GameManager.Instance.eventMgr;
+       
     }
 
     
@@ -208,7 +208,7 @@ public class CameraController : MonoBehaviour
 
 
 
-    public IEnumerator ShakeRotateCam(Camera _cam, float _shakeTime, float _shakeAmount, Vector3 _shakeDir, float _shakingTime)
+    public IEnumerator ShakeRotateCam(Camera _cam, float _shakeTime, float _shakeAmount, Vector3 _shakeDir, float _shakingSpeed)
     {
         float _timer = 0f;
         Quaternion originRotate = _cam.transform.localRotation;
@@ -223,7 +223,7 @@ public class CameraController : MonoBehaviour
             Quaternion rotationQ = Quaternion.Euler(rotationV);
             while (Quaternion.Angle(_cam.transform.localRotation, rotationQ) > 0.1f)
             {
-                shake += Time.deltaTime * _shakingTime;
+                shake += Time.deltaTime * _shakingSpeed;
                 Mathf.Clamp(shake, 5f, _shakeAmount);
                 _cam.transform.localRotation = Quaternion.RotateTowards(_cam.transform.localRotation, rotationQ, shake * Time.deltaTime);
                 _timer += Time.deltaTime;
@@ -234,23 +234,21 @@ public class CameraController : MonoBehaviour
 
         }
     }
-    public IEnumerator OnGravityFallCamera(Camera _cam, float _shakeTime, float _shakeAmount, Vector3 _shakeDir, float _shakingTime)
+    public IEnumerator OnGravityFallCamera(Camera _cam, float _shakeTime, float _shakeAmount, Vector3 _shakeDir, float _shakingSpeed)
     {
         _cam.transform.parent = target;
 
-        yield return StartCoroutine(ShakeRotateCam(_cam, _shakeTime, _shakeAmount, _shakeDir, _shakingTime));
-        //while(eventMgr.eCurEvent == ESOEventType.OnGravity)
-        //{
-        //    yield return null;
-        //}
+        yield return StartCoroutine(ShakeRotateCam(_cam, _shakeTime, _shakeAmount, _shakeDir, _shakingSpeed));
+
         yield return new WaitForSeconds(0.5f);
+
         _cam.transform.parent = null;
 
     }
 
     public void OnGravityCam()
     {        
-        StartCoroutine(OnGravityFallCamera(main_cam, 2.5f, 100f, shakeDir, 50f));
+        StartCoroutine(OnGravityFallCamera(main_cam, 2.5f, 100f, shakeDir, 80f));
     }
 
 }

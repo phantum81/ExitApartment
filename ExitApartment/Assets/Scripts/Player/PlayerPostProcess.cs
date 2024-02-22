@@ -11,18 +11,7 @@ public class PlayerPostProcess : MonoBehaviour
 
     private Vignette vignette;
     private Grain grain;
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-
-
-    }
     public void OnDamageVignette()
     {
 
