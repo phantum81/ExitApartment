@@ -49,7 +49,10 @@ public class GameManager : MonoBehaviour
         
     }
 
-
+    public bool Checkinterection(Ray _ray, float _maxDis, int _layer)
+    {
+        return cameraMgr.CameraCtr.Checkinterection(_ray, _maxDis, _layer);
+    }
 
 
 

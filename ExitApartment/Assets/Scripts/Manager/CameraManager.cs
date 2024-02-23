@@ -15,7 +15,11 @@ public class CameraManager : MonoBehaviour
 
     [Header("현재카메라"),SerializeField]
     private Camera curCamera;
-    
+
+    [Header("Ui카메라"), SerializeField]
+    private Camera UiCamera;
+
+
     /// <summary>
     /// 0: 메인캠 1: 12f캠
     /// </summary>
@@ -40,6 +44,7 @@ public class CameraManager : MonoBehaviour
     {
         camDic.Add(0, Camera.main);
         camDic.Add(1, deadCamCtr.GetComponent<Camera>());
+        camDic.Add(2, UiCamera);
         curCamera = camDic[0];
         camDic[1].enabled = false;
     }
@@ -108,5 +113,8 @@ public class CameraManager : MonoBehaviour
         curCamera = _cam;
 
     }
+
+
+
 
 }

@@ -90,17 +90,17 @@ public class CameraController : MonoBehaviour
             case 0:
                 FollowCamera(main_cam, target, S_speed, S_shake, 1);
                 RotateCamera();
-                CheckWall();
+                //CheckWall();
                 break;
             case 1:
                 FollowCamera(main_cam, target, W_speed, W_shake, 1);
                 RotateCamera();
-                CheckWall();
+                //CheckWall();
                 break;
             case 2:
                 FollowCamera(main_cam, target, R_speed, R_shake, 1);
                 RotateCamera();
-                CheckWall();
+                //CheckWall();
                 break;
             case 3:
                 break;
@@ -110,7 +110,7 @@ public class CameraController : MonoBehaviour
             default:
                 FollowCamera(main_cam, target, S_speed, S_shake, 1);
                 RotateCamera();
-                CheckWall();
+                //CheckWall();
                 break;
         }
 
@@ -185,7 +185,7 @@ public class CameraController : MonoBehaviour
             }
         }
 
-    }
+    }//문제가있다. 고쳐야함 (떨림, 이동고정문제)
 
 
 
@@ -234,7 +234,7 @@ public class CameraController : MonoBehaviour
 
         }
     }
-    public IEnumerator OnGravityFallCamera(Camera _cam, float _shakeTime, float _shakeAmount, Vector3 _shakeDir, float _shakingSpeed)
+    private IEnumerator OnGravityFallCamera(Camera _cam, float _shakeTime, float _shakeAmount, Vector3 _shakeDir, float _shakingSpeed)
     {
         _cam.transform.parent = target;
 
@@ -250,5 +250,18 @@ public class CameraController : MonoBehaviour
     {        
         StartCoroutine(OnGravityFallCamera(main_cam, 2.5f, 100f, shakeDir, 80f));
     }
+
+
+    public bool Checkinterection(Ray _ray ,float _maxDis, int _layer )
+    {
+        
+        if(Physics.Raycast(_ray, _maxDis, _layer))
+        {
+            return true;
+        }
+        else
+            return false;
+    }
+
 
 }
