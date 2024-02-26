@@ -15,6 +15,7 @@ public class CameraManager : MonoBehaviour
 
     [Header("현재카메라"),SerializeField]
     private Camera curCamera;
+    public Camera CurCamera => curCamera;
 
     [Header("Ui카메라"), SerializeField]
     private Camera UiCamera;

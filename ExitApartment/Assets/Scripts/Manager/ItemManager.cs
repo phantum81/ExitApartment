@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class ItemManager : MonoBehaviour
 {
-    private Dictionary<ElevatorPan, ElevatorNumData> elevatorFloorDic;
+    private Dictionary<ElevatorPan, ElevatorNumData> elevatorFloorDic = new Dictionary<ElevatorPan, ElevatorNumData>();
     public Dictionary<ElevatorPan, ElevatorNumData> ElevatorFloorDic => elevatorFloorDic;
+
     [SerializeField]
     private List<ElevatorPan> elevatorFloorList;
 
@@ -16,7 +17,7 @@ public class ItemManager : MonoBehaviour
 
         for(int i = 0; i < elevatorFloorList.Count; i++)
         {
-            elevatorFloorDic.Add(elevatorFloorList[i], new ElevatorNumData(elevatorFloorList[i].GetComponentInChildren<TextMeshPro>().text));
+            elevatorFloorDic.Add(elevatorFloorList[i], new ElevatorNumData(elevatorFloorList[i].transform.GetComponentInChildren<TextMeshPro>().text));
 
         }
     }
@@ -24,7 +25,7 @@ public class ItemManager : MonoBehaviour
     
     void Update()
     {
-        Debug.Log("¿¨");
+        
     }
 
 

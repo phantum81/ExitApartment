@@ -23,7 +23,12 @@ public enum EItemInteraction
 
 };
 
+public enum EElevatorButtonType
+{
+    Open,
+    Close,
 
+};
 
 /// <summary>
 /// 카메라 상태 0:Stand 1:Walk 2:Run 3:Gravity 4:None

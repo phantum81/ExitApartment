@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ElevatorPan : MonoBehaviour, IInteraction
 {
     private Color originColor;
     private Material curMaterial;
-
+    
 
     private void Start()
     {
@@ -20,7 +21,8 @@ public class ElevatorPan : MonoBehaviour, IInteraction
     }
     public void OnInteraction()
     {
-
+        ElevatorNumData data=GameManager.Instance.itemMgr.ElevatorFloorDic[transform.GetComponentInChildren<ElevatorPan>()];
+        UiManager.Instance.inGameCtr.InGameUiShower.RenewWriteFloor(data.Num);
     }
     public void OnRayOut()
     {

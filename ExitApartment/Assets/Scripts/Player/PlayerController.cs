@@ -59,8 +59,8 @@ public class PlayerController : MonoBehaviour
 
     public void Move(Vector3 _inputDir, float _speed)
     {
-        Vector3 right= _inputDir.x*player.right;
-        Vector3 foward = _inputDir.z*player.forward;
+        Vector3 right= _inputDir.x * player.right;
+        Vector3 foward = _inputDir.z * player.forward;
         Vector3 velocity = (right + foward).normalized;
 
         rigd.MovePosition(player.position + velocity * _speed * Time.deltaTime);

@@ -12,18 +12,19 @@ public class PlayerInteraction : MonoBehaviour
     private bool isInteraction = false;
     private Color selectColor = Color.green;
     private RaycastHit prevHit;
+    private CameraManager cameraMgr;
     void Start()
     {
-        
+        cameraMgr = GameManager.Instance.cameraMgr;
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 screenCenter = new Vector3(Camera.main.pixelWidth / 2, Camera.main.pixelHeight / 2);
+        Vector3 screenCenter = new Vector3(cameraMgr.CurCamera.pixelWidth / 2, cameraMgr.CurCamera.pixelHeight / 2);
 
-        ray = Camera.main.ScreenPointToRay(screenCenter);
+        ray = cameraMgr.CurCamera.ScreenPointToRay(screenCenter);
 
         isInteraction = GameManager.Instance.CheckInterection(ray, out RaycastHit _hit, maxDis, interectionLayer);
         
@@ -34,7 +35,7 @@ public class PlayerInteraction : MonoBehaviour
             _hit.transform?.GetComponent<IInteraction>().OnRayHit(selectColor);
             UiManager.Instance.inGameCtr.InGameUiShower.ActivePickUpMark(isInteraction);   
             
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetKeyDown(KeyCode.E))
                 _hit.transform.GetComponent<IInteraction>()?.OnInteraction();
         }
         else

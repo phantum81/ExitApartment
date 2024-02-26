@@ -29,9 +29,17 @@ public class InGameUiShower : MonoBehaviour
         pickMark.SetActive(_bool);
     }
 
+    public void RenewWriteFloor(string _txt)
+    {
+        if (writeFloor_txt.GetTextInfo(writeFloor_txt.text).characterCount < 4)
+            writeFloor_txt.text += _txt;
+        else
+            writeFloor_txt.text = string.Empty;
+    }
+
     public void RenewCurFloor(string _txt)
     {
-        writeFloor_txt.text = _txt;
+        curFloor_txt.text = _txt;
     }
 
     
