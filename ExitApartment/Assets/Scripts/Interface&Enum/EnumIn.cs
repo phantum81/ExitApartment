@@ -16,7 +16,12 @@ public enum EplayerMoveState
 
 };
 
+public enum EItemInteraction
+{
+    None,
+    On,
 
+};
 
 
 
@@ -54,9 +59,15 @@ public enum EplayerState  // 보통 이벤트때문에 일어남.
 };
 
 
-
+/// <summary>
+/// 이벤트 종류 0 : 그래비티, 1 : 12층사망 
+/// </summary>
 public enum ESOEventType
 {
     OnGravity,
     OnDie12F,
 };
+
+
+
+

@@ -409,11 +409,14 @@
 "Assets/Scripts/Floor12F/GravityDieCollider.cs"
 "Assets/Scripts/Interface&Enum/EnumIn.cs"
 "Assets/Scripts/Interface&Enum/Interface.cs"
+"Assets/Scripts/Item/ElevatorNumData.cs"
+"Assets/Scripts/Item/ElevatorPan.cs"
 "Assets/Scripts/Manager/CameraManager.cs"
 "Assets/Scripts/Manager/EventManager.cs"
 "Assets/Scripts/Manager/GameManager.cs"
 "Assets/Scripts/Manager/InputManager.cs"
 "Assets/Scripts/Manager/ItemManager.cs"
+"Assets/Scripts/Manager/UiManager.cs"
 "Assets/Scripts/Manager/UnitManager.cs"
 "Assets/Scripts/Mobs/Mob12F.cs"
 "Assets/Scripts/Mobs/MonsterController.cs"
@@ -436,6 +439,9 @@
 "Assets/Scripts/Player/PlayerStateHFsm/PlayerStateNone.cs"
 "Assets/Scripts/ScriptableObjects/EventListener.cs"
 "Assets/Scripts/ScriptableObjects/GameEvent.cs"
+"Assets/Scripts/Ui/InGameOnClick.cs"
+"Assets/Scripts/Ui/InGameUiController.cs"
+"Assets/Scripts/Ui/InGameUiShower.cs"
 -langversion:9.0
 
 /deterministic

@@ -414,6 +414,7 @@
 "Assets/Scripts/Manager/GameManager.cs"
 "Assets/Scripts/Manager/InputManager.cs"
 "Assets/Scripts/Manager/ItemManager.cs"
+"Assets/Scripts/Manager/UiManager.cs"
 "Assets/Scripts/Manager/UnitManager.cs"
 "Assets/Scripts/Mobs/Mob12F.cs"
 "Assets/Scripts/Mobs/MonsterController.cs"
@@ -426,6 +427,7 @@
 "Assets/Scripts/Player/PlayerHFsm/PlayerRun.cs"
 "Assets/Scripts/Player/PlayerHFsm/PlayerStand.cs"
 "Assets/Scripts/Player/PlayerHFsm/PlayerWalk.cs"
+"Assets/Scripts/Player/PlayerInteraction.cs"
 "Assets/Scripts/Player/PlayerPostProcess.cs"
 "Assets/Scripts/Player/PlayerSound.cs"
 "Assets/Scripts/Player/PlayerStateHFsm/PlayerStateDamage.cs"
@@ -435,6 +437,9 @@
 "Assets/Scripts/Player/PlayerStateHFsm/PlayerStateNone.cs"
 "Assets/Scripts/ScriptableObjects/EventListener.cs"
 "Assets/Scripts/ScriptableObjects/GameEvent.cs"
+"Assets/Scripts/Ui/InGameOnClick.cs"
+"Assets/Scripts/Ui/InGameUiController.cs"
+"Assets/Scripts/Ui/InGameUiShower.cs"
 -langversion:9.0
 
 /deterministic

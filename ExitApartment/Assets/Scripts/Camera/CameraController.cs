@@ -252,10 +252,10 @@ public class CameraController : MonoBehaviour
     }
 
 
-    public bool Checkinterection(Ray _ray ,float _maxDis, int _layer )
+    public bool CheckInterection(Ray _ray , out RaycastHit _hit, float _maxDis, int _layer )
     {
         
-        if(Physics.Raycast(_ray, _maxDis, _layer))
+        if(Physics.Raycast(_ray, out _hit, _maxDis, _layer))
         {
             return true;
         }

@@ -22,3 +22,14 @@ public interface IEnemyContect
 
 
 }
+
+public interface IInteraction
+{
+
+    void OnRayHit(Color _color);
+    void OnInteraction();
+
+    void OnRayOut();
+
+
+}
