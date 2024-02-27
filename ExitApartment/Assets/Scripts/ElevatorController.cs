@@ -21,6 +21,7 @@ public class ElevatorController : MonoBehaviour
     void Start()
     {
         Init();
+        //StartCoroutine(ShakeElevator(2f,0.005f));
     }
 
     // Update is called once per frame
@@ -34,7 +35,7 @@ public class ElevatorController : MonoBehaviour
     {
         
         float elapsedTime = 0f;
-        float duration = 2f;        
+        float duration = 5f;        
         yield return new WaitForSeconds(0.5f);
         while (elapsedTime < duration)
         {
@@ -48,7 +49,7 @@ public class ElevatorController : MonoBehaviour
     public IEnumerator CloseDoor()
     {
         float elapsedTime = 0f;
-        float duration = 2f;
+        float duration = 5f;
         yield return new WaitForSeconds(0.5f);
         while (elapsedTime < duration)
         {
@@ -67,4 +68,21 @@ public class ElevatorController : MonoBehaviour
             origin[i] = doors[i].transform.position;
         }
     }
+
+
+
+    IEnumerator ShakeElevator(float _shakeTime, float _shakeAmount)
+    {
+        float curTime = 0f;
+        Vector3 originPos = transform.position;
+        while (curTime<_shakeTime)
+        {
+            transform.position = originPos + Random.insideUnitSphere * _shakeAmount;
+            curTime += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = originPos;
+    }
+      
 }

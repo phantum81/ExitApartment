@@ -79,6 +79,7 @@ public enum ESOEventType
 {
     OnGravity,
     OnDie12F,
+    OnClear12F,
 };
 
 

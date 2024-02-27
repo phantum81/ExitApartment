@@ -3832,8 +3832,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 433436394}
   m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: -0.84, y: 2.95, z: 10.13}
-  m_LocalScale: {x: 8, y: 0.6, z: 1}
+  m_LocalPosition: {x: -0.84, y: 7.96, z: 10.13}
+  m_LocalScale: {x: 8, y: 0.6, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 975609613}
@@ -8456,7 +8456,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.1
+  near clip plane: 0.05
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -8484,7 +8484,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.28680027, y: 1.046, z: 3.2286}
+  m_LocalPosition: {x: 0.28680027, y: 0.88, z: 3.2286}
   m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16381,7 +16381,7 @@ MonoBehaviour:
   doors:
   - {fileID: 1786755624929450}
   - {fileID: 1835893768290536}
-  speed: 3
+  speed: 2
   eleWork: 1
 --- !u!4 &4143536671295116
 Transform:
@@ -16443,7 +16443,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1111907748514506}
   m_LocalRotation: {x: -0.0000010326, y: 0.70710516, z: 0.70710844, w: -0.0000010325953}
-  m_LocalPosition: {x: -0.00752, y: -0.00261, z: -0.05529}
+  m_LocalPosition: {x: -0.00752, y: -0.00261, z: -0.05553}
   m_LocalScale: {x: 0.00051231805, y: 0.00051231787, z: 0.000512318}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -20830,6 +20830,7 @@ GameObject:
   - component: {fileID: 8675915457251421347}
   - component: {fileID: 1245490584}
   - component: {fileID: 275724988}
+  - component: {fileID: 8675915457251421350}
   - component: {fileID: 275724992}
   - component: {fileID: 275724993}
   - component: {fileID: 8675915457251421348}
@@ -20888,7 +20889,7 @@ MonoBehaviour:
   minGrowCoef: 2.07
   maxGrowCoef: 4.89
   newLegCooldown: 0.31
-  velocity: {x: -0.039149806, y: 0, z: 0.18805762}
+  velocity: {x: -0.20535201, y: 0, z: 0.51508665}
 --- !u!54 &8675915457251421348
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -20937,6 +20938,35 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.65, y: 0.59, z: 0.58}
   m_Center: {x: 0, y: 0, z: 0.43}
+--- !u!114 &8675915457251421350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8675915457251421344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83f03c80104fdc541aec7e3e1764c956, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventSo: {fileID: 11400000, guid: f7060df52747b0b4c9867b69ee8c2c6b, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  eventType: 2
 --- !u!33 &8877336523859573907
 MeshFilter:
   m_ObjectHideFlags: 0
