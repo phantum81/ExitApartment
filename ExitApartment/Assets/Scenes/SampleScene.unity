@@ -1429,6 +1429,7 @@ GameObject:
   - component: {fileID: 196612599}
   - component: {fileID: 196612598}
   - component: {fileID: 196612601}
+  - component: {fileID: 196612602}
   m_Layer: 6
   m_Name: CloseButton
   m_TagString: Untagged
@@ -1537,6 +1538,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonType: 1
+--- !u!114 &196612602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 196612596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
 --- !u!1 &240424508
 GameObject:
   m_ObjectHideFlags: 0
@@ -13532,8 +13546,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 3850880387058471502}
-  _walkSpeed: 4
-  _runSpeed: 8
+  _walkSpeed: 2
+  _runSpeed: 4
 --- !u!114 &1735829889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16367,7 +16381,8 @@ MonoBehaviour:
   doors:
   - {fileID: 1786755624929450}
   - {fileID: 1835893768290536}
-  speed: 1
+  speed: 3
+  eleWork: 1
 --- !u!4 &4143536671295116
 Transform:
   m_ObjectHideFlags: 0
@@ -20873,7 +20888,7 @@ MonoBehaviour:
   minGrowCoef: 2.07
   maxGrowCoef: 4.89
   newLegCooldown: 0.31
-  velocity: {x: -0.72057086, y: 0, z: -0.17413521}
+  velocity: {x: -0.039149806, y: 0, z: 0.18805762}
 --- !u!54 &8675915457251421348
 Rigidbody:
   m_ObjectHideFlags: 0

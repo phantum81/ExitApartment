@@ -21,7 +21,7 @@ public class ElevatorPan : MonoBehaviour, IInteraction
     }
     public void OnInteraction()
     {
-        ElevatorNumData data=GameManager.Instance.itemMgr.ElevatorFloorDic[transform.GetComponentInChildren<ElevatorPan>()];
+        ElevatorNumData data = GameManager.Instance.itemMgr.ElevatorFloorDic[transform.GetComponentInChildren<ElevatorPan>()];
         UiManager.Instance.inGameCtr.InGameUiShower.RenewWriteFloor(data.Num);
     }
     public void OnRayOut()

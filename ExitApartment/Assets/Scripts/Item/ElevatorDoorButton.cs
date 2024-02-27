@@ -5,9 +5,20 @@ using UnityEngine;
 public class ElevatorDoorButton : MonoBehaviour, IInteraction
 {
     public EElevatorButtonType buttonType;
+    
     private Color originColor;
     private Material curMaterial;
-    
+    private ElevatorController eleCtr;
+
+
+
+    private void Start()
+    {
+        curMaterial = transform.GetComponent<Renderer>().material;
+        originColor = curMaterial.color;
+        eleCtr = GameManager.Instance.unitMgr.ElevatorCtr;
+
+    }
     public void OnRayHit(Color _color)
     {
         curMaterial.color = _color;
@@ -15,17 +26,34 @@ public class ElevatorDoorButton : MonoBehaviour, IInteraction
     }
     public void OnInteraction()
     {
-        if(buttonType == EElevatorButtonType.Open && !GameManager.Instance.unitMgr.ElevatorCtr.IsOpen)
-        {            
-            StartCoroutine(GameManager.Instance.unitMgr.ElevatorCtr.OpenDoor());
+        if (buttonType == EElevatorButtonType.Open)
+        {
+
+            if (eleCtr.eleWork == EElevatorWork.Closing && eleCtr.CurCoroutine != null)
+            {
+                eleCtr.StopCoroutine(eleCtr.CurCoroutine);
+            }                     
+                eleCtr.eleWork = EElevatorWork.Opening;
+                eleCtr.CurCoroutine = eleCtr.StartCoroutine(eleCtr.OpenDoor());
+
         }
-        else if(buttonType == EElevatorButtonType.Close && GameManager.Instance.unitMgr.ElevatorCtr.IsOpen)
-            StartCoroutine(GameManager.Instance.unitMgr.ElevatorCtr.CloseDoor());
-        // 조건 생각해야함.
+        else if (buttonType == EElevatorButtonType.Close)
+        {
+
+            if (eleCtr.eleWork == EElevatorWork.Opening && eleCtr.CurCoroutine != null)
+            {
+                eleCtr.StopCoroutine(eleCtr.CurCoroutine);
+            }
+                eleCtr.eleWork = EElevatorWork.Closing;
+
+                eleCtr.CurCoroutine = eleCtr.StartCoroutine(eleCtr.CloseDoor());
+        }
 
     }
     public void OnRayOut()
     {
         curMaterial.color = originColor;
     }
+
+
 }

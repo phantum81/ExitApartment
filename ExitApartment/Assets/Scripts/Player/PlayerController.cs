@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour
         Vector3 foward = _inputDir.z * player.forward;
         Vector3 velocity = (right + foward).normalized;
 
-        rigd.MovePosition(player.position + velocity * _speed * Time.deltaTime);
+        rigd.MovePosition(player.position + velocity * _speed * Time.fixedDeltaTime);
 
         Rotate();
 

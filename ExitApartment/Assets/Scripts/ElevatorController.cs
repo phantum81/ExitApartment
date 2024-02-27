@@ -11,9 +11,13 @@ public class ElevatorController : MonoBehaviour
     private GameObject[] doors;
     [Header("¹® ¼Óµµ"), SerializeField]
     private float speed = 3f;
+
     private Vector3[] origin = new Vector3[2];
-    private bool isOpen = false;
-    public bool IsOpen => isOpen;
+
+    public EElevatorWork eleWork = EElevatorWork.Closing;
+
+    private Coroutine curCoroutine;
+    public Coroutine CurCoroutine { get; set; }
     void Start()
     {
         Init();
@@ -22,33 +26,39 @@ public class ElevatorController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+       
     }
 
 
     public IEnumerator OpenDoor()
     {
-        Vector3 lDoor = doors[0].transform.position;
-        Vector3 rDoor = doors[1].transform.position;
-        while (doors[0].transform.position.x > -0.5f)
+        
+        float elapsedTime = 0f;
+        float duration = 2f;        
+        yield return new WaitForSeconds(0.5f);
+        while (elapsedTime < duration)
         {
-            doors[0].transform.position = Vector3.Lerp(lDoor, new Vector3(lDoor.x - 0.1f, lDoor.y, lDoor.z), Time.deltaTime * speed);
-            doors[1].transform.position = Vector3.Lerp(rDoor, new Vector3(rDoor.x + 0.1f, rDoor.y, rDoor.z), Time.deltaTime * speed);
+            doors[0].transform.position = Vector3.Lerp(doors[0].transform.position, origin[0] + Vector3.left * 0.8f, (elapsedTime / duration) * Time.fixedDeltaTime * speed);
+            doors[1].transform.position = Vector3.Lerp(doors[1].transform.position, origin[1] + Vector3.right * 0.8f, (elapsedTime / duration) * Time.fixedDeltaTime * speed);
+            elapsedTime += Time.deltaTime;
             yield return null;
-        }
-        isOpen = true;
+        }        
     }
-
 
     public IEnumerator CloseDoor()
     {
-        while (Vector3.Distance(doors[0].transform.position, origin[0])<0.02f)
+        float elapsedTime = 0f;
+        float duration = 2f;
+        yield return new WaitForSeconds(0.5f);
+        while (elapsedTime < duration)
         {
-            doors[0].transform.position = Vector3.Lerp(doors[0].transform.position, origin[0], Time.deltaTime * speed * 0.3f);
-            doors[1].transform.position = Vector3.Lerp(doors[1].transform.position, origin[1], Time.deltaTime * speed * 0.3f);
+
+            doors[0].transform.position = Vector3.Lerp(doors[0].transform.position, origin[0], (elapsedTime / duration) * Time.fixedDeltaTime * speed);
+            doors[1].transform.position = Vector3.Lerp(doors[1].transform.position, origin[1], (elapsedTime / duration) * Time.fixedDeltaTime * speed);
+            elapsedTime += Time.deltaTime;
             yield return null;
         }
-        isOpen = false;
+        
     }
     private void Init()
     {

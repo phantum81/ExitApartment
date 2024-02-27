@@ -30,6 +30,14 @@ public enum EElevatorButtonType
 
 };
 
+public enum EElevatorWork
+{
+    Opening,
+    Closing,
+
+
+};
+
 /// <summary>
 /// 카메라 상태 0:Stand 1:Walk 2:Run 3:Gravity 4:None
 /// </summary>

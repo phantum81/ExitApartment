@@ -11,7 +11,7 @@ public class PlayerInteraction : MonoBehaviour
     
     private bool isInteraction = false;
     private Color selectColor = Color.green;
-    private RaycastHit prevHit;
+    private List<RaycastHit> prevHit = new List<RaycastHit>();
     private CameraManager cameraMgr;
     void Start()
     {
@@ -31,7 +31,7 @@ public class PlayerInteraction : MonoBehaviour
 
         if (isInteraction)
         {
-            prevHit = _hit;
+            prevHit.Add( _hit);
             _hit.transform?.GetComponent<IInteraction>().OnRayHit(selectColor);
             UiManager.Instance.inGameCtr.InGameUiShower.ActivePickUpMark(isInteraction);   
             
@@ -40,7 +40,11 @@ public class PlayerInteraction : MonoBehaviour
         }
         else
         {
-            prevHit.transform?.GetComponent<IInteraction>().OnRayOut();
+            for(int i = 0; i < prevHit.Count; i++)
+            {
+                prevHit[i].transform?.GetComponent<IInteraction>().OnRayOut();
+            }
+            prevHit.Clear();
             UiManager.Instance.inGameCtr.InGameUiShower.ActivePickUpMark(isInteraction);
         }
 
