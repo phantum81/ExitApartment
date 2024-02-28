@@ -64,10 +64,10 @@ public class CameraController : MonoBehaviour
     private float _w_shake = 0.0005f;
     public float W_shake => _w_shake;
 
-    private float _r_shake = 0.0008f;
+    private float _r_shake = 0.0007f;
     public float R_shake => _r_shake;
 
-    private float _s_shake = 0.0003f;
+    private float _s_shake = 0.0001f;
     public float S_shake => _s_shake;
 
 

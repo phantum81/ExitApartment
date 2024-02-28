@@ -11,7 +11,15 @@ public interface IState<T>
 }
 public interface IContect
 {
+
     void OnContect();
+
+
+}
+public interface IEventContect
+{
+
+    void OnContect(ESOEventType _type);
 
 
 }
@@ -25,6 +33,8 @@ public interface IEnemyContect
 
 public interface IInteraction
 {
+
+    void Init();
 
     void OnRayHit(Color _color);
     void OnInteraction();

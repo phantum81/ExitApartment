@@ -8,7 +8,7 @@ public class GameEvent : ScriptableObject
 {
     public List<EventListener> gravityListener = new List<EventListener>();
     public List<EventListener> die12FListener = new List<EventListener>();
-
+    public List<EventListener> alive12FListener = new List<EventListener>();
     public void GravityRaise()
     {
         for (int i = gravityListener.Count - 1; i >= 0; i--)
@@ -42,5 +42,22 @@ public class GameEvent : ScriptableObject
     public void Die12FUnregisterListener(EventListener _listener)
     {
         die12FListener.Remove(_listener);
+    }
+
+
+    public void Alive12FRaise()
+    {
+        for (int i = alive12FListener.Count - 1; i >= 0; i--)
+        {
+            alive12FListener[i].OnEventRaise();
+        }
+    }
+    public void Alive12FRegisterListener(EventListener _listener)
+    {
+        alive12FListener.Add(_listener);
+    }
+    public void Alive12FUnregisterListener(EventListener _listener)
+    {
+        alive12FListener.Remove(_listener);
     }
 }

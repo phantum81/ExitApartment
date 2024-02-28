@@ -16,7 +16,8 @@ public class InputManager : MonoBehaviour
     
     private bool isShift = false;
     public bool IsShift => isShift;
-
+    private bool isE = false;
+    public bool IsE => isE;
 
     // Update is called once per frame
     void Update()
@@ -24,7 +25,7 @@ public class InputManager : MonoBehaviour
         GetInputDir();
         GetCameraInput();
         isShift = Input.GetKey(KeyCode.LeftShift);
-
+        isE = Input.GetKey(KeyCode.E);
     }
 
     private void GetInputDir()

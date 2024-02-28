@@ -7,8 +7,7 @@ public class PlayerInteraction : MonoBehaviour
     [Header("최대 거리"), SerializeField]
     private float maxDis = 2f;
     private Ray ray;
-    private int interectionLayer = 1 << 6;
-    
+    private int interectionLayer = 1 << 6;    
     private bool isInteraction = false;
     private Color selectColor = Color.green;
     private List<RaycastHit> prevHit = new List<RaycastHit>();
@@ -35,7 +34,7 @@ public class PlayerInteraction : MonoBehaviour
             _hit.transform?.GetComponent<IInteraction>().OnRayHit(selectColor);
             UiManager.Instance.inGameCtr.InGameUiShower.ActivePickUpMark(isInteraction);   
             
-            if (Input.GetKeyDown(KeyCode.E))
+            if (GameManager.Instance.inputMgr.IsE)
                 _hit.transform.GetComponent<IInteraction>()?.OnInteraction();
         }
         else
@@ -49,6 +48,7 @@ public class PlayerInteraction : MonoBehaviour
         }
 
     }
+
 
 }
 

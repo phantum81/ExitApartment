@@ -20,6 +20,9 @@ public class EventListener : MonoBehaviour
             case ESOEventType.OnDie12F:
                 eventSo.Die12FRegisterListener(this); 
                 break;
+            case ESOEventType.OnClear12F:
+                eventSo.Alive12FRegisterListener(this);
+                break;
         }
 
         
@@ -33,6 +36,9 @@ public class EventListener : MonoBehaviour
                 break;
             case ESOEventType.OnDie12F:
                 eventSo.Die12FUnregisterListener(this);
+                break;
+            case ESOEventType.OnClear12F:
+                eventSo.Alive12FUnregisterListener(this);
                 break;
         }
     }

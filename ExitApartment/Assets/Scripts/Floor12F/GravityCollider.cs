@@ -1,21 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using Unity.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class GravityCollider : MonoBehaviour, IContect
+public class GravityCollider : MonoBehaviour, IEventContect
 {
-
+    
     public UnityEvent onGravityEvent;
-
-    public void OnContect()
+    public UnityEvent onAliveEvent;
+    public void OnContect(ESOEventType _type)
     {
-        OnGravirty();
+        switch (_type)
+        {
+            case ESOEventType.OnGravity:
+                OnGravirty();
+                break;
+            case ESOEventType.OnClear12F:
+                OnAlive();
+                break;
+
+        }
         GameManager.Instance.eventMgr.ChangeStageState(1);
-        GameManager.Instance.eventMgr.ChangeEventType(0);
+        GameManager.Instance.eventMgr.ChangeEventType((int)_type);
     }
     public void OnGravirty()
     {
-        onGravityEvent?.Invoke();
+        onGravityEvent.Invoke();
+    }
+    public void OnAlive()
+    {
+        onAliveEvent.Invoke();
     }
 }

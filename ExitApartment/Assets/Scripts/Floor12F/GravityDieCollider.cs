@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class GravityDieCollider : MonoBehaviour, IContect
+public class GravityDieCollider : MonoBehaviour, IEventContect
 {
-    [SerializeField]
-    private float shake = 1f;
-    [SerializeField]
-    private float amount = 1f;
+
     [Header("트리거 이벤트"), SerializeField]
     private UnityEvent onDead12F;
-    public void OnContect()
+
+    public void OnContect(ESOEventType _type)
     {
         OnDead12F();
         GameManager.Instance.eventMgr.ChangeStageState(1);
@@ -21,7 +19,7 @@ public class GravityDieCollider : MonoBehaviour, IContect
 
     public void OnDead12F()
     {
-        onDead12F?.Invoke();
+        onDead12F.Invoke();
     }
 
 }

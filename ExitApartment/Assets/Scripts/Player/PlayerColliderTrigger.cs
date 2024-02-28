@@ -18,9 +18,9 @@ public class PlayerColliderTrigger : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         
-        IContect col = other.GetComponent<IContect>();
+        IEventContect col = other.GetComponent<IEventContect>();
         
-        col?.OnContect();
+        col?.OnContect(ESOEventType.OnGravity);
     }
 
 }

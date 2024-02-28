@@ -12,13 +12,7 @@ public class ElevatorDoorButton : MonoBehaviour, IInteraction
 
 
 
-    private void Start()
-    {
-        curMaterial = transform.GetComponent<Renderer>().material;
-        originColor = curMaterial.color;
-        eleCtr = GameManager.Instance.unitMgr.ElevatorCtr;
 
-    }
     public void OnRayHit(Color _color)
     {
         curMaterial.color = _color;
@@ -55,5 +49,10 @@ public class ElevatorDoorButton : MonoBehaviour, IInteraction
         curMaterial.color = originColor;
     }
 
+    public void Init()
+    {
+        GameManager.Instance.itemMgr.InitInteractionItem(out curMaterial, out originColor, transform);
+        eleCtr = GameManager.Instance.unitMgr.ElevatorCtr;
+    }
 
 }

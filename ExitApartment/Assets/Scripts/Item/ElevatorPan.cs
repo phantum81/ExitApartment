@@ -9,11 +9,7 @@ public class ElevatorPan : MonoBehaviour, IInteraction
     private Material curMaterial;
     
 
-    private void Start()
-    {
-        curMaterial = transform.GetComponent<Renderer>().material;
-        originColor = curMaterial.color;
-    }
+
     public void OnRayHit( Color _color)
     {
         curMaterial.color = _color;
@@ -27,5 +23,9 @@ public class ElevatorPan : MonoBehaviour, IInteraction
     public void OnRayOut()
     {
         curMaterial.color = originColor;
+    }
+    public void Init()
+    {
+        GameManager.Instance.itemMgr.InitInteractionItem(out curMaterial, out originColor, transform);
     }
 }

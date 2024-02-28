@@ -412,6 +412,8 @@
 "Assets/Scripts/Item/ElevatorDoorButton.cs"
 "Assets/Scripts/Item/ElevatorNumData.cs"
 "Assets/Scripts/Item/ElevatorPan.cs"
+"Assets/Scripts/Item/ItemTrigger.cs"
+"Assets/Scripts/Item/LightStatueItem.cs"
 "Assets/Scripts/Manager/CameraManager.cs"
 "Assets/Scripts/Manager/EventManager.cs"
 "Assets/Scripts/Manager/GameManager.cs"

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - door
   - FloorPan
+  - Iinteraction
   layers:
   - Default
   - TransparentFX

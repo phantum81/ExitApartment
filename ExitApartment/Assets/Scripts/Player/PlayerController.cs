@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     private float rotateY = 0f;
     //-----------이동관련---------------------------------
 
-    private Vector3 reserveGravity = new Vector3(0, 0, 1f);
+    
 
 
     private InputManager inputMgr;
@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
         unitMgr = GameManager.Instance.unitMgr;
 
         playerProcess = gameObject.GetComponent<PlayerPostProcess>();
-        reserveGravity.Normalize();
+        
        
 
     }
@@ -85,8 +85,11 @@ public class PlayerController : MonoBehaviour
 
     public void ChangeGravity()
     {
-        StartCoroutine(unitMgr.ChangeGravity(rigd,reserveGravity));
+        unitMgr.OnChangeGravity(rigd,unitMgr.ReserveGravity);
     }
 
+    public void PickItem()
+    {
 
+    }
 }

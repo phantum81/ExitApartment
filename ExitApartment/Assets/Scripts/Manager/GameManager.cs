@@ -38,9 +38,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        //GameObject go = new GameObject("CameraMgr");
-        //cameraMgr = go.AddComponent<CameraManager>();
-        //go.transform.parent = transform;
+        itemMgr.Init();
     }
 
     // Update is called once per frame

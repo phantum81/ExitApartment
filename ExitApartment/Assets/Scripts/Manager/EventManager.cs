@@ -47,7 +47,7 @@ public class EventManager : MonoBehaviour
         }
     }
     /// <summary>
-    /// 이벤트 타입 0: 그래비티 폴 1: 12층사망
+    /// 이벤트 타입 0: 그래비티 폴 1: 12층사망 2: 12층 클리어
     /// </summary>
     /// <param name="_state"></param>
     public void ChangeEventType(int _state)
@@ -59,6 +59,9 @@ public class EventManager : MonoBehaviour
                 break;
             case 1:
                 eCurEvent = ESOEventType.OnDie12F;
+                break;
+            case 2:
+                eCurEvent = ESOEventType.OnClear12F;
                 break;
 
 

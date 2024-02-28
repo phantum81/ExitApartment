@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class ItemManager : MonoBehaviour
 {
@@ -9,17 +12,13 @@ public class ItemManager : MonoBehaviour
     public Dictionary<ElevatorPan, ElevatorNumData> ElevatorFloorDic => elevatorFloorDic;
 
     [SerializeField]
-    private List<ElevatorPan> elevatorFloorList;
+    private List<GameObject> itemList= new List<GameObject>();
+
 
     
     void Start()
     {
-
-        for(int i = 0; i < elevatorFloorList.Count; i++)
-        {
-            elevatorFloorDic.Add(elevatorFloorList[i], new ElevatorNumData(elevatorFloorList[i].transform.GetComponentInChildren<TextMeshPro>().text));
-
-        }
+        
     }
 
     
@@ -28,6 +27,36 @@ public class ItemManager : MonoBehaviour
         
     }
 
+    public void InitInteractionItem(out Material _curM, out Color _originColor, Transform _obj)
+    {
+        _curM = _obj.GetComponent<Renderer>().material;
+        _originColor = _curM.color;
+    }
 
 
+
+
+    public void Init()
+    {
+        GameObject[] objsInteraction = GameObject.FindGameObjectsWithTag("Iinteraction");
+
+        for (int i = 0; i < objsInteraction.Length; i++)
+        {
+            objsInteraction[i].GetComponent<IInteraction>()?.Init();
+            itemList.Add(objsInteraction[i]);
+        }
+
+
+        for (int i = 0; i < itemList.Count; i++)
+        {
+
+            ElevatorPan pan = itemList[i].GetComponent<ElevatorPan>();
+            if (pan != null)
+            {
+                elevatorFloorDic.Add(pan, new ElevatorNumData(itemList[i].transform.GetComponentInChildren<TextMeshPro>().text));
+            }
+
+
+        }
+    }
 }

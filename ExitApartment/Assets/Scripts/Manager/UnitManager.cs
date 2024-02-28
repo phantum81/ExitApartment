@@ -15,8 +15,14 @@ public class UnitManager : MonoBehaviour
     private Transform contectTarget;
     public Transform ContectTarget => contectTarget;
 
+
+
+    private Vector3 reserveGravity = new Vector3(0, 0, 1f);
+    public Vector3 ReserveGravity=> reserveGravity;
+
     void Start()
     {
+        reserveGravity.Normalize();
         playerCtr.Init();
     }
 
@@ -29,7 +35,7 @@ public class UnitManager : MonoBehaviour
 
 
 
-    public IEnumerator ChangeGravity (Rigidbody _rigd, Vector3 _gravity)
+    private IEnumerator ChangeGravity (Rigidbody _rigd, Vector3 _gravity)
     {
         EventManager evMgr = GameManager.Instance.eventMgr;
         float speed = 0f;
@@ -43,6 +49,13 @@ public class UnitManager : MonoBehaviour
             yield return null;
         }
     }
+
+    public void OnChangeGravity(Rigidbody _rigd, Vector3 _gravity)
+    {
+        StartCoroutine(ChangeGravity(_rigd, _gravity));
+    }
+
+
 
 
     public void GetContectTarget(Transform _target)
