@@ -25,7 +25,7 @@ public class InputManager : MonoBehaviour
         GetInputDir();
         GetCameraInput();
         isShift = Input.GetKey(KeyCode.LeftShift);
-        isE = Input.GetKey(KeyCode.E);
+        isE = Input.GetKeyDown(KeyCode.E);
     }
 
     private void GetInputDir()

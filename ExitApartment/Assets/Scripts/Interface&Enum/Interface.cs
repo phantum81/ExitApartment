@@ -31,6 +31,13 @@ public interface IEnemyContect
 
 }
 
+public interface IUseItem
+{
+    void OnUseItem();
+
+    void OnThrowItem();
+}
+
 public interface IInteraction
 {
 

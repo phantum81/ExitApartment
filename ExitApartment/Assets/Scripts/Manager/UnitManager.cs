@@ -35,24 +35,24 @@ public class UnitManager : MonoBehaviour
 
 
 
-    private IEnumerator ChangeGravity (Rigidbody _rigd, Vector3 _gravity)
+    private IEnumerator ChangeGravity (Rigidbody _rigd, Vector3 _gravity, float _startSpeed)
     {
         EventManager evMgr = GameManager.Instance.eventMgr;
-        float speed = 0f;
+        
         yield return new WaitUntil (()=> evMgr.eStageState == EstageEventState.Eventing);
         while(evMgr.eStageState == EstageEventState.Eventing)
         {
             _rigd.useGravity = false;
-            speed = Mathf.Clamp(speed, 0, 9.81f);
-            speed += Time.deltaTime;
-            _rigd.AddForce(_gravity * speed * _rigd.mass, ForceMode.Acceleration);
+            _startSpeed = Mathf.Clamp(_startSpeed, 0, 9.81f);
+            _startSpeed += Time.deltaTime;
+            _rigd.AddForce(_gravity * _startSpeed * _rigd.mass, ForceMode.Acceleration);
             yield return null;
         }
     }
 
-    public void OnChangeGravity(Rigidbody _rigd, Vector3 _gravity)
+    public void OnChangeGravity(Rigidbody _rigd, Vector3 _gravity, float _startSpeed)
     {
-        StartCoroutine(ChangeGravity(_rigd, _gravity));
+        StartCoroutine(ChangeGravity(_rigd, _gravity, _startSpeed));
     }
 
 

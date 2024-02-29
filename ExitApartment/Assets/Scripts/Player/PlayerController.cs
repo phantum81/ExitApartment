@@ -29,7 +29,9 @@ public class PlayerController : MonoBehaviour
     private UnitManager unitMgr;
 
     private PlayerPostProcess playerProcess;
-
+    private Transform curItem;
+    [SerializeField]
+    private Transform pickTransform;
     private EplayerState ePlayerState = EplayerState.None;
 
    
@@ -85,11 +87,24 @@ public class PlayerController : MonoBehaviour
 
     public void ChangeGravity()
     {
-        unitMgr.OnChangeGravity(rigd,unitMgr.ReserveGravity);
+        unitMgr.OnChangeGravity(rigd,unitMgr.ReserveGravity,0f);
     }
 
-    public void PickItem()
+    public void PickItem(Transform _target)
     {
-
+        curItem = _target;
+        _target.parent = player;
+        _target.transform.position = pickTransform.position;
+        _target.GetComponent<Rigidbody>().useGravity = false;
+        _target.GetComponent<Collider>().enabled = false;
+    }
+    public void ThrowItem(Transform _target, float _power, Vector3 _dir)
+    {
+        Rigidbody rd = _target.GetComponent<Rigidbody>();
+        curItem = null;
+        _target.parent = null;        
+        rd.useGravity = true;
+        rd.AddForce(_dir.normalized * _power * Time.fixedDeltaTime);
+        _target.GetComponent<Collider>().enabled = true;
     }
 }

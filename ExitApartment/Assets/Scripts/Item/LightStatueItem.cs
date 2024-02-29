@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LightStatueItem : MonoBehaviour, IInteraction
+public class LightStatueItem : MonoBehaviour, IInteraction, IUseItem
 {
     private Color originColor;
     private Material curMaterial;
@@ -21,8 +21,8 @@ public class LightStatueItem : MonoBehaviour, IInteraction
 
     }
     public void OnInteraction()
-    { 
-        
+    {
+        GameManager.Instance.itemMgr.PickItem(this.transform);
 
     }
     public void OnRayOut()
@@ -30,9 +30,20 @@ public class LightStatueItem : MonoBehaviour, IInteraction
         curMaterial.color = originColor;
     }
 
+    public void OnUseItem()
+    {
+
+    }
+
+    public void OnThrowItem()
+    {
+
+    }
+
+
     public void OnGravity()
     {
-        GameManager.Instance.unitMgr.OnChangeGravity(rigd, GameManager.Instance.unitMgr.ReserveGravity);
+        GameManager.Instance.unitMgr.OnChangeGravity(rigd, GameManager.Instance.unitMgr.ReserveGravity,5f);
     }
 
     private void OnTriggerEnter(Collider other)

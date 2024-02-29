@@ -33,7 +33,10 @@ public class ItemManager : MonoBehaviour
         _originColor = _curM.color;
     }
 
-
+    public void PickItem(Transform _target)
+    {
+        GameManager.Instance.unitMgr.PlayerCtr.PickItem(_target);
+    }
 
 
     public void Init()

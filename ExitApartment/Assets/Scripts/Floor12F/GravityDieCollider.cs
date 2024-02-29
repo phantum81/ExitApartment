@@ -8,7 +8,6 @@ public class GravityDieCollider : MonoBehaviour, IEventContect
 
     [Header("트리거 이벤트"), SerializeField]
     private UnityEvent onDead12F;
-
     public void OnContect(ESOEventType _type)
     {
         OnDead12F();
@@ -21,5 +20,4 @@ public class GravityDieCollider : MonoBehaviour, IEventContect
     {
         onDead12F.Invoke();
     }
-
 }
