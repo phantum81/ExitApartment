@@ -23532,7 +23532,7 @@ MonoBehaviour:
   minGrowCoef: 2.07
   maxGrowCoef: 4.89
   newLegCooldown: 0.31
-  velocity: {x: 0.62383443, y: 0, z: -0.089766115}
+  velocity: {x: 0.55114305, y: 0, z: 0.7032181}
 --- !u!54 &8675915457251421348
 Rigidbody:
   m_ObjectHideFlags: 0
