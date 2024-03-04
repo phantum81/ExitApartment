@@ -258,6 +258,7 @@ public class CameraController : MonoBehaviour
         else
             return false;
     }
+
     public void OnGravityCam()
     {        
         StartCoroutine(OnGravityFallCamera(main_cam, 2.5f, 100f, shakeDir, 80f));

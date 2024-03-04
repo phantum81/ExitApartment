@@ -40,8 +40,7 @@ public class OnDeadCameraController : MonoBehaviour
         lookMonsterWait = new WaitForSeconds(lookMonster_time);
         cameraCtr = GameManager.Instance.cameraMgr.CameraCtr;
         cameraMgr = GameManager.Instance.cameraMgr;
-        
-        
+                
     }
 
 

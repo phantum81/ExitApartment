@@ -35,13 +35,13 @@ public class GameManager : MonoBehaviour
     public EventManager eventMgr;
     public ItemManager itemMgr;
     
-
+    
     void Start()
     {
         itemMgr.Init();
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         
