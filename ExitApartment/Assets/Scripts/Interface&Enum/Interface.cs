@@ -16,6 +16,12 @@ public interface IContect
 
 
 }
+
+public interface IGravityChange
+{
+    void OnGravityChange();
+}
+
 public interface IEventContect
 {
 

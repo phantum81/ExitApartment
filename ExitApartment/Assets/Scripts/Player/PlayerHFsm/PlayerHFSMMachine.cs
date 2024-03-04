@@ -42,6 +42,9 @@ public class PlayerHFSMMachine : MonoBehaviour
 
     }
 
+
+
+
     private void Init()
     {
         

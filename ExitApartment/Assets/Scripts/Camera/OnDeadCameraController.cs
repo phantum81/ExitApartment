@@ -44,16 +44,13 @@ public class OnDeadCameraController : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 
     IEnumerator DieCam12F()
     {
 
         yield return new WaitUntil(() => cameraMgr.CameraDic[1].enabled == true);
+        transform.GetComponent<Collider>().enabled = true;
         Quaternion _firstTarget = Quaternion.Euler(new Vector3(0, 90f, 0f));
         Quaternion _secondTarget = Quaternion.Euler(new Vector3(0, 90f, -90f));
         Quaternion _thirdTarget = Quaternion.Euler(new Vector3(0, 173f, -90f));
@@ -132,8 +129,13 @@ public class OnDeadCameraController : MonoBehaviour
     {
 
         IEnemyContect col = other.GetComponent<IEnemyContect>();
+        if(col != null)
+        {
+            col.OnContect();
+            transform.GetComponent<Collider>().enabled = false;
+        }
+        
 
-        col?.OnContect();
     }
 
 

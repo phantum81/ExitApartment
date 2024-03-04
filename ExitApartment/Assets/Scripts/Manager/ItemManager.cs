@@ -38,6 +38,11 @@ public class ItemManager : MonoBehaviour
         GameManager.Instance.unitMgr.PlayerCtr.PickItem(_target);
     }
 
+    public void ThrowItem(Transform _target)
+    {
+        GameManager.Instance.unitMgr.PlayerCtr.ThrowItem(_target);
+
+    }
 
     public void Init()
     {

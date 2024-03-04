@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Presets;
 using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
@@ -10,27 +11,37 @@ public class PlayerInteraction : MonoBehaviour
     private int interectionLayer = 1 << 6;    
     private bool isInteraction = false;
     private Color selectColor = Color.green;
-    private List<RaycastHit> prevHit = new List<RaycastHit>();
     private CameraManager cameraMgr;
+    private PlayerController playerCtr;
+    private RaycastHit preHit;
+
+
+
     void Start()
     {
         cameraMgr = GameManager.Instance.cameraMgr;
-        
+        playerCtr = gameObject.GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 screenCenter = new Vector3(cameraMgr.CurCamera.pixelWidth / 2, cameraMgr.CurCamera.pixelHeight / 2);
 
-        ray = cameraMgr.CurCamera.ScreenPointToRay(screenCenter);
+        ray = CenterRay();
 
         isInteraction = GameManager.Instance.CheckInterection(ray, out RaycastHit _hit, maxDis, interectionLayer);
-        
+
+        if (Input.GetKeyDown(KeyCode.F) && playerCtr.CurItem != null)
+        {
+            playerCtr.CurItem.GetComponent<IUseItem>().OnUseItem();
+        }
+
 
         if (isInteraction)
         {
-            prevHit.Add( _hit);
+            if(preHit.collider ==null)
+                preHit = _hit;
+
             _hit.transform?.GetComponent<IInteraction>().OnRayHit(selectColor);
             UiManager.Instance.inGameCtr.InGameUiShower.ActivePickUpMark(isInteraction);   
             
@@ -39,16 +50,32 @@ public class PlayerInteraction : MonoBehaviour
         }
         else
         {
-            for(int i = 0; i < prevHit.Count; i++)
-            {
-                prevHit[i].transform?.GetComponent<IInteraction>().OnRayOut();
-            }
-            prevHit.Clear();
+
+            preHit.transform?.GetComponent<IInteraction>()?.OnRayOut();
+            preHit = new RaycastHit();
+
             UiManager.Instance.inGameCtr.InGameUiShower.ActivePickUpMark(isInteraction);
+
+            if (GameManager.Instance.inputMgr.IsE && playerCtr.CurItem != null)
+            {
+                playerCtr.CurItem.GetComponent<IUseItem>().OnThrowItem();
+            }
         }
+
+
+        
 
     }
 
+    private Ray CenterRay()
+    {
+        
+        Vector3 screenCenter = new Vector3(cameraMgr.CurCamera.pixelWidth / 2, cameraMgr.CurCamera.pixelHeight / 2);
+
+        ray = cameraMgr.CurCamera.ScreenPointToRay(screenCenter);
+        return ray;
+
+    }
 
 }
 

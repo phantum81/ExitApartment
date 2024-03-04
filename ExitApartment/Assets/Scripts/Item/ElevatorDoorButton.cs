@@ -12,12 +12,12 @@ public class ElevatorDoorButton : MonoBehaviour, IInteraction
 
 
 
-
     public void OnRayHit(Color _color)
     {
         curMaterial.color = _color;
 
     }
+
     public void OnInteraction()
     {
         if (buttonType == EElevatorButtonType.Open)

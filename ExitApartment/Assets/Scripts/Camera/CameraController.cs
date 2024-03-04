@@ -246,10 +246,6 @@ public class CameraController : MonoBehaviour
 
     }
 
-    public void OnGravityCam()
-    {        
-        StartCoroutine(OnGravityFallCamera(main_cam, 2.5f, 100f, shakeDir, 80f));
-    }
 
 
     public bool CheckInterection(Ray _ray , out RaycastHit _hit, float _maxDis, int _layer )
@@ -261,6 +257,15 @@ public class CameraController : MonoBehaviour
         }
         else
             return false;
+    }
+    public void OnGravityCam()
+    {        
+        StartCoroutine(OnGravityFallCamera(main_cam, 2.5f, 100f, shakeDir, 80f));
+    }
+
+    public void OnCameraShake()
+    {
+        StartCoroutine(CameraShake(main_cam, 1f, 0.3f));
     }
 
 

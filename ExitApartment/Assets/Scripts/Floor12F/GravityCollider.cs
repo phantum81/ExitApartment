@@ -9,28 +9,31 @@ public class GravityCollider : MonoBehaviour, IEventContect
 {
     
     public UnityEvent onGravityEvent;
-    public UnityEvent onAliveEvent;
     public void OnContect(ESOEventType _type)
     {
         switch (_type)
         {
             case ESOEventType.OnGravity:
                 OnGravirty();
+                GameManager.Instance.eventMgr.ChangeEventType((int)_type);
                 break;
-            case ESOEventType.OnClear12F:
-                OnAlive();
+            default:                
                 break;
-
         }
         GameManager.Instance.eventMgr.ChangeStageState(1);
-        GameManager.Instance.eventMgr.ChangeEventType((int)_type);
     }
+
+
+
     public void OnGravirty()
     {
         onGravityEvent.Invoke();
     }
-    public void OnAlive()
+
+
+    private void OnTriggerEnter(Collider other)
     {
-        onAliveEvent.Invoke();
+        IGravityChange _col = other.GetComponent<IGravityChange>();
+        _col?.OnGravityChange();
     }
 }

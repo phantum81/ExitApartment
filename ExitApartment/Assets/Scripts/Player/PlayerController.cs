@@ -16,6 +16,10 @@ public class PlayerController : MonoBehaviour
     [Header("뛰는속력"), SerializeField]
     private float _runSpeed = 8f;
     public float RunSpeed => _runSpeed;
+    [Header("던지는 힘"), SerializeField]
+    private float throwPower = 8f;
+
+
 
     private Rigidbody rigd;
     private float rotateY = 0f;
@@ -29,8 +33,13 @@ public class PlayerController : MonoBehaviour
     private UnitManager unitMgr;
 
     private PlayerPostProcess playerProcess;
+
     private Transform curItem;
-    [SerializeField]
+    public Transform CurItem => curItem;
+
+
+
+    [Header("주운 아이템 위치"),SerializeField]
     private Transform pickTransform;
     private EplayerState ePlayerState = EplayerState.None;
 
@@ -64,8 +73,10 @@ public class PlayerController : MonoBehaviour
         Vector3 right= _inputDir.x * player.right;
         Vector3 foward = _inputDir.z * player.forward;
         Vector3 velocity = (right + foward).normalized;
-
-        rigd.MovePosition(player.position + velocity * _speed * Time.fixedDeltaTime);
+        
+        rigd.AddForce(velocity * _speed * Time.deltaTime, ForceMode.VelocityChange);
+        rigd.velocity = Vector3.zero;
+        rigd.angularVelocity = Vector3.zero;
 
         Rotate();
 
@@ -92,19 +103,33 @@ public class PlayerController : MonoBehaviour
 
     public void PickItem(Transform _target)
     {
-        curItem = _target;
-        _target.parent = player;
-        _target.transform.position = pickTransform.position;
-        _target.GetComponent<Rigidbody>().useGravity = false;
-        _target.GetComponent<Collider>().enabled = false;
+        if(curItem == null)
+        {
+            curItem = _target;
+            _target.parent = pickTransform;
+            _target.transform.localPosition = new Vector3(0f,0f,0f);
+            _target.rotation = Quaternion.Euler(new Vector3( 0f, 0f, 0f));
+            _target.GetComponent<Rigidbody>().useGravity = false;
+            _target.GetComponent<Rigidbody>().isKinematic = true;
+            _target.GetComponent<Collider>().enabled = false;
+            
+        }
+        else
+        {
+            ThrowItem(curItem);
+            PickItem(_target);
+        }
+
     }
-    public void ThrowItem(Transform _target, float _power, Vector3 _dir)
+    public void ThrowItem(Transform _target)
     {
+        Vector3 _dir = transform.forward;
         Rigidbody rd = _target.GetComponent<Rigidbody>();
-        curItem = null;
+        _target.GetComponent<Collider>().enabled = true;
         _target.parent = null;        
         rd.useGravity = true;
-        rd.AddForce(_dir.normalized * _power * Time.fixedDeltaTime);
-        _target.GetComponent<Collider>().enabled = true;
+        rd.isKinematic = false;
+        rd.AddForce(_dir.normalized * 40f*throwPower * Time.fixedDeltaTime);
+        curItem = null;
     }
 }

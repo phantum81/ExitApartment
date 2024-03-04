@@ -45,7 +45,7 @@ public class UnitManager : MonoBehaviour
             _rigd.useGravity = false;
             _startSpeed = Mathf.Clamp(_startSpeed, 0, 9.81f);
             _startSpeed += Time.deltaTime;
-            _rigd.AddForce(_gravity * _startSpeed * _rigd.mass, ForceMode.Acceleration);
+            _rigd.AddForce(_gravity * _startSpeed * _rigd.mass * 0.2f, ForceMode.Acceleration);
             yield return null;
         }
     }

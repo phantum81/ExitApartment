@@ -31,6 +31,12 @@ namespace MimicSpace
         private float rotSpeed = 3f;
 
 
+        [Header("이동루트1"),SerializeField]
+        private Transform route1;
+        [Header("이동루트2"),SerializeField]
+        private Transform route2;
+
+
         private void Start()
         {
             myMimic = GetComponent<Mimic>();
@@ -47,24 +53,38 @@ namespace MimicSpace
         IEnumerator GravityDead()
         {
             
-            Vector3 dir = Vector3.zero;
+            
             Camera onDeadCam= GameManager.Instance.cameraMgr.CameraDic[1];
             yield return new WaitForSeconds(15f);
             while (Vector3.Distance(transform.position, onDeadCam.transform.position) > validDis)
             {
-                ChaseTarget(transform, onDeadCam.transform, dir, velocityLerpCoef);
+                ChaseTarget(transform, onDeadCam.transform, velocityLerpCoef);
                 yield return null;
             }
 
 
         }
         
-
-
-
-        public void ChaseTarget(Transform _chaser,Transform _target, Vector3 _dir , float _speed )
+        IEnumerator Clear12F()
         {
-            _dir = (_target.position - _chaser.position).normalized;
+            float dis1 = Vector3.Distance(transform.position, route1.position);
+            float dis2 = Vector3.Distance(transform.position, route2.position);
+            while (dis1 > 0.2f)
+            {
+                ChaseTarget(transform, route1.transform, speed);
+                yield return null;
+            }
+            while (dis2 > 0.2f)
+            {
+                ChaseTarget(transform, route2.transform, speed);
+                yield return null;
+            }
+        }
+
+
+        public void ChaseTarget(Transform _chaser,Transform _target, float _speed )
+        {
+            Vector3 _dir = (_target.position - _chaser.position).normalized;
             _chaser.rotation = Quaternion.Lerp(_chaser.rotation,Quaternion.LookRotation(_dir),Time.deltaTime* rotSpeed);
             velocity = _chaser.forward;
             
@@ -88,6 +108,11 @@ namespace MimicSpace
         public void OnDead12F()
         {
             StartCoroutine(GravityDead());
+        }
+
+        public void OnClear12F()
+        {
+            StartCoroutine(Clear12F());
         }
     }
 

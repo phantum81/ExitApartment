@@ -6,18 +6,36 @@ using UnityEngine.Events;
 public class GravityDieCollider : MonoBehaviour, IEventContect
 {
 
-    [Header("트리거 이벤트"), SerializeField]
+    [Header("죽음 이벤트"), SerializeField]
     private UnityEvent onDead12F;
+    [Header("생존 이벤트"), SerializeField]
+    private UnityEvent onClear12F;
+
+
     public void OnContect(ESOEventType _type)
     {
-        OnDead12F();
+        switch (_type)
+        {
+            case ESOEventType.OnDie12F:
+                OnDead12F();
+                GameManager.Instance.eventMgr.ChangeEventType((int)_type);
+                break;
+            case ESOEventType.OnClear12F:
+                OnClear12F();
+                GameManager.Instance.eventMgr.ChangeEventType((int)_type);
+                break;
+
+        }
         GameManager.Instance.eventMgr.ChangeStageState(1);
-        GameManager.Instance.eventMgr.ChangeEventType(1);
 
     }
 
     public void OnDead12F()
     {
         onDead12F.Invoke();
+    }
+    public void OnClear12F()
+    {
+        onClear12F.Invoke();
     }
 }
