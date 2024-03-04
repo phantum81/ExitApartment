@@ -55,7 +55,7 @@ public class LightStatueItem : MonoBehaviour, IInteraction, IUseItem, IGravityCh
 
     public void OnGravityChange()
     {
-        GameManager.Instance.unitMgr.OnChangeGravity(rigd, GameManager.Instance.unitMgr.ReserveGravity,5f);
+        GameManager.Instance.unitMgr.OnChangeGravity(rigd, GameManager.Instance.unitMgr.ReserveGravity, 9f);
     }
 
     private void OnTriggerEnter(Collider other)

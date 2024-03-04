@@ -19,14 +19,18 @@ public class GravityDieCollider : MonoBehaviour, IEventContect
             case ESOEventType.OnDie12F:
                 OnDead12F();
                 GameManager.Instance.eventMgr.ChangeEventType((int)_type);
+                GameManager.Instance.eventMgr.ChangeStageState(1);
+                transform.GetComponent<Collider>().enabled = false;
                 break;
             case ESOEventType.OnClear12F:
                 OnClear12F();
                 GameManager.Instance.eventMgr.ChangeEventType((int)_type);
+                GameManager.Instance.eventMgr.ChangeStageState(0);
+                transform.GetComponent<Collider>().enabled = false;
                 break;
 
         }
-        GameManager.Instance.eventMgr.ChangeStageState(1);
+        
 
     }
 

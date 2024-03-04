@@ -129,7 +129,7 @@ public class PlayerController : MonoBehaviour
         _target.parent = null;        
         rd.useGravity = true;
         rd.isKinematic = false;
-        rd.AddForce(_dir.normalized * 40f*throwPower * Time.fixedDeltaTime);
+        rd.AddForce(_dir.normalized * 40f * throwPower * Time.fixedDeltaTime);
         curItem = null;
     }
 }

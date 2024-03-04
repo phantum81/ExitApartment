@@ -264,10 +264,15 @@ public class CameraController : MonoBehaviour
         StartCoroutine(OnGravityFallCamera(main_cam, 2.5f, 100f, shakeDir, 80f));
     }
 
-    public void OnCameraShake()
+    IEnumerator OnCameraShake()
     {
-        StartCoroutine(CameraShake(main_cam, 1f, 0.3f));
+        yield return new WaitForSeconds(2f);
+        StartCoroutine(CameraShake(main_cam, 1.3f, 0.3f));
     }
 
+    public void OnClear12FCamera()
+    {
+        StartCoroutine(OnCameraShake());
+    }
 
 }

@@ -16,11 +16,12 @@ public class GravityCollider : MonoBehaviour, IEventContect
             case ESOEventType.OnGravity:
                 OnGravirty();
                 GameManager.Instance.eventMgr.ChangeEventType((int)_type);
+                GameManager.Instance.eventMgr.ChangeStageState(1);
                 break;
             default:                
                 break;
         }
-        GameManager.Instance.eventMgr.ChangeStageState(1);
+        
     }
 
 

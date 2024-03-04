@@ -33,8 +33,7 @@ namespace MimicSpace
 
         [Header("이동루트1"),SerializeField]
         private Transform route1;
-        [Header("이동루트2"),SerializeField]
-        private Transform route2;
+
 
 
         private void Start()
@@ -67,16 +66,15 @@ namespace MimicSpace
         
         IEnumerator Clear12F()
         {
-            float dis1 = Vector3.Distance(transform.position, route1.position);
-            float dis2 = Vector3.Distance(transform.position, route2.position);
-            while (dis1 > 0.2f)
+ 
+            while (Vector3.Distance(transform.position, route1.position)> validDis)
             {
                 ChaseTarget(transform, route1.transform, speed);
                 yield return null;
             }
-            while (dis2 > 0.2f)
+            while (Vector3.Distance(transform.position, target.position) > validDis)
             {
-                ChaseTarget(transform, route2.transform, speed);
+                ChaseTarget(transform, route2.transform, speed*3.5f);
                 yield return null;
             }
         }

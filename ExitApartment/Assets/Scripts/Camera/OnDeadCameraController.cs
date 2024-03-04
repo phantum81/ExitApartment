@@ -78,12 +78,12 @@ public class OnDeadCameraController : MonoBehaviour
         Transform _target = GameManager.Instance.unitMgr.ContectTarget;
         yield return new WaitUntil(()=> _target != null);
 
-        Vector3 dir = _target.position - cameraMgr.CameraDic[1].transform.position;
+        Vector3 dir = _target.position - cameraMgr.CurCamera.transform.position;
         Quaternion rotateDir =  Quaternion.LookRotation(dir);
 
-        cameraMgr.CameraDic[1].transform.position = _target.position + _target.forward * 0.4f;
-        cameraMgr.CameraDic[1].transform.rotation = rotateDir;
-        StartCoroutine(cameraCtr.CameraShake(cameraMgr.CameraDic[1], 0.5f, 0.8f));
+        cameraMgr.CurCamera.transform.position = _target.position + _target.forward * 0.4f;
+        cameraMgr.CurCamera.transform.rotation = rotateDir;
+        StartCoroutine(cameraCtr.CameraShake(cameraMgr.CurCamera, 0.5f, 0.8f));
 
 
         
