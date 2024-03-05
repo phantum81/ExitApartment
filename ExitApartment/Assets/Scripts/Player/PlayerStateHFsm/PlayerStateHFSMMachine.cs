@@ -9,8 +9,13 @@ public class PlayerStateHFSMMachine : MonoBehaviour
 
     
     private PlayerPostProcess playerPost;
+
     [SerializeField]
     private OnDeadCameraController deadCamCtr;
+
+    private EplayerState ePlayerCurState;
+    public EplayerState EPlayerCurState => ePlayerCurState;
+    
 
     void Start()
     {
@@ -21,6 +26,7 @@ public class PlayerStateHFSMMachine : MonoBehaviour
     {
         statePostHFSM.Update(playerPost);
         stateDeadCamHFSM.Update(deadCamCtr);
+        ePlayerCurState = statePostHFSM.CurState;
     }
 
 

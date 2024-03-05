@@ -74,4 +74,8 @@ public class EventManager : MonoBehaviour
         playerStateHFSM.ChangePlayerState(_state);
     }
 
+    public EplayerState GetPlayerState()
+    {
+        return playerStateHFSM.EPlayerCurState;
+    }
 }

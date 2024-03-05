@@ -27,13 +27,17 @@ namespace MimicSpace
         [Header("타겟과의 제한거리"), SerializeField]
         private float validDis = 0.4f;
 
+        [Header("플레이어 접촉 제한거리"), SerializeField]
+        private float playerValidDis = 0.4f;
+
         [Header("회전속도"),SerializeField]
         private float rotSpeed = 3f;
 
 
         [Header("이동루트1"),SerializeField]
         private Transform route1;
-
+        [Header("이동루트2"), SerializeField]
+        private Transform route2;
 
 
         private void Start()
@@ -42,12 +46,7 @@ namespace MimicSpace
             
         }
 
-        void Update()
-        {
 
-
-
-        }
 
         IEnumerator GravityDead()
         {
@@ -66,15 +65,30 @@ namespace MimicSpace
         
         IEnumerator Clear12F()
         {
- 
+            
+            WaitUntil openWait =  new WaitUntil(() => GameManager.Instance.unitMgr.ElevatorCtr.eleWork == EElevatorWork.Opening);
             while (Vector3.Distance(transform.position, route1.position)> validDis)
             {
-                ChaseTarget(transform, route1.transform, speed);
+                ChaseTarget(transform, route1.transform, speed*2f);
                 yield return null;
             }
-            while (Vector3.Distance(transform.position, target.position) > validDis)
+            while (true)
             {
-                ChaseTarget(transform, route2.transform, speed*3.5f);
+                if(GameManager.Instance.unitMgr.ElevatorCtr.eleWork == EElevatorWork.Opening)
+                {
+                    ChaseTarget(transform, target, speed * 3.5f);
+                    if(Vector3.Distance(transform.position, target.position) < playerValidDis)
+                        break;
+                }
+                else if (GameManager.Instance.unitMgr.ElevatorCtr.eleWork == EElevatorWork.Closing)
+                {
+
+                    ChaseTarget(transform, route2, speed * 3.5f);
+                    if (Vector3.Distance(transform.position, route2.position) < validDis)
+                        yield return openWait;
+                }
+                    
+
                 yield return null;
             }
         }

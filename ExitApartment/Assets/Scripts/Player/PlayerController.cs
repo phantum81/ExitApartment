@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     private CameraManager cameraMgr;
     private UnitManager unitMgr;
 
-    private PlayerPostProcess playerProcess;
+    
 
     private Transform curItem;
     public Transform CurItem => curItem;
@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("주운 아이템 위치"),SerializeField]
     private Transform pickTransform;
+
     private EplayerState ePlayerState = EplayerState.None;
 
    
@@ -51,7 +52,7 @@ public class PlayerController : MonoBehaviour
         cameraMgr = GameManager.Instance.cameraMgr;
         unitMgr = GameManager.Instance.unitMgr;
 
-        playerProcess = gameObject.GetComponent<PlayerPostProcess>();
+        
         
        
 
@@ -61,7 +62,7 @@ public class PlayerController : MonoBehaviour
     {
         InputDir = inputMgr.InputDir;
 
-        playerProcess.ChangePlayerState((int)ePlayerState);
+        
 
 
     }

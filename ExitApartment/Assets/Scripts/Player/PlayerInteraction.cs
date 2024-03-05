@@ -13,6 +13,7 @@ public class PlayerInteraction : MonoBehaviour
     private Color selectColor = Color.green;
     private CameraManager cameraMgr;
     private PlayerController playerCtr;
+    private InputManager inputMgr;
     private RaycastHit preHit;
 
 
@@ -21,6 +22,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         cameraMgr = GameManager.Instance.cameraMgr;
         playerCtr = gameObject.GetComponent<PlayerController>();
+        inputMgr = GameManager.Instance.inputMgr;
     }
 
     // Update is called once per frame
@@ -31,7 +33,7 @@ public class PlayerInteraction : MonoBehaviour
 
         isInteraction = GameManager.Instance.CheckInterection(ray, out RaycastHit _hit, maxDis, interectionLayer);
 
-        if (Input.GetKeyDown(KeyCode.F) && playerCtr.CurItem != null)
+        if (inputMgr.IsF && playerCtr.CurItem != null)
         {
             playerCtr.CurItem.GetComponent<IUseItem>().OnUseItem();
         }
@@ -45,7 +47,7 @@ public class PlayerInteraction : MonoBehaviour
             _hit.transform?.GetComponent<IInteraction>().OnRayHit(selectColor);
             UiManager.Instance.inGameCtr.InGameUiShower.ActivePickUpMark(isInteraction);   
             
-            if (GameManager.Instance.inputMgr.IsE)
+            if (inputMgr.IsE)
                 _hit.transform.GetComponent<IInteraction>()?.OnInteraction();
         }
         else
@@ -56,7 +58,7 @@ public class PlayerInteraction : MonoBehaviour
 
             UiManager.Instance.inGameCtr.InGameUiShower.ActivePickUpMark(isInteraction);
 
-            if (GameManager.Instance.inputMgr.IsE && playerCtr.CurItem != null)
+            if (inputMgr.IsE && playerCtr.CurItem != null)
             {
                 playerCtr.CurItem.GetComponent<IUseItem>().OnThrowItem();
             }
