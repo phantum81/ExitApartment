@@ -5,13 +5,13 @@ using UnityEngine.Rendering.PostProcessing;
 
 public class PlayerPostProcess : MonoBehaviour
 {
-    [SerializeField]
+    [Header("포스트 프로세싱"),SerializeField]
     private PostProcessVolume post;
-    private EplayerState playerState;
 
     private Vignette vignette;
     private Grain grain;
     private LensDistortion distortion;
+    
     private ChromaticAberration chromaticAber;
 
 
@@ -40,21 +40,8 @@ public class PlayerPostProcess : MonoBehaviour
     {
         if (post != null && post.profile.TryGetSettings(out grain))
         {
-            
-            if (!_bool)
-            {
-                grain.active = _bool;
-                //grain.intensity.value = 0;
-                return;
-            }
-            else
-            {
-                grain.active = _bool;
-                //while (grain.intensity.value <= 1f)
-                //{
-                //    grain.intensity.value += Time.deltaTime * 0.3f;
-                //}
-            }
+
+            grain.active = _bool;
         }
     }
 
@@ -132,32 +119,7 @@ public class PlayerPostProcess : MonoBehaviour
         GrainOn(true);
     }
 
-    public void ChangePlayerState(int _state)
-    {
-        switch (_state)
-        {
-            case 0:
-                playerState = EplayerState.None;
-                break;
-            case 1:
-                playerState = EplayerState.MentalDamage;
-                
-               
-                break;
-            case 2:
-                playerState = EplayerState.Damage;
-                
-                break;
-            case 3:
-                playerState = EplayerState.Die;
 
-                break;
-            default:
-                playerState = EplayerState.None;
-                break;
-
-        }
-    }
 
 
 

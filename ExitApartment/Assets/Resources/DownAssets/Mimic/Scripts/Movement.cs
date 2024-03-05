@@ -40,6 +40,8 @@ namespace MimicSpace
         private Transform route2;
 
 
+        
+
         private void Start()
         {
             myMimic = GetComponent<Mimic>();

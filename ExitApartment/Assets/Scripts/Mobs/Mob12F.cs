@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class Mob12F : MonoBehaviour, IEnemyContect
 {
-    // Start is called before the first frame update
+    private int igonorelayer = 1 << 8 | 1<<2;
+
+    private Transform target;
+    private EenemyState eEnemyState = EenemyState.None;
+
+    private float chaseLimit = 3f;
     void Start()
     {
         
@@ -13,17 +18,38 @@ public class Mob12F : MonoBehaviour, IEnemyContect
     // Update is called once per frame
     void Update()
     {
+        if(target != null)
+        {
+            eEnemyState = EenemyState.Chase;
+        }
+        else
+            eEnemyState = EenemyState.None;
+
+
         if (DetectedPlayer())
         {
-            if(GameManager.Instance.eventMgr.GetPlayerState() != EplayerState.Die)
-                GameManager.Instance.eventMgr.ChangePlayerState(EplayerState.MentalDamage);
-            
+            chaseLimit = 3f;
         }
         else
         {
-            GameManager.Instance.eventMgr.ChangePlayerState(EplayerState.None);
-
+            chaseLimit -= Time.deltaTime;
+            if(chaseLimit < 0)
+            {
+                target = null;
+                GameManager.Instance.eventMgr.ChangePlayerState(EplayerState.None);
+            }
         }
+
+
+        if( eEnemyState == EenemyState.Chase)
+        {
+            if (GameManager.Instance.eventMgr.GetPlayerState() != EplayerState.Die)
+            {
+                
+                GameManager.Instance.eventMgr.ChangePlayerState(EplayerState.MentalDamage);
+            }
+        }
+
     }
 
     public void OnContect()
@@ -36,16 +62,26 @@ public class Mob12F : MonoBehaviour, IEnemyContect
     {
         Ray ray = new Ray(transform.position, transform.forward);
 
-        if(Physics.Raycast(ray, out RaycastHit _hit, 15f))
+        if(Physics.Raycast(ray, out RaycastHit _hit, 17f, ~igonorelayer))
         {
-            return false;
-        }
-        else if(Physics.Raycast(ray, out RaycastHit _hitPlayer, 15f, 1 << 7))
-        {
-            return true;
+            if(_hit.transform.gameObject.layer == 7)
+            {
+                target = _hit.transform;
+                return true;
+            }
+            else
+                return false;
         }
         else
             return false;
+    }
+
+
+    IEnumerator SaveTarget(Transform _target)
+    {
+        
+        yield return new WaitForSeconds(3f);
+        target = null;
     }
 
 

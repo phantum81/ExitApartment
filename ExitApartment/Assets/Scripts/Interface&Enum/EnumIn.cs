@@ -15,6 +15,13 @@ public enum EplayerMoveState
     None,
 
 };
+public enum EenemyState
+{
+    None,
+    Patrol,
+    Chase,
+}
+
 
 public enum EItemInteraction
 {

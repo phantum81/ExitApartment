@@ -7,12 +7,16 @@ public class PlayerStateNone<T> : IState<T> where T : MonoBehaviour
     public void OperateEnter(T _send)
     {
 
-        //if (_send is PlayerPostProcess)
-        //{
-        //    PlayerPostProcess _post = _send as PlayerPostProcess;
-        //    _post.InitPostProcess();
+        if (_send is PlayerPostProcess)
+        {
+            PlayerPostProcess _post = _send as PlayerPostProcess;
+            if (_post != null)
+            {
+                _post.InitPostProcess();
+            }
+            
 
-        //}
+        }
     }
 
     public void OperateUdate(T _send)
