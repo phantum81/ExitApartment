@@ -18,18 +18,12 @@ public class Mob12F : MonoBehaviour, IEnemyContect
     // Update is called once per frame
     void Update()
     {
-        if(target != null)
-        {
-            eEnemyState = EenemyState.Chase;
-        }
-        else
-            eEnemyState = EenemyState.None;
-        // 자세한 상태 수정이 이후필요
 
 
         if (DetectedPlayer())
         {
             chaseLimit = 3f;
+            eEnemyState = EenemyState.Chase;
         }
         else
         {
@@ -37,6 +31,7 @@ public class Mob12F : MonoBehaviour, IEnemyContect
             if(chaseLimit < 0)
             {
                 target = null;
+                eEnemyState = EenemyState.None;
                 eventMgr.ChangePlayerState(EplayerState.None);
             }
         }
@@ -73,7 +68,10 @@ public class Mob12F : MonoBehaviour, IEnemyContect
             return false;
     }
 
-
+    public void OnDrawGizmos()
+    {
+        Debug.DrawRay(transform.position, transform.forward * 17f, Color.green, 0.2f);
+    }
 
 
 }

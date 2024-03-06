@@ -10,7 +10,7 @@ public class PlayerStateDamage<T> : IState<T> where T : MonoBehaviour
        
     }
 
-    public void OperateUdate(T _send)
+    public void OperateUpdate(T _send)
     {
 
     }

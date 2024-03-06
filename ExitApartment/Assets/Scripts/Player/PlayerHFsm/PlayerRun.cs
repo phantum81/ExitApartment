@@ -10,7 +10,7 @@ public class PlayerRun<T> : IState<T> where T : MonoBehaviour
         GameManager.Instance.cameraMgr.ChangeCameraState((int)HFSM<EplayerMoveState, PlayerController>.Instance.CurState);
     }
 
-    public void OperateUdate(T _player)
+    public void OperateUpdate(T _player)
     {
         PlayerController _playerCtr = _player as PlayerController;
         if (_playerCtr != null)

@@ -70,7 +70,10 @@ public class HFSM<TState, T> where TState : System.Enum where T : MonoBehaviour
 
     public void ChangeState(TState _newState, T _obj)
     {
-        ExitState(curState, _obj);
+        if (EqualityComparer<TState>.Default.Equals(curState, _newState))
+            return;
+            
+        ExitState(curState, _obj);        
         curState = _newState;
         EnterState(curState, _obj);
     }
@@ -86,7 +89,7 @@ public class HFSM<TState, T> where TState : System.Enum where T : MonoBehaviour
 
     public void Update(T _obj)
     {
-        stateDic[curState].OperateUdate(_obj);
+        stateDic[curState].OperateUpdate(_obj);
     }
 
 }

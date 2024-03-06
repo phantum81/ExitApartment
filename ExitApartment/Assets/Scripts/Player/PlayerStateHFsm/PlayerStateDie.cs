@@ -10,9 +10,9 @@ public class PlayerStateDie<T> : IState<T> where T : MonoBehaviour
         if (_send is PlayerPostProcess)
         {
             PlayerPostProcess _post = _send as PlayerPostProcess;
-            _post.GrainOn(true);
+            _post.StartCoroutine(_post.GrainOn(true));
             _post.VignetteOn(true);
-            _post.ChromaticAberrationOn(true);
+            _post.StartCoroutine(_post.ChromaticAberrationOn(true));
         }
         else if (_send is OnDeadCameraController)
         {
@@ -23,7 +23,7 @@ public class PlayerStateDie<T> : IState<T> where T : MonoBehaviour
         GameManager.Instance.eventMgr.ChangeStageState(1);
     }
 
-    public void OperateUdate(T _send)
+    public void OperateUpdate(T _send)
     {
 
 

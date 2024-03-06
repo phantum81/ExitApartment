@@ -12337,7 +12337,7 @@ GameObject:
   - component: {fileID: 1340111124}
   - component: {fileID: 1340111123}
   m_Layer: 0
-  m_Name: Route1
+  m_Name: DeadRoute1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23852,7 +23852,7 @@ MonoBehaviour:
   minGrowCoef: 2.07
   maxGrowCoef: 4.89
   newLegCooldown: 0.31
-  velocity: {x: -0.5256941, y: 0, z: 0.7740506}
+  velocity: {x: -0.051940467, y: 0, z: -0.79261065}
 --- !u!54 &8675915457251421348
 Rigidbody:
   m_ObjectHideFlags: 0

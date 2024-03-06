@@ -402,6 +402,8 @@
 "Assets/Resources/DownAssets/Mimic/Scripts/Leg.cs"
 "Assets/Resources/DownAssets/Mimic/Scripts/Mimic.cs"
 "Assets/Resources/DownAssets/Mimic/Scripts/Movement.cs"
+"Assets/Scripts/Binding/InputBinding.cs"
+"Assets/Scripts/Binding/SerializableInputBinding.cs"
 "Assets/Scripts/Camera/CameraController.cs"
 "Assets/Scripts/Camera/OnDeadCameraController.cs"
 "Assets/Scripts/ElevatorController.cs"

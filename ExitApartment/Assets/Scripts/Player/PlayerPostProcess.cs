@@ -11,19 +11,18 @@ public class PlayerPostProcess : MonoBehaviour
 
     private Vignette vignette;
     private Grain grain;
-    private LensDistortion distortion;
-    
+    private LensDistortion distortion;    
     private ChromaticAberration chromaticAber;
 
 
-    private float lensVlaue = 0f;
+    
 
 
     public void InitPostProcess()
     {
         VignetteOn(false);
-        GrainOn(false);
-        ChromaticAberrationOn(false);
+        StartCoroutine(GrainOn(false));
+        StartCoroutine(ChromaticAberrationOn(false));
         StartCoroutine(LensDistortion(false));
 
     }
@@ -37,13 +36,26 @@ public class PlayerPostProcess : MonoBehaviour
         
         
     }
-    public void GrainOn(bool _bool)
+    public IEnumerator GrainOn(bool _bool)
     {
+        
+
         if (post != null && post.profile.TryGetSettings(out grain))
         {
-
-            grain.active = _bool;
+            
+            if (!_bool)
+            {
+                yield return StartCoroutine(LerpVlaue(value => grain.intensity.value = value, grain.intensity.value, 0, 2f, 1f));
+                grain.active = _bool;
+            }
+            else
+            {
+                grain.active = _bool;
+                yield return StartCoroutine(LerpVlaue(value => grain.intensity.value = value, grain.intensity.value, 1, 0.5f, 1f));
+                
+            }
         }
+        
     }
 
     public IEnumerator LensDistortion(bool _bool)
@@ -55,31 +67,59 @@ public class PlayerPostProcess : MonoBehaviour
             if (!_bool)
             {
                 yield return StartCoroutine(LerpVlaue(value => distortion.intensity.value = value, distortion.intensity.value, 0, 2f, 1f));
+
                 distortion.active = _bool;
 
             }
             else
             {
-                distortion.active = _bool;
-                yield return StartCoroutine(LerpVlaue(value => distortion.intensity.value = value ,0, -40, 1f, 1f));
+                distortion.active = _bool;                
+                yield return StartCoroutine(LerpVlaue(value => distortion.intensity.value = value, distortion.intensity.value, -40, 0.5f, 1f));
+                
             }
-           
-                        
+                                   
         }
         
-
     }
 
 
-    IEnumerator LerpVlaue(Action<float> _value ,float _min, float _max, float _time, float _speed)
+
+
+    public IEnumerator ChromaticAberrationOn(bool _bool)
+    {
+        
+        if (post != null && post.profile.TryGetSettings(out chromaticAber))
+        {
+            
+            if (!_bool)
+            {
+                yield return StartCoroutine(LerpVlaue(value => chromaticAber.intensity.value = value, chromaticAber.intensity.value, 0, 2f, 1f));
+                
+                chromaticAber.active = _bool;
+           
+            }
+            else
+            {
+                chromaticAber.active = _bool;
+                yield return StartCoroutine(LerpVlaue(value => chromaticAber.intensity.value = value, chromaticAber.intensity.value, 1, 0.5f, 1f));
+                
+            }
+            
+
+        }
+    }
+
+
+
+    IEnumerator LerpVlaue(Action<float> _value, float _min, float _max, float _inverseSpeed, float _lerpRatio)
     {
         float elapsedTime = 0f;
         while (true)
         {
-            _value(Mathf.Lerp(_min, _max, elapsedTime / (_time * _speed)));
+            _value(Mathf.Lerp(_min, _max, elapsedTime / (_inverseSpeed * _lerpRatio)));
 
-            
-            if (elapsedTime >= _time)
+
+            if (elapsedTime >= _inverseSpeed)
             {
                 break;
             }
@@ -89,30 +129,6 @@ public class PlayerPostProcess : MonoBehaviour
             yield return null;
         }
     }
-
-    public void ChromaticAberrationOn(bool _bool)
-    {
-        if (post != null && post.profile.TryGetSettings(out chromaticAber))
-        {
-            if(!_bool)
-            {
-                chromaticAber.active = _bool;
-                chromaticAber.intensity.value = 0;
-                return;
-            }
-            else
-            {
-                chromaticAber.active = _bool;
-                while (chromaticAber.intensity.value <= 1f)
-                {
-                    chromaticAber.intensity.value += Time.deltaTime * 0.3f;
-                }
-            }
-            
-
-        }
-    }
-
 
     public void On12FDeadState()
     {
