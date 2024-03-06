@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         itemMgr.Init();
+        inputMgr.Init();
     }
 
     

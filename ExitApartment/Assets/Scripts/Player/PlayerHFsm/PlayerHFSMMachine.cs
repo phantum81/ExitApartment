@@ -25,7 +25,7 @@ public class PlayerHFSMMachine : MonoBehaviour
             {
                 MoveHFSM.ChangeState(EplayerMoveState.Walk, playerCtr);
 
-                if (inputMgr.IsShift)
+                if (inputMgr.InputDic[EuserAction.Run])
                     MoveHFSM.ChangeState(EplayerMoveState.Run, playerCtr);
             }
             else

@@ -76,6 +76,7 @@
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Ui\InGameUiShower.cs" />
     <Compile Include="Assets\Resources\DownAssets\Brick Project Studio\_BPS Basic Assets\Common\Scripts and Animations\Windows\opencloseWindow.cs" />
+    <Compile Include="Assets\Scripts\Binding\SerializableInputBinding.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerHFsm\PlayerFall.cs" />
     <Compile Include="Assets\Resources\DownAssets\3d-character_animeGirlAkane\DemoScene\Scripts\Akane_CameraScript.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerColliderTrigger.cs" />
@@ -114,6 +115,7 @@
     <Compile Include="Assets\Resources\DownAssets\Enviroment\enviroment\Office building\scripts\evelator_controll.cs" />
     <Compile Include="Assets\Resources\DownAssets\Mimic\Scripts\Movement.cs" />
     <Compile Include="Assets\Scripts\Ui\InGameUiController.cs" />
+    <Compile Include="Assets\Scripts\Binding\InputBinding.cs" />
     <Compile Include="Assets\Scripts\Mobs\Mob12F.cs" />
     <Compile Include="Assets\Resources\DownAssets\Brick Project Studio\Apartment Kit\Common\Scripts &amp; Animation\OvenOpen\OvenFlip.cs" />
     <Compile Include="Assets\Resources\DownAssets\Brick Project Studio\_BPS Basic Assets\Common\Scripts and Animations\Windows\opencloseWindow1.cs" />

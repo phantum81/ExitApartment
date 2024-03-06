@@ -60,11 +60,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        InputDir = inputMgr.InputDir;
-
-        
-
-
+        InputDir = inputMgr.InputDir;        
     }
 
 

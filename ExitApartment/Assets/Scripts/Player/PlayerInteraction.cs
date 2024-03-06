@@ -33,21 +33,25 @@ public class PlayerInteraction : MonoBehaviour
 
         isInteraction = GameManager.Instance.CheckInterection(ray, out RaycastHit _hit, maxDis, interectionLayer);
 
-        if (inputMgr.IsF && playerCtr.CurItem != null)
+        if (inputMgr.InputDic[EuserAction.UseItem] && playerCtr.CurItem != null)
         {
             playerCtr.CurItem.GetComponent<IUseItem>().OnUseItem();
         }
 
+        if (inputMgr.InputDic[EuserAction.Throw] && playerCtr.CurItem != null)
+        {
+            playerCtr.CurItem.GetComponent<IUseItem>().OnThrowItem();
+        }
 
         if (isInteraction)
         {
-            if(preHit.collider ==null)
+            if(preHit.collider == null)
                 preHit = _hit;
 
             _hit.transform?.GetComponent<IInteraction>().OnRayHit(selectColor);
             UiManager.Instance.inGameCtr.InGameUiShower.ActivePickUpMark(isInteraction);   
             
-            if (inputMgr.IsE)
+            if (inputMgr.InputDic[EuserAction.Interaction])
                 _hit.transform.GetComponent<IInteraction>()?.OnInteraction();
         }
         else
@@ -58,10 +62,7 @@ public class PlayerInteraction : MonoBehaviour
 
             UiManager.Instance.inGameCtr.InGameUiShower.ActivePickUpMark(isInteraction);
 
-            if (inputMgr.IsE && playerCtr.CurItem != null)
-            {
-                playerCtr.CurItem.GetComponent<IUseItem>().OnThrowItem();
-            }
+
         }
 
 
@@ -78,6 +79,8 @@ public class PlayerInteraction : MonoBehaviour
         return ray;
 
     }
+
+
 
 }
 

@@ -89,6 +89,23 @@ public enum ESOEventType
     OnClear12F,
 };
 
+/// <summary>
+/// 키 입력 0: 앞 1:뒤 2:오 3:왼 4:달리기 5: 상호작용 6: 던지기/놓기 7: 아이템사용 8:ui메뉴
+/// </summary>
+public enum EuserAction
+{
+    MoveForward,
+    MoveBackward,
+    MoveRight,
+    MoveLeft,
+    Run,
 
+    Interaction,
+    Throw,
+    UseItem,
+
+    Ui_Menu,
+
+}
 
 
