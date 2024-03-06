@@ -19,7 +19,7 @@ namespace MimicSpace
         [Header("속력"),SerializeField]
         private float speed = 1f;
         public float velocityLerpCoef = 4f;
-        Mimic myMimic;
+        
 
         [Header("타겟"),SerializeField]
         private Transform target;
@@ -44,7 +44,7 @@ namespace MimicSpace
 
         private void Start()
         {
-            myMimic = GetComponent<Mimic>();
+           
             
         }
 
@@ -52,8 +52,7 @@ namespace MimicSpace
 
         IEnumerator GravityDead()
         {
-            
-            
+         
             Camera onDeadCam= GameManager.Instance.cameraMgr.CameraDic[1];
             yield return new WaitForSeconds(15f);
             while (Vector3.Distance(transform.position, onDeadCam.transform.position) > validDis)
@@ -62,9 +61,27 @@ namespace MimicSpace
                 yield return null;
             }
 
-
         }
-        
+
+             
+
+        public void ChaseTarget(Transform _chaser,Transform _target, float _speed )
+        {
+            Vector3 _dir = (_target.position - _chaser.position).normalized;
+            _chaser.rotation = Quaternion.Lerp(_chaser.rotation,Quaternion.LookRotation(_dir),Time.deltaTime* rotSpeed);
+            velocity = _chaser.forward;
+            
+            _chaser.position = _chaser.position + velocity * Time.deltaTime* _speed;
+
+            RaycastHit hit;
+            Vector3 destHeight = _chaser.position;
+
+            if (Physics.Raycast(_chaser.position + Vector3.up, -Vector3.up, out hit))
+                destHeight = new Vector3(_chaser.position.x, hit.point.y + height, _chaser.position.z);
+
+            _chaser.position = Vector3.Lerp(_chaser.position, destHeight, velocityLerpCoef * Time.deltaTime);
+            
+        }
         IEnumerator Clear12F()
         {
             
@@ -94,30 +111,9 @@ namespace MimicSpace
                 yield return null;
             }
         }
+        
 
-
-        public void ChaseTarget(Transform _chaser,Transform _target, float _speed )
-        {
-            Vector3 _dir = (_target.position - _chaser.position).normalized;
-            _chaser.rotation = Quaternion.Lerp(_chaser.rotation,Quaternion.LookRotation(_dir),Time.deltaTime* rotSpeed);
-            velocity = _chaser.forward;
-            
-
-
-            _chaser.position = _chaser.position + velocity * Time.deltaTime* _speed;
-
-            RaycastHit hit;
-
-            Vector3 destHeight = _chaser.position;
-
-            if (Physics.Raycast(_chaser.position + Vector3.up, -Vector3.up, out hit))
-                destHeight = new Vector3(_chaser.position.x, hit.point.y + height, _chaser.position.z);
-
-            _chaser.position = Vector3.Lerp(_chaser.position, destHeight, velocityLerpCoef * Time.deltaTime);
-            
-        }
-
-
+        #region 이벤트 등록부
 
         public void OnDead12F()
         {
@@ -129,5 +125,5 @@ namespace MimicSpace
             StartCoroutine(Clear12F());
         }
     }
-
+    #endregion
 }

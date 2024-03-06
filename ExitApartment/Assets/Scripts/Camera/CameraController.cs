@@ -45,10 +45,6 @@ public class CameraController : MonoBehaviour
 
 
     Vector3 shakeDir = new Vector3(30f,60f,40f);
-    
-
-
-
 
 
     private float _w_speed = 8f;
@@ -70,7 +66,7 @@ public class CameraController : MonoBehaviour
     private float _s_shake = 0.0001f;
     public float S_shake => _s_shake;
 
-
+    #region 유니티 실행부
 
     void Start()
     {
@@ -118,7 +114,11 @@ public class CameraController : MonoBehaviour
 
 
     }
+    #endregion
 
+
+
+    #region 기본 카메라 기능
     /// <summary>
     /// _version 은 0 :x 1: y 2:z
     /// </summary>
@@ -187,7 +187,9 @@ public class CameraController : MonoBehaviour
 
     }//문제가있다. 고쳐야함 (떨림, 이동고정문제)
 
+    #endregion
 
+    #region 카메라 흔들림
 
     public IEnumerator CameraShake(Camera _cam, float _shakeTime, float _shakeAmount)
     {
@@ -204,8 +206,6 @@ public class CameraController : MonoBehaviour
         _cam.transform.localPosition = originalPosition;
 
     }
-
-
 
 
     public IEnumerator ShakeRotateCam(Camera _cam, float _shakeTime, float _shakeAmount, Vector3 _shakeDir, float _shakingSpeed)
@@ -234,6 +234,24 @@ public class CameraController : MonoBehaviour
 
         }
     }
+
+    #endregion
+
+    #region 그외 기능
+    public bool CheckInterection(Ray _ray , out RaycastHit _hit, float _maxDis, int _layer )
+    {
+        
+        if(Physics.Raycast(_ray, out _hit, _maxDis, _layer))
+        {
+            return true;
+        }
+        else
+            return false;
+    }
+    #endregion
+
+    #region 이벤트 코루틴
+
     private IEnumerator OnGravityFallCamera(Camera _cam, float _shakeTime, float _shakeAmount, Vector3 _shakeDir, float _shakingSpeed)
     {
         _cam.transform.parent = target;
@@ -246,33 +264,23 @@ public class CameraController : MonoBehaviour
 
     }
 
-
-
-    public bool CheckInterection(Ray _ray , out RaycastHit _hit, float _maxDis, int _layer )
+    IEnumerator OnCameraShake()
     {
-        
-        if(Physics.Raycast(_ray, out _hit, _maxDis, _layer))
-        {
-            return true;
-        }
-        else
-            return false;
+        yield return new WaitForSeconds(2f);
+        StartCoroutine(CameraShake(main_cam, 1.3f, 0.3f));
     }
+    #endregion
+
+    #region 유니티 이벤트 등록부
 
     public void OnGravityCam()
     {        
         StartCoroutine(OnGravityFallCamera(main_cam, 2.5f, 100f, shakeDir, 80f));
     }
 
-    IEnumerator OnCameraShake()
-    {
-        yield return new WaitForSeconds(2f);
-        StartCoroutine(CameraShake(main_cam, 1.3f, 0.3f));
-    }
-
     public void OnClear12FCamera()
     {
         StartCoroutine(OnCameraShake());
     }
-
+    #endregion
 }

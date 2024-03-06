@@ -44,17 +44,13 @@ public class PlayerController : MonoBehaviour
 
     private EplayerState ePlayerState = EplayerState.None;
 
-   
+    #region 유니티 실행부
 
-    private  void  Start()
+    private void  Start()
     {
         inputMgr = GameManager.Instance.inputMgr;
         cameraMgr = GameManager.Instance.cameraMgr;
         unitMgr = GameManager.Instance.unitMgr;
-
-        
-        
-       
 
     }
 
@@ -62,8 +58,10 @@ public class PlayerController : MonoBehaviour
     {
         InputDir = inputMgr.InputDir;        
     }
+    #endregion
 
 
+    #region 플레이어 기본 움직임
 
     public void Move(Vector3 _inputDir, float _speed)
     {
@@ -79,24 +77,16 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    public void Init()
-    {
-        rigd= player.gameObject.GetComponent<Rigidbody>();        
-    }
     public void Rotate() //마우스 움직임 기반 Y축 움직임
     {   
         rotateY = rotateY + inputMgr.CameraInputDir.y * cameraMgr.CameraCtr.Sensitivity;
         Quaternion quat = Quaternion.Euler(new Vector3(0, rotateY, 0));
         player.rotation = quat;
     }
+    #endregion
 
+    #region 플레이어 특정움직임
 
-
-
-    public void ChangeGravity()
-    {
-        unitMgr.OnChangeGravity(rigd,unitMgr.ReserveGravity,0f);
-    }
 
     public void PickItem(Transform _target)
     {
@@ -128,5 +118,18 @@ public class PlayerController : MonoBehaviour
         rd.isKinematic = false;
         rd.AddForce(_dir.normalized * 40f * throwPower * Time.fixedDeltaTime);
         curItem = null;
+    }
+
+
+    #endregion
+
+
+    public void Init()
+    {
+        rigd = player.gameObject.GetComponent<Rigidbody>();
+    }
+    public void ChangeGravity()
+    {
+        unitMgr.OnChangeGravity(rigd,unitMgr.ReserveGravity,0f);
     }
 }

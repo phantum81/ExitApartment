@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class Mob12F : MonoBehaviour, IEnemyContect
 {
-    private int igonorelayer = 1 << 8 | 1<<2;
+    private int igonoreLayer = 1 << 8 | 1<<2;
 
     private Transform target;
     private EenemyState eEnemyState = EenemyState.None;
-
+    private EventManager eventMgr;
     private float chaseLimit = 3f;
     void Start()
     {
-        
+        eventMgr = GameManager.Instance.eventMgr;
     }
 
     // Update is called once per frame
@@ -24,6 +24,7 @@ public class Mob12F : MonoBehaviour, IEnemyContect
         }
         else
             eEnemyState = EenemyState.None;
+        // 자세한 상태 수정이 이후필요
 
 
         if (DetectedPlayer())
@@ -36,18 +37,14 @@ public class Mob12F : MonoBehaviour, IEnemyContect
             if(chaseLimit < 0)
             {
                 target = null;
-                GameManager.Instance.eventMgr.ChangePlayerState(EplayerState.None);
+                eventMgr.ChangePlayerState(EplayerState.None);
             }
         }
 
-
-        if( eEnemyState == EenemyState.Chase)
+        
+        if( eEnemyState == EenemyState.Chase && eventMgr.GetPlayerState() != EplayerState.Die)
         {
-            if (GameManager.Instance.eventMgr.GetPlayerState() != EplayerState.Die)
-            {
-                
-                GameManager.Instance.eventMgr.ChangePlayerState(EplayerState.MentalDamage);
-            }
+            eventMgr.ChangePlayerState(EplayerState.MentalDamage);
         }
 
     }
@@ -55,14 +52,14 @@ public class Mob12F : MonoBehaviour, IEnemyContect
     public void OnContect()
     {
         GameManager.Instance.unitMgr.GetContectTarget(this.transform);
-        GameManager.Instance.eventMgr.ChangePlayerState(EplayerState.Die);
+        eventMgr.ChangePlayerState(EplayerState.Die);
     }
 
     private bool DetectedPlayer()
     {
         Ray ray = new Ray(transform.position, transform.forward);
 
-        if(Physics.Raycast(ray, out RaycastHit _hit, 17f, ~igonorelayer))
+        if(Physics.Raycast(ray, out RaycastHit _hit, 17f, ~igonoreLayer))
         {
             if(_hit.transform.gameObject.layer == 7)
             {
@@ -77,12 +74,6 @@ public class Mob12F : MonoBehaviour, IEnemyContect
     }
 
 
-    IEnumerator SaveTarget(Transform _target)
-    {
-        
-        yield return new WaitForSeconds(3f);
-        target = null;
-    }
 
 
 }

@@ -33,8 +33,7 @@ public class LightStatueItem : MonoBehaviour, IInteraction, IUseItem, IGravityCh
 
     public void OnUseItem()
     {
-        //curMaterial.EnableKeyword("_EMISSON");
-        //curMaterial.globalIlluminationFlags = MaterialGlobalIlluminationFlags.RealtimeEmissive;
+
         Color curColor;
         Light myLight;
         myLight = transform.GetComponentInChildren<Light>();

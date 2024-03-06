@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -53,14 +54,14 @@ public class PlayerPostProcess : MonoBehaviour
             
             if (!_bool)
             {
+                yield return StartCoroutine(LerpVlaue(value => distortion.intensity.value = value, distortion.intensity.value, 0, 2f, 1f));
                 distortion.active = _bool;
-                distortion.intensity.value = 0;
-                
+
             }
             else
             {
                 distortion.active = _bool;
-                yield return StartCoroutine(LerpVlaue(0, -40, 1f, 1f));
+                yield return StartCoroutine(LerpVlaue(value => distortion.intensity.value = value ,0, -40, 1f, 1f));
             }
            
                         
@@ -70,12 +71,12 @@ public class PlayerPostProcess : MonoBehaviour
     }
 
 
-    IEnumerator LerpVlaue(float _min, float _max, float _time, float _speed)
+    IEnumerator LerpVlaue(Action<float> _value ,float _min, float _max, float _time, float _speed)
     {
         float elapsedTime = 0f;
         while (true)
         {
-            distortion.intensity.value = Mathf.Lerp(_min, _max, elapsedTime / (_time* _speed));
+            _value(Mathf.Lerp(_min, _max, elapsedTime / (_time * _speed)));
 
             
             if (elapsedTime >= _time)

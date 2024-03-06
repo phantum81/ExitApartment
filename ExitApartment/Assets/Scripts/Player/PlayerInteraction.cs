@@ -7,6 +7,7 @@ public class PlayerInteraction : MonoBehaviour
 {
     [Header("최대 거리"), SerializeField]
     private float maxDis = 2f;
+
     private Ray ray;
     private int interectionLayer = 1 << 6;    
     private bool isInteraction = false;
@@ -33,40 +34,28 @@ public class PlayerInteraction : MonoBehaviour
 
         isInteraction = GameManager.Instance.CheckInterection(ray, out RaycastHit _hit, maxDis, interectionLayer);
 
-        if (inputMgr.InputDic[EuserAction.UseItem] && playerCtr.CurItem != null)
-        {
-            playerCtr.CurItem.GetComponent<IUseItem>().OnUseItem();
-        }
-
-        if (inputMgr.InputDic[EuserAction.Throw] && playerCtr.CurItem != null)
-        {
-            playerCtr.CurItem.GetComponent<IUseItem>().OnThrowItem();
-        }
 
         if (isInteraction)
         {
-            if(preHit.collider == null)
-                preHit = _hit;
-
-            _hit.transform?.GetComponent<IInteraction>().OnRayHit(selectColor);
-            UiManager.Instance.inGameCtr.InGameUiShower.ActivePickUpMark(isInteraction);   
-            
-            if (inputMgr.InputDic[EuserAction.Interaction])
-                _hit.transform.GetComponent<IInteraction>()?.OnInteraction();
+            OnInteraction(_hit);
         }
         else
         {
-
-            preHit.transform?.GetComponent<IInteraction>()?.OnRayOut();
-            preHit = new RaycastHit();
-
-            UiManager.Instance.inGameCtr.InGameUiShower.ActivePickUpMark(isInteraction);
-
-
+            OffInteraction();
         }
 
 
-        
+        if(playerCtr.CurItem != null)
+        {
+            if (inputMgr.InputDic[EuserAction.UseItem])
+            {
+                playerCtr.CurItem.GetComponent<IUseItem>().OnUseItem();
+            }
+            if (inputMgr.InputDic[EuserAction.Throw])
+            {
+                playerCtr.CurItem.GetComponent<IUseItem>().OnThrowItem();
+            }
+        }
 
     }
 
@@ -80,7 +69,25 @@ public class PlayerInteraction : MonoBehaviour
 
     }
 
+    private void OnInteraction(RaycastHit _hit)
+    {
+        if (preHit.collider == null)
+            preHit = _hit;
 
+        _hit.transform?.GetComponent<IInteraction>().OnRayHit(selectColor);
+        UiManager.Instance.inGameCtr.InGameUiShower.ActivePickUpMark(isInteraction);
+
+        if (inputMgr.InputDic[EuserAction.Interaction])
+            _hit.transform.GetComponent<IInteraction>()?.OnInteraction();
+    }
+
+    private void OffInteraction()
+    {
+        preHit.transform?.GetComponent<IInteraction>()?.OnRayOut();
+        preHit = new RaycastHit();
+
+        UiManager.Instance.inGameCtr.InGameUiShower.ActivePickUpMark(isInteraction);
+    }
 
 }
 
