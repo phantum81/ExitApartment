@@ -92,7 +92,7 @@ public class InputManager : MonoBehaviour
         inputDic[EuserAction.MoveBackward] = Input.GetKey(inputbind.BindingDic[EuserAction.MoveBackward]);
         inputDic[EuserAction.MoveRight] = Input.GetKey(inputbind.BindingDic[EuserAction.MoveRight]);
         inputDic[EuserAction.MoveLeft] = Input.GetKey(inputbind.BindingDic[EuserAction.MoveLeft]);
-        inputDic[EuserAction.Run] = Input.GetKeyDown(inputbind.BindingDic[EuserAction.Run]);
+        inputDic[EuserAction.Run] = Input.GetKey(inputbind.BindingDic[EuserAction.Run]);
         inputDic[EuserAction.Interaction] = Input.GetKeyDown(inputbind.BindingDic[EuserAction.Interaction]);
         inputDic[EuserAction.Throw] = Input.GetKeyDown(inputbind.BindingDic[EuserAction.Throw]);
         inputDic[EuserAction.UseItem] = Input.GetKeyDown(inputbind.BindingDic[EuserAction.UseItem]);
