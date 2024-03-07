@@ -74,11 +74,12 @@ public class PlayerInteraction : MonoBehaviour
         if (preHit.collider == null)
             preHit = _hit;
 
-        _hit.transform?.GetComponent<IInteraction>().OnRayHit(selectColor);
+
+        preHit.transform?.GetComponent<IInteraction>().OnRayHit(selectColor);
         UiManager.Instance.inGameCtr.InGameUiShower.ActivePickUpMark(isInteraction);
 
         if (inputMgr.InputDic[EuserAction.Interaction])
-            _hit.transform.GetComponent<IInteraction>()?.OnInteraction();
+            preHit.transform.GetComponent<IInteraction>()?.OnInteraction();
     }
 
     private void OffInteraction()

@@ -109,3 +109,12 @@ public enum EuserAction
 }
 
 
+
+public enum EpostProcessType
+{
+    Vignette,
+    Grain,
+    LensDistortion,
+    ChromaticAberration,
+}
+

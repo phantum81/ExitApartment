@@ -9,9 +9,10 @@ public class PlayerStateMentalDamage<T> : IState<T> where T : MonoBehaviour
         if (_send is PlayerPostProcess)
         {
             PlayerPostProcess _post = _send as PlayerPostProcess;
-            _post.StartCoroutine(_post.GrainOn(true));
-            _post.StartCoroutine(_post.ChromaticAberrationOn(true));
-            _post.StartCoroutine(_post.LensDistortion(true));
+            _post.StopAllCoroutinesInList();
+            _post.CurCoroutine.Add(_post.StartCoroutine(_post.PostProccessEffectOn(EpostProcessType.Grain)));
+            _post.CurCoroutine.Add(_post.StartCoroutine(_post.PostProccessEffectOn(EpostProcessType.LensDistortion, -40f)));
+            _post.CurCoroutine.Add(_post.StartCoroutine(_post.PostProccessEffectOn(EpostProcessType.ChromaticAberration)));
         }
 
     }
