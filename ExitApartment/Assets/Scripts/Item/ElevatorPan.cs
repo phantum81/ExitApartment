@@ -5,27 +5,35 @@ using UnityEngine;
 
 public class ElevatorPan : MonoBehaviour, IInteraction
 {
-    private Color originColor;
-    private Material curMaterial;
+    private List<Color> originColor = new List<Color>();
+    private List<Material> curMaterial = new List<Material>();
     
 
 
     public void OnRayHit( Color _color)
     {
-        curMaterial.color = _color;
+        foreach (Material mat in curMaterial)
+        {
+            mat.color = _color;
+        }
+        
 
     }
-    public void OnInteraction()
+    public void OnInteraction(Vector3 _angle)
     {
         ElevatorNumData data = GameManager.Instance.itemMgr.ElevatorFloorDic[transform.GetComponentInChildren<ElevatorPan>()];
         UiManager.Instance.inGameCtr.InGameUiShower.RenewWriteFloor(data.Num);
     }
     public void OnRayOut()
     {
-        curMaterial.color = originColor;
+        for(int i = 0; i < curMaterial.Count; i++)
+        {
+            curMaterial[i].color = originColor[i];
+        }
+        
     }
     public void Init()
     {
-        GameManager.Instance.itemMgr.InitInteractionItem(out curMaterial, out originColor, transform);
+        GameManager.Instance.itemMgr.InitInteractionItem(ref curMaterial, ref originColor, transform);
     }
 }

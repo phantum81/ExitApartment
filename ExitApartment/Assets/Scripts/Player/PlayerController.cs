@@ -88,14 +88,15 @@ public class PlayerController : MonoBehaviour
     #region 플레이어 특정움직임
 
 
-    public void PickItem(Transform _target)
+    public void PickItem(Transform _target, Vector3 _angle)
     {
         if(curItem == null)
         {
+            
             curItem = _target;
             _target.parent = pickTransform;
             _target.transform.localPosition = new Vector3(0f,0f,0f);
-            _target.rotation = Quaternion.Euler(new Vector3( 0f, 0f, 0f));
+            _target.localRotation = Quaternion.Euler(_angle);
             _target.GetComponent<Rigidbody>().useGravity = false;
             _target.GetComponent<Rigidbody>().isKinematic = true;
             _target.GetComponent<Collider>().enabled = false;
@@ -104,7 +105,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             ThrowItem(curItem);
-            PickItem(_target);
+            PickItem(_target,_angle);
         }
 
     }

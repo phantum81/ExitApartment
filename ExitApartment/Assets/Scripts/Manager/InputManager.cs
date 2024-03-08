@@ -13,18 +13,6 @@ public class InputManager : MonoBehaviour
     Vector3 cameraInputDir;
     public Vector3 CameraInputDir => cameraInputDir;
 
-    
-    private bool isShift = false;
-    public bool IsShift => isShift;
-    private bool isE = false;
-    public bool IsE => isE;
-
-    private bool isF = false;
-    public bool IsF => isF;
-
-    private bool isG = false;
-    public bool IsG => isG;
-
 
     private InputBinding inputbind =new InputBinding();
 

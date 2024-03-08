@@ -2,59 +2,53 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LightStatueItem : MonoBehaviour, IInteraction, IUseItem, IGravityChange
+public class LightStatueItem : Item
 {
-    private Color originColor;
-    private Material curMaterial;
-    private Rigidbody rigd;
- 
 
-
-    public void Init()
+    public override void Init()
     {
-        GameManager.Instance.itemMgr.InitInteractionItem(out curMaterial, out originColor, transform);
-        rigd = GetComponent<Rigidbody>();
+        base.Init();
     }
 
-    public void OnRayHit(Color _color)
+    public override void OnRayHit(Color _color)
     {
-        curMaterial.color = _color;
+        base.OnRayHit(_color);
 
     }
-    public void OnInteraction()
+    public override void OnInteraction(Vector3 _angle)
     {
-        GameManager.Instance.itemMgr.PickItem(this.transform);
+        base.OnInteraction(Vector3.zero);
 
     }
-    public void OnRayOut()
+    public override void OnRayOut()
     {
-        curMaterial.color = originColor;
+        base.OnRayOut();
     }
 
-    public void OnUseItem()
+    public override void OnUseItem()
     {
 
         Color curColor;
         Light myLight;
         myLight = transform.GetComponentInChildren<Light>();
-        for (int i =0; i< transform.childCount+1; i++)
+        for (int i = 0; i < transform.childCount + 1; i++)
         {
             curColor = transform.GetComponentsInChildren<Renderer>()[i].material.GetColor("_EmissionColor");
             transform.GetComponentsInChildren<Renderer>()[i].material.SetColor("_EmissionColor", curColor == Color.black ? Color.white : Color.black);
         }
         myLight.enabled = !myLight.enabled;
-        
+
     }
 
-    public void OnThrowItem()
+    public override void OnThrowItem()
     {
-        GameManager.Instance.itemMgr.ThrowItem(this.transform);
+        base.OnThrowItem();
     }
 
 
-    public void OnGravityChange()
+    public override void OnGravityChange()
     {
-        GameManager.Instance.unitMgr.OnChangeGravity(rigd, GameManager.Instance.unitMgr.ReserveGravity, 9f);
+        base.OnGravityChange();
     }
 
     private void OnTriggerEnter(Collider other)

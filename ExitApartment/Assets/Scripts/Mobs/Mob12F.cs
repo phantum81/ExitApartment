@@ -20,27 +20,27 @@ public class Mob12F : MonoBehaviour, IEnemyContect
     {
 
 
-        if (DetectedPlayer())
+        if (DetectedPlayer() && eventMgr.GetPlayerState() != EplayerState.Die)
         {
             chaseLimit = 3f;
             eEnemyState = EenemyState.Chase;
+            eventMgr.ChangePlayerState(EplayerState.MentalDamage);
         }
         else
         {
             chaseLimit -= Time.deltaTime;
             if(chaseLimit < 0)
             {
-                target = null;
-                eEnemyState = EenemyState.None;
-                eventMgr.ChangePlayerState(EplayerState.None);
+                if(target != null)
+                {
+                    target = null;
+                    eEnemyState = EenemyState.None;
+                    eventMgr.ChangePlayerState(EplayerState.None);
+                }
             }
         }
 
         
-        if( eEnemyState == EenemyState.Chase && eventMgr.GetPlayerState() != EplayerState.Die)
-        {
-            eventMgr.ChangePlayerState(EplayerState.MentalDamage);
-        }
 
     }
 

@@ -79,7 +79,7 @@ public class PlayerInteraction : MonoBehaviour
         UiManager.Instance.inGameCtr.InGameUiShower.ActivePickUpMark(isInteraction);
 
         if (inputMgr.InputDic[EuserAction.Interaction])
-            preHit.transform.GetComponent<IInteraction>()?.OnInteraction();
+            preHit.transform.GetComponent<IInteraction>()?.OnInteraction(Vector3.zero);
     }
 
     private void OffInteraction()

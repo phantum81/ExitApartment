@@ -1,3 +1,4 @@
+using NUnit.Framework.Constraints;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,15 +28,33 @@ public class ItemManager : MonoBehaviour
         
     }
 
-    public void InitInteractionItem(out Material _curM, out Color _originColor, Transform _obj)
+    public void InitInteractionItem(ref List<Material> _curM, ref List<Color> _originColor, Transform _obj)
     {
-        _curM = _obj.GetComponent<Renderer>().material;
-        _originColor = _curM.color;
+        List<Renderer> ren = new List<Renderer>();
+
+        Renderer[] renderers = _obj.GetComponentsInChildren<Renderer>(true);
+
+        for(int i = 0; i < renderers.Length; i++)
+        {
+            if (renderers[i].gameObject.CompareTag("Iinteraction"))
+            {
+                ren.Add(renderers[i]);
+            }
+        }
+
+        foreach (Renderer renderer in ren)
+        {
+            foreach (Material material in renderer.materials)
+            {
+                _curM.Add(material);
+                _originColor.Add(material.color);
+            }
+        }
     }
 
-    public void PickItem(Transform _target)
+    public void PickItem(Transform _target, Vector3 _angle)
     {
-        GameManager.Instance.unitMgr.PlayerCtr.PickItem(_target);
+        GameManager.Instance.unitMgr.PlayerCtr.PickItem(_target, _angle);
     }
 
     public void ThrowItem(Transform _target)

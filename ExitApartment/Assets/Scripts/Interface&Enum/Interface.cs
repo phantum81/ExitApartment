@@ -50,7 +50,7 @@ public interface IInteraction
     void Init();
 
     void OnRayHit(Color _color);
-    void OnInteraction();
+    void OnInteraction(Vector3 _angle);
 
     void OnRayOut();
 

@@ -16,7 +16,7 @@ public class ItemTrigger : MonoBehaviour, IInteraction
         
 
     }
-    public void OnInteraction()
+    public void OnInteraction(Vector3 _angle)
     {
         if (rigd.isKinematic)
             rigd.isKinematic = false;

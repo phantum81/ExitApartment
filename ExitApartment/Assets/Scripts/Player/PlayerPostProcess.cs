@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 
@@ -117,12 +118,13 @@ public class PlayerPostProcess : MonoBehaviour
 
     IEnumerator LerpValue(Action<float> _value, float _min, float _max, float _inverseSpeed, float _lerpRatio)
     {
+        yield return null;
         float elapsedTime = 0f;
         while (true)
         {
             _value(Mathf.Lerp(_min, _max, elapsedTime / (_inverseSpeed * _lerpRatio)));
 
-
+            
             if (elapsedTime >= _inverseSpeed)
             {
                 break;
@@ -149,9 +151,9 @@ public class PlayerPostProcess : MonoBehaviour
                     
 
                     if (post.profile.TryGetSettings(out grain))
-                    {                        
-                        yield return StartCoroutine(LerpValue(value => grain.intensity.value = value, grain.intensity.value, _max, _inverseSpeed, _lerpRatio));
-                        grain.active = false;
+                    {
+                        curCoroutine.Add(StartCoroutine(LerpValue(value => grain.intensity.value = value, grain.intensity.value, _max, _inverseSpeed, _lerpRatio)));
+                        
                     }                        
                     break;
 
@@ -160,8 +162,8 @@ public class PlayerPostProcess : MonoBehaviour
                     
                     if (post.profile.TryGetSettings(out chromaticAber))
                     {
-                        yield return StartCoroutine(LerpValue(value => chromaticAber.intensity.value = value, chromaticAber.intensity.value, _max, _inverseSpeed, _lerpRatio));
-                        chromaticAber.active = false;
+                        curCoroutine.Add(StartCoroutine(LerpValue(value => chromaticAber.intensity.value = value, chromaticAber.intensity.value, _max, _inverseSpeed, _lerpRatio)));
+                        
                     }                        
                     break;
 
@@ -170,12 +172,13 @@ public class PlayerPostProcess : MonoBehaviour
                     
                     if (post.profile.TryGetSettings(out distortion))
                     {
-                        yield return StartCoroutine(LerpValue(value => distortion.intensity.value = value, distortion.intensity.value, _max, _inverseSpeed, _lerpRatio));
-                        distortion.active = false;
+                        curCoroutine.Add(StartCoroutine(LerpValue(value => distortion.intensity.value = value, distortion.intensity.value, _max, _inverseSpeed, _lerpRatio)));
+
+                       
                     }                        
                     break;
             }
-
+            yield return null;
             
         }
     }
@@ -183,8 +186,8 @@ public class PlayerPostProcess : MonoBehaviour
 
     public IEnumerator PostProccessEffectOn(EpostProcessType _type, float _max =1f, float _inverseSpeed = 0.5f, float _lerpRatio = 1f)
     {
-        
 
+        
         if (post != null)
         {
 
@@ -197,7 +200,7 @@ public class PlayerPostProcess : MonoBehaviour
                     if (post.profile.TryGetSettings(out grain))
                     {                        
                         grain.active = true;
-                        yield return StartCoroutine(LerpValue(value => grain.intensity.value = value, grain.intensity.value, _max, _inverseSpeed, _lerpRatio));
+                        curCoroutine.Add(StartCoroutine(LerpValue(value => grain.intensity.value = value, grain.intensity.value, _max, _inverseSpeed, _lerpRatio)   ));
                     }
                     break;
 
@@ -206,7 +209,7 @@ public class PlayerPostProcess : MonoBehaviour
                     if (post.profile.TryGetSettings(out chromaticAber))
                     {
                         chromaticAber.active = true;
-                        yield return StartCoroutine(LerpValue(value => chromaticAber.intensity.value = value, chromaticAber.intensity.value, _max, _inverseSpeed, _lerpRatio));
+                        curCoroutine.Add(StartCoroutine(LerpValue(value => chromaticAber.intensity.value = value, chromaticAber.intensity.value, _max, _inverseSpeed, _lerpRatio)));
                     }
                     break;
 
@@ -215,15 +218,24 @@ public class PlayerPostProcess : MonoBehaviour
                     if  (post.profile.TryGetSettings(out distortion))
                     {
                         distortion.active = true;
-                        yield return StartCoroutine(LerpValue(value => distortion.intensity.value = value, distortion.intensity.value, _max, _inverseSpeed, _lerpRatio));
+                        curCoroutine.Add(StartCoroutine(LerpValue(value => distortion.intensity.value = value, distortion.intensity.value, _max, _inverseSpeed, _lerpRatio)));
                     }                                            
                     break;
             }
-
+            yield return null;
             
         }
     }
 
+
+
+    public void MentalDamagePostProccess()
+    {
+        StopAllCoroutinesInList();
+        CurCoroutine.Add(StartCoroutine(PostProccessEffectOn(EpostProcessType.Grain)));
+        CurCoroutine.Add(StartCoroutine(PostProccessEffectOn(EpostProcessType.LensDistortion, -40f)));
+        CurCoroutine.Add(StartCoroutine(PostProccessEffectOn(EpostProcessType.ChromaticAberration)));
+    }
 
     public void On12FDeadState()
     {
