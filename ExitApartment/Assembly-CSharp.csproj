@@ -116,6 +116,7 @@
     <Compile Include="Assets\Resources\DownAssets\Enviroment\enviroment\Office building\scripts\evelator_controll.cs" />
     <Compile Include="Assets\Scripts\Item\Item.cs" />
     <Compile Include="Assets\Resources\DownAssets\Mimic\Scripts\Movement.cs" />
+    <Compile Include="Assets\Resources\TestRestart.cs" />
     <Compile Include="Assets\Scripts\Ui\InGameUiController.cs" />
     <Compile Include="Assets\Scripts\Binding\InputBinding.cs" />
     <Compile Include="Assets\Scripts\Mobs\Mob12F.cs" />

@@ -241,9 +241,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: ea6e0000
-      m_LastClickedID: 28394
-      m_ExpandedIDs: ea0bf1ff3e2ff1ff842ff1ff8c2ff1ff942ff1ff065af6ff0a5af6ff74e5faff84e5faff92e5faffb628fcffbe28fcff409cfcff00b5fdff1c5dffff767cffff3e98ffffecfaffff36610000a661000034620000e8620000166300007e630000666500003a6700006467000088670000bc670000106800009a690000386b0000466e0000e66e0000e86e0000ea6e0000f26e0000f86e0000
+      m_SelectedIDs: ac4b0200
+      m_LastClickedID: 150444
+      m_ExpandedIDs: c0d3ffff18d4ffffa4d8ffffecfaffff9a940000269b00002e9b0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -284,7 +284,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 458
     y: 0
-    width: 464
+    width: 299
     height: 645
   m_MinSize: {x: 277, y: 71}
   m_MaxSize: {x: 4002, y: 4021}
@@ -317,7 +317,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 458
     y: 73
-    width: 462
+    width: 297
     height: 624
   m_SerializedDataModeController:
     m_DataMode: 0
@@ -394,9 +394,9 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 922
+    x: 757
     y: 0
-    width: 197
+    width: 362
     height: 645
   m_MinSize: {x: 102, y: 121}
   m_MaxSize: {x: 4002, y: 4021}
@@ -550,9 +550,9 @@ MonoBehaviour:
     m_TextWithWhitespace: "Scene\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 922
+    x: 757
     y: 73
-    width: 195
+    width: 360
     height: 624
   m_SerializedDataModeController:
     m_DataMode: 0
@@ -1056,7 +1056,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 177522
+  controlID: 1015
 --- !u!114 &15
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1148,9 +1148,9 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 4e880000
-    m_LastClickedID: 34894
-    m_ExpandedIDs: 000000002a8800002c88000030880000328800003488000036880000388800003a8800003c88000046880000488800004a8800004c8800004e88000050880000528800005488000056880000588800009a880000a0880000b088000000ca9a3b
+    m_SelectedIDs: aa8a0000
+    m_LastClickedID: 35498
+    m_ExpandedIDs: 00000000908a0000928a0000948a0000968a0000988a00009a8a00009c8a00009e8a0000a08a0000a68a0000a88a0000ac8a0000ae8a0000b08a0000b28a0000b48a0000b68a0000b88a0000ba8a000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1178,7 +1178,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000002a8800002c88000030880000328800003488000036880000388800003a8800003c88000046880000488800004a8800004c8800004e88000050880000528800005488000056880000588800009a880000a0880000b088000000ca9a3b
+    m_ExpandedIDs: 00000000908a0000928a0000948a0000968a0000988a00009a8a00009c8a00009e8a0000a08a0000a68a0000a88a0000ac8a0000ae8a0000b08a0000b28a0000b48a0000b68a0000b88a0000ba8a000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1203,9 +1203,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: ea6e0000
-    m_LastClickedInstanceID: 28394
-    m_HadKeyboardFocusLastEvent: 0
+    m_SelectedInstanceIDs: ac4b0200
+    m_LastClickedInstanceID: 150444
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000766d0000986e0000188c00002ed100003e7b0000f06d0000a8750000866f00007a7700004472000014690000989f0100e0a601000ec10100bc7f0000ba7f000052f4000054f40000547d0000368200007c81000028e8020000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1256,9 +1256,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 800
-    width: 1007
-    height: 191
+    y: 718
+    width: 1011
+    height: 273
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -1334,4 +1334,4 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 28394
+  m_LastSelectedObjectID: 150444

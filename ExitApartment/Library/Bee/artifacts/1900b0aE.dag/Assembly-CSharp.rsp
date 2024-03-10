@@ -405,6 +405,8 @@
 "Assets/Resources/DownAssets/Mimic/Scripts/Mimic.cs"
 "Assets/Resources/DownAssets/Mimic/Scripts/Movement.cs"
 "Assets/Resources/DownAssets/Rusty Flashlight/Scripts/FlashlightToggle.cs"
+"Assets/Resources/TestRestart.cs"
+"Assets/Resources/TestScripts.cs"
 "Assets/Scripts/Binding/InputBinding.cs"
 "Assets/Scripts/Binding/SerializableInputBinding.cs"
 "Assets/Scripts/Camera/CameraController.cs"
