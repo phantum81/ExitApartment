@@ -5,68 +5,77 @@ using UnityEngine;
 namespace SojaExiles
 
 {
-	public class opencloseDoor : MonoBehaviour
+	public class opencloseDoor : MonoBehaviour, IInteraction
 	{
-
-		public Animator openandclose;
-		public bool open;
-		public Transform Player;
-
+		
+		private Animator openandClose;
+		private bool isOpen;
+		private InputManager inputMgr;
 		void Start()
 		{
-			open = false;
-		}
-
-		void OnMouseOver()
-		{
-			{
-				if (Player)
-				{
-					float dist = Vector3.Distance(Player.position, transform.position);
-					if (dist < 15)
-					{
-						if (open == false)
-						{
-							if (Input.GetMouseButtonDown(0))
-							{
-								StartCoroutine(opening());
-							}
-						}
-						else
-						{
-							if (open == true)
-							{
-								if (Input.GetMouseButtonDown(0))
-								{
-									StartCoroutine(closing());
-								}
-							}
-
-						}
-
-					}
-				}
-
-			}
-
-		}
-
-		IEnumerator opening()
-		{
-			print("you are opening the door");
-			openandclose.Play("Opening");
-			open = true;
-			yield return new WaitForSeconds(.5f);
-		}
-
-		IEnumerator closing()
-		{
-			print("you are closing the door");
-			openandclose.Play("Closing");
-			open = false;
-			yield return new WaitForSeconds(.5f);
+            openandClose = GetComponent<Animator>();
+			inputMgr = GameManager.Instance.inputMgr;
+			isOpen = false;
 		}
 
 
-	}
+        public void Init()
+        {
+
+        }
+
+        public void OnRayHit(Color _color)
+        {
+
+        }
+        public void OnInteraction(Vector3 _angle)
+        {
+            if (!isOpen)
+            {
+                if (inputMgr.InputDic[EuserAction.Interaction])
+                {
+                    StartCoroutine(opening());
+                }
+            }
+            else
+            {
+                if (isOpen)
+                {
+                    if (inputMgr.InputDic[EuserAction.Interaction])
+                    {
+                        StartCoroutine(closing());
+                    }
+                }
+
+            }
+        }
+
+        public void OnRayOut()
+        {
+
+        }
+
+        IEnumerator opening()
+        {
+            print("you are opening the door");
+            openandClose.Play("Opening");
+            isOpen = true;
+            yield return new WaitForSeconds(.5f);
+        }
+
+        IEnumerator closing()
+        {
+            print("you are closing the door");
+            openandClose.Play("Closing");
+            isOpen = false;
+            yield return new WaitForSeconds(.5f);
+        }
+
+
+    }
+
+
+
+
+
 }

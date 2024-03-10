@@ -88,7 +88,7 @@ LineRenderer:
   m_Positions: []
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.4
+    widthMultiplier: 0.9834223
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -102,8 +102,8 @@ LineRenderer:
         inWeight: 0.33333334
         outWeight: 0.48259553
       - serializedVersion: 3
-        time: 0.20628557
-        value: 0.29106066
+        time: 0.43177995
+        value: 0.7497132
         inSlope: -0.2686744
         outSlope: -0.2686744
         tangentMode: 0
@@ -232,11 +232,11 @@ MonoBehaviour:
   legResolution: 0
   legLine: {fileID: 0}
   handlesCount: 8
-  legMinHeight: 0.28
-  legMaxHeight: 0.92
+  legMinHeight: 1
+  legMaxHeight: 2
   handles: []
-  handleOffsetMinRadius: 0.2
-  handleOffsetMaxRadius: 0.65
+  handleOffsetMinRadius: 1
+  handleOffsetMaxRadius: 2
   handleOffsets: []
   finalFootDistance: 0.35
   growCoef: 3

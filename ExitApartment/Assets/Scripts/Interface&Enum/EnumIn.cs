@@ -118,3 +118,11 @@ public enum EpostProcessType
     ChromaticAberration,
 }
 
+
+
+public enum ETestFloor
+{
+    Home,
+    Monster,
+    Nothing
+}

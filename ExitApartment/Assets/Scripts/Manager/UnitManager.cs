@@ -15,7 +15,7 @@ public class UnitManager : MonoBehaviour
     private Transform contectTarget;
     public Transform ContectTarget => contectTarget;
 
-
+    public List<GameObject> floorList;
 
     private Vector3 reserveGravity = new Vector3(0, 0, 1f);
     public Vector3 ReserveGravity => reserveGravity;
@@ -62,6 +62,9 @@ public class UnitManager : MonoBehaviour
     {
         contectTarget = _target;
     }
+
+
+
 
 
 }
