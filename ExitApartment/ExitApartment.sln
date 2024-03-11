@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{862F8A5A-EFE8-7D2C-601B-5CBE51016180}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MToon", "MToon.csproj", "{295C2F99-B1FC-743F-C37D-7D121ABC679D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{862F8A5A-EFE8-7D2C-601B-5CBE51016180}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MToon.Editor", "MToon.Editor.csproj", "{4BCA9BFB-F4FD-6557-73C8-AFBD3AD0A712}"
 EndProject
@@ -13,14 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{862F8A5A-EFE8-7D2C-601B-5CBE51016180}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{862F8A5A-EFE8-7D2C-601B-5CBE51016180}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{862F8A5A-EFE8-7D2C-601B-5CBE51016180}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{862F8A5A-EFE8-7D2C-601B-5CBE51016180}.Release|Any CPU.Build.0 = Release|Any CPU
 		{295C2F99-B1FC-743F-C37D-7D121ABC679D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{295C2F99-B1FC-743F-C37D-7D121ABC679D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{295C2F99-B1FC-743F-C37D-7D121ABC679D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{295C2F99-B1FC-743F-C37D-7D121ABC679D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{862F8A5A-EFE8-7D2C-601B-5CBE51016180}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{862F8A5A-EFE8-7D2C-601B-5CBE51016180}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{862F8A5A-EFE8-7D2C-601B-5CBE51016180}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{862F8A5A-EFE8-7D2C-601B-5CBE51016180}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4BCA9BFB-F4FD-6557-73C8-AFBD3AD0A712}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4BCA9BFB-F4FD-6557-73C8-AFBD3AD0A712}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4BCA9BFB-F4FD-6557-73C8-AFBD3AD0A712}.Release|Any CPU.ActiveCfg = Release|Any CPU

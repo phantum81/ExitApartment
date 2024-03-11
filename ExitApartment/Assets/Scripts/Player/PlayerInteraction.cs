@@ -36,8 +36,7 @@ public class PlayerInteraction : MonoBehaviour
 
 
         if (isInteraction)
-        {
-            
+        {            
             OnInteraction(_hit);
         }
         else

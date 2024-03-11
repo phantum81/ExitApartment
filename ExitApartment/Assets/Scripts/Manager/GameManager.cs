@@ -53,6 +53,9 @@ public class GameManager : MonoBehaviour
         return cameraMgr.CameraCtr.CheckInterection(_ray, out _hit ,_maxDis, _layer);
     }
 
-
+    public void ZoomCamera( Camera _zoomCam, Camera _mainCam, Transform _target, float _distance)
+    {
+        cameraMgr.ZoomCamera.ZoomCamera( _zoomCam, _mainCam, _target, _distance);
+    }
 
 }

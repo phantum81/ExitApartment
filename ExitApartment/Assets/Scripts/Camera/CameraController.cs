@@ -63,7 +63,7 @@ public class CameraController : MonoBehaviour
     private float _r_shake = 0.0007f;
     public float R_shake => _r_shake;
 
-    private float _s_shake = 0.0001f;
+    private float _s_shake = 0.00005f;
     public float S_shake => _s_shake;
 
     #region 유니티 실행부
@@ -248,6 +248,9 @@ public class CameraController : MonoBehaviour
         else
             return false;
     }
+
+
+
     #endregion
 
     #region 이벤트 코루틴

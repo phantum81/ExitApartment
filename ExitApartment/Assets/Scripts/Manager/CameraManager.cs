@@ -13,12 +13,18 @@ public class CameraManager : MonoBehaviour
     [Header("µ¥µåÄ«¸Þ¶ó ÄÁÆ®·Ñ·¯12F"), SerializeField]
     private OnDeadCameraController deadCamCtr;
 
+
+
+
     [Header("ÇöÀçÄ«¸Þ¶ó"),SerializeField]
     private Camera curCamera;
     public Camera CurCamera => curCamera;
 
     [Header("UiÄ«¸Þ¶ó"), SerializeField]
-    private Camera UiCamera;
+    private Camera uiCamera;
+    [Header("ÁÜ Ä«¸Þ¶ó"), SerializeField]
+    private ZoomCameraController zoomCamera;
+    public ZoomCameraController ZoomCamera => zoomCamera;
 
 
     /// <summary>
@@ -26,7 +32,7 @@ public class CameraManager : MonoBehaviour
     /// </summary>
     private Dictionary<int, Camera> camDic= new Dictionary<int, Camera>();
     /// <summary>
-    /// 0: ¸ÞÀÎÄ· 1: 12fÄ·
+    /// 0: ¸ÞÀÎÄ· 1: 12fÄ· 2: ÁÜ Ä· 3: ui Ä·
     /// </summary>
     public Dictionary<int, Camera> CameraDic => camDic;
 
@@ -45,9 +51,17 @@ public class CameraManager : MonoBehaviour
     {
         camDic.Add(0, Camera.main);
         camDic.Add(1, deadCamCtr.GetComponent<Camera>());
-        camDic.Add(2, UiCamera);
+        camDic.Add(2, zoomCamera.GetComponent<Camera>());
+        camDic.Add(3, uiCamera);
+
         curCamera = camDic[0];
-        camDic[1].enabled = false;
+        foreach (Camera cam in camDic.Values)
+        {
+            cam.enabled = false;
+        }
+        curCamera.enabled = true;
+        camDic[3].enabled = true;
+        
     }
     void Start()
     {
@@ -63,7 +77,7 @@ public class CameraManager : MonoBehaviour
             case ESOEventType.OnGravity:
                 break;
             case ESOEventType.OnDie12F:
-                StartCoroutine(ChangeCamera(camDic[1], 0f));
+                StartCoroutine(ChangeCamera(camDic[1]));
                 break;
         }
 
@@ -104,15 +118,13 @@ public class CameraManager : MonoBehaviour
         }
     }
 
-    IEnumerator ChangeCamera(Camera _cam, float _time)
-    {
-
-        yield return new WaitForSeconds(_time);
+    public IEnumerator ChangeCamera(Camera _cam, float _time = 0f)
+    {        
         curCamera.enabled=false;
         _cam.enabled=true;
 
         curCamera = _cam;
-
+        yield return null;
     }
 
 
