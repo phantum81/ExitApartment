@@ -23,14 +23,10 @@ public class ZoomCameraController : MonoBehaviour
         if(!_zoomCam.enabled)
         {
             GameManager.Instance.cameraMgr.StartCoroutine(GameManager.Instance.cameraMgr.ChangeCamera(_zoomCam));
-            _zoomCam.transform.position = _target.position + _target.forward * _distance;
+            _zoomCam.transform.position = _target.position - _target.forward * _distance;
+            _zoomCam.transform.rotation = _target.rotation;
             
-            
-
-            _zoomCam.transform.LookAt(_target);
-
-            _zoomCam.transform.rotation = Quaternion.Euler(_zoomCam.transform.rotation.eulerAngles.x, 180f, _zoomCam.transform.rotation.eulerAngles.z);
-
+      
 
         }
         else
