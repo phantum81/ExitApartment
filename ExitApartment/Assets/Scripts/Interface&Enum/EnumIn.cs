@@ -126,3 +126,9 @@ public enum ETestFloor
     Monster,
     Nothing
 }
+
+public enum EZoomType
+{
+    Item,
+    HomeTrap,
+}

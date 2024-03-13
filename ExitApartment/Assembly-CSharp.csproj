@@ -87,6 +87,7 @@
     <Compile Include="Assets\Resources\DownAssets\ApartAsset\_BPS Basic Assets\Common\Scripts and Animations\First Person Player\MouseLook.cs" />
     <Compile Include="Assets\Resources\DownAssets\ApartAsset\Apartment Kit\Common\Scripts &amp; Animation\OvenOpen\OvenFlip.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerHFsm\PlayerHFSMMachine.cs" />
+    <Compile Include="Assets\Scripts\Item\TrapDoor.cs" />
     <Compile Include="Assets\Scripts\ElevatorController.cs" />
     <Compile Include="Assets\Resources\DownAssets\OfficeAsset\enviroment\Office building\scripts\DoorAction.cs" />
     <Compile Include="Assets\Scripts\Manager\GameManager.cs" />
@@ -128,6 +129,7 @@
     <Compile Include="Assets\Scripts\Mobs\Mob12F.cs" />
     <Compile Include="Assets\Resources\DownAssets\ApartAsset\_BPS Basic Assets\Common\Scripts and Animations\Windows\opencloseWindow1.cs" />
     <Compile Include="Assets\Resources\DownAssets\ApartAsset\_BPS Basic Assets\Common\Scripts and Animations\Windows\opencloseWindow.cs" />
+    <Compile Include="Assets\Scripts\Mobs\Pumpkin.cs" />
     <Compile Include="Assets\Resources\DownAssets\ApartAsset\Apartment Kit\Common\Scripts &amp; Animation\Slide\BRGlassDoor.cs" />
     <Compile Include="Assets\Scripts\Ui\InGameOnClick.cs" />
     <Compile Include="Assets\Resources\DownAssets\ApartAsset\_BPS Basic Assets\Common\Scripts and Animations\Drawer\Z Axis\Drawer_Pull_Z.cs" />
@@ -450,12 +452,6 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.8.0\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2023.1.3f1\Editor\Data\PlaybackEngines\iOSSupport\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Common">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2023.1.3f1\Editor\Data\PlaybackEngines\iOSSupport\UnityEditor.iOS.Extensions.Common.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Android.Types">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2023.1.3f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Types.dll</HintPath>
