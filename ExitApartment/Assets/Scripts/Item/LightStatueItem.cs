@@ -8,6 +8,7 @@ public class LightStatueItem : Item
     public override void Init()
     {
         base.Init();
+        eItemType = EItemType.LightStatue;
     }
 
     public override void OnRayHit(Color _color)

@@ -6,66 +6,69 @@ namespace SojaExiles
 
 {
 
-	public class Drawer_Pull_X : MonoBehaviour
-	{
+	public class Drawer_Pull_X : MonoBehaviour, IInteraction
+    {
 
-		public Animator pull_01;
-		public bool open;
-		public Transform Player;
+        private Animator openandClose;
+        private bool isOpen;
+        private InputManager inputMgr;
+        void Start()
+        {
+            openandClose = GetComponent<Animator>();
+            inputMgr = GameManager.Instance.inputMgr;
+            isOpen = false;
+        }
 
-		void Start()
-		{
-			open = false;
-		}
 
-		void OnMouseOver()
-		{
-			{
-				if (Player)
-				{
-					float dist = Vector3.Distance(Player.position, transform.position);
-					if (dist < 10)
-					{
-						print("object name");
-						if (open == false)
-						{
-							if (Input.GetMouseButtonDown(0))
-							{
-								StartCoroutine(opening());
-							}
-						}
-						else
-						{
-							if (open == true)
-							{
-								if (Input.GetMouseButtonDown(0))
-								{
-									StartCoroutine(closing());
-								}
-							}
+        public void Init()
+        {
 
-						}
+        }
 
-					}
-				}
+        public void OnRayHit(Color _color)
+        {
 
-			}
+        }
+        public void OnInteraction(Vector3 _angle)
+        {
+            if (!isOpen)
+            {
+                if (inputMgr.InputDic[EuserAction.Interaction])
+                {
+                    StartCoroutine(opening());
+                }
+            }
+            else
+            {
+                if (isOpen)
+                {
+                    if (inputMgr.InputDic[EuserAction.Interaction])
+                    {
+                        StartCoroutine(closing());
+                    }
+                }
 
-		}
+            }
+        }
 
-		IEnumerator opening()
+        public void OnRayOut()
+        {
+
+        }
+
+        IEnumerator opening()
 		{
 			print("you are opening the door");
-			pull_01.Play("openpull_01");
-			open = true;
+            openandClose.Play("openpull_01");
+            isOpen = true;
 			yield return new WaitForSeconds(.5f);
 		}
 
 		IEnumerator closing()
 		{
 			print("you are closing the door");
-			pull_01.Play("closepush_01");
-			open = false;
+            openandClose.Play("closepush_01");
+            isOpen = false;
 			yield return new WaitForSeconds(.5f);
 		}
 

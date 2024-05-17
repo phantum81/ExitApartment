@@ -38,6 +38,10 @@ public class PlayerInteraction : MonoBehaviour
         if (isInteraction)
         {            
             OnInteraction(_hit);
+            if(preHit.collider != _hit.collider)
+            {
+                OffInteraction();
+            }
         }
         else
         {
@@ -49,11 +53,11 @@ public class PlayerInteraction : MonoBehaviour
         {
             if (inputMgr.InputDic[EuserAction.UseItem])
             {
-                playerCtr.CurItem.GetComponent<IUseItem>().OnUseItem();
+                playerCtr.CurItem.GetComponent<IUseItem>()?.OnUseItem();
             }
             if (inputMgr.InputDic[EuserAction.Throw])
             {
-                playerCtr.CurItem.GetComponent<IUseItem>().OnThrowItem();
+                playerCtr.CurItem.GetComponent<IUseItem>()?.OnThrowItem();
             }
         }
 
@@ -80,10 +84,12 @@ public class PlayerInteraction : MonoBehaviour
 
         if (inputMgr.InputDic[EuserAction.Interaction])
             preHit.transform.GetComponent<IInteraction>()?.OnInteraction(Vector3.zero);
+
     }
 
     private void OffInteraction()
     {
+
         preHit.transform?.GetComponent<IInteraction>()?.OnRayOut();
         preHit = new RaycastHit();
 

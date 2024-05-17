@@ -23,6 +23,10 @@ public class EventListener : MonoBehaviour
             case ESOEventType.OnClear12F:
                 eventSo.Alive12FRegisterListener(this);
                 break;
+            //case ESOEventType.OnHomeTrap:
+            //    eventSo.HomeTrapRegisterListener(this);
+            //    break;
+                
         }
 
         
@@ -40,6 +44,9 @@ public class EventListener : MonoBehaviour
             case ESOEventType.OnClear12F:
                 eventSo.Alive12FUnregisterListener(this);
                 break;
+            //case ESOEventType.OnHomeTrap:
+            //    eventSo.HomeTrapUnregisterListener(this);
+            //    break;
         }
     }
 

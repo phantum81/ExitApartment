@@ -100,6 +100,8 @@ public class PlayerController : MonoBehaviour
             _target.GetComponent<Rigidbody>().useGravity = false;
             _target.GetComponent<Rigidbody>().isKinematic = true;
             _target.GetComponent<Collider>().enabled = false;
+
+            
             
         }
         else

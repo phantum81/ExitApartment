@@ -27,9 +27,7 @@ public class CameraManager : MonoBehaviour
     public ZoomCameraController ZoomCamera => zoomCamera;
 
 
-    /// <summary>
-    /// 0: ¸ŞÀÎÄ· 1: 12fÄ·
-    /// </summary>
+
     private Dictionary<int, Camera> camDic= new Dictionary<int, Camera>();
     /// <summary>
     /// 0: ¸ŞÀÎÄ· 1: 12fÄ· 2: ÁÜ Ä· 3: ui Ä·

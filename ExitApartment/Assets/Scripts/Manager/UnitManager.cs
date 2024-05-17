@@ -33,8 +33,6 @@ public class UnitManager : MonoBehaviour
     }
 
 
-
-
     private IEnumerator ChangeGravity(Rigidbody _rigd, Vector3 _gravity, float _startSpeed)
     {
         EventManager evMgr = GameManager.Instance.eventMgr;
@@ -64,7 +62,10 @@ public class UnitManager : MonoBehaviour
     }
 
 
-
+    public void ShowMob(Transform _enemy, bool _bool)
+    {
+        _enemy.gameObject.SetActive(_bool);
+    }
 
 
 }

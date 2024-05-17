@@ -11,6 +11,7 @@ public class FlashLightItem : Item
     public override void Init()
     {
         base.Init();
+        eItemType = EItemType.FlashLight;
         lightGo = transform.GetComponentInChildren<Light>().gameObject;
         lightGo.SetActive(false);
     }

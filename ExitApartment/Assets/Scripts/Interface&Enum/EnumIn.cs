@@ -80,13 +80,15 @@ public enum EplayerState  // 보통 이벤트때문에 일어남.
 
 
 /// <summary>
-/// 이벤트 종류 0 : 그래비티, 1 : 12층사망 2:12층 생존
+/// 이벤트 종류 0 : 그래비티, 1 : 12층사망 2:12층 생존 
 /// </summary>
 public enum ESOEventType
 {
     OnGravity,
     OnDie12F,
     OnClear12F,
+    
+    
 };
 
 /// <summary>
@@ -124,11 +126,25 @@ public enum ETestFloor
 {
     Home,
     Monster,
-    Nothing
+    None
 }
+
+
 
 public enum EZoomType
 {
     Item,
-    HomeTrap,
+    HomeTrapDoor,
+}
+
+
+public enum EItemType
+{
+    None,
+    Rope,
+    Bottle,
+    FlashLight,
+    LightStatue,
+    Water,
+    Wine,
 }

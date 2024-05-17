@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class ZoomableItem : MonoBehaviour, IInteraction
 {
-    private Transform ray_collider;
+    [SerializeField]
+    protected Transform ray_collider;
     [Header("줌 정도"), SerializeField]
-    private float zoomValue = 0.5f;
+    protected float zoomValue = 0.5f;
     [Header("이동 제한 콜라이더"), SerializeField]
-    private Collider limitCol;
+    protected Collider limitCol;
 
 
 
-    public EZoomType eZoomType;
-    public void Init()
+    //public EZoomType eZoomType;
+    public virtual void Init()
     {
         ray_collider = transform.GetChild(0).transform;
     }
@@ -22,17 +23,9 @@ public class ZoomableItem : MonoBehaviour, IInteraction
     {
 
     }
-    public void OnInteraction(Vector3 _angle)
+    public virtual void OnInteraction(Vector3 _angle)
     {
         GameManager.Instance.ZoomCamera(GameManager.Instance.cameraMgr.CameraDic[2], GameManager.Instance.cameraMgr.CameraDic[0] , ray_collider, zoomValue);
-        switch (eZoomType)
-        {
-            case EZoomType.Item:
-                GameManager.Instance.ZoomMove(GameManager.Instance.cameraMgr.CameraDic[2], limitCol, zoomValue);
-                break;
-            case EZoomType.HomeTrap:
-                break;
-        }
     }
 
     public void OnRayOut()

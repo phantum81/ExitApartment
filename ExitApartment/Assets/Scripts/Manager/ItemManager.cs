@@ -71,6 +71,7 @@ public class ItemManager : MonoBehaviour
         {
             objsInteraction[i].GetComponent<IInteraction>()?.Init();
             itemList.Add(objsInteraction[i]);
+
         }
 
 
@@ -82,8 +83,8 @@ public class ItemManager : MonoBehaviour
             {
                 elevatorFloorDic.Add(pan, new ElevatorNumData(itemList[i].transform.GetComponentInChildren<TextMeshPro>().text));
             }
-
-
         }
+
+        
     }
 }

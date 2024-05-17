@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using static UnityEngine.GraphicsBuffer;
 
 public class ZoomCameraController : MonoBehaviour
@@ -21,6 +22,8 @@ public class ZoomCameraController : MonoBehaviour
     {
         
     }
+
+
     public void ZoomCamera( Camera _zoomCam, Camera _mainCam ,Transform _target, float _distance)
     {
         if(!_zoomCam.enabled)
@@ -28,13 +31,12 @@ public class ZoomCameraController : MonoBehaviour
             GameManager.Instance.cameraMgr.ChangeCamera(_zoomCam);
             _zoomCam.transform.position = _target.position - _target.forward * _distance;
             _zoomCam.transform.rotation = _target.rotation;
-            
-      
-
+                  
         }
         else
         {
             GameManager.Instance.cameraMgr.ChangeCamera((_mainCam));
+            
         }
 
     }
@@ -43,42 +45,32 @@ public class ZoomCameraController : MonoBehaviour
     public IEnumerator ZoomMove(Camera _zoomCam , Collider _col, float _dis)
     {
         Vector3 dir = Vector3.zero;
-        Vector3 movePos = Vector3.zero;
+        Vector3 moveDir = Vector3.zero;
         InputManager inputMgr = GameManager.Instance.inputMgr;
-        while(_zoomCam.enabled)
+
+
+        while (_zoomCam.enabled)
         {
             dir = new Vector3(inputMgr.InputDir.x, inputMgr.InputDir.z, 0f);
             dir.Normalize();
 
-            Vector3 _colSize = new Vector3(_col.bounds.size.x, _col.bounds.size.y, _zoomCam.transform.position.z);
-            
-            
-            movePos = _zoomCam.transform.position + dir * Time.deltaTime * speed;
-
-
-
             Vector3 colCenter = _col.bounds.center;
-            Vector3 colSize = _col.bounds.size;
-            Vector3 colMin = colCenter - colSize / 2f;
-            Vector3 colMax = colCenter + colSize / 2f;
-            Vector3 newPosWithoutZ = new Vector3(movePos.x, movePos.y, 0f);
+            Vector3 colExtents = _col.bounds.extents;
 
-            // 이동할 위치가 Collider의 범위를 벗어나지 않는지 확인합니다.
-            if (newPosWithoutZ.x >= colMin.x && newPosWithoutZ.x <= colMax.x &&
-                newPosWithoutZ.y >= colMin.y && newPosWithoutZ.y <= colMax.y)
-            {
-                // Collider 내부에 위치할 경우에만 이동을 수행합니다.
-                _zoomCam.transform.Translate(dir * Time.deltaTime * speed);
+            float minLocalX = Mathf.Clamp(_zoomCam.transform.localPosition.x, colCenter.x - colExtents.x, colCenter.x + colExtents.x);
+            float minLocalY = Mathf.Clamp(_zoomCam.transform.localPosition.y, colCenter.y - colExtents.y, colCenter.y + colExtents.y);
+            float minLocalZ = Mathf.Clamp(_zoomCam.transform.localPosition.z, colCenter.z - colExtents.z, colCenter.z + colExtents.z);
 
-            }
-            else if (newPosWithoutZ.x >= colMax.x ||
-                newPosWithoutZ.y >= colMax.y)
-            {
-                _zoomCam.transform.Translate(-dir * Time.deltaTime * speed);
-            }
+            _zoomCam.transform.position = new Vector3(minLocalX, minLocalY, minLocalZ) + _col.transform.forward *_dis ;
+            
+            _zoomCam.transform.Translate(dir * Time.deltaTime * speed, Space.Self);
+
+
 
             yield return null;
         }
+
+
 
     }
 }

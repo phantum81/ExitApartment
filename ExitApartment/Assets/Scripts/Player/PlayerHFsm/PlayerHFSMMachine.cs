@@ -9,6 +9,7 @@ public class PlayerHFSMMachine : MonoBehaviour
 
     private InputManager inputMgr;
     private EventManager eventMgr;
+    private CameraManager cameraMgr;
     private PlayerController playerCtr;
     
     void Start()
@@ -19,7 +20,8 @@ public class PlayerHFSMMachine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(eventMgr.eStageState == EstageEventState.None)
+
+        if(cameraMgr.CurCamera == cameraMgr.CameraDic[0] && eventMgr.eStageState == EstageEventState.None)
         {
             if (inputMgr.InputDir != Vector3.zero)
             {
@@ -50,11 +52,11 @@ public class PlayerHFSMMachine : MonoBehaviour
         
         inputMgr = GameManager.Instance.inputMgr;
         playerCtr = GameManager.Instance.unitMgr.PlayerCtr;
-        MoveHFSM = HFSM<EplayerMoveState, PlayerController>.Instance;
-        
-        
-
+        cameraMgr = GameManager.Instance.cameraMgr;
         eventMgr = GameManager.Instance.eventMgr;
+        MoveHFSM = HFSM<EplayerMoveState, PlayerController>.Instance;
+
+
         MoveHFSM.ChangeState(EplayerMoveState.None, playerCtr);
         
     }

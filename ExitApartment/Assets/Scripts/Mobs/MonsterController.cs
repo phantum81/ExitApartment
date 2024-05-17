@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class MonsterController : MonoBehaviour
 {
-    // Start is called before the first frame update
+    
+    
+
     void Start()
     {
         
@@ -15,4 +17,7 @@ public class MonsterController : MonoBehaviour
     {
         
     }
+
+
+
 }

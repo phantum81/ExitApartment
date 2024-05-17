@@ -7,6 +7,10 @@ public class InGameUiController : MonoBehaviour
     [SerializeField]
     private InGameUiShower inGameShower; 
     public InGameUiShower InGameUiShower => inGameShower;
+
+    
+
+
     void Start()
     {
         

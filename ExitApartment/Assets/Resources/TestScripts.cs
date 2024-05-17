@@ -42,7 +42,7 @@ public class TestScripts : MonoBehaviour, IInteraction
                         GameManager.Instance.unitMgr.floorList[1].SetActive(true);
                 }
                 break;
-            case ETestFloor.Nothing:
+            case ETestFloor.None:
                 for (int i = 0; i < GameManager.Instance.unitMgr.floorList.Count; i++)
                 {
                     if (i != 2)

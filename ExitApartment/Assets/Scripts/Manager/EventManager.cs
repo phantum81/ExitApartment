@@ -11,6 +11,8 @@ public class EventManager : MonoBehaviour
     public EstageEventState eStageState = EstageEventState.None;
     public ESOEventType eCurEvent = ESOEventType.OnGravity;
 
+
+
     [SerializeField]
     private PlayerStateHFSMMachine playerStateHFSM;
 
@@ -63,6 +65,9 @@ public class EventManager : MonoBehaviour
             case 2:
                 eCurEvent = ESOEventType.OnClear12F;
                 break;
+            //case 3:
+            //    eCurEvent= ESOEventType.OnHomeTrap;
+            //    break;
 
 
         }
@@ -78,4 +83,6 @@ public class EventManager : MonoBehaviour
     {
         return playerStateHFSM.EPlayerCurState;
     }
+
+
 }

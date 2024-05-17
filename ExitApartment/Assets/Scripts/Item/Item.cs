@@ -8,10 +8,19 @@ public class Item : MonoBehaviour, IInteraction, IUseItem, IGravityChange
     protected List<Material> curMaterial = new List<Material>();
     protected Rigidbody rigd;
 
+    [Header("아이템 데이터"),SerializeField]
+    protected ItemData soItemData;
+    public ItemData SOItemData => soItemData;
 
+
+
+    [Header("아이템 타입"),SerializeField]
+    protected EItemType eItemType;
+    public EItemType EItemType => eItemType;
 
     public virtual void Init()
     {
+        
         GameManager.Instance.itemMgr.InitInteractionItem(ref curMaterial, ref originColor, transform);
         rigd = GetComponent<Rigidbody>();
     }
