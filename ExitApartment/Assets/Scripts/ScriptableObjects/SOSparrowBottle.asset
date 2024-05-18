@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: SOSparrowBottle
   m_EditorClassIdentifier: 
   itemName: SparrowBottle
+  itemImage: {fileID: 21300000, guid: daa383bcf06e4a247be052265c91ca7d, type: 3}

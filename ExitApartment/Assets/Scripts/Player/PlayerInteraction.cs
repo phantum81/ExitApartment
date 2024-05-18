@@ -15,12 +15,14 @@ public class PlayerInteraction : MonoBehaviour
     private CameraManager cameraMgr;
     private PlayerController playerCtr;
     private InputManager inputMgr;
+    private PlayerInventory playerInven;
     private RaycastHit preHit;
 
 
 
     void Start()
     {
+        playerInven = gameObject.GetComponent<PlayerInventory>();
         cameraMgr = GameManager.Instance.cameraMgr;
         playerCtr = gameObject.GetComponent<PlayerController>();
         inputMgr = GameManager.Instance.inputMgr;
@@ -49,15 +51,15 @@ public class PlayerInteraction : MonoBehaviour
         }
 
 
-        if(playerCtr.CurItem != null)
+        if(playerInven.CurItem != null)
         {
             if (inputMgr.InputDic[EuserAction.UseItem])
             {
-                playerCtr.CurItem.GetComponent<IUseItem>()?.OnUseItem();
+                playerInven.CurItem.GetComponent<IUseItem>()?.OnUseItem();
             }
             if (inputMgr.InputDic[EuserAction.Throw])
             {
-                playerCtr.CurItem.GetComponent<IUseItem>()?.OnThrowItem();
+                playerInven.CurItem.GetComponent<IUseItem>()?.OnThrowItem();
             }
         }
 

@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UIElements;
+using static UnityEngine.GraphicsBuffer;
 
 public class PlayerController : MonoBehaviour
 {
@@ -25,22 +26,21 @@ public class PlayerController : MonoBehaviour
     private float rotateY = 0f;
     //-----------이동관련---------------------------------
 
+
     
-
-
+    private PlayerInventory playerInven;
     private InputManager inputMgr;
     private CameraManager cameraMgr;
     private UnitManager unitMgr;
 
+
     
 
-    private Transform curItem;
-    public Transform CurItem => curItem;
 
 
 
-    [Header("주운 아이템 위치"),SerializeField]
-    private Transform pickTransform;
+
+
 
     private EplayerState ePlayerState = EplayerState.None;
 
@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour
         inputMgr = GameManager.Instance.inputMgr;
         cameraMgr = GameManager.Instance.cameraMgr;
         unitMgr = GameManager.Instance.unitMgr;
+        playerInven = gameObject.GetComponent<PlayerInventory>();
 
     }
 
@@ -88,29 +89,41 @@ public class PlayerController : MonoBehaviour
     #region 플레이어 특정움직임
 
 
-    public void PickItem(Transform _target, Vector3 _angle)
+    public void PickItem(Transform _target, Vector3 _angle, ItemData _data)
     {
-        if(curItem == null)
+        if(UiManager.Instance.inGameCtr.InvenCtr.CheckInventoryEmpty() || playerInven.CurItem ==null)
         {
-            
-            curItem = _target;
-            _target.parent = pickTransform;
-            _target.transform.localPosition = new Vector3(0f,0f,0f);
-            _target.localRotation = Quaternion.Euler(_angle);
-            _target.GetComponent<Rigidbody>().useGravity = false;
-            _target.GetComponent<Rigidbody>().isKinematic = true;
-            _target.GetComponent<Collider>().enabled = false;
-
-            
-            
+            playerInven.CurItem = _target;
+            playerInven.InventoryItemList.Add(_target.gameObject);
+            UiManager.Instance.inGameCtr.InvenCtr.AddItem(_data);
+        }
+        else if(UiManager.Instance.inGameCtr.InvenCtr.CheckInventoryFull())
+        {
+            return;
         }
         else
         {
-            ThrowItem(curItem);
-            PickItem(_target,_angle);
+            
+            playerInven.InventoryItemList.Add(_target.gameObject);
+            UiManager.Instance.inGameCtr.InvenCtr.AddItem(_data);
+            _target.gameObject.SetActive(false);
         }
 
+        AttachItem(_target, _angle);
+
     }
+
+    private void AttachItem(Transform _target, Vector3 _angle)
+    {
+        _target.parent = playerInven.PickTransform;
+        _target.transform.localPosition = new Vector3(0f, 0f, 0f);
+        _target.localRotation = Quaternion.Euler(_angle);
+        _target.GetComponent<Rigidbody>().useGravity = false;
+        _target.GetComponent<Rigidbody>().isKinematic = true;
+        _target.GetComponent<Collider>().enabled = false;
+    }
+
+
     public void ThrowItem(Transform _target)
     {
         Vector3 _dir = transform.forward;
@@ -120,7 +133,9 @@ public class PlayerController : MonoBehaviour
         rd.useGravity = true;
         rd.isKinematic = false;
         rd.AddForce(_dir.normalized * 40f * throwPower * Time.fixedDeltaTime);
-        curItem = null;
+        playerInven.RemoveList(playerInven.CurItem);
+        playerInven.CurItem = null;
+
     }
 
 

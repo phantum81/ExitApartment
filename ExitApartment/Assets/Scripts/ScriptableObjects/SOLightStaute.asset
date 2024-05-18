@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: SOLightStaute
   m_EditorClassIdentifier: 
   itemName: LightStaute
+  itemImage: {fileID: 21300000, guid: 0301d81f19219e04888e55e34f59bec2, type: 3}

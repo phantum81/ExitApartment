@@ -8,7 +8,9 @@ public class InGameUiController : MonoBehaviour
     private InGameUiShower inGameShower; 
     public InGameUiShower InGameUiShower => inGameShower;
 
-    
+    [SerializeField]
+    private InventoryController invenCtr;
+    public InventoryController InvenCtr => invenCtr;
 
 
     void Start()

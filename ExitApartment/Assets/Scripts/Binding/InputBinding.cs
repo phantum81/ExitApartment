@@ -62,6 +62,21 @@ public class InputBinding
         Bind(EuserAction.UseItem, KeyCode.F);
         Bind(EuserAction.Ui_Menu, KeyCode.Escape);
 
+
+        Bind(EuserAction.One, KeyCode.Alpha1);
+        Bind(EuserAction.Two, KeyCode.Alpha2);
+        Bind(EuserAction.Three, KeyCode.Alpha3);
+        Bind(EuserAction.Four, KeyCode.Alpha4);
+        Bind(EuserAction.Five, KeyCode.Alpha5);
+        Bind(EuserAction.Six, KeyCode.Alpha6);
+        Bind(EuserAction.Seven, KeyCode.Alpha7);
+        Bind(EuserAction.Eight, KeyCode.Alpha8);
+        Bind(EuserAction.Nine, KeyCode.Alpha9);
+
+
+
+
+
     }
 
 

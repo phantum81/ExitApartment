@@ -455,6 +455,7 @@
 "Assets/Scripts/Player/PlayerHFsm/PlayerStand.cs"
 "Assets/Scripts/Player/PlayerHFsm/PlayerWalk.cs"
 "Assets/Scripts/Player/PlayerInteraction.cs"
+"Assets/Scripts/Player/PlayerInventory.cs"
 "Assets/Scripts/Player/PlayerPostProcess.cs"
 "Assets/Scripts/Player/PlayerSound.cs"
 "Assets/Scripts/Player/PlayerStateHFsm/PlayerStateDamage.cs"

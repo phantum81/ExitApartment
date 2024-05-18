@@ -8,30 +8,74 @@ public class InventoryController : MonoBehaviour
     private List<Slot> slotList = new List<Slot>();
     public List<Slot> SlotList => slotList;
 
-    private void OnValidate()
+
+    private Slot curSlot;
+
+
+    //private void OnValidate()
+    //{
+    //    if(slotList == null)
+    //    {
+    //        for (int i = 0; i < transform.GetComponentsInChildren<Slot>().Length; i++)
+    //        {
+    //            slotList.Add(transform.GetComponentsInChildren<Slot>()[i]);
+    //        }
+    //    }
+
+    //}
+
+    public void AddItem(ItemData _data)
     {
-        if(slotList == null)
+        if (!CheckInventoryFull())
         {
-            for (int i = 0; i < transform.GetComponentsInChildren<Slot>().Length; i++)
+            for (int i = 0; i < slotList.Count; i++)
             {
-                slotList.Add(transform.GetComponentsInChildren<Slot>()[i]);
+                if (!slotList[i].Data)
+                {
+                    slotList[i].Data = _data;
+                    break;
+                }
             }
         }
 
     }
-    void Start()
+
+    public void RemoveItem(ItemData _data)
     {
-        
+        for (int i = 0; i < slotList.Count; i++)
+        {
+            if(_data == slotList[i].Data)
+            {
+                slotList[i].Data= null;
+                break;
+            }
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
-    public void AddItem()
+
+    public bool CheckInventoryEmpty()
     {
-        //slotList.Add()
+        for(int i =0; i < slotList.Count; i++)
+        {
+            if (slotList[i].Data)
+            {
+                return false;
+            }
+            
+        }
+        return true;
+    }
+    public bool CheckInventoryFull()
+    {
+        for (int i = 0; i < slotList.Count; i++)
+        {
+            if (!slotList[i].Data)
+            {
+                return false;
+            }
+
+        }
+        return true;
     }
 }

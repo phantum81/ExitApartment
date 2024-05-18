@@ -108,6 +108,17 @@ public enum EuserAction
 
     Ui_Menu,
 
+
+    One,
+    Two,
+    Three,
+    Four,
+    Five,
+    Six,
+    Seven,
+    Eight,
+    Nine,
+
 }
 
 

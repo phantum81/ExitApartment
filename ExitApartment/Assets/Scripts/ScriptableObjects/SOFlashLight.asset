@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: SOFlashLight
   m_EditorClassIdentifier: 
   itemName: FlashLight
+  itemImage: {fileID: 21300000, guid: a8a75ba7fe575024d87a9d8301c3bd38, type: 3}

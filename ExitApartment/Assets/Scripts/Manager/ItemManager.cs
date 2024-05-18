@@ -52,9 +52,9 @@ public class ItemManager : MonoBehaviour
         }
     }
 
-    public void PickItem(Transform _target, Vector3 _angle)
+    public void PickItem(Transform _target, Vector3 _angle, ItemData _data)
     {
-        GameManager.Instance.unitMgr.PlayerCtr.PickItem(_target, _angle);
+        GameManager.Instance.unitMgr.PlayerCtr.PickItem(_target, _angle, _data);
     }
 
     public void ThrowItem(Transform _target)

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class Item : MonoBehaviour, IInteraction, IUseItem, IGravityChange
 {
@@ -35,8 +36,8 @@ public class Item : MonoBehaviour, IInteraction, IUseItem, IGravityChange
     }
     public virtual void OnInteraction(Vector3 _angle)
     {
-        GameManager.Instance.itemMgr.PickItem(this.transform, _angle);
-
+        GameManager.Instance.itemMgr.PickItem(this.transform, _angle, soItemData);
+        
     }
     public virtual void OnRayOut()
     {
@@ -56,6 +57,8 @@ public class Item : MonoBehaviour, IInteraction, IUseItem, IGravityChange
     public virtual void OnThrowItem()
     {
         GameManager.Instance.itemMgr.ThrowItem(this.transform);
+        UiManager.Instance.inGameCtr.InvenCtr.RemoveItem(soItemData);
+
     }
 
 
