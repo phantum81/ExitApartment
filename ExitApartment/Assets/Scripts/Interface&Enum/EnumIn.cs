@@ -119,6 +119,9 @@ public enum EuserAction
     Eight,
     Nine,
 
+    Inventory,
+
+
 }
 
 
@@ -158,4 +161,11 @@ public enum EItemType
     LightStatue,
     Water,
     Wine,
+}
+
+
+public enum EUiObjectType
+{
+    Inventory,
+    PickMark,
 }

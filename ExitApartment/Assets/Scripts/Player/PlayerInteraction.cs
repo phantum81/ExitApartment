@@ -13,7 +13,6 @@ public class PlayerInteraction : MonoBehaviour
     private bool isInteraction = false;
     private Color selectColor = Color.green;
     private CameraManager cameraMgr;
-    private PlayerController playerCtr;
     private InputManager inputMgr;
     private PlayerInventory playerInven;
     private RaycastHit preHit;
@@ -23,8 +22,7 @@ public class PlayerInteraction : MonoBehaviour
     void Start()
     {
         playerInven = gameObject.GetComponent<PlayerInventory>();
-        cameraMgr = GameManager.Instance.cameraMgr;
-        playerCtr = gameObject.GetComponent<PlayerController>();
+        cameraMgr = GameManager.Instance.cameraMgr;        
         inputMgr = GameManager.Instance.inputMgr;
     }
 
@@ -82,7 +80,7 @@ public class PlayerInteraction : MonoBehaviour
 
 
         preHit.transform?.GetComponent<IInteraction>().OnRayHit(selectColor);
-        UiManager.Instance.inGameCtr.InGameUiShower.ActivePickUpMark(isInteraction);
+        //UiManager.Instance.ActiveUi(isInteraction , EUiObjectType.PickMark);
 
         if (inputMgr.InputDic[EuserAction.Interaction])
             preHit.transform.GetComponent<IInteraction>()?.OnInteraction(Vector3.zero);
@@ -95,9 +93,13 @@ public class PlayerInteraction : MonoBehaviour
         preHit.transform?.GetComponent<IInteraction>()?.OnRayOut();
         preHit = new RaycastHit();
 
-        UiManager.Instance.inGameCtr.InGameUiShower.ActivePickUpMark(isInteraction);
+        //UiManager.Instance.ActiveUi(isInteraction , EUiObjectType.PickMark);
     }
 
+    public bool CheckInteraction()
+    {
+        return isInteraction;
+    }
 }
 
     

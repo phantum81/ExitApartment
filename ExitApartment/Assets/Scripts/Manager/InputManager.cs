@@ -80,6 +80,7 @@ public class InputManager : MonoBehaviour
         inputDic[EuserAction.Throw] = Input.GetKeyDown(inputbind.BindingDic[EuserAction.Throw]);
         inputDic[EuserAction.UseItem] = Input.GetKeyDown(inputbind.BindingDic[EuserAction.UseItem]);
         inputDic[EuserAction.Ui_Menu] = Input.GetKeyDown(inputbind.BindingDic[EuserAction.Ui_Menu]);
+        inputDic[EuserAction.Inventory] = Input.GetKeyDown(inputbind.BindingDic[EuserAction.Inventory]);
 
         inputDic[EuserAction.One] = Input.GetKeyDown(inputbind.BindingDic[EuserAction.One]);
         inputDic[EuserAction.Two] = Input.GetKeyDown(inputbind.BindingDic[EuserAction.Two]);

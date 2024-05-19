@@ -61,7 +61,7 @@ public class InputBinding
         Bind(EuserAction.Throw, KeyCode.G);
         Bind(EuserAction.UseItem, KeyCode.F);
         Bind(EuserAction.Ui_Menu, KeyCode.Escape);
-
+        Bind(EuserAction.Inventory, KeyCode.I);
 
         Bind(EuserAction.One, KeyCode.Alpha1);
         Bind(EuserAction.Two, KeyCode.Alpha2);
