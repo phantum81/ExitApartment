@@ -21,6 +21,12 @@ public class LightStatueItem : Item
         base.OnInteraction(Vector3.zero);
 
     }
+
+    public override EInteractionType OnGetType()
+    {
+        return EInteractionType.Pick;
+    }
+
     public override void OnRayOut()
     {
         base.OnRayOut();

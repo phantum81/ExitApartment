@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MToon", "MToon.csproj", "{2
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{862F8A5A-EFE8-7D2C-601B-5CBE51016180}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{ACEC196D-AC3D-6D77-9B09-276F6CD906AE}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MToon.Editor", "MToon.Editor.csproj", "{4BCA9BFB-F4FD-6557-73C8-AFBD3AD0A712}"
 EndProject
 Global
@@ -21,6 +23,10 @@ Global
 		{862F8A5A-EFE8-7D2C-601B-5CBE51016180}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{862F8A5A-EFE8-7D2C-601B-5CBE51016180}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{862F8A5A-EFE8-7D2C-601B-5CBE51016180}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACEC196D-AC3D-6D77-9B09-276F6CD906AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACEC196D-AC3D-6D77-9B09-276F6CD906AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACEC196D-AC3D-6D77-9B09-276F6CD906AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACEC196D-AC3D-6D77-9B09-276F6CD906AE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4BCA9BFB-F4FD-6557-73C8-AFBD3AD0A712}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4BCA9BFB-F4FD-6557-73C8-AFBD3AD0A712}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4BCA9BFB-F4FD-6557-73C8-AFBD3AD0A712}.Release|Any CPU.ActiveCfg = Release|Any CPU

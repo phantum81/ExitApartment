@@ -27,7 +27,10 @@ public class ZoomableItem : MonoBehaviour, IInteraction
     {
         GameManager.Instance.ZoomCamera(GameManager.Instance.cameraMgr.CameraDic[2], GameManager.Instance.cameraMgr.CameraDic[0] , ray_collider, zoomValue);
     }
-
+    public virtual EInteractionType OnGetType()
+    {
+        return EInteractionType.See;
+    }
     public void OnRayOut()
     {
 

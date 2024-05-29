@@ -63,4 +63,6 @@ public class GameManager : MonoBehaviour
         cameraMgr.ZoomCamera.StartCoroutine(cameraMgr.ZoomCamera.ZoomMove(_zoomCam, _col, _dis));
     }
 
+    
+
 }

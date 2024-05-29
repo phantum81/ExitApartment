@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class UnitManager : MonoBehaviour
@@ -11,17 +12,52 @@ public class UnitManager : MonoBehaviour
     private ElevatorController elevatorCtr;
     public ElevatorController ElevatorCtr => elevatorCtr;
 
+    [Header("에너미 컨트롤러"), SerializeField]
+    private MonsterController mobCtr;
+    public MonsterController MobCtr => mobCtr;
+
+
+
     [Header("충돌한 에너미 타겟"), SerializeField]
     private Transform contectTarget;
     public Transform ContectTarget => contectTarget;
 
     public List<GameObject> floorList;
 
+    
+
+
     private Vector3 reserveGravity = new Vector3(0, 0, 1f);
     public Vector3 ReserveGravity => reserveGravity;
 
+    /// <summary>
+    /// 임시
+    /// </summary>
+
+
+    [Header("몹 리스트"), SerializeField]
+    private List<GameObject> mobList = new List<GameObject>();
+    [Header("쪽지 리스트"), SerializeField]
+    private List<GameObject> PaperList = new List<GameObject>();
+
+    private Dictionary<EMobType, GameObject> mobDic = new Dictionary<EMobType, GameObject>();
+    public Dictionary<EMobType, GameObject> MobDic => mobDic;
+
+    private Dictionary<ENoteType, GameObject> notePaperDic = new Dictionary<ENoteType, GameObject>();
+    public Dictionary<ENoteType, GameObject> NotePaperDic => notePaperDic;
+
+
+    private void Awake()
+    {
+        mobDic.Add(EMobType.Mob12F, mobList[0]);
+        mobDic.Add(EMobType.Pumpkin, mobList[1]);
+        notePaperDic.Add(ENoteType.Pumpkin, PaperList[0]);
+    }
     void Start()
     {
+        
+
+
         reserveGravity.Normalize();
         playerCtr.Init();
     }
@@ -62,10 +98,12 @@ public class UnitManager : MonoBehaviour
     }
 
 
-    public void ShowMob(Transform _enemy, bool _bool)
+    public void ShowObject(Transform _obj, bool _bool)
     {
-        _enemy.gameObject.SetActive(_bool);
+        _obj.gameObject.SetActive(_bool);
     }
+
+
 
 
 

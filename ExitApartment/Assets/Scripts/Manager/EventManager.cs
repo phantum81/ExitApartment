@@ -16,6 +16,8 @@ public class EventManager : MonoBehaviour
     [SerializeField]
     private PlayerStateHFSMMachine playerStateHFSM;
 
+    private bool isPumpkinEvent = false;
+    
     private void Awake()
     {
     }
@@ -27,7 +29,7 @@ public class EventManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     /// <summary>
@@ -84,5 +86,13 @@ public class EventManager : MonoBehaviour
         return playerStateHFSM.EPlayerCurState;
     }
 
+   public void SetIsPumpkinEvent(bool _bool)
+   {
+        isPumpkinEvent = _bool;
+   }
 
+   public bool GetIsPumpkinEvent()
+   {
+        return isPumpkinEvent;
+   }
 }

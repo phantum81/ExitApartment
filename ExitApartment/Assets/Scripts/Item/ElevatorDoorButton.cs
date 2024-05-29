@@ -48,6 +48,12 @@ public class ElevatorDoorButton : MonoBehaviour, IInteraction
         }
 
     }
+
+    public EInteractionType OnGetType()
+    {
+        return EInteractionType.Press;
+    }
+
     public void OnRayOut()
     {
         for (int i = 0; i < curMaterial.Count; i++)

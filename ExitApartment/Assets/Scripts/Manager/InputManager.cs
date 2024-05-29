@@ -14,9 +14,9 @@ public class InputManager : MonoBehaviour
     public Vector3 CameraInputDir => cameraInputDir;
 
 
-    private InputBinding inputbind =new InputBinding();
+    private InputBinding inputBind =new InputBinding();
 
-    public InputBinding Inputbind => inputbind;
+    public InputBinding Inputbind => inputBind;
 
     private Dictionary<EuserAction, bool> inputDic = new Dictionary<EuserAction, bool>();
     public Dictionary<EuserAction, bool> InputDic => inputDic;
@@ -71,25 +71,25 @@ public class InputManager : MonoBehaviour
 
     public void CheckInputKeys()
     {
-        inputDic[EuserAction.MoveForward] = Input.GetKey(inputbind.BindingDic[EuserAction.MoveForward]);
-        inputDic[EuserAction.MoveBackward] = Input.GetKey(inputbind.BindingDic[EuserAction.MoveBackward]);
-        inputDic[EuserAction.MoveRight] = Input.GetKey(inputbind.BindingDic[EuserAction.MoveRight]);
-        inputDic[EuserAction.MoveLeft] = Input.GetKey(inputbind.BindingDic[EuserAction.MoveLeft]);
-        inputDic[EuserAction.Run] = Input.GetKey(inputbind.BindingDic[EuserAction.Run]);
-        inputDic[EuserAction.Interaction] = Input.GetKeyDown(inputbind.BindingDic[EuserAction.Interaction]);
-        inputDic[EuserAction.Throw] = Input.GetKeyDown(inputbind.BindingDic[EuserAction.Throw]);
-        inputDic[EuserAction.UseItem] = Input.GetKeyDown(inputbind.BindingDic[EuserAction.UseItem]);
-        inputDic[EuserAction.Ui_Menu] = Input.GetKeyDown(inputbind.BindingDic[EuserAction.Ui_Menu]);
-        inputDic[EuserAction.Inventory] = Input.GetKeyDown(inputbind.BindingDic[EuserAction.Inventory]);
+        inputDic[EuserAction.MoveForward] = Input.GetKey(inputBind.BindingDic[EuserAction.MoveForward]);
+        inputDic[EuserAction.MoveBackward] = Input.GetKey(inputBind.BindingDic[EuserAction.MoveBackward]);
+        inputDic[EuserAction.MoveRight] = Input.GetKey(inputBind.BindingDic[EuserAction.MoveRight]);
+        inputDic[EuserAction.MoveLeft] = Input.GetKey(inputBind.BindingDic[EuserAction.MoveLeft]);
+        inputDic[EuserAction.Run] = Input.GetKey(inputBind.BindingDic[EuserAction.Run]);
+        inputDic[EuserAction.Interaction] = Input.GetKeyDown(inputBind.BindingDic[EuserAction.Interaction]);
+        inputDic[EuserAction.Throw] = Input.GetKeyDown(inputBind.BindingDic[EuserAction.Throw]);
+        inputDic[EuserAction.UseItem] = Input.GetKeyDown(inputBind.BindingDic[EuserAction.UseItem]);
+        inputDic[EuserAction.Ui_Menu] = Input.GetKeyDown(inputBind.BindingDic[EuserAction.Ui_Menu]);
+        inputDic[EuserAction.Inventory] = Input.GetKeyDown(inputBind.BindingDic[EuserAction.Inventory]);
 
-        inputDic[EuserAction.One] = Input.GetKeyDown(inputbind.BindingDic[EuserAction.One]);
-        inputDic[EuserAction.Two] = Input.GetKeyDown(inputbind.BindingDic[EuserAction.Two]);
-        inputDic[EuserAction.Three] = Input.GetKeyDown(inputbind.BindingDic[EuserAction.Three]);
-        inputDic[EuserAction.Four] = Input.GetKeyDown(inputbind.BindingDic[EuserAction.Four]);
-        inputDic[EuserAction.Five] = Input.GetKeyDown(inputbind.BindingDic[EuserAction.Five]);
-        inputDic[EuserAction.Six] = Input.GetKeyDown(inputbind.BindingDic[EuserAction.Six]);
-        inputDic[EuserAction.Seven] = Input.GetKeyDown(inputbind.BindingDic[EuserAction.Seven]);
-        inputDic[EuserAction.Eight] = Input.GetKeyDown(inputbind.BindingDic[EuserAction.Eight]);
-        inputDic[EuserAction.Nine] = Input.GetKeyDown(inputbind.BindingDic[EuserAction.Nine]);
+        inputDic[EuserAction.One] = Input.GetKeyDown(inputBind.BindingDic[EuserAction.One]);
+        inputDic[EuserAction.Two] = Input.GetKeyDown(inputBind.BindingDic[EuserAction.Two]);
+        inputDic[EuserAction.Three] = Input.GetKeyDown(inputBind.BindingDic[EuserAction.Three]);
+        inputDic[EuserAction.Four] = Input.GetKeyDown(inputBind.BindingDic[EuserAction.Four]);
+        inputDic[EuserAction.Five] = Input.GetKeyDown(inputBind.BindingDic[EuserAction.Five]);
+        inputDic[EuserAction.Six] = Input.GetKeyDown(inputBind.BindingDic[EuserAction.Six]);
+        inputDic[EuserAction.Seven] = Input.GetKeyDown(inputBind.BindingDic[EuserAction.Seven]);
+        inputDic[EuserAction.Eight] = Input.GetKeyDown(inputBind.BindingDic[EuserAction.Eight]);
+        inputDic[EuserAction.Nine] = Input.GetKeyDown(inputBind.BindingDic[EuserAction.Nine]);
     }
 }

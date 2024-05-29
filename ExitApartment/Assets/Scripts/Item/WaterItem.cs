@@ -31,7 +31,10 @@ public class WaterItem : Item
     {
         base.OnThrowItem();
     }
-
+    public override EInteractionType OnGetType()
+    {
+        return EInteractionType.Pick;
+    }
 
     public override void OnGravityChange()
     {

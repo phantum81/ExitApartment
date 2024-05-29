@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.UIElements;
@@ -28,12 +29,13 @@ public class CameraManager : MonoBehaviour
 
 
 
+
+
     private Dictionary<int, Camera> camDic= new Dictionary<int, Camera>();
     /// <summary>
     /// 0: ¸ÞÀÎÄ· 1: 12fÄ· 2: ÁÜ Ä· 3: ui Ä·
     /// </summary>
     public Dictionary<int, Camera> CameraDic => camDic;
-
 
 
     [SerializeField]
@@ -78,6 +80,7 @@ public class CameraManager : MonoBehaviour
                 ChangeCamera(camDic[1]);
                 break;
         }
+
 
     }
 
@@ -125,7 +128,20 @@ public class CameraManager : MonoBehaviour
         
     }
 
+    
+    public bool CheckObjectInCamera(GameObject _target)
+    {
+        if (_target.transform.parent.gameObject.activeSelf)
+        {
+            Vector3 screenPoint = CurCamera.WorldToViewportPoint(_target.transform.position);
+            bool isIn = screenPoint.z > 0 && screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1;
+            return isIn;
+        }
+        return false;
 
+
+
+    }
 
 
 }

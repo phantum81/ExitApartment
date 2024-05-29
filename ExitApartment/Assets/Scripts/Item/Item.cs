@@ -61,6 +61,10 @@ public class Item : MonoBehaviour, IInteraction, IUseItem, IGravityChange
 
     }
 
+    public virtual EInteractionType OnGetType()
+    {
+        return EInteractionType.Press;
+    }
 
     public virtual void OnGravityChange()
     {

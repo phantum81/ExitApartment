@@ -15,7 +15,15 @@ public class PlayerStateHFSMMachine : MonoBehaviour
 
     private EplayerState ePlayerCurState;
     public EplayerState EPlayerCurState => ePlayerCurState;
-    
+
+    private float limitTime = 3f;
+    private float curTime = 0f;
+
+
+    private CameraManager cameraMgr;
+    private UnitManager unitMgr;
+
+    private GameObject seePoint;
 
     void Start()
     {
@@ -24,9 +32,30 @@ public class PlayerStateHFSMMachine : MonoBehaviour
 
     private void Update()
     {
+        
         statePostHFSM.Update(playerPost);
         stateDeadCamHFSM.Update(deadCamCtr);
         ePlayerCurState = statePostHFSM.CurState;
+
+
+        if (curTime > limitTime)
+        {
+            ChangePlayerState(EplayerState.Die);
+        }
+
+
+        if (cameraMgr.CheckObjectInCamera(seePoint))
+        {
+            ChangePlayerState(EplayerState.MentalDamage);
+            curTime += Time.deltaTime;
+        }
+        else
+            curTime = 0f;
+
+
+
+
+
     }
 
 
@@ -42,12 +71,15 @@ public class PlayerStateHFSMMachine : MonoBehaviour
         stateDeadCamHFSM.ChangeState(EplayerState.None, deadCamCtr);
 
         playerPost = transform.GetComponent<PlayerPostProcess>();
-
-
+        cameraMgr = GameManager.Instance.cameraMgr;
+        unitMgr = GameManager.Instance.unitMgr;
+        seePoint = unitMgr.MobDic[EMobType.Pumpkin].GetComponent<Pumpkin>().SeePoint;
     }
     public void ChangePlayerState(EplayerState _state)
     {
         statePostHFSM.ChangeState(_state, playerPost);
         stateDeadCamHFSM.ChangeState(_state, deadCamCtr);
     }
+
+
 }

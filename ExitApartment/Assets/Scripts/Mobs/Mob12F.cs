@@ -8,8 +8,10 @@ public class Mob12F : MonoBehaviour, IEnemyContect
 
     private Transform target;
     private EenemyState eEnemyState = EenemyState.None;
+    private EMobType eMobType = EMobType.Mob12F;
     private EventManager eventMgr;
     private float chaseLimit = 3f;
+
     void Start()
     {
         eventMgr = GameManager.Instance.eventMgr;

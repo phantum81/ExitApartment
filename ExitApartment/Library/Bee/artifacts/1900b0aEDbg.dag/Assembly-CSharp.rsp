@@ -471,6 +471,7 @@
 "Assets/Scripts/Ui/InGameUiShower.cs"
 "Assets/Scripts/Ui/Inventory/InventoryController.cs"
 "Assets/Scripts/Ui/Inventory/Slot.cs"
+"Assets/Scripts/Ui/ItemDragHandler.cs"
 -langversion:9.0
 
 /deterministic

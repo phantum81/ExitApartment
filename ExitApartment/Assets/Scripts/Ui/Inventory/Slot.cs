@@ -8,6 +8,7 @@ public class Slot : MonoBehaviour
 {
     [SerializeField]
     Image image;
+
     [SerializeField]
     private ItemData data;
     public ItemData Data 

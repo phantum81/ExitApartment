@@ -11,6 +11,8 @@ public class TrapDoor : ZoomableItem
     public UnityEvent<Transform, bool> onShowPumpkin;
     [Header("º¸¿©ÁÙ Å¸°Ù"),SerializeField]
     private Transform showTarget;
+
+    
     private float trapCount = 0;
     public float TrapCount => trapCount;
     
@@ -30,16 +32,20 @@ public class TrapDoor : ZoomableItem
         else if(trapCount == 2)
         {
             onShowPumpkin.Invoke(showTarget, true);
-            GameManager.Instance.eventMgr.ChangePlayerState(EplayerState.MentalDamage);
+            
         }
         else if(trapCount == 3)
         {
             onTrapDoor.Invoke(false);
             onShowPumpkin.Invoke(showTarget, false);
-            
+            GameManager.Instance.eventMgr.SetIsPumpkinEvent(true);
         }
 
         trapCount++;
     }
-    
+    public override EInteractionType OnGetType()
+    {
+        return base.OnGetType();
+    }
+
 }

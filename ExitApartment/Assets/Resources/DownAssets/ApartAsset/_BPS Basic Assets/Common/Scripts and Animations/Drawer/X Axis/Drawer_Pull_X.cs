@@ -51,6 +51,15 @@ namespace SojaExiles
             }
         }
 
+        public EInteractionType OnGetType()
+        {
+            if(isOpen)
+                return EInteractionType.Close;
+            else 
+                return EInteractionType.Open;
+            
+        }
+
         public void OnRayOut()
         {
 

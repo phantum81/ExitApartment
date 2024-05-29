@@ -24,6 +24,10 @@ public class ItemTrigger : MonoBehaviour, IInteraction
         
 
     }
+    public EInteractionType OnGetType()
+    {
+        return EInteractionType.Find;
+    }
     public void OnRayOut()
     {
         

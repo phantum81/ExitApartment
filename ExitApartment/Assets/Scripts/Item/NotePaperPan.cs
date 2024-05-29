@@ -15,4 +15,8 @@ public class NotePaperPan : ZoomableItem
         base.OnInteraction(_angle);
         GameManager.Instance.ZoomMove(GameManager.Instance.cameraMgr.CameraDic[2], limitCol, zoomValue);
     }
+    public override EInteractionType OnGetType()
+    {
+        return base.OnGetType();
+    }
 }

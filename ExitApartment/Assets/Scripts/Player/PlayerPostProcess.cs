@@ -21,6 +21,8 @@ public class PlayerPostProcess : MonoBehaviour
     public List<Coroutine> CurCoroutine => curCoroutine;
 
 
+
+
     public void InitPostProcess()
     {
         StopAllCoroutinesInList();

@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerStateDie<T> : IState<T> where T : MonoBehaviour
 {
+
     public void OperateEnter(T _send)
     {
         if (_send is PlayerPostProcess)

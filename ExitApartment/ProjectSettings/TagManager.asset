@@ -7,6 +7,7 @@ TagManager:
   - door
   - FloorPan
   - Iinteraction
+  - UiCanvas
   layers:
   - Default
   - TransparentFX

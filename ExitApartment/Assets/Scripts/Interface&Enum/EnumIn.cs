@@ -18,17 +18,12 @@ public enum EplayerMoveState
 public enum EenemyState
 {
     None,
+    Idle,
     Patrol,
     Chase,
+    Attack,
 }
 
-
-public enum EItemInteraction
-{
-    None,
-    On,
-
-};
 
 public enum EElevatorButtonType
 {
@@ -144,12 +139,13 @@ public enum ETestFloor
 }
 
 
-
-public enum EZoomType
+public enum EMobType
 {
-    Item,
-    HomeTrapDoor,
+    Mob12F,
+    Pumpkin,
+
 }
+
 
 
 public enum EItemType
@@ -168,4 +164,23 @@ public enum EUiObjectType
 {
     Inventory,
     PickMark,
+}
+
+public enum ENoteType
+{
+    Pumpkin,
+
+}
+
+public enum EInteractionType
+{
+    Pick,
+    See,
+    Use,
+    Find,
+    Pull,
+    Push,
+    Open,
+    Close,
+    Press,
 }

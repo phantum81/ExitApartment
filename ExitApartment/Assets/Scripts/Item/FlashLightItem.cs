@@ -26,6 +26,10 @@ public class FlashLightItem : Item
         base.OnInteraction(new Vector3(90f,0f,0f));
 
     }
+    public override EInteractionType OnGetType()
+    {
+        return EInteractionType.Pick;
+    }
     public override void OnRayOut()
     {
         base.OnRayOut();

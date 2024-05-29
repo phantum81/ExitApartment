@@ -23,10 +23,12 @@ public class PlayerStateMentalDamage<T> : IState<T> where T : MonoBehaviour
             GameManager.Instance.eventMgr.ChangePlayerState(EplayerState.None);
             m_damageTime= 0f;
         }
+
     }
 
     public void OperateExit(T _send)
     {
 
     }
+
 }

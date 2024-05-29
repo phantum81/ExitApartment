@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -10,12 +11,7 @@ public class CameraController : MonoBehaviour
 {
     
     private Vector3 InGameCameraPos;
-    [Header("카메라Z오프셋"),SerializeField]
-    private float offSetZ = 2f;
-    [Header("카메라X오프셋"), SerializeField]
-    private float offSetX = 2f;
-    [Header("카메라Y오프셋"),SerializeField]
-    private float offSetY = 1f;
+
     [Header("민감도"),SerializeField]
     private float sensitivity = 2f;
     public float Sensitivity => sensitivity;
@@ -35,6 +31,14 @@ public class CameraController : MonoBehaviour
 
     [Space, Header("타겟"),SerializeField]
     private Transform target;
+    [Header("타겟 머리 위치"), SerializeField]
+    private Transform target_head;
+
+
+    [Header("멘탈공격 몹"), SerializeField]
+    private GameObject mentalMob;
+    
+
 
     private Camera main_cam;
     private CameraManager cameraMgr;
@@ -46,31 +50,35 @@ public class CameraController : MonoBehaviour
 
     Vector3 shakeDir = new Vector3(30f,60f,40f);
 
-
-    private float _w_speed = 8f;
+    [Header("걷는 카메라 흔들림 속도"),SerializeField]
+    private float _w_speed = 9f;
     public float W_speed => _w_speed;
 
-    private float _r_speed = 12f;
+    [Header("달리는 카메라 흔들림 속도"),SerializeField]
+    private float _r_speed = 14f;
     public float R_speed => _r_speed;
 
+    [Header("서있는 카메라 흔들림 속도"),SerializeField]
     private float _s_speed = 5f;
     public float S_speed => _s_speed;
 
-
-    private float _w_shake = 0.0005f;
+    [Header("걷는 흔들림 정도"),SerializeField]
+    private float _w_shake = 0.0007f;
     public float W_shake => _w_shake;
 
-    private float _r_shake = 0.0007f;
+    [Header("달리는 흔들림 정도"),SerializeField]
+    private float _r_shake = 0.0009f;
     public float R_shake => _r_shake;
 
-    private float _s_shake = 0.00005f;
+    [Header("서있는 흔들림 정도"),SerializeField]
+    private float _s_shake = 0.00006f;
     public float S_shake => _s_shake;
-
+    private Vector3 _velocity = Vector3.zero;
     #region 유니티 실행부
 
     void Start()
     {
-        InGameCameraPos = new Vector3(target.position.x+ offSetX, transform.position.y, target.position.z + offSetZ);
+        InGameCameraPos = new Vector3(target.position.x, transform.position.y, target.position.z);
         main_cam = gameObject.GetComponent<Camera>();
         inputMgr = GameManager.Instance.inputMgr;
         cameraMgr = GameManager.Instance.cameraMgr;
@@ -110,7 +118,7 @@ public class CameraController : MonoBehaviour
                 break;
         }
 
-
+        
 
 
     }
@@ -130,7 +138,8 @@ public class CameraController : MonoBehaviour
     public void FollowCamera(Camera _cam,Transform _target, float _speed, float _shake, int _version)
     {
         
-        Vector3 v = new Vector3(_target.position.x+ offSetX, _cam.transform.position.y, _target.position.z + offSetZ);
+        Vector3 v = new Vector3(_target.position.x, _cam.transform.position.y, _target.position.z);
+        Vector3 y = target_head.position;
         //v.y += 0.0002f / (2f * Mathf.PI / 4f) * Mathf.Sin(Time.time * 4f); 
 
         switch( _version )
@@ -140,8 +149,12 @@ public class CameraController : MonoBehaviour
                 _cam.transform.position = v;
                 break;
             case 1:
-                v.y += _shake / (2f * Mathf.PI / _speed) * Mathf.Sin(Time.time * _speed);
-                _cam.transform.position = v;
+                y.y += _shake / (2f * Mathf.PI / _speed) * Mathf.Sin(Time.time * _speed);
+                target_head.transform.position = y;
+                Vector3 newCameraPosition = new Vector3(v.x, target_head.position.y, v.z);
+
+                _cam.transform.position = Vector3.SmoothDamp(_cam.transform.position, newCameraPosition, ref _velocity, 0.1f);
+                //_cam.transform.position = new Vector3(v.x, target_head.position.y, v.z);
                 break;
             case 2:
                 v.z += _shake / (2f * Mathf.PI / _speed) * Mathf.Sin(Time.time * _speed);
@@ -168,7 +181,7 @@ public class CameraController : MonoBehaviour
     public void CheckWall()
     {   
         
-        Vector3 v = new Vector3(target.position.x, target.position.y+offSetY, target.position.z + offSetZ);
+        Vector3 v = new Vector3(target.position.x, target.position.y, target.position.z);
         int layerMask = (1 << 7); 
         layerMask = ~layerMask;
 

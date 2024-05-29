@@ -2,11 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InGameUiShower : MonoBehaviour
 {
-    [Header("픽 마크"),SerializeField]
+    [Header("상호작용 마크"),SerializeField]
     private GameObject pickMark;
+    [Header("상호작용 텍스트"), SerializeField]
+    private TextMeshProUGUI interactionTxt;
+
     [Header("인벤토리 창"), SerializeField]
     private GameObject inventoryPan;
     [Header("층 입력 텍스트"), SerializeField]
@@ -15,8 +19,10 @@ public class InGameUiShower : MonoBehaviour
     private TextMeshPro curFloor_txt;
 
     private InputManager inputMgr;
-   
+    string interactionAction;
     private PlayerInteraction playerInteraction;
+
+    private EInteractionType hitType;
     void Start()
     {
         playerInteraction = GameManager.Instance.unitMgr.PlayerCtr.gameObject.GetComponent<PlayerInteraction>();
@@ -26,13 +32,29 @@ public class InGameUiShower : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+
         if (inputMgr.InputDic[EuserAction.Inventory])
         {            
             ActiveUi(!inventoryPan.activeSelf, inventoryPan);
         }
+
+
+     
+
         if (playerInteraction.CheckInteraction())
         {
             ActiveUi(true, pickMark);
+
+            if (playerInteraction.PreHit)
+            {
+                hitType = playerInteraction.PreHit.GetComponent<IInteraction>().OnGetType();
+                
+                interactionAction = GetInteractionAction(hitType);
+
+                ReWrite(interactionTxt, $"{interactionAction}({inputMgr.Inputbind.BindingDic[EuserAction.Interaction]})");
+            }
+            
         }
         else
         {
@@ -59,6 +81,24 @@ public class InGameUiShower : MonoBehaviour
         curFloor_txt.text = _txt;
     }
 
-    
-    
+    private void ReWrite(TextMeshProUGUI _text, string _main)
+    {
+        _text.text = _main;
+    }
+    string GetInteractionAction(EInteractionType hitType)
+    {
+        return hitType switch
+        {
+            EInteractionType.Pick => "줍기",
+            EInteractionType.See => "보기",
+            EInteractionType.Use => "사용",
+            EInteractionType.Find => "찾다",
+            EInteractionType.Pull => "당기다",
+            EInteractionType.Push => "밀다",
+            EInteractionType.Open => "열다",
+            EInteractionType.Close=> "닫다",
+            EInteractionType.Press => "누르다",
+            _ => "줍기"
+        };
+    }
 }

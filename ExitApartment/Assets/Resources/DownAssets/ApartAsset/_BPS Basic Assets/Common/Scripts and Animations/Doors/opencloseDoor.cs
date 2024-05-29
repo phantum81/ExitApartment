@@ -55,6 +55,15 @@ namespace SojaExiles
 
         }
 
+        public EInteractionType OnGetType()
+        {
+            if (isOpen)
+                return EInteractionType.Close;
+            else
+                return EInteractionType.Open;
+        }
+
+
         IEnumerator opening()
         {
             print("you are opening the door");

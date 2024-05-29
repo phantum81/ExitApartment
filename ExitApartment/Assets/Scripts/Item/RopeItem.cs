@@ -18,7 +18,10 @@ public class RopeItem : Item
         base.OnInteraction(_angle);
 
     }
-
+    public override EInteractionType OnGetType()
+    {
+        return EInteractionType.Pick;
+    }
 
     public override void OnUseItem()
     {

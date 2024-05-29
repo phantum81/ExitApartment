@@ -55,7 +55,10 @@ public class TestScripts : MonoBehaviour, IInteraction
                 break;
         }
     }
-
+    public EInteractionType OnGetType()
+    {
+        return EInteractionType.Press;
+    }
     public void OnRayOut()
     {
 

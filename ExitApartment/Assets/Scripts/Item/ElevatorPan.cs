@@ -24,6 +24,10 @@ public class ElevatorPan : MonoBehaviour, IInteraction
         ElevatorNumData data = GameManager.Instance.itemMgr.ElevatorFloorDic[transform.GetComponentInChildren<ElevatorPan>()];
         UiManager.Instance.inGameCtr.InGameUiShower.RenewWriteFloor(data.Num);
     }
+    public EInteractionType OnGetType()
+    {
+        return EInteractionType.Press;
+    }
     public void OnRayOut()
     {
         for(int i = 0; i < curMaterial.Count; i++)

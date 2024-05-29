@@ -44,7 +44,7 @@ public class BlinkLight : MonoBehaviour
         }
     }
 
-    IEnumerator  Blink()
+    IEnumerator Blink()
     {
         if(transLight != null)
         {

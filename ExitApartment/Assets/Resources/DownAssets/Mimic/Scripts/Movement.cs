@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace MimicSpace
@@ -39,14 +40,14 @@ namespace MimicSpace
         [Header("이동루트2"), SerializeField]
         private Transform route2;
 
-
-        
-
+        private UnitManager unitMgr;
         private void Start()
         {
-           
+            unitMgr = GameManager.Instance.unitMgr;
             
         }
+
+
 
 
 
@@ -57,7 +58,7 @@ namespace MimicSpace
             yield return new WaitForSeconds(15f);
             while (Vector3.Distance(transform.position, onDeadCam.transform.position) > validDis)
             {
-                ChaseTarget(transform, onDeadCam.transform, velocityLerpCoef);
+                unitMgr.MobCtr.ChaseTarget(transform, onDeadCam.transform, velocityLerpCoef, rotSpeed, height, velocityLerpCoef);
                 yield return null;
             }
 
@@ -65,44 +66,45 @@ namespace MimicSpace
 
              
 
-        public void ChaseTarget(Transform _chaser,Transform _target, float _speed )
-        {
-            Vector3 _dir = (_target.position - _chaser.position).normalized;
-            _chaser.rotation = Quaternion.Lerp(_chaser.rotation,Quaternion.LookRotation(_dir),Time.deltaTime* rotSpeed);
-            velocity = _chaser.forward;
+        //public void ChaseTarget(Transform _chaser,Transform _target, float _speed )
+        //{
+        //    Vector3 _dir = (_target.position - _chaser.position).normalized;
+        //    _chaser.rotation = Quaternion.Lerp(_chaser.rotation,Quaternion.LookRotation(_dir),Time.deltaTime* rotSpeed);
+        //    velocity = _chaser.forward;
             
-            _chaser.position = _chaser.position + velocity * Time.deltaTime* _speed;
+        //    _chaser.position = _chaser.position + velocity * Time.deltaTime* _speed;
 
-            RaycastHit hit;
-            Vector3 destHeight = _chaser.position;
+        //    RaycastHit hit;
+        //    Vector3 destHeight = _chaser.position;
 
-            if (Physics.Raycast(_chaser.position + Vector3.up, -Vector3.up, out hit))
-                destHeight = new Vector3(_chaser.position.x, hit.point.y + height, _chaser.position.z);
+        //    if (Physics.Raycast(_chaser.position + Vector3.up, -Vector3.up, out hit))
+        //        destHeight = new Vector3(_chaser.position.x, hit.point.y + height, _chaser.position.z);
 
-            _chaser.position = Vector3.Lerp(_chaser.position, destHeight, velocityLerpCoef * Time.deltaTime);
+        //    _chaser.position = Vector3.Lerp(_chaser.position, destHeight, velocityLerpCoef * Time.deltaTime);
             
-        }
+        //}
+
         IEnumerator Clear12F()
         {
             
             WaitUntil openWait =  new WaitUntil(() => GameManager.Instance.unitMgr.ElevatorCtr.eleWork == EElevatorWork.Opening);
             while (Vector3.Distance(transform.position, route1.position)> validDis)
             {
-                ChaseTarget(transform, route1.transform, speed*2f);
+                unitMgr.MobCtr.ChaseTarget(transform, route1.transform, speed*2f, rotSpeed, height, velocityLerpCoef);
                 yield return null;
             }
             while (true)
             {
                 if(GameManager.Instance.unitMgr.ElevatorCtr.eleWork == EElevatorWork.Opening)
                 {
-                    ChaseTarget(transform, target, speed * 3.5f);
+                    unitMgr.MobCtr.ChaseTarget(transform, target, speed * 3.5f, rotSpeed, height, velocityLerpCoef);
                     if(Vector3.Distance(transform.position, target.position) < playerValidDis)
                         break;
                 }
                 else if (GameManager.Instance.unitMgr.ElevatorCtr.eleWork == EElevatorWork.Closing)
                 {
 
-                    ChaseTarget(transform, route2, speed * 3.5f);
+                    unitMgr.MobCtr.ChaseTarget(transform, route2, speed * 3.5f, rotSpeed, height, velocityLerpCoef);
                     if (Vector3.Distance(transform.position, route2.position) < validDis)
                         yield return openWait;
                 }

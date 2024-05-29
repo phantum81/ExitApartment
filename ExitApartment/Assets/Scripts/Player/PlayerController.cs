@@ -19,15 +19,16 @@ public class PlayerController : MonoBehaviour
     public float RunSpeed => _runSpeed;
     [Header("던지는 힘"), SerializeField]
     private float throwPower = 8f;
-
+    [Header("슬로프 제한"), SerializeField]
+    private float slopLimit = 30f;
 
 
     private Rigidbody rigd;
     private float rotateY = 0f;
     //-----------이동관련---------------------------------
 
-
-    
+    [SerializeField]
+    private PlayerSlopeRay playerSlopRay;
     private PlayerInventory playerInven;
     private InputManager inputMgr;
     private CameraManager cameraMgr;
@@ -35,11 +36,6 @@ public class PlayerController : MonoBehaviour
 
 
     
-
-
-
-
-
 
 
     private EplayerState ePlayerState = EplayerState.None;
@@ -69,11 +65,12 @@ public class PlayerController : MonoBehaviour
         Vector3 right= _inputDir.x * player.right;
         Vector3 foward = _inputDir.z * player.forward;
         Vector3 velocity = (right + foward).normalized;
-        
-        rigd.AddForce(velocity * _speed * Time.deltaTime, ForceMode.VelocityChange);
-        rigd.velocity = Vector3.zero;
-        rigd.angularVelocity = Vector3.zero;
 
+        rigd.AddForce(velocity * _speed * Time.deltaTime, ForceMode.VelocityChange);
+        Vector3 lastVelo = new Vector3(0f, rigd.velocity.y, 0f);
+        Vector3 lastAngular = new Vector3(0f, rigd.angularVelocity.y, 0f);
+        rigd.velocity = lastVelo;
+        rigd.angularVelocity = lastAngular;
         Rotate();
 
     }

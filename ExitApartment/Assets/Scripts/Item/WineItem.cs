@@ -27,6 +27,11 @@ public class WineItem : Item
 
     }
 
+    public override EInteractionType OnGetType()
+    {
+        return EInteractionType.Pick;
+    }
+
     public override void OnThrowItem()
     {
         base.OnThrowItem();

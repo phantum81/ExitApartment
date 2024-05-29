@@ -54,6 +54,8 @@ public interface IInteraction
 
     void OnRayOut();
 
+    EInteractionType OnGetType();
+
 
 }
 
