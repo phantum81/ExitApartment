@@ -9,23 +9,23 @@ public class GameEvent : ScriptableObject
     public List<EventListener> gravityListener = new List<EventListener>();
     public List<EventListener> die12FListener = new List<EventListener>();
     public List<EventListener> alive12FListener = new List<EventListener>();
-    //public List<EventListener> homeTrapListener = new List<EventListener>();
+    public List<EventListener> magicStoneListener = new List<EventListener>();
 
-    //public void HomeTrapRaise()
-    //{
-    //    for (int i = homeTrapListener.Count - 1; i >= 0; i--)
-    //    {
-    //        homeTrapListener[i].OnEventRaise();
-    //    }
-    //}
-    //public void HomeTrapRegisterListener(EventListener _listener)
-    //{
-    //    homeTrapListener.Add(_listener);
-    //}
-    //public void HomeTrapUnregisterListener(EventListener _listener)
-    //{
-    //    homeTrapListener.Remove(_listener);
-    //}
+    public void magicStoneRaise()
+    {
+        for (int i = magicStoneListener.Count - 1; i >= 0; i--)
+        {
+            magicStoneListener[i].OnEventRaise();
+        }
+    }
+    public void magicStoneRegisterListener(EventListener _listener)
+    {
+        magicStoneListener.Add(_listener);
+    }
+    public void magicStoneUnregisterListener(EventListener _listener)
+    {
+        magicStoneListener.Remove(_listener);
+    }
 
 
 

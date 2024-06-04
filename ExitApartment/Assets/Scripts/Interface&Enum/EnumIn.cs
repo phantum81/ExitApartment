@@ -82,6 +82,7 @@ public enum ESOEventType
     OnGravity,
     OnDie12F,
     OnClear12F,
+    OnMagicStone,
     
     
 };
@@ -143,6 +144,8 @@ public enum EMobType
 {
     Mob12F,
     Pumpkin,
+    SkinLess,
+    Crab,
 
 }
 
@@ -183,4 +186,11 @@ public enum EInteractionType
     Open,
     Close,
     Press,
+}
+
+
+public enum EFloorState
+{
+    Open,
+    Close,
 }

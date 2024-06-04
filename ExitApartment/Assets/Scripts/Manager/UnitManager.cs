@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using Unity.VisualScripting;
 using UnityEngine;
-
+using Color = UnityEngine.Color;
 public class UnitManager : MonoBehaviour
 {
     [Header("플레이어 컨트롤러"), SerializeField]
@@ -40,6 +41,13 @@ public class UnitManager : MonoBehaviour
     [Header("쪽지 리스트"), SerializeField]
     private List<GameObject> PaperList = new List<GameObject>();
 
+    [Header("스카이박스"), SerializeField]
+    private Material skyBox;
+    public Material SkyBox=> skyBox;
+
+    private UnityEngine.Color skyboxOringinColor;
+    public UnityEngine.Color SkyboxOringinColor => skyboxOringinColor;
+
     private Dictionary<EMobType, GameObject> mobDic = new Dictionary<EMobType, GameObject>();
     public Dictionary<EMobType, GameObject> MobDic => mobDic;
 
@@ -51,11 +59,13 @@ public class UnitManager : MonoBehaviour
     {
         mobDic.Add(EMobType.Mob12F, mobList[0]);
         mobDic.Add(EMobType.Pumpkin, mobList[1]);
+        mobDic.Add(EMobType.SkinLess, mobList[2]);
+        mobDic.Add(EMobType.Crab, mobList[3]);
         notePaperDic.Add(ENoteType.Pumpkin, PaperList[0]);
+        skyboxOringinColor = skyBox.GetColor("_Tint");
     }
     void Start()
     {
-        
 
 
         reserveGravity.Normalize();
@@ -104,7 +114,34 @@ public class UnitManager : MonoBehaviour
     }
 
 
+    public IEnumerator CorChangeLightColor(Light _light, Color _start, Color _end, float _time)
+    {
+        float curTime = 0f;
+        while (curTime < _time)
+        {
+            curTime += Time.deltaTime;
+            _light.color = Color.Lerp(_start, _end, curTime / _time);
+            yield return null;
+        }
+        _light.color = _end;
+    }
 
 
+    public IEnumerator ChangeMaterialColor(Material _mat, Color _start, Color _end, float _time )
+    {
+        float curTime = 0f;
+        while (curTime < _time)
+        {
+            curTime += Time.deltaTime;
+            Color lerpColor = Color.Lerp(_start, _end, curTime / _time);
+            _mat.SetColor("_Tint", lerpColor);
+            yield return null;
+        }
+        _mat.SetColor("_Tint", _end);
+    }
 
+    void OnApplicationQuit()
+    {
+        skyBox.SetColor("_Tint", skyboxOringinColor);
+    }
 }

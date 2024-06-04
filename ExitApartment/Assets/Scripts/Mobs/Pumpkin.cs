@@ -9,16 +9,7 @@ public class Pumpkin : MonoBehaviour, IEnemyContect
     [Header("보임 판정"),SerializeField]
     private GameObject seePoint;
     public GameObject SeePoint => seePoint;
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void OnContect()
     {
 

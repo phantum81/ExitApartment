@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UIElements;
@@ -98,7 +99,7 @@ public class MonsterController : MonoBehaviour
 
 
 
-    public bool CheckTargetAudio(Transform _origin, float _radius, int _layMaks)
+    public Transform GetSoundtarget(Transform _origin, float _radius, int _layMaks)
     {
         Collider[] col = Physics.OverlapSphere(_origin.position, _radius, _layMaks);
 
@@ -107,11 +108,44 @@ public class MonsterController : MonoBehaviour
             foreach (Collider collider in col)
             {
                 if (collider.GetComponent<AudioSource>() != null && collider.GetComponent<AudioSource>().isPlaying)
+                    return collider.transform;
+            }
+            return null;
+        }
+        return null;
+
+    }
+
+    public Transform GetLookingTarget(Transform _origin, float _radius, int _layMaks)
+    {
+        Collider[] col = Physics.OverlapSphere(_origin.position, _radius, _layMaks);
+
+        if (col != null)
+        {
+            foreach (Collider collider in col)
+            {
+                if ((1<<collider.gameObject.layer) == _layMaks)
+                    return collider.transform;
+            }
+            return null;
+        }
+        return null;
+
+    }
+
+    public bool CheckTargetInSight(Transform _origin,Transform _target, float _viewAngle)
+    {
+        if(_target != null)
+        {
+            Vector3 dirToTarget = (_target.position - _origin.position).normalized;
+
+            if(Vector3.Angle(_origin.forward, dirToTarget) < _viewAngle / 2)
+            {
+                //if (!Physics.Raycast(_origin.position, dirToTarget, Vector3.Distance(_target.position, _origin.position), 1 << 9))
                     return true;
             }
             return false;
         }
         return false;
-
     }
 }

@@ -96,6 +96,7 @@
     <Compile Include="Assets\GreenForest\PostProcessing\Runtime\Models\DepthOfFieldModel.cs" />
     <Compile Include="Assets\Scripts\Binding\SerializableInputBinding.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerHFsm\PlayerFall.cs" />
+    <Compile Include="Assets\Scripts\Mobs\CrabMob.cs" />
     <Compile Include="Assets\Resources\DownAssets\ApartAsset\_BPS Basic Assets\Common\Scripts and Animations\Doors\opencloseDoor.cs" />
     <Compile Include="Assets\Resources\DownAssets\ApartAsset\Apartment Kit\Common\Scripts &amp; Animation\Slide\opencloseSlide.cs" />
     <Compile Include="Assets\Tensori\SkinlessZombie\Demo Scripts\AnimationItemData.cs" />
@@ -109,9 +110,9 @@
     <Compile Include="Assets\GreenForest\PostProcessing\Runtime\Components\FxaaComponent.cs" />
     <Compile Include="Assets\Resources\DownAssets\ApartAsset\Apartment Kit\Common\Scripts &amp; Animation\OvenOpen\OvenFlip.cs" />
     <Compile Include="Assets\GreenForest\PostProcessing\Runtime\Models\EyeAdaptationModel.cs" />
+    <Compile Include="Assets\Scripts\Mobs\MobContect.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerHFsm\PlayerHFSMMachine.cs" />
     <Compile Include="Assets\Scripts\Item\TrapDoor.cs" />
-    <Compile Include="Assets\Magical Rock\Scripts\Example\SwitchStateOnClick.cs" />
     <Compile Include="Assets\Scripts\ElevatorController.cs" />
     <Compile Include="Assets\Resources\DownAssets\OfficeAsset\enviroment\Office building\scripts\DoorAction.cs" />
     <Compile Include="Assets\Scripts\Manager\GameManager.cs" />
@@ -120,8 +121,10 @@
     <Compile Include="Assets\Resources\DownAssets\PlayerPack\DemoScene\Scripts\MyLightSc.cs" />
     <Compile Include="Assets\Resources\DownAssets\ApartAsset\Apartment Kit\Common\Scripts &amp; Animation\Windows\opencloseWindowApt.cs" />
     <Compile Include="Assets\Scripts\Ui\Inventory\Slot.cs" />
+    <Compile Include="Assets\Resources\DownAssets\Magical Rock\Scripts\Example\SwitchStateOnClick.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerStateHFsm\PlayerStateNone.cs" />
     <Compile Include="Assets\GreenForest\PostProcessing\Runtime\Models\ScreenSpaceReflectionModel.cs" />
+    <Compile Include="Assets\Resources\DownAssets\Magical Rock\Scripts\MRock.cs" />
     <Compile Include="Assets\GreenForest\PostProcessing\Runtime\Components\ScreenSpaceReflectionComponent.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerSound.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\EventListener.cs" />
@@ -136,9 +139,7 @@
     <Compile Include="Assets\Scripts\ScriptableObjects\GameEvent.cs" />
     <Compile Include="Assets\Scripts\Item\BlinkLight.cs" />
     <Compile Include="Assets\Scripts\Manager\ItemManager.cs" />
-    <Compile Include="Assets\Magical Rock\Scripts\MRock.cs" />
     <Compile Include="Assets\GreenForest\PostProcessing\Runtime\Models\AntialiasingModel.cs" />
-    <Compile Include="Assets\Magical Rock\Scripts\Diamond.cs" />
     <Compile Include="Assets\Scripts\Item\ElevatorDoorButton.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerStateHFsm\PlayerStateHFSMMachine.cs" />
     <Compile Include="Assets\Resources\DownAssets\OfficeAsset\enviroment\Office building\scripts\evelator_controll.cs" />
@@ -174,6 +175,7 @@
     <Compile Include="Assets\Scripts\Mobs\Mob12F.cs" />
     <Compile Include="Assets\Resources\DownAssets\ApartAsset\_BPS Basic Assets\Common\Scripts and Animations\Windows\opencloseWindow1.cs" />
     <Compile Include="Assets\Resources\DownAssets\ApartAsset\_BPS Basic Assets\Common\Scripts and Animations\Windows\opencloseWindow.cs" />
+    <Compile Include="Assets\Resources\DownAssets\Magical Rock\Scripts\Diamond.cs" />
     <Compile Include="Assets\GreenForest\PostProcessing\Runtime\Components\FogComponent.cs" />
     <Compile Include="Assets\GreenForest\PostProcessing\Runtime\Attributes\TrackballGroupAttribute.cs" />
     <Compile Include="Assets\Scripts\Mobs\Pumpkin.cs" />
@@ -182,6 +184,7 @@
     <Compile Include="Assets\GreenForest\PostProcessing\Runtime\Models\ColorGradingModel.cs" />
     <Compile Include="Assets\GreenForest\PostProcessing\Runtime\Components\DitheringComponent.cs" />
     <Compile Include="Assets\GreenForest\PostProcessing\Runtime\Components\AmbientOcclusionComponent.cs" />
+    <Compile Include="Assets\Resources\DownAssets\Magical Rock\Scripts\IMRock.cs" />
     <Compile Include="Assets\Resources\DownAssets\ApartAsset\_BPS Basic Assets\Common\Scripts and Animations\Drawer\Z Axis\Drawer_Pull_Z.cs" />
     <Compile Include="Assets\Resources\DownAssets\Rusty Flashlight\Scripts\FlashlightToggle.cs" />
     <Compile Include="Assets\GreenForest\PostProcessing\Runtime\Models\GrainModel.cs" />
@@ -209,9 +212,9 @@
     <Compile Include="Assets\GreenForest\PostProcessing\Runtime\Components\GrainComponent.cs" />
     <Compile Include="Assets\Scripts\Floor12F\GravityCollider.cs" />
     <Compile Include="Assets\Resources\DownAssets\ApartAsset\Apartment Kit\Common\Scripts &amp; Animation\Closet\ClosetopencloseDoor.cs" />
-    <Compile Include="Assets\Magical Rock\Scripts\IMRock.cs" />
     <Compile Include="Assets\Scripts\Manager\UiManager.cs" />
     <Compile Include="Assets\Scripts\Ui\ItemDragHandler.cs" />
+    <Compile Include="Assets\Scripts\DirectLight.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -242,7 +245,7 @@
     <None Include="Assets\GreenForest\PostProcessing\Resources\Shaders\ColorGrading.cginc" />
     <None Include="Assets\GreenForest\PostProcessing\Editor Resources\Monitors\HistogramRender.shader" />
     <None Include="Assets\GreenForest\PostProcessing\Resources\Shaders\UberSecondPass.cginc" />
-    <None Include="Assets\Magical Rock\Notes.txt" />
+    <None Include="Assets\Resources\DownAssets\Magical Rock\Notes.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
@@ -1007,6 +1010,9 @@
     </Reference>
     <Reference Include="Unity.Postprocessing.Runtime">
       <HintPath>Library\ScriptAssemblies\Unity.Postprocessing.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Performance.Profile-Analyzer.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Performance.Profile-Analyzer.Editor.dll</HintPath>

@@ -12,14 +12,7 @@ public class SkinZombie : MonoBehaviour, IEnemyContect
     
     [Header("대기시간"),SerializeField]
     private float waitTime;
-    [Header("회전속도"), SerializeField]
-    private float rotSpeed;
-    [Header("속도"), SerializeField]
-    private float speed;
-    [Header("탐색 높이"), SerializeField]
-    private float height;
-    [Header("이동러프"), SerializeField]
-    private float velocityLerp;
+
 
     [Header("탐색반경"), SerializeField]
     private float hearRadius;
@@ -34,26 +27,27 @@ public class SkinZombie : MonoBehaviour, IEnemyContect
 
     void Start()
     {
+        anim = transform.GetComponent<Animator>();
         eventMgr = GameManager.Instance.eventMgr;
         unitMgr = GameManager.Instance.unitMgr;
         agent = GetComponent<NavMeshAgent>();
         timer = waitTime;
-        MoveToRandomPosition();
+        state = EenemyState.Idle;
+        
     }
 
     
     void Update()
     {
+        anim.SetFloat("Speed", agent.speed);
 
-        if(EenemyState.Idle != state && EenemyState.Attack != state)
+        target = unitMgr.MobCtr.GetSoundtarget(transform, hearRadius, 1 << 7);
+        
+
+        if (EenemyState.Idle != state && EenemyState.Attack != state)
         {
-            if (unitMgr.MobCtr.CheckTargetAudio(transform, hearRadius, 1 << 7))
-            {
-                // 일정 시간 동안은 쫒아오게
-                state = EenemyState.Chase;
-            }
-            else
-                state = EenemyState.Patrol;
+            state = target ? EenemyState.Chase : EenemyState.Patrol;
+
         }
 
 
@@ -61,31 +55,23 @@ public class SkinZombie : MonoBehaviour, IEnemyContect
         switch (state)
         {
             case EenemyState.None:
-
                 break;
+
             case EenemyState.Idle:
-                // 포효 2초후 patrol
                 state = EenemyState.Patrol;
                 break;
+
             case EenemyState.Patrol:
-
-                if (agent.remainingDistance <= agent.stoppingDistance && !agent.pathPending)
-                {
-                    timer -= Time.deltaTime;
-
-                    if (timer <= 0f)
-                    {
-                        MoveToRandomPosition();
-                        timer = waitTime;
-                    }
-                }
+                HandlePatrolState();
                 break;
+
             case EenemyState.Chase:
-                unitMgr.MobCtr.ChaseTarget(transform, target, speed, rotSpeed, height, velocityLerp);                
+                HandleChaseState();
                 break;
 
             case EenemyState.Attack:
-                // 죽이는 모션
+                anim.SetTrigger("Attack");
+                state = EenemyState.None;
                 break;
         }
 
@@ -95,6 +81,7 @@ public class SkinZombie : MonoBehaviour, IEnemyContect
     }
     public void OnContect()
     {
+        if(state == EenemyState.None) return;
         state = EenemyState.Attack;
         GameManager.Instance.unitMgr.GetContectTarget(this.transform);
         eventMgr.ChangePlayerState(EplayerState.Die);
@@ -113,9 +100,43 @@ public class SkinZombie : MonoBehaviour, IEnemyContect
         agent.SetDestination(navHit.position);
     }
 
+
+    private void HandlePatrolState()
+    {
+        if (agent.remainingDistance <= agent.stoppingDistance && !agent.pathPending)
+        {
+            agent.speed = 0f;
+            timer -= Time.deltaTime;
+            if (timer <= 0f)
+            {
+                agent.speed = 2f;
+                MoveToRandomPosition();
+                timer = waitTime;
+            }
+        }
+    }
+
+    private void HandleChaseState()
+    {
+
+        if (target || agent.destination == target.position)
+        {
+            agent.SetDestination(target.position);
+            agent.speed = 4f;
+        }
+    }
+
+
+
+
     private void OnDrawGizmos()
     {
-        Gizmos.DrawSphere(transform.position, hearRadius);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, hearRadius);
+
     }
+
+
+
 
 }
