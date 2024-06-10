@@ -12,17 +12,19 @@ namespace SojaExiles
         private Animator openandClose;
         private bool isOpen;
         private InputManager inputMgr;
+        private SoundController soundCtr;
         void Start()
         {
-            openandClose = GetComponent<Animator>();
-            inputMgr = GameManager.Instance.inputMgr;
-            isOpen = false;
+
         }
 
 
         public void Init()
         {
-
+            openandClose = GetComponent<Animator>();
+            inputMgr = GameManager.Instance.inputMgr;
+            isOpen = false;
+            soundCtr = GetComponent<SoundController>();
         }
 
         public void OnRayHit(Color _color)
@@ -36,6 +38,8 @@ namespace SojaExiles
                 if (inputMgr.InputDic[EuserAction.Interaction])
                 {
                     StartCoroutine(opening());
+                    soundCtr.AudioPath = GameManager.Instance.soundMgr.SoundList[32];
+                    soundCtr.Play();
                 }
             }
             else
@@ -45,6 +49,8 @@ namespace SojaExiles
                     if (inputMgr.InputDic[EuserAction.Interaction])
                     {
                         StartCoroutine(closing());
+                        soundCtr.AudioPath = GameManager.Instance.soundMgr.SoundList[32];
+                        soundCtr.Play();
                     }
                 }
 

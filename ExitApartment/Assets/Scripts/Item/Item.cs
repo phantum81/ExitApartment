@@ -8,6 +8,7 @@ public class Item : MonoBehaviour, IInteraction, IUseItem, IGravityChange
     protected List<Color> originColor = new List<Color>();
     protected List<Material> curMaterial = new List<Material>();
     protected Rigidbody rigd;
+    protected SoundController soundCtr;
 
     [Header("아이템 데이터"),SerializeField]
     protected ItemData soItemData;
@@ -24,6 +25,7 @@ public class Item : MonoBehaviour, IInteraction, IUseItem, IGravityChange
         
         GameManager.Instance.itemMgr.InitInteractionItem(ref curMaterial, ref originColor, transform);
         rigd = GetComponent<Rigidbody>();
+        soundCtr = gameObject.GetComponent<SoundController>();
     }
 
     public virtual void OnRayHit(Color _color)
@@ -37,6 +39,8 @@ public class Item : MonoBehaviour, IInteraction, IUseItem, IGravityChange
     public virtual void OnInteraction(Vector3 _angle)
     {
         GameManager.Instance.itemMgr.PickItem(this.transform, _angle, soItemData);
+        soundCtr.AudioPath = GameManager.Instance.soundMgr.SoundList[9];
+        soundCtr.Play();
         
     }
     public virtual void OnRayOut()

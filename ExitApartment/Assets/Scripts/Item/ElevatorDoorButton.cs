@@ -10,7 +10,7 @@ public class ElevatorDoorButton : MonoBehaviour, IInteraction
     private List<Color> originColor = new List<Color>();
     private List<Material> curMaterial = new List<Material>();
     private ElevatorController eleCtr;
-
+    private SoundController soundCtr;
 
 
     public void OnRayHit(Color _color)
@@ -33,6 +33,8 @@ public class ElevatorDoorButton : MonoBehaviour, IInteraction
             }                     
                 eleCtr.eleWork = EElevatorWork.Opening;
                 eleCtr.CurCoroutine = eleCtr.StartCoroutine(eleCtr.OpenDoor());
+            
+            soundCtr.Play();
 
         }
         else if (buttonType == EElevatorButtonType.Close)
@@ -45,6 +47,7 @@ public class ElevatorDoorButton : MonoBehaviour, IInteraction
                 eleCtr.eleWork = EElevatorWork.Closing;
 
                 eleCtr.CurCoroutine = eleCtr.StartCoroutine(eleCtr.CloseDoor());
+            soundCtr.Play();
         }
 
     }
@@ -66,6 +69,9 @@ public class ElevatorDoorButton : MonoBehaviour, IInteraction
     {
         GameManager.Instance.itemMgr.InitInteractionItem(ref curMaterial, ref originColor, transform);
         eleCtr = GameManager.Instance.unitMgr.ElevatorCtr;
+        soundCtr = gameObject.GetComponent<SoundController>();
+        soundCtr.AudioPath = GameManager.Instance.soundMgr.SoundList[34];
+
     }
 
 }

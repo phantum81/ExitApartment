@@ -75,6 +75,7 @@ public class CameraController : MonoBehaviour
     public float S_shake => _s_shake;
     private Vector3 _velocity = Vector3.zero;
     #region 유니티 실행부
+    private float originCamY;
 
     void Start()
     {
@@ -82,6 +83,7 @@ public class CameraController : MonoBehaviour
         main_cam = gameObject.GetComponent<Camera>();
         inputMgr = GameManager.Instance.inputMgr;
         cameraMgr = GameManager.Instance.cameraMgr;
+        originCamY = transform.position.y;
        
     }
 
@@ -199,6 +201,12 @@ public class CameraController : MonoBehaviour
         }
 
     }//문제가있다. 고쳐야함 (떨림, 이동고정문제)
+
+    public void ResetCamYPosition()
+    {
+        target_head.position = new Vector3(target_head.position.x, originCamY, target_head.position.z);
+    }
+
 
     #endregion
 

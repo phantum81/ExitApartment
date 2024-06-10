@@ -206,3 +206,9 @@ public enum ESoundType
    
 
 }
+
+public enum EDoorType
+{
+    Closet,
+    HomeDoor,
+}

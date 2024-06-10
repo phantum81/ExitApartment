@@ -7,21 +7,23 @@ namespace SojaExiles
 {
 	public class opencloseDoor : MonoBehaviour, IInteraction
 	{
-		
+        public EDoorType eDoorType;
 		private Animator openandClose;
 		private bool isOpen;
 		private InputManager inputMgr;
+        private SoundController soundCtr;
 		void Start()
 		{
-            openandClose = GetComponent<Animator>();
-			inputMgr = GameManager.Instance.inputMgr;
-			isOpen = false;
+
 		}
 
 
         public void Init()
         {
-
+            openandClose = GetComponent<Animator>();
+            inputMgr = GameManager.Instance.inputMgr;
+            soundCtr = gameObject.GetComponent<SoundController>();
+            isOpen = false;
         }
 
         public void OnRayHit(Color _color)
@@ -35,6 +37,18 @@ namespace SojaExiles
                 if (inputMgr.InputDic[EuserAction.Interaction])
                 {
                     StartCoroutine(opening());
+                    switch (eDoorType)
+                    {
+                        case EDoorType.Closet:
+                            soundCtr.AudioPath = GameManager.Instance.soundMgr.SoundList[32];
+                            soundCtr.Play();
+                            break;
+                        case EDoorType.HomeDoor:
+                            soundCtr.AudioPath = GameManager.Instance.soundMgr.SoundList[30];
+                            soundCtr.Play();
+                            break;
+                    }
+
                 }
             }
             else
@@ -44,6 +58,17 @@ namespace SojaExiles
                     if (inputMgr.InputDic[EuserAction.Interaction])
                     {
                         StartCoroutine(closing());
+                        switch (eDoorType)
+                        {
+                            case EDoorType.Closet:
+                                soundCtr.AudioPath = GameManager.Instance.soundMgr.SoundList[33];
+                                soundCtr.Play();
+                                break;
+                            case EDoorType.HomeDoor:
+                                soundCtr.AudioPath = GameManager.Instance.soundMgr.SoundList[31];
+                                soundCtr.Play();
+                                break;
+                        }
                     }
                 }
 
@@ -84,7 +109,7 @@ namespace SojaExiles
     }
 
 
-
+    
 
 
 }

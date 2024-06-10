@@ -25,10 +25,12 @@ public class PlayerHFSMMachine : MonoBehaviour
         {
             if (inputMgr.InputDir != Vector3.zero)
             {
-                MoveHFSM.ChangeState(EplayerMoveState.Walk, playerCtr);
-
                 if (inputMgr.InputDic[EuserAction.Run])
                     MoveHFSM.ChangeState(EplayerMoveState.Run, playerCtr);
+                else
+                    MoveHFSM.ChangeState(EplayerMoveState.Walk, playerCtr);
+
+
             }
             else
                 MoveHFSM.ChangeState(EplayerMoveState.Stand, playerCtr);

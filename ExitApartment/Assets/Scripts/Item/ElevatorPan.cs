@@ -7,8 +7,8 @@ public class ElevatorPan : MonoBehaviour, IInteraction
 {
     private List<Color> originColor = new List<Color>();
     private List<Material> curMaterial = new List<Material>();
-    
 
+    private SoundController soundCtr;
 
     public void OnRayHit( Color _color)
     {
@@ -23,6 +23,8 @@ public class ElevatorPan : MonoBehaviour, IInteraction
     {
         ElevatorNumData data = GameManager.Instance.itemMgr.ElevatorFloorDic[transform.GetComponentInChildren<ElevatorPan>()];
         UiManager.Instance.inGameCtr.InGameUiShower.RenewWriteFloor(data.Num);
+        
+        soundCtr.Play();
     }
     public EInteractionType OnGetType()
     {
@@ -39,5 +41,7 @@ public class ElevatorPan : MonoBehaviour, IInteraction
     public void Init()
     {
         GameManager.Instance.itemMgr.InitInteractionItem(ref curMaterial, ref originColor, transform);
+        soundCtr = GetComponent<SoundController>();
+        soundCtr.AudioPath = GameManager.Instance.soundMgr.SoundList[34];
     }
 }

@@ -33,7 +33,8 @@ public class PlayerController : MonoBehaviour
     private InputManager inputMgr;
     private CameraManager cameraMgr;
     private UnitManager unitMgr;
-
+    private SoundController soundCtr;
+    public SoundController SoundCtr => soundCtr;
 
     
 
@@ -44,10 +45,7 @@ public class PlayerController : MonoBehaviour
 
     private void  Start()
     {
-        inputMgr = GameManager.Instance.inputMgr;
-        cameraMgr = GameManager.Instance.cameraMgr;
-        unitMgr = GameManager.Instance.unitMgr;
-        playerInven = gameObject.GetComponent<PlayerInventory>();
+        Init();
 
     }
 
@@ -142,6 +140,11 @@ public class PlayerController : MonoBehaviour
     public void Init()
     {
         rigd = player.gameObject.GetComponent<Rigidbody>();
+        inputMgr = GameManager.Instance.inputMgr;
+        cameraMgr = GameManager.Instance.cameraMgr;
+        unitMgr = GameManager.Instance.unitMgr;
+        soundCtr = GetComponent<SoundController>();
+        playerInven = gameObject.GetComponent<PlayerInventory>();
     }
     public void ChangeGravity()
     {

@@ -10,8 +10,14 @@ public class SoundController : MonoBehaviour
     private AudioSource audioSource;
     public AudioSource Sorce => audioSource;
 
-    [SerializeField]
+    [Header("루프여부"),SerializeField]
+    private bool isLoop =false;
+
+    [Header("볼륨"), SerializeField]
+    private float volume = 1f;
+    [Header("오디오 이름"),SerializeField]
     private string audioPath;
+    public string AudioPath { get { return audioPath; } set { audioPath = value; } }
 
     void Start()
     {
@@ -19,10 +25,10 @@ public class SoundController : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        audioSource.loop = isLoop;
+        audioSource.volume = volume;
     }
 
     public void Play()
@@ -33,5 +39,9 @@ public class SoundController : MonoBehaviour
     public void Stop()
     {
         audioSource.Stop();
+    }
+    public bool CheckPlaying()
+    {
+        return audioSource.isPlaying;
     }
 }

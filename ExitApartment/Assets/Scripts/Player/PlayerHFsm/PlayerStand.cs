@@ -7,6 +7,7 @@ public class PlayerStand<T> :  IState<T> where T : MonoBehaviour
     public void OperateEnter(T _player)
     {
         GameManager.Instance.cameraMgr.ChangeCameraState((int)HFSM<EplayerMoveState, PlayerController>.Instance.CurState);
+        
     }
 
     public void OperateUpdate(T _player)
