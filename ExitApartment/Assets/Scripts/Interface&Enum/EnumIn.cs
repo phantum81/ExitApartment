@@ -172,6 +172,9 @@ public enum EUiObjectType
 public enum ENoteType
 {
     Pumpkin,
+    Forest,
+    Mob12F,
+    Last,
 
 }
 
@@ -193,4 +196,13 @@ public enum EFloorState
 {
     Open,
     Close,
+}
+
+
+public enum ESoundType
+{
+    Bgm,
+    Effect,
+   
+
 }

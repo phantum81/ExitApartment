@@ -23,8 +23,9 @@ public class CrabMob : MonoBehaviour, IEnemyContect
     private UnitManager unitMgr;
     private EventManager eventMgr;
     private Transform target;
-    private Transform curTarget;
+    private Vector3 origin;
     private bool isEvent=false;
+
 
     void Start()
     {
@@ -34,6 +35,7 @@ public class CrabMob : MonoBehaviour, IEnemyContect
         agent = GetComponent<NavMeshAgent>();
         timer = waitTime;
         state = EenemyState.None;
+        origin = transform.position;
 
     }
     void Update()
@@ -92,7 +94,7 @@ public class CrabMob : MonoBehaviour, IEnemyContect
     void HandleIdleState()
     {
         agent.speed = 0f;
-        anim.SetTrigger("Interact");
+        anim.SetBool("Interact", true);
     }
 
     void HandleChaseState()
@@ -142,4 +144,14 @@ public class CrabMob : MonoBehaviour, IEnemyContect
             Gizmos.DrawRay(transform.position, (target.position - transform.position).normalized);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.layer == 9)
+        {
+            isEvent = false;
+            agent.SetDestination(origin);
+
+
+        }
+    }
 }

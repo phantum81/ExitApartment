@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using static GameManager;
 
 public class Diamond : MonoBehaviour, IInteraction
 {
@@ -10,6 +11,8 @@ public class Diamond : MonoBehaviour, IInteraction
     [SerializeField]
     private GameObject [] turnOffObj = new GameObject[2];
     private UnitManager unitMgr;
+
+    
 
     void Start()
     {
@@ -36,6 +39,13 @@ public class Diamond : MonoBehaviour, IInteraction
         onMagicStone.Invoke();
         transform.GetComponent<MeshRenderer>().enabled= false;
         transform.GetComponent<AudioSource>().enabled= false;
+
+        if(GameManager.Instance.onGetForestHumanity != null)
+        {
+            GameManager.Instance.onGetForestHumanity();
+        }
+
+
         
     }
     public virtual void OnRayOut()

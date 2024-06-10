@@ -23,17 +23,18 @@ public class UnitManager : MonoBehaviour
     private Transform contectTarget;
     public Transform ContectTarget => contectTarget;
 
-    public List<GameObject> floorList;
-
     
 
 
     private Vector3 reserveGravity = new Vector3(0, 0, 1f);
     public Vector3 ReserveGravity => reserveGravity;
 
+    //--------------딕셔너리로 변경할것
     /// <summary>
     /// 임시
     /// </summary>
+
+    public List<GameObject> floorList;
 
 
     [Header("몹 리스트"), SerializeField]
@@ -41,9 +42,21 @@ public class UnitManager : MonoBehaviour
     [Header("쪽지 리스트"), SerializeField]
     private List<GameObject> PaperList = new List<GameObject>();
 
+    [Header("아파트 정보지"), SerializeField]
+    private GameObject apartInfoPaper;
+
+    [Header("아파트 정보지 마테리얼"), SerializeField]
+    private List<Material> apartPaperMatList;
+
     [Header("스카이박스"), SerializeField]
     private Material skyBox;
     public Material SkyBox=> skyBox;
+
+
+    //-----------딕셔너리로 변경할것.
+
+
+
 
     private UnityEngine.Color skyboxOringinColor;
     public UnityEngine.Color SkyboxOringinColor => skyboxOringinColor;
@@ -62,12 +75,14 @@ public class UnitManager : MonoBehaviour
         mobDic.Add(EMobType.SkinLess, mobList[2]);
         mobDic.Add(EMobType.Crab, mobList[3]);
         notePaperDic.Add(ENoteType.Pumpkin, PaperList[0]);
+        notePaperDic.Add(ENoteType.Forest, PaperList[1]);
+        notePaperDic.Add(ENoteType.Mob12F, PaperList[2]);
+        notePaperDic.Add(ENoteType.Last, PaperList[3]);
         skyboxOringinColor = skyBox.GetColor("_Tint");
     }
     void Start()
     {
-
-
+        GameManager.Instance.onGetForestHumanity += OnForestHumanity;
         reserveGravity.Normalize();
         playerCtr.Init();
     }
@@ -139,6 +154,18 @@ public class UnitManager : MonoBehaviour
         }
         _mat.SetColor("_Tint", _end);
     }
+
+    public void OnForestHumanity()
+    {
+        ShowObject(notePaperDic[ENoteType.Forest].transform, true);
+        ChangeMaterial(apartInfoPaper.transform, apartPaperMatList[1]);
+    }
+
+    public void ChangeMaterial(Transform _target, Material _mat)
+    {
+        _target.GetComponent<Renderer>().material = _mat;
+    }
+
 
     void OnApplicationQuit()
     {

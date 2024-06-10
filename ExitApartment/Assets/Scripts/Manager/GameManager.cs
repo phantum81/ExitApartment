@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -34,10 +35,18 @@ public class GameManager : MonoBehaviour
     public InputManager inputMgr;
     public EventManager eventMgr;
     public ItemManager itemMgr;
+    public SoundManager soundMgr;
     
+
+    public Action onGetForestHumanity;
+
+    private int humanityScore = 0;
+    public int HumanityScore => humanityScore;
+
     
     void Start()
     {
+        onGetForestHumanity += AddHumanityScore;
         itemMgr.Init();
         inputMgr.Init();
     }
@@ -45,7 +54,7 @@ public class GameManager : MonoBehaviour
     
     void Update()
     {
-        
+
     }
 
     public bool CheckInterection(Ray _ray, out RaycastHit _hit, float _maxDis, int _layer)
@@ -64,5 +73,12 @@ public class GameManager : MonoBehaviour
     }
 
     
-
+    public void AddHumanityScore()
+    {
+        humanityScore++;
+    }
+    public int GetHumanityScore()
+    {
+        return humanityScore;
+    }
 }
