@@ -1,3 +1,4 @@
+using NUnit.Framework.Constraints;
 using NUnit.Framework.Internal;
 using System;
 using System.Collections;
@@ -17,6 +18,7 @@ public class PlayerPostProcess : MonoBehaviour
     private LensDistortion distortion;    
     private ChromaticAberration chromaticAber;
 
+    
     private List<Coroutine> curCoroutine = new List<Coroutine>();
     public List<Coroutine> CurCoroutine => curCoroutine;
 
@@ -27,21 +29,30 @@ public class PlayerPostProcess : MonoBehaviour
     {
         StopAllCoroutinesInList();
 
-        VignetteOn(false);
+        curCoroutine.Add(StartCoroutine(PostProccessEffectOff(EpostProcessType.Vignette)));
         curCoroutine.Add(StartCoroutine(PostProccessEffectOff(EpostProcessType.Grain)));
         curCoroutine.Add(StartCoroutine(PostProccessEffectOff(EpostProcessType.ChromaticAberration)));
         curCoroutine.Add(StartCoroutine(PostProccessEffectOff(EpostProcessType.LensDistortion)));
 
     }
-    public void VignetteOn(bool _bool)
+    public IEnumerator VignetteOn(float _val=0.4f , float _speed =1f,Color _col = default(Color))
     {
+        if (_col == default(Color))
+        {
+            _col = Color.red;
+        }
 
         if (post != null && post.profile.TryGetSettings(out vignette))
         {
-            vignette.active = _bool;
+            vignette.active = true;
+            vignette.color.value = _col;
+            vignette.center.value = new Vector2(0.5f, 0.5f);
+            curCoroutine.Add(StartCoroutine(LerpValue(value => vignette.intensity.value = value, vignette.intensity.value, _val, _speed, 1f)));
+
+            yield return null;
         }
-        
-        
+
+
     }
     public IEnumerator GrainOn(bool _bool)
     {
@@ -148,6 +159,11 @@ public class PlayerPostProcess : MonoBehaviour
             switch (_type)
             {
                 case EpostProcessType.Vignette:
+                    if(post.profile.TryGetSettings(out vignette))
+                    {
+
+                    }
+                        //curCoroutine.Add(StartCoroutine( LerpValue(value => vignette.intensity.value = value, vignette.intensity.value, _max, _inverseSpeed, _lerpRatio)));
                     break;
                 case EpostProcessType.Grain:
                     
@@ -196,6 +212,7 @@ public class PlayerPostProcess : MonoBehaviour
             switch (_type)
             {
                 case EpostProcessType.Vignette:
+
                     break;
                 case EpostProcessType.Grain:
                                         
@@ -231,6 +248,77 @@ public class PlayerPostProcess : MonoBehaviour
 
 
 
+    public IEnumerator CameraChange()
+    {
+        yield return StartCoroutine(CloseCameraVignette());
+       // StartCoroutine(VignetteOn(1f,Color.black));
+    }
+
+    public IEnumerator CloseCameraVignette(float _speed = 1f, Color _col = default(Color))
+    {
+
+        if (_col == default(Color))
+        {
+            _col = Color.black; 
+        }
+
+        if (post != null && post.profile.TryGetSettings(out vignette))
+        {
+            while (true)
+            {
+                vignette.active = true;
+                vignette.color.value = _col;
+                vignette.intensity.value += Time.deltaTime * _speed;
+                if (vignette.intensity.value >= 1)
+                {
+                    vignette.center.value = new Vector2(3f, 3f);
+                    break;
+                }
+
+                yield return null;
+            }
+        }
+        
+
+    }
+    //public IEnumerator OpenCameraVignette(float _val, float _speed =1f, Color _col = default(Color))
+    //{
+    //    if (_col == default(Color))
+    //    {
+    //        _col = Color.black;
+    //    }
+    //    if (post != null && post.profile.TryGetSettings(out vignette))
+    //    {
+    //        while (true)
+    //        {
+    //            vignette.active = true;
+    //            vignette.color.value = _col;
+    //            vignette.center.value = new Vector2(0.5f, 0.5f);
+    //            vignette.intensity.value -= Time.deltaTime * _speed;
+    //            if (vignette.intensity.value <= _val)
+    //            {
+    //                vignette.intensity.value = _val;
+                    
+    //                break;
+    //            }
+
+    //            yield return null;
+    //        }
+    //    }
+
+    //}
+
+    public void AllBlackCloseCamera()
+    {
+        if (post != null && post.profile.TryGetSettings(out vignette))
+        {
+            vignette.active = true;
+            vignette.intensity.value = 1f;
+            vignette.center.value = new Vector2(3f, 3f);
+        }
+    }
+
+
     public void MentalDamagePostProccess()
     {
         StopAllCoroutinesInList();
@@ -241,8 +329,9 @@ public class PlayerPostProcess : MonoBehaviour
 
     public void On12FDeadState()
     {
-        VignetteOn(true);
+        
         GrainOn(true);
+        
     }
 
 

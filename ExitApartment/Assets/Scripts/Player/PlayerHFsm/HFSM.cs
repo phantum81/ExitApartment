@@ -72,10 +72,29 @@ public class HFSM<TState, T> where TState : System.Enum where T : MonoBehaviour
     {
         if (EqualityComparer<TState>.Default.Equals(curState, _newState))
             return;
-            
+
+        if (!CheckState(_newState, curState))
+            return;
+
         ExitState(curState, _obj);        
         curState = _newState;
         EnterState(curState, _obj);
+    }
+
+    private bool CheckState(TState _newState, TState _state)
+    {
+        switch (_state)
+        {
+            case EplayerState.Die:
+                if (_newState.Equals(EplayerState.None))
+                {
+                    return true;
+                }
+                return false;
+
+
+            default: return true;
+        }
     }
 
     private void EnterState(TState _state, T _obj)

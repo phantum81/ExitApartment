@@ -11,6 +11,10 @@ public class Mob12F : MonoBehaviour, IEnemyContect
     private EMobType eMobType = EMobType.Mob12F;
     private EventManager eventMgr;
     private float chaseLimit = 3f;
+    [Header("µ¥µåºä"),SerializeField]
+    private Transform deadView;
+
+
 
     void Start()
     {
@@ -20,27 +24,16 @@ public class Mob12F : MonoBehaviour, IEnemyContect
     // Update is called once per frame
     void Update()
     {
+        if (eventMgr.GetPlayerState() == EplayerState.Die)
+            return;
 
-
-        if (DetectedPlayer() && eventMgr.GetPlayerState() != EplayerState.Die)
+        if (DetectedPlayer())
         {
             chaseLimit = 3f;
             eEnemyState = EenemyState.Chase;
             eventMgr.ChangePlayerState(EplayerState.MentalDamage);
         }
-        else
-        {
-            chaseLimit -= Time.deltaTime;
-            if(chaseLimit < 0)
-            {
-                if(target != null)
-                {
-                    target = null;
-                    eEnemyState = EenemyState.None;
-                    eventMgr.ChangePlayerState(EplayerState.None);
-                }
-            }
-        }
+
 
         
 
@@ -48,7 +41,8 @@ public class Mob12F : MonoBehaviour, IEnemyContect
 
     public void OnContect()
     {
-        GameManager.Instance.unitMgr.GetContectTarget(this.transform);
+        GameManager.Instance.unitMgr.SetContectTarget(deadView);
+
         eventMgr.ChangePlayerState(EplayerState.Die);
     }
 

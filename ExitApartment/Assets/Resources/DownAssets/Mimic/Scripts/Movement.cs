@@ -41,10 +41,16 @@ namespace MimicSpace
         private Transform route2;
 
         private UnitManager unitMgr;
+        private CameraManager cameraMgr;
+        private SoundController soundCtr;
+        private SoundManager soundMgr;
         private void Start()
         {
             unitMgr = GameManager.Instance.unitMgr;
-            
+            cameraMgr= GameManager.Instance.cameraMgr;
+            soundCtr = gameObject.GetComponent<SoundController>();
+            soundMgr = GameManager.Instance.soundMgr;
+            soundCtr.AudioPath = GameManager.Instance.soundMgr.SoundList[81];
         }
 
 
@@ -55,10 +61,13 @@ namespace MimicSpace
         {
          
             Camera onDeadCam= GameManager.Instance.cameraMgr.CameraDic[1];
-            yield return new WaitForSeconds(15f);
-            while (Vector3.Distance(transform.position, onDeadCam.transform.position) > validDis)
-            {
-                unitMgr.MobCtr.ChaseTarget(transform, onDeadCam.transform, velocityLerpCoef, rotSpeed, height, velocityLerpCoef);
+            yield return new WaitForSeconds(20f);
+            soundCtr.Play();
+            StartCoroutine(cameraMgr.CameraCtr.CameraShake(cameraMgr.CurCamera, 1.3f, 0.3f));
+            soundMgr.BgmCtr.BgmChange(soundMgr.SoundList[82], false);
+            while (Vector3.Distance(transform.position, route1.transform.position) > validDis)
+            {                
+                unitMgr.MobCtr.ChaseTarget(transform, route1.transform, speed, rotSpeed);
                 yield return null;
             }
 
@@ -66,52 +75,49 @@ namespace MimicSpace
 
              
 
-        //public void ChaseTarget(Transform _chaser,Transform _target, float _speed )
-        //{
-        //    Vector3 _dir = (_target.position - _chaser.position).normalized;
-        //    _chaser.rotation = Quaternion.Lerp(_chaser.rotation,Quaternion.LookRotation(_dir),Time.deltaTime* rotSpeed);
-        //    velocity = _chaser.forward;
-            
-        //    _chaser.position = _chaser.position + velocity * Time.deltaTime* _speed;
 
-        //    RaycastHit hit;
-        //    Vector3 destHeight = _chaser.position;
-
-        //    if (Physics.Raycast(_chaser.position + Vector3.up, -Vector3.up, out hit))
-        //        destHeight = new Vector3(_chaser.position.x, hit.point.y + height, _chaser.position.z);
-
-        //    _chaser.position = Vector3.Lerp(_chaser.position, destHeight, velocityLerpCoef * Time.deltaTime);
-            
-        //}
 
         IEnumerator Clear12F()
         {
-            
             WaitUntil openWait =  new WaitUntil(() => GameManager.Instance.unitMgr.ElevatorCtr.eleWork == EElevatorWork.Opening);
+            yield return new WaitForSeconds(1f);
+            soundCtr.Play();
             while (Vector3.Distance(transform.position, route1.position)> validDis)
             {
-                unitMgr.MobCtr.ChaseTarget(transform, route1.transform, speed*2f, rotSpeed, height, velocityLerpCoef);
+                unitMgr.MobCtr.ChaseTarget(transform, route1.transform, speed*2f, rotSpeed);
                 yield return null;
             }
+
+            soundCtr.Play();
+            StartCoroutine(cameraMgr.CameraCtr.CameraShake(cameraMgr.CurCamera, 4f, 0.05f));
+            soundMgr.BgmCtr.BgmChange(soundMgr.SoundList[82], false);
             while (true)
             {
                 if(GameManager.Instance.unitMgr.ElevatorCtr.eleWork == EElevatorWork.Opening)
-                {
-                    unitMgr.MobCtr.ChaseTarget(transform, target, speed * 3.5f, rotSpeed, height, velocityLerpCoef);
+                {                    
+                    unitMgr.MobCtr.ChaseTarget(transform, target, speed * 2f, rotSpeed);
                     if(Vector3.Distance(transform.position, target.position) < playerValidDis)
                         break;
                 }
                 else if (GameManager.Instance.unitMgr.ElevatorCtr.eleWork == EElevatorWork.Closing)
                 {
 
-                    unitMgr.MobCtr.ChaseTarget(transform, route2, speed * 3.5f, rotSpeed, height, velocityLerpCoef);
+                    unitMgr.MobCtr.ChaseTarget(transform, route2, speed * 2f, rotSpeed);
                     if (Vector3.Distance(transform.position, route2.position) < validDis)
-                        yield return openWait;
+                    {
+                        yield return new WaitUntil(()=>GameManager.Instance.unitMgr.ElevatorCtr.IsClose);
+                        GameManager.Instance.Set12FClearFloor(true);
+                        transform.gameObject.SetActive(false);
+                        GameManager.Instance.ChangeFloorLevel(EFloorType.Mob122F);
+                        break;
+                    }
+                        
                 }
                     
 
                 yield return null;
             }
+            
         }
         
 
@@ -125,6 +131,7 @@ namespace MimicSpace
         public void OnClear12F()
         {
             StartCoroutine(Clear12F());
+
         }
     }
     #endregion

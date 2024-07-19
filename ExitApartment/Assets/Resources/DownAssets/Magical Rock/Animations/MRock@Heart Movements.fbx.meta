@@ -1,58 +1,112 @@
 fileFormatVersion: 2
 guid: eeb6ee34a8ee76c4b8faf2fc6643ce21
-timeCreated: 1507994287
-licenseType: Store
+AssetOrigin:
+  serializedVersion: 1
+  productId: 102756
+  packageName: Magical Rock
+  packageVersion: 1.0
+  assetPath: Assets/Magical Rock/Animations/MRock@Heart Movements.fbx
+  uploadId: 207304
 ModelImporter:
-  serializedVersion: 19
-  fileIDToRecycleName:
-    100000: Diamond
-    100002: //RootNode
-    100004: MRock_LOD0
-    100006: MRock_LOD1
-    100008: MRock_LOD2
-    400000: Diamond
-    400002: //RootNode
-    400004: MRock_LOD0
-    400006: MRock_LOD1
-    400008: MRock_LOD2
-    2300000: Diamond
-    3300000: Diamond
-    4300000: MRock_LOD0
-    4300002: MRock_LOD1
-    4300004: MRock_LOD2
-    4300006: Diamond
-    7400000: Heart Movements
-    9500000: //RootNode
-    13700000: MRock_LOD0
-    13700002: MRock_LOD1
-    13700004: MRock_LOD2
-    20500000: //RootNode
+  serializedVersion: 22200
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: Diamond
+  - first:
+      1: 100002
+    second: //RootNode
+  - first:
+      1: 100004
+    second: MRock_LOD0
+  - first:
+      1: 100006
+    second: MRock_LOD1
+  - first:
+      1: 100008
+    second: MRock_LOD2
+  - first:
+      4: 400000
+    second: Diamond
+  - first:
+      4: 400002
+    second: //RootNode
+  - first:
+      4: 400004
+    second: MRock_LOD0
+  - first:
+      4: 400006
+    second: MRock_LOD1
+  - first:
+      4: 400008
+    second: MRock_LOD2
+  - first:
+      23: 2300000
+    second: Diamond
+  - first:
+      33: 3300000
+    second: Diamond
+  - first:
+      43: 4300000
+    second: MRock_LOD0
+  - first:
+      43: 4300002
+    second: MRock_LOD1
+  - first:
+      43: 4300004
+    second: MRock_LOD2
+  - first:
+      43: 4300006
+    second: Diamond
+  - first:
+      74: 7400000
+    second: Heart Movements
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      137: 13700000
+    second: MRock_LOD0
+  - first:
+      137: 13700002
+    second: MRock_LOD1
+  - first:
+      137: 13700004
+    second: MRock_LOD2
+  - first:
+      205: 20500000
+    second: //RootNode
+  externalObjects: {}
   materials:
-    importMaterials: 1
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
     motionNodeName: 
-    rigImportErrors: 
-    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
+    extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
       name: Heart Movements
       takeName: Heart Movements
+      internalID: 0
       firstFrame: 0
       lastFrame: 120
       wrapMode: 0
@@ -97,26 +151,49 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 0
+    importVisibility: 0
     importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
+    nodeNameCollisionStrategy: 0
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
+    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
+    normalCalculationMode: 0
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -126,22 +203,20 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
+  importBlendShapeDeformPercent: 0
+  remapMaterialsIfMaterialImportModeIsNone: 1
   additionalBone: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 102756
-  packageName: Magical Rock
-  packageVersion: 1.0
-  assetPath: Assets/Magical Rock/Animations/MRock@Heart Movements.fbx
-  uploadId: 207304

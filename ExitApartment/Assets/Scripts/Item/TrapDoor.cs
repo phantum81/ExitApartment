@@ -12,13 +12,15 @@ public class TrapDoor : ZoomableItem
     [Header("º¸¿©ÁÙ Å¸°Ù"),SerializeField]
     private Transform showTarget;
 
-    
+    private SoundController soundCtr;
     private float trapCount = 0;
     public float TrapCount => trapCount;
     
     public override void Init()
     {
         base.Init();
+        soundCtr = gameObject.GetComponent<SoundController>();
+        soundCtr.AudioPath = GameManager.Instance.soundMgr.SoundList[36];
     }
 
     public override void OnInteraction(Vector3 _angle)
@@ -32,6 +34,7 @@ public class TrapDoor : ZoomableItem
         else if(trapCount == 2)
         {
             onShowPumpkin.Invoke(showTarget, true);
+            soundCtr.Play();
             
         }
         else if(trapCount == 3)

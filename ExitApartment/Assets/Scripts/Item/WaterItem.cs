@@ -40,4 +40,13 @@ public class WaterItem : Item
     {
         base.OnGravityChange();
     }
+
+    protected override void OnTriggerEnter(Collider other)
+    {
+        base.OnTriggerEnter(other);
+    }
+    protected override void OnCollisionEnter(Collision other)
+    {
+        base.OnCollisionEnter(other);
+    }
 }

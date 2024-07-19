@@ -29,14 +29,14 @@ public enum EElevatorButtonType
 {
     Open,
     Close,
-
+    Move,
 };
 
 public enum EElevatorWork
 {
     Opening,
     Closing,
-
+    Locking,
 
 };
 
@@ -196,6 +196,17 @@ public enum EFloorState
 {
     Open,
     Close,
+}
+
+
+public enum EFloorType
+{
+    Home15EB,
+    Nothing436A, 
+    Mob122F,
+    Forest5ABC,
+    Escape888B,
+
 }
 
 

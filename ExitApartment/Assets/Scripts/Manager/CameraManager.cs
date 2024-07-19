@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
+using UnityEngine.Playables;
+using UnityEngine.Timeline;
 using UnityEngine.UIElements;
 
 public class CameraManager : MonoBehaviour
@@ -15,7 +17,9 @@ public class CameraManager : MonoBehaviour
     private OnDeadCameraController deadCamCtr;
 
 
-
+    [Header("흔들림 전용 오브젝트"), SerializeField]
+    private Transform shakeObj;
+    public Transform ShakeObj => shakeObj;
 
     [Header("현재카메라"),SerializeField]
     private Camera curCamera;
@@ -27,10 +31,12 @@ public class CameraManager : MonoBehaviour
     private ZoomCameraController zoomCamera;
     public ZoomCameraController ZoomCamera => zoomCamera;
 
-
-
-
-
+    [Header("타임라인 에셋"),SerializeField]
+    private List<TimelineAsset> timelineAsset;
+    public List<TimelineAsset> TimelineAssets=> timelineAsset;
+    [Header("포스트프로세스"),SerializeField]
+    private PlayerPostProcess postProcess;
+    public PlayerPostProcess PostProcess => postProcess;
     private Dictionary<int, Camera> camDic= new Dictionary<int, Camera>();
     /// <summary>
     /// 0: 메인캠 1: 12f캠 2: 줌 캠 3: ui 캠
@@ -77,7 +83,9 @@ public class CameraManager : MonoBehaviour
             case ESOEventType.OnGravity:
                 break;
             case ESOEventType.OnDie12F:
+                
                 ChangeCamera(camDic[1]);
+
                 break;
         }
 
@@ -121,6 +129,8 @@ public class CameraManager : MonoBehaviour
 
     public void ChangeCamera(Camera _cam, float _time = 0f)
     {        
+        if(curCamera == _cam) return;
+        //postProcess.StartCoroutine(postProcess.CloseCameraVignette());
         curCamera.enabled=false;
         _cam.enabled=true;
 
@@ -131,17 +141,39 @@ public class CameraManager : MonoBehaviour
     
     public bool CheckObjectInCamera(GameObject _target)
     {
-        if (_target.transform.parent.gameObject.activeSelf)
+
+        if (_target.transform.parent.gameObject.activeSelf && GameManager.Instance.unitMgr.ElevatorCtr.eCurFloor == EFloorType.Home15EB)
         {
             Vector3 screenPoint = CurCamera.WorldToViewportPoint(_target.transform.position);
             bool isIn = screenPoint.z > 0 && screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1;
-            return isIn;
+
+            if (isIn)
+            {
+                // 카메라에서 대상 오브젝트까지의 방향 벡터 계산
+                Vector3 directionToTarget = _target.transform.position - CurCamera.transform.position;
+
+                // 레이캐스트를 사용하여 장애물이 있는지 확인
+                if (Physics.Raycast(CurCamera.transform.position, directionToTarget, out RaycastHit hit, 20f ,1<<9))
+                {
+                    // 레이캐스트가 대상 오브젝트에 닿았다면 true, 그렇지 않으면 false
+                    return false;
+                }
+                else 
+                    return true;
+            }
         }
         return false;
 
 
-
     }
+
+    public void ChangeTimeLineAsset(PlayableDirector _direct, TimelineAsset _asset)
+    {
+        _direct.Stop();
+        _direct.playableAsset = _asset;
+    }
+
+    
 
 
 }

@@ -15,7 +15,7 @@ public class ItemManager : MonoBehaviour
     [SerializeField]
     private List<GameObject> itemList= new List<GameObject>();
 
-
+    
     
     void Start()
     {
@@ -31,7 +31,7 @@ public class ItemManager : MonoBehaviour
     public void InitInteractionItem(ref List<Material> _curM, ref List<Color> _originColor, Transform _obj)
     {
         List<Renderer> ren = new List<Renderer>();
-
+        
         Renderer[] renderers = _obj.GetComponentsInChildren<Renderer>(true);
 
         for(int i = 0; i < renderers.Length; i++)

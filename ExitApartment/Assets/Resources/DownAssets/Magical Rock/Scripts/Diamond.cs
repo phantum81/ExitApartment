@@ -11,12 +11,16 @@ public class Diamond : MonoBehaviour, IInteraction
     [SerializeField]
     private GameObject [] turnOffObj = new GameObject[2];
     private UnitManager unitMgr;
+    private SoundController soundCtr;
 
     
 
     void Start()
     {
         unitMgr = GameManager.Instance.unitMgr;
+        soundCtr = GetComponent<SoundController>();
+        GameManager.Instance.onGetForestHumanity += SetIsClear;
+        
     }
     public void Init()
     {
@@ -38,13 +42,17 @@ public class Diamond : MonoBehaviour, IInteraction
         }
         onMagicStone.Invoke();
         transform.GetComponent<MeshRenderer>().enabled= false;
-        transform.GetComponent<AudioSource>().enabled= false;
+        soundCtr.Stop();
+        soundCtr.AudioPath = GameManager.Instance.soundMgr.SoundList[70];
+        soundCtr.SetLoop(false);
+        soundCtr.Play();
 
         if(GameManager.Instance.onGetForestHumanity != null)
         {
             GameManager.Instance.onGetForestHumanity();
+            
         }
-
+        
 
         
     }
@@ -62,7 +70,10 @@ public class Diamond : MonoBehaviour, IInteraction
         StartCoroutine(GameManager.Instance.unitMgr.ChangeMaterialColor(unitMgr.SkyBox,unitMgr.SkyboxOringinColor, Color.red, 4f));
        
     }
-
+    public void SetIsClear()
+    {
+        GameManager.Instance.SetForestClearFloor(true);
+    }
     IEnumerator ShowObject()
     {
         yield return new WaitForSeconds(1f);

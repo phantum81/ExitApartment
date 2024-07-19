@@ -28,8 +28,11 @@ public class UiManager : MonoBehaviour
     }
 
     public InGameUiController inGameCtr;
-    
 
+    private void Awake()
+    {
+        //DontDestroyOnLoad(gameObject);
+    }
     void Start()
     {
         

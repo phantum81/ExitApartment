@@ -14,7 +14,8 @@ public class MonsterController : MonoBehaviour
 
     [Header("홈 이벤트 타겟 위치"), SerializeField]
     private Transform home_target;
-
+    [Header("펌프킨 노래"), SerializeField]
+    private AudioSource pumpkinSource;
     private float randomEventTime;
     private float appearTime = 3f;
     private float disappearTime = 5f;
@@ -45,11 +46,12 @@ public class MonsterController : MonoBehaviour
 
             unitMgr.ShowObject(pumpkinNote, true);
 
-            randomEventTime = Random.Range(20f, 50f);
+            randomEventTime = Random.Range(20f, 30f);
             
             yield return new WaitForSeconds(randomEventTime);
 
             SetBlinkEvent(true);
+            pumpkinSource.pitch = 0.5f;
 
             yield return new WaitForSeconds(appearTime);
 
@@ -62,7 +64,7 @@ public class MonsterController : MonoBehaviour
 
             SetBlinkEvent(false);
             unitMgr.ShowObject(pumpkinTransform, false);
-           
+            pumpkinSource.pitch = 1f;
 
             yield return null;
 
@@ -78,28 +80,24 @@ public class MonsterController : MonoBehaviour
         
     }
 
-    public void ChaseTarget(Transform _chaser, Transform _target, float _speed, float _rotSpeed, float _height, float _velocityLerpCoef)
+    public void ChaseTarget(Transform _chaser, Transform _target, float _speed, float _rotSpeed)
     {
         Vector3 velocity = Vector3.zero;
         Vector3 _dir = (_target.position - _chaser.position).normalized;
-        _chaser.rotation = Quaternion.Lerp(_chaser.rotation, Quaternion.LookRotation(_dir), Time.deltaTime * _rotSpeed);
-        velocity = _chaser.forward;
 
-        _chaser.position = _chaser.position + velocity * Time.deltaTime * _speed;
+        if(Vector3.Distance(_chaser.position, _target.position) > 0.2f)
+        {
+            _chaser.rotation = Quaternion.Lerp(_chaser.rotation, Quaternion.LookRotation(_dir), Time.deltaTime * _rotSpeed);
+            velocity = _chaser.forward;
 
-        RaycastHit hit;
-        Vector3 destHeight = _chaser.position;
-
-        if (Physics.Raycast(_chaser.position + Vector3.up, -Vector3.up, out hit))
-            destHeight = new Vector3(_chaser.position.x, hit.point.y + _height, _chaser.position.z);
-
-        _chaser.position = Vector3.Lerp(_chaser.position, destHeight, _velocityLerpCoef * Time.deltaTime);
+            _chaser.position = _chaser.position + velocity * Time.deltaTime * _speed;
+        }
 
     }
 
 
 
-    public Transform GetSoundtarget(Transform _origin, float _radius, int _layMaks)
+    public Transform GetOverlaptarget(Transform _origin, float _radius, int _layMaks)
     {
         Collider[] col = Physics.OverlapSphere(_origin.position, _radius, _layMaks);
 
@@ -107,8 +105,7 @@ public class MonsterController : MonoBehaviour
         {
             foreach (Collider collider in col)
             {
-                if (collider.GetComponent<AudioSource>() != null && collider.GetComponent<AudioSource>().isPlaying)
-                    return collider.transform;
+                return collider.transform;
             }
             return null;
         }

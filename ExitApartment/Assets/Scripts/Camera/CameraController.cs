@@ -24,8 +24,10 @@ public class CameraController : MonoBehaviour
     private float cameraFixLerp = 5f;
 
     //카메라 회전관련 각도설정
-    private float maxXAngle = 70f; 
-    private float minXAngle = -60f;
+    
+    private float maxXAngle = 70f;
+    
+    private float minXAngle = -90f;
     private float rotateX = 0f;
 
 
@@ -43,7 +45,7 @@ public class CameraController : MonoBehaviour
     private Camera main_cam;
     private CameraManager cameraMgr;
     private InputManager inputMgr;
-    
+
 
 
 
@@ -74,23 +76,26 @@ public class CameraController : MonoBehaviour
     private float _s_shake = 0.00006f;
     public float S_shake => _s_shake;
     private Vector3 _velocity = Vector3.zero;
-    #region 유니티 실행부
     private float originCamY;
-
+    private float groundHeight;
+    #region 유니티 실행부
     void Start()
     {
         InGameCameraPos = new Vector3(target.position.x, transform.position.y, target.position.z);
         main_cam = gameObject.GetComponent<Camera>();
         inputMgr = GameManager.Instance.inputMgr;
         cameraMgr = GameManager.Instance.cameraMgr;
-        originCamY = transform.position.y;
-       
+        originCamY = transform.position.y - target.transform.position.y;
+        
     }
 
     
     void Update()
     {
         
+        
+
+
         switch ((int)cameraMgr.ECameraState)
         {
             case 0:
@@ -204,7 +209,8 @@ public class CameraController : MonoBehaviour
 
     public void ResetCamYPosition()
     {
-        target_head.position = new Vector3(target_head.position.x, originCamY, target_head.position.z);
+        target_head.position = new Vector3(target_head.position.x, originCamY+target.transform.position.y , target_head.position.z);
+        
     }
 
 
@@ -214,20 +220,49 @@ public class CameraController : MonoBehaviour
 
     public IEnumerator CameraShake(Camera _cam, float _shakeTime, float _shakeAmount)
     {
+        //float _timer = 0;
+        //Vector3 originalPosition = _cam.transform.localPosition;
+
+        //while (_timer <= _shakeTime)
+        //{
+        //    _cam.transform.localPosition = originalPosition + Random.insideUnitSphere * _shakeAmount;
+        //    _timer += Time.deltaTime;
+        //    yield return null;
+        //}
+
+        //_cam.transform.localPosition = originalPosition;
+        _cam.transform.parent = cameraMgr.ShakeObj;
+        float _timer = 0;
+        Vector3 originalPosition = _cam.transform.localPosition;
+        Vector3 shakePos = _cam.transform.parent.localPosition;
+        while (_timer <= _shakeTime)
+        {
+            _cam.transform.parent.position = shakePos + Random.insideUnitSphere * _shakeAmount;
+            _timer += Time.deltaTime;
+            yield return null;
+        }
+
+        _cam.transform.localPosition = originalPosition;
+        _cam.transform.parent = null;
+
+    }
+    public IEnumerator CameraShakeOrigin(Camera _cam, float _shakeTime, float _shakeAmount)
+    {
+        Debug.Log("CameraShakeOrigin 코루틴 시작");
         float _timer = 0;
         Vector3 originalPosition = _cam.transform.localPosition;
 
         while (_timer <= _shakeTime)
         {
+            Debug.Log($"카메라 위치: {_cam.transform.localPosition}");
             _cam.transform.localPosition = originalPosition + Random.insideUnitSphere * _shakeAmount;
             _timer += Time.deltaTime;
             yield return null;
         }
 
         _cam.transform.localPosition = originalPosition;
-
+        Debug.Log("CameraShakeOrigin 코루틴 종료");
     }
-
 
     public IEnumerator ShakeRotateCam(Camera _cam, float _shakeTime, float _shakeAmount, Vector3 _shakeDir, float _shakingSpeed)
     {
@@ -290,8 +325,9 @@ public class CameraController : MonoBehaviour
 
     IEnumerator OnCameraShake()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         StartCoroutine(CameraShake(main_cam, 1.3f, 0.3f));
+
     }
     #endregion
 

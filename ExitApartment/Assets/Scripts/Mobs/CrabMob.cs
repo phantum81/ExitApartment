@@ -25,7 +25,8 @@ public class CrabMob : MonoBehaviour, IEnemyContect
     private Transform target;
     private Vector3 origin;
     private bool isEvent=false;
-
+    [Header("µ¥µåºä"), SerializeField]
+    private Transform deadView;
 
     void Start()
     {
@@ -118,8 +119,10 @@ public class CrabMob : MonoBehaviour, IEnemyContect
         if(state != EenemyState.None)
         {
             state = EenemyState.Attack;
-            GameManager.Instance.unitMgr.GetContectTarget(this.transform);
+            
+            GameManager.Instance.unitMgr.SetContectTarget(deadView);
             eventMgr.ChangePlayerState(EplayerState.Die);
+            state = EenemyState.None;
         }
 
     }

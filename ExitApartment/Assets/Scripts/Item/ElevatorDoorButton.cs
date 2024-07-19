@@ -11,6 +11,10 @@ public class ElevatorDoorButton : MonoBehaviour, IInteraction
     private List<Material> curMaterial = new List<Material>();
     private ElevatorController eleCtr;
     private SoundController soundCtr;
+    private InGameUiShower uiShower;
+
+    private bool isLock = false;
+    
 
 
     public void OnRayHit(Color _color)
@@ -24,30 +28,79 @@ public class ElevatorDoorButton : MonoBehaviour, IInteraction
 
     public void OnInteraction(Vector3 _angle)
     {
-        if (buttonType == EElevatorButtonType.Open)
+        soundCtr.Play();
+        if (buttonType == EElevatorButtonType.Open && eleCtr.eleWork != EElevatorWork.Locking)
         {
+            if (GameManager.Instance.isClear12F)
+            {
+                return;
+            }
 
             if (eleCtr.eleWork == EElevatorWork.Closing && eleCtr.CurCoroutine != null)
             {
                 eleCtr.StopCoroutine(eleCtr.CurCoroutine);
-            }                     
+                eleCtr.CurCoroutine = null;
+            }
+            if(eleCtr.CurCoroutine == null)
+            {
+
                 eleCtr.eleWork = EElevatorWork.Opening;
                 eleCtr.CurCoroutine = eleCtr.StartCoroutine(eleCtr.OpenDoor());
+            }
             
-            soundCtr.Play();
+            
 
         }
-        else if (buttonType == EElevatorButtonType.Close)
+        else if (buttonType == EElevatorButtonType.Close && eleCtr.eleWork != EElevatorWork.Locking)
         {
-
+            
             if (eleCtr.eleWork == EElevatorWork.Opening && eleCtr.CurCoroutine != null)
             {
                 eleCtr.StopCoroutine(eleCtr.CurCoroutine);
+                eleCtr.CurCoroutine = null;
             }
-                eleCtr.eleWork = EElevatorWork.Closing;
 
+            if(eleCtr.CurCoroutine == null)
+            {
+                eleCtr.eleWork = EElevatorWork.Closing;
                 eleCtr.CurCoroutine = eleCtr.StartCoroutine(eleCtr.CloseDoor());
-            soundCtr.Play();
+            }
+
+
+
+
+        }
+        else if (buttonType == EElevatorButtonType.Move)
+        {
+            
+            if (uiShower.CheckRightFloor() && eleCtr.IsClose)
+            {
+                if (GameManager.Instance.isClearForest)
+                {
+                    GameManager.Instance.ChangeFloorLevel(EFloorType.Forest5ABC);
+                    GameManager.Instance.SetForestClearFloor(false);
+                }
+                if (GameManager.Instance.isClear12F)
+                {
+                    
+                    GameManager.Instance.Set12FClearFloor(false);
+                }
+
+
+                if (eleCtr.CurCoroutine != null)
+                {
+                    eleCtr.StopCoroutine(eleCtr.CurCoroutine);
+                    eleCtr.CurCoroutine = null;
+                }
+
+                
+                if (eleCtr.CurCoroutine == null)
+                {
+                    eleCtr.eleWork = EElevatorWork.Locking;
+                    eleCtr.CurCoroutine = eleCtr.StartCoroutine(eleCtr.MoveFloor());
+                }
+
+            }
         }
 
     }
@@ -71,6 +124,7 @@ public class ElevatorDoorButton : MonoBehaviour, IInteraction
         eleCtr = GameManager.Instance.unitMgr.ElevatorCtr;
         soundCtr = gameObject.GetComponent<SoundController>();
         soundCtr.AudioPath = GameManager.Instance.soundMgr.SoundList[34];
+        uiShower = UiManager.Instance.inGameCtr.InGameUiShower;
 
     }
 

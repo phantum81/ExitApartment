@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+[RequireComponent(typeof(Light))]
+[RequireComponent(typeof(SoundController))]
+[RequireComponent(typeof(AudioSource))]
 public class BlinkLight : MonoBehaviour
 {
         
@@ -16,8 +19,10 @@ public class BlinkLight : MonoBehaviour
     private float randomIntensity;
     private float curRange;
     private Coroutine curCoroutine;
+    private Coroutine soundCoroutine;
     private Light transLight;
-
+    private SoundController soundCtr;
+    
     private void Awake()
     {
 
@@ -25,20 +30,27 @@ public class BlinkLight : MonoBehaviour
         curIntensity = transLight.intensity;
         originIntensity = transLight.intensity;
         curRange = transLight.range;
+        soundCtr= GetComponent<SoundController>();
+    }
+
+    private void Start()
+    {
+        soundCtr.AudioPath = GameManager.Instance.soundMgr.SoundList[52];
     }
 
 
-
-    
     void Update()
     {
         if(isEnable && curCoroutine == null)
         {
             curCoroutine = StartCoroutine(Blink());
+            soundCoroutine = StartCoroutine(PlaySound());
         }
         else if(!isEnable && curCoroutine !=null)
         {
+            StopCoroutine(soundCoroutine);
             StopCoroutine(curCoroutine);
+            soundCtr.Stop();
             curCoroutine = null;
             transLight.intensity = originIntensity;
         }
@@ -66,12 +78,21 @@ public class BlinkLight : MonoBehaviour
                 {
                     randomIntensity = Random.Range(0.2f, 0.8f);
                 }
-
+                
                 transLight.intensity = curIntensity;
                 transLight.range = curIntensity + curRange;
 
                 yield return null;
             }
+        }
+    }
+
+    private IEnumerator PlaySound()
+    {
+        while(true)
+        {
+            soundCtr.Play();
+            yield return new WaitForSeconds(0.1f);
         }
     }
 

@@ -14,7 +14,7 @@ public interface IContect
 
     void OnContect();
 
-
+    void OnExit();
 }
 
 public interface IGravityChange

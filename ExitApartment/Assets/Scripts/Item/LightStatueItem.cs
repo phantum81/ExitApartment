@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -37,12 +38,29 @@ public class LightStatueItem : Item
 
         Color curColor;
         Light myLight;
+        Renderer[] ren = transform.GetComponentsInChildren<Renderer>();
         myLight = transform.GetComponentInChildren<Light>();
-        for (int i = 0; i < transform.childCount + 1; i++)
+        // 자신의 Renderer를 제외한 리스트 생성
+        List<Renderer> childRenderers = new List<Renderer>();
+        foreach (Renderer renderer in ren)
         {
-            curColor = transform.GetComponentsInChildren<Renderer>()[i].material.GetColor("_EmissionColor");
-            transform.GetComponentsInChildren<Renderer>()[i].material.SetColor("_EmissionColor", curColor == Color.black ? Color.white : Color.black);
+            if (renderer.gameObject != this.gameObject)
+            {
+                childRenderers.Add(renderer);
+            }
         }
+
+        for (int i = 0; i < childRenderers.Count ; i++)
+        {
+            Material mat = childRenderers[i].material;
+            mat.EnableKeyword("_EMISSION");
+            curColor = mat.GetColor("_EmissionColor");
+            Color newColor = curColor == Color.black ? Color.white : Color.black;
+            mat.SetColor("_EmissionColor", newColor);
+            DynamicGI.SetEmissive(childRenderers[i], newColor);
+            childRenderers[i].UpdateGIMaterials();
+        }
+
         myLight.enabled = !myLight.enabled;
 
     }
@@ -58,11 +76,17 @@ public class LightStatueItem : Item
         base.OnGravityChange();
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected override void OnTriggerEnter(Collider other)
     {
+        base.OnTriggerEnter(other);
         IEventContect col = other.GetComponent<IEventContect>();
         col?.OnContect(ESOEventType.OnClear12F);
         
     }
 
+
+    protected override void OnCollisionEnter(Collision other)
+    {
+        base.OnCollisionEnter(other);
+    }
 }

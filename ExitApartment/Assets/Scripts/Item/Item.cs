@@ -22,7 +22,7 @@ public class Item : MonoBehaviour, IInteraction, IUseItem, IGravityChange
 
     public virtual void Init()
     {
-        
+        GameManager.Instance.unitMgr.ChangeFloor(EFloorType.Home15EB);
         GameManager.Instance.itemMgr.InitInteractionItem(ref curMaterial, ref originColor, transform);
         rigd = GetComponent<Rigidbody>();
         soundCtr = gameObject.GetComponent<SoundController>();
@@ -38,9 +38,9 @@ public class Item : MonoBehaviour, IInteraction, IUseItem, IGravityChange
     }
     public virtual void OnInteraction(Vector3 _angle)
     {
-        GameManager.Instance.itemMgr.PickItem(this.transform, _angle, soItemData);
         soundCtr.AudioPath = GameManager.Instance.soundMgr.SoundList[9];
         soundCtr.Play();
+        GameManager.Instance.itemMgr.PickItem(this.transform, _angle, soItemData);
         
     }
     public virtual void OnRayOut()
@@ -75,5 +75,13 @@ public class Item : MonoBehaviour, IInteraction, IUseItem, IGravityChange
         GameManager.Instance.unitMgr.OnChangeGravity(rigd, GameManager.Instance.unitMgr.ReserveGravity, 9f);
     }
 
+    protected virtual void OnCollisionEnter(Collision other)
+    {
+        if(other.gameObject.layer != 7)
+            soundCtr.Play();
+    }
+    protected virtual void OnTriggerEnter(Collider other)
+    {
 
+    }
 }

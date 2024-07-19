@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public Vector3 InputDir { get; private set; }
     [Header("플레이어"),SerializeField]
     private Transform player;
+    public Transform Player=>player;
     [Header("걷는속력"), SerializeField]
     private float _walkSpeed = 4f;
     public float WalkSpeed => _walkSpeed;
@@ -24,20 +25,26 @@ public class PlayerController : MonoBehaviour
 
 
     private Rigidbody rigd;
+    public Rigidbody Rigd => rigd;
     private float rotateY = 0f;
     //-----------이동관련---------------------------------
 
     [SerializeField]
     private PlayerSlopeRay playerSlopRay;
+    [SerializeField]
+    private GroundCheck groundCheck;
+    public GroundCheck GrCheck=> groundCheck;
     private PlayerInventory playerInven;
     private InputManager inputMgr;
     private CameraManager cameraMgr;
     private UnitManager unitMgr;
     private SoundController soundCtr;
     public SoundController SoundCtr => soundCtr;
+    [Header("플레이어 사운드"),SerializeField]
+    private PlayerSound playerSound;
+    public PlayerSound PSound => playerSound;
 
-    
-
+    private Vector3 origin;
 
     private EplayerState ePlayerState = EplayerState.None;
 
@@ -70,6 +77,7 @@ public class PlayerController : MonoBehaviour
         rigd.velocity = lastVelo;
         rigd.angularVelocity = lastAngular;
         Rotate();
+        
 
     }
 
@@ -145,9 +153,12 @@ public class PlayerController : MonoBehaviour
         unitMgr = GameManager.Instance.unitMgr;
         soundCtr = GetComponent<SoundController>();
         playerInven = gameObject.GetComponent<PlayerInventory>();
+        origin = player.position;
     }
     public void ChangeGravity()
     {
         unitMgr.OnChangeGravity(rigd,unitMgr.ReserveGravity,0f);
     }
+
+    
 }

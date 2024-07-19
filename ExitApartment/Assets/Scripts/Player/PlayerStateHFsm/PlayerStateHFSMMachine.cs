@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -33,8 +34,6 @@ public class PlayerStateHFSMMachine : MonoBehaviour
     private void Update()
     {
         
-        statePostHFSM.Update(playerPost);
-        stateDeadCamHFSM.Update(deadCamCtr);
         ePlayerCurState = statePostHFSM.CurState;
 
 
@@ -53,8 +52,10 @@ public class PlayerStateHFSMMachine : MonoBehaviour
             curTime = 0f;
 
 
+        statePostHFSM.Update(playerPost);
+        stateDeadCamHFSM.Update(deadCamCtr);
 
-
+        
 
     }
 
@@ -74,6 +75,14 @@ public class PlayerStateHFSMMachine : MonoBehaviour
         cameraMgr = GameManager.Instance.cameraMgr;
         unitMgr = GameManager.Instance.unitMgr;
         seePoint = unitMgr.MobDic[EMobType.Pumpkin].GetComponent<Pumpkin>().SeePoint;
+
+        //Action onResetEvent = () => ChangePlayerState(EplayerState.None);
+
+        //GameManager.Instance.onHomeReset += onResetEvent;
+        //GameManager.Instance.onNothingReset += onResetEvent;
+        //GameManager.Instance.onFallReset += onResetEvent;
+        //GameManager.Instance.onForestReset += onResetEvent;
+        //GameManager.Instance.onEscapeReset += onResetEvent;
     }
     public void ChangePlayerState(EplayerState _state)
     {

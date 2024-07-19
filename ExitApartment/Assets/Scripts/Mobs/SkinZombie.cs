@@ -13,6 +13,14 @@ public class SkinZombie : MonoBehaviour, IEnemyContect
     [Header("대기시간"),SerializeField]
     private float waitTime;
 
+    [Header("걷는 속도"), SerializeField]
+    private float walkSpeed = 2f;
+    [Header("달리는 속도"), SerializeField]
+    private float runSpeed = 4f;
+
+    [Header("그라운드 체커"), SerializeField]
+    private GroundCheck groundCheck;
+
 
     [Header("탐색반경"), SerializeField]
     private float hearRadius;
@@ -24,7 +32,11 @@ public class SkinZombie : MonoBehaviour, IEnemyContect
     private UnitManager unitMgr;
     private EventManager eventMgr;
     private Transform target;
-
+    private SoundController soundCtr;
+    [SerializeField]
+    private SoundController chaseSoundCtr;
+    [Header("데드뷰"), SerializeField]
+    private Transform deadView;
     void Start()
     {
         anim = transform.GetComponent<Animator>();
@@ -33,16 +45,31 @@ public class SkinZombie : MonoBehaviour, IEnemyContect
         agent = GetComponent<NavMeshAgent>();
         timer = waitTime;
         state = EenemyState.Idle;
-        
+
+        soundCtr = GetComponent<SoundController>();
+        soundCtr.AudioPath = GameManager.Instance.soundMgr.SoundList[71];
+        chaseSoundCtr.AudioPath = GameManager.Instance.soundMgr.SoundList[72];
+        soundCtr.Play();
+        //soundCtr.StartCoroutine(soundCtr.PlayingRandomTimeSound(8f, 14f));
     }
 
     
     void Update()
     {
         anim.SetFloat("Speed", agent.speed);
+        if (EenemyState.None == state)
+            return;
 
-        target = unitMgr.MobCtr.GetSoundtarget(transform, hearRadius, 1 << 7);
-        
+        target = unitMgr.MobCtr.GetOverlaptarget(transform, hearRadius, 1 << 7);
+        if(target != null)
+        {
+            if (!target.parent.gameObject.GetComponent<AudioSource>().isPlaying)
+            {
+                target = null;
+            }
+                            
+        }
+
 
         if (EenemyState.Idle != state && EenemyState.Attack != state)
         {
@@ -55,6 +82,7 @@ public class SkinZombie : MonoBehaviour, IEnemyContect
         switch (state)
         {
             case EenemyState.None:
+
                 break;
 
             case EenemyState.Idle:
@@ -67,6 +95,8 @@ public class SkinZombie : MonoBehaviour, IEnemyContect
 
             case EenemyState.Chase:
                 HandleChaseState();
+                if(!chaseSoundCtr.IsPlaying)
+                    chaseSoundCtr.Play();
                 break;
 
             case EenemyState.Attack:
@@ -82,10 +112,12 @@ public class SkinZombie : MonoBehaviour, IEnemyContect
     public void OnContect()
     {
         if(state == EenemyState.None) return;
-        state = EenemyState.Attack;
-        GameManager.Instance.unitMgr.GetContectTarget(this.transform);
+        state = EenemyState.Attack;        
+        GameManager.Instance.unitMgr.SetContectTarget(deadView);
+        soundCtr.AudioPath = GameManager.Instance.soundMgr.SoundList[73];
+        soundCtr.Play();
         eventMgr.ChangePlayerState(EplayerState.Die);
-
+        
     }
 
     void MoveToRandomPosition()
@@ -107,9 +139,10 @@ public class SkinZombie : MonoBehaviour, IEnemyContect
         {
             agent.speed = 0f;
             timer -= Time.deltaTime;
+            
             if (timer <= 0f)
             {
-                agent.speed = 2f;
+                agent.speed = walkSpeed;
                 MoveToRandomPosition();
                 timer = waitTime;
             }
@@ -122,9 +155,10 @@ public class SkinZombie : MonoBehaviour, IEnemyContect
         if (target || agent.destination == target.position)
         {
             agent.SetDestination(target.position);
-            agent.speed = 4f;
+            agent.speed = runSpeed;
         }
     }
+
 
 
 

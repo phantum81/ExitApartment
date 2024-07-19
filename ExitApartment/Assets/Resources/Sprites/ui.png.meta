@@ -689,7 +689,7 @@ TextureImporter:
       name: ui_27
       rect:
         serializedVersion: 2
-        x: 384
+        x: 385
         y: 512
         width: 128
         height: 128
@@ -711,7 +711,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 512
-        y: 512
+        y: 513
         width: 128
         height: 128
       alignment: 0
@@ -900,7 +900,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 640
-        y: 384
+        y: 385
         width: 128
         height: 128
       alignment: 0

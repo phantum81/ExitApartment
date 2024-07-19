@@ -15,9 +15,18 @@ public class SoundManager : MonoBehaviour
     /// </summary>
     public Dictionary<int, string> SoundList => soundList;
 
-    void Start()
+    [Header("Bgm 컨트롤러"),SerializeField]
+    private BgmController bgmCtr;
+    public BgmController BgmCtr => bgmCtr;
+
+    private void Awake()
     {
         Init();
+    }
+
+    void Start()
+    {
+        
     }
 
     
@@ -25,6 +34,7 @@ public class SoundManager : MonoBehaviour
     {
         
     }
+
 
 
     public AudioClip GetOrAddAudioClip(string _path)
@@ -94,7 +104,8 @@ public class SoundManager : MonoBehaviour
         soundList.Add(33, "CloseTheClosetSound");
         soundList.Add(34, "ButtonPressSound");
         soundList.Add(35, "ElevatorSound");
-
+        soundList.Add(36, "JumpScarePumpkin");
+        soundList.Add(37, "BackRoomSound");
         //----효과음엘베문----
 
 
@@ -104,6 +115,27 @@ public class SoundManager : MonoBehaviour
         soundList.Add(53, "AnalogSound");
 
         //---아이템 관련----
+
+        soundList.Add(70, "Ahhh");
+        soundList.Add(71, "ZombieSound");
+        soundList.Add(72, "ChaseSound");
+        soundList.Add(73, "ZombieAttackSound");
+
+
+
+        soundList.Add(80, "ChaseBgm");
+        soundList.Add(81, "Mob12FSound");
+        soundList.Add(82, "Mob12FChase");
+
+        //----몬스터 관련 bgm-----
+
+        soundList.Add(101, "FallDead");
+        soundList.Add(102, "FallScream");
+        soundList.Add(103, "ManBreathe");
+        soundList.Add(104, "ManHurtBreathe");
+
+        //-----플레이어 효과음-----
+
 
     }
 }

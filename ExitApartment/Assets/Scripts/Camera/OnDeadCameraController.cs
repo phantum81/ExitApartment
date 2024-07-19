@@ -1,7 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Playables;
+using UnityEngine.Timeline;
 
 public class OnDeadCameraController : MonoBehaviour
 {
@@ -33,87 +36,96 @@ public class OnDeadCameraController : MonoBehaviour
 
     private CameraController cameraCtr;
     private CameraManager cameraMgr;
-
-
+    private PlayableDirector playableDir;
+    [Header("Á×À½ Ä·"), SerializeField]
+    private TimelineAsset deadAsset;
+    private Collider deadCollider;
+    private PlayerController playerCtr;
+    private SoundManager soundMgr;
+    [SerializeField]
+    private Light childLight;
     void Start()
     {
         lookMonsterWait = new WaitForSeconds(lookMonster_time);
         cameraCtr = GameManager.Instance.cameraMgr.CameraCtr;
         cameraMgr = GameManager.Instance.cameraMgr;
-                
+        playableDir = GetComponent<PlayableDirector>();
+        deadCollider = GetComponent<Collider>();
+        playerCtr = GameManager.Instance.unitMgr.PlayerCtr;
+        soundMgr = GameManager.Instance.soundMgr;
     }
 
 
 
     IEnumerator DieCam12F()
     {
-
-        yield return new WaitUntil(() => cameraMgr.CameraDic[1].enabled == true);
-        transform.GetComponent<Collider>().enabled = true;
-        Quaternion _firstTarget = Quaternion.Euler(new Vector3(0, 90f, 0f));
-        Quaternion _secondTarget = Quaternion.Euler(new Vector3(0, 90f, -90f));
-        Quaternion _thirdTarget = Quaternion.Euler(new Vector3(0, 173f, -90f));
-        Quaternion _forthTarget = Quaternion.Euler(new Vector3(0, 90f, -90f));
-
         
-        yield return lookMonsterWait;
-        yield return StartCoroutine(CamLookAt(cameraMgr.CameraDic[1], _firstTarget, rotateSpeed, min_rotateSpeed, max_rotateSpeed));
-        StartCoroutine(FollowCam(cameraMgr.CameraDic[1], transform, _d_speed, _d_shake, 2));
+        cameraMgr.PostProcess.AllBlackCloseCamera();
+        yield return new WaitForSeconds(4f);
+        deadCollider.enabled = true;
+        childLight.enabled = true;
+        cameraMgr.PostProcess.StartCoroutine(cameraMgr.PostProcess.VignetteOn(0f,4f,Color.black));
+        yield return new WaitForSeconds(4.3f);
+        cameraMgr.PostProcess.StartCoroutine(cameraMgr.PostProcess.VignetteOn());        
+        playerCtr.PSound.StartCoroutine(playerCtr.PSound.On12HurtSound());
+        cameraMgr.PostProcess.CurCoroutine.Add(StartCoroutine(cameraMgr.PostProcess.PostProccessEffectOn(EpostProcessType.Grain)));
+        playableDir.Play();
 
-        yield return lookMonsterWait;
-        yield return StartCoroutine(cameraCtr.ShakeRotateCam(cameraMgr.CameraDic[1], 2.5f, 40f, shakeDir, 12f));
-        yield return StartCoroutine(CamLookAt(cameraMgr.CameraDic[1], _secondTarget, rotateSpeed*2f, min_rotateSpeed, max_rotateSpeed));
-
-        yield return lookMonsterWait;
-        yield return StartCoroutine(CamLookAt(cameraMgr.CameraDic[1], _thirdTarget, rotateSpeed*3f, min_rotateSpeed, max_rotateSpeed));
-
-        yield return lookMonsterWait;
-        yield return StartCoroutine(CamLookAt(cameraMgr.CameraDic[1], _forthTarget, rotateSpeed*6f , min_rotateSpeed, max_rotateSpeed));
-        
+        yield return null;
 
     }
+
     public IEnumerator DeadCam()
     {
-        
+        playableDir.Stop();
         Transform _target = GameManager.Instance.unitMgr.ContectTarget;
-        yield return new WaitUntil(()=> _target != null);
+        Camera curCam = GameManager.Instance.cameraMgr.CurCamera;
+        if (_target != null)
+        {
+            
+            yield return StartCoroutine(CamMoveToTarget(curCam, _target, 10f, 10f));
+            yield return new WaitForSeconds(0.5f);
+            cameraCtr.StartCoroutine(cameraCtr.CameraShakeOrigin(cameraMgr.CurCamera, 0.5f, 0.8f));
+            
+        }
+   
+    }
 
-        Vector3 dir = _target.position - cameraMgr.CurCamera.transform.position;
-        Quaternion rotateDir =  Quaternion.LookRotation(dir);
-
-        cameraMgr.CurCamera.transform.position = _target.position + _target.forward * 0.4f;
-        cameraMgr.CurCamera.transform.rotation = rotateDir;
-        StartCoroutine(cameraCtr.CameraShake(cameraMgr.CurCamera, 0.5f, 0.8f));
-
-
+    public IEnumerator CamMoveToTarget(Camera _cam, Transform _target, float _speed, float _rotSpeed , float _threshold = 0.5f)
+    {
+        _cam.transform.parent = _target;
+        float disValue = 0f;
+        float angleValue = 0f;
         
-    }
-
-    IEnumerator CamLookAt(Camera _cam , Quaternion _target, float _rotSpeed, float _minSpeed, float _maxSpeed)
-    {
-        float speed=0f;
-        while (Quaternion.Angle(_cam.transform.rotation, _target) > validAngle)
-        {
-            speed += Time.deltaTime * _rotSpeed;
-            Mathf.Clamp(speed, _minSpeed, _maxSpeed);
-            _cam.transform.rotation = Quaternion.RotateTowards(transform.rotation, _target, speed * Time.deltaTime);
-            
-            yield return null;
-        }
-
-
-    }
-
-
-    IEnumerator FollowCam(Camera _cam, Transform _target, float _speed, float _shake, int _version)
-    {
         while (true)
-        {
-            cameraCtr.FollowCamera( _cam, _target, _speed, _shake, _version);
-            
+        {            
+
+            _cam.transform.position = Vector3.Lerp(_cam.transform.position, _target.position - _target.forward  , Time.deltaTime * _speed);
+            _cam.transform.rotation = Quaternion.Lerp(_cam.transform.rotation, _target.rotation, Time.deltaTime * _rotSpeed);
+            disValue = Vector3.Distance(_cam.transform.position, _target.position - _target.forward);
+            angleValue = Quaternion.Angle(_cam.transform.rotation, _target.rotation);
+            if (disValue < _threshold && angleValue < _threshold)
+            {
+                break;
+            }
+
             yield return null;
+
         }
+
+       
+
     }
+
+
+
+
+    public void ChangeTimeLineAsset()
+    {
+        playableDir.Stop();
+
+    }
+
 
 
     public void Die12FDeadCam()

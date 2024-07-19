@@ -52,4 +52,9 @@ public class FlashLightItem : Item
     {
         base.OnGravityChange();
     }
+    protected override void OnCollisionEnter(Collision other)
+    {
+        base.OnCollisionEnter(other);
+    }
+
 }
