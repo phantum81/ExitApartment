@@ -23,13 +23,22 @@ public class SoundController : MonoBehaviour
     private float audioTime;
     public float AudioTime => audioTime;
 
+    [Header("어웨이크 실행"), SerializeField]
+    private bool isAwakePlay = false;
 
-
-
+    private void Awake()
+    {
+          
+        
+    }
     void Start()
     {
+
         audioSource= GetComponent<AudioSource>();
-        
+        if (isAwakePlay)
+        {
+            Play();
+        }
     }
 
     private void Update()
@@ -39,6 +48,7 @@ public class SoundController : MonoBehaviour
         isPlaying = audioSource.isPlaying;
         audioTime = audioSource.time;
         
+
     }
 
     public void Play()

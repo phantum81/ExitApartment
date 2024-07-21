@@ -22,7 +22,7 @@ public class Item : MonoBehaviour, IInteraction, IUseItem, IGravityChange
 
     public virtual void Init()
     {
-        GameManager.Instance.unitMgr.ChangeFloor(EFloorType.Home15EB);
+        
         GameManager.Instance.itemMgr.InitInteractionItem(ref curMaterial, ref originColor, transform);
         rigd = GetComponent<Rigidbody>();
         soundCtr = gameObject.GetComponent<SoundController>();
@@ -78,7 +78,7 @@ public class Item : MonoBehaviour, IInteraction, IUseItem, IGravityChange
     protected virtual void OnCollisionEnter(Collision other)
     {
         if(other.gameObject.layer != 7)
-            soundCtr.Play();
+            soundCtr?.Play();
     }
     protected virtual void OnTriggerEnter(Collider other)
     {

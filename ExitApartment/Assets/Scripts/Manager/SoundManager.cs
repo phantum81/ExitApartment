@@ -21,7 +21,11 @@ public class SoundManager : MonoBehaviour
 
     private void Awake()
     {
-        Init();
+
+        GameManager.Instance.soundMgr = this;
+        //DontDestroyOnLoad(gameObject);
+        SoundInit();
+        
     }
 
     void Start()
@@ -83,7 +87,7 @@ public class SoundManager : MonoBehaviour
     }
     
 
-    private void Init()
+    private void SoundInit()
     {
         soundList.Add(0, "InsideRoomWalkSound");
         soundList.Add(1, "InsideRoomRunSound");
@@ -137,6 +141,23 @@ public class SoundManager : MonoBehaviour
         //-----플레이어 효과음-----
 
 
+
+        soundList.Add(200, "MenuBgmSound");
+        soundList.Add(201, "RainSound");
+
+
+        //----- Ui 사운드-----
+    }
+    public void Init()
+    {
+        if(bgmCtr == null)
+        {
+            GameObject go = GameObject.Find("BgmSound");
+            if(go != null)
+            {
+                bgmCtr = go.GetComponent<BgmController>();
+            }
+        }
     }
 }
 

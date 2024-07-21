@@ -58,4 +58,7 @@ public interface IInteraction
 
 
 }
-
+public interface IMenuView
+{
+    void ShowOptionPanel();
+}

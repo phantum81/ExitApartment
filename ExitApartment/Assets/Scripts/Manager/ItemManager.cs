@@ -15,8 +15,11 @@ public class ItemManager : MonoBehaviour
     [SerializeField]
     private List<GameObject> itemList= new List<GameObject>();
 
-    
-    
+    private void Awake()
+    {
+        GameManager.Instance.itemMgr = this;
+    }
+
     void Start()
     {
         

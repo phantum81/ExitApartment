@@ -20,6 +20,7 @@ public class EventManager : MonoBehaviour
     
     private void Awake()
     {
+        GameManager.Instance.eventMgr = this;
     }
     void Start()
     {

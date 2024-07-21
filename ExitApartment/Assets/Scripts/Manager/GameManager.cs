@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
     public EventManager eventMgr;
     public ItemManager itemMgr;
     public SoundManager soundMgr;
-    
+    public ScenesManager sceneMgr;
 
     public Action onGetForestHumanity;
     public Action onForestFloor;
@@ -68,11 +68,13 @@ public class GameManager : MonoBehaviour
     private bool isRest =false;
     private void Awake()
     {
+        DontDestroyOnLoad(gameObject);
         if (_instance == null)
         {
             _instance = this;
-            DontDestroyOnLoad(gameObject);
-            SceneManager.sceneLoaded += OnSceneLoaded;
+           
+            
+           // SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else if (_instance != this)
         {
@@ -92,7 +94,8 @@ public class GameManager : MonoBehaviour
     {
         if(isRest)
         {
-            ChangeFloorLevel(saveData.data.eFloorData);
+            if(saveData != null)
+                ChangeFloorLevel(saveData.data.eFloorData);
             isRest= false;
         }
     }
@@ -102,7 +105,7 @@ public class GameManager : MonoBehaviour
         // 씬이 로드된 후 참조를 갱신하는 로직을 여기에 작성합니다.
         Init();
     }
-    private void Init()
+    public void Init()
     {
         if (unitMgr == null)
         {
@@ -167,6 +170,8 @@ public class GameManager : MonoBehaviour
         }
         itemMgr.Init();
         inputMgr.Init();
+        soundMgr.Init();
+        
         isRest = true;
         onGetForestHumanity += AddHumanityScore;
     }
@@ -264,7 +269,8 @@ public class GameManager : MonoBehaviour
 
     private void Save(EFloorType _type)
     {
-        saveData.data.eFloorData = _type;
+        if(saveData != null)
+             saveData.data.eFloorData = _type;
     }
     public void Restart()
     {

@@ -21,6 +21,10 @@ public class InputManager : MonoBehaviour
     private Dictionary<EuserAction, bool> inputDic = new Dictionary<EuserAction, bool>();
     public Dictionary<EuserAction, bool> InputDic => inputDic;
 
+    private void Awake()
+    {
+        GameManager.Instance.inputMgr = this;
+    }
     // Update is called once per frame
     private void Start()
     {

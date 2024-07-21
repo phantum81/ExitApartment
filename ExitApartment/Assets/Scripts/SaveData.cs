@@ -9,7 +9,8 @@ public class SaveData : MonoBehaviour
     public GameData data;
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(this);
+        GameManager.Instance.saveData = this;
     }
     void Start()
     {

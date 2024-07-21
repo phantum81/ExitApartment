@@ -55,6 +55,8 @@ public class CameraManager : MonoBehaviour
 
     private void Awake()
     {
+        GameManager.Instance.cameraMgr = this;
+
         camDic.Add(0, Camera.main);
         camDic.Add(1, deadCamCtr.GetComponent<Camera>());
         camDic.Add(2, zoomCamera.GetComponent<Camera>());

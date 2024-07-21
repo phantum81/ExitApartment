@@ -84,6 +84,7 @@ public class UnitManager : MonoBehaviour
 
     private void Awake()
     {
+        GameManager.Instance.unitMgr = this;
         mobDic.Add(EMobType.Mob12F, mobList[0]);
         mobDic.Add(EMobType.Pumpkin, mobList[1]);
         mobDic.Add(EMobType.SkinLess, mobList[2]);
@@ -96,6 +97,7 @@ public class UnitManager : MonoBehaviour
     }
     void Start()
     {
+
         GameManager.Instance.onGetForestHumanity += OnForestHumanity;
         GameManager.Instance.onNothingFloor += ShowClearNothingFloor;
         GameManager.Instance.onFallFloor += ShowClearFallFloor;
@@ -104,6 +106,7 @@ public class UnitManager : MonoBehaviour
         playerCtr.Init();
         terrain = Terrain.activeTerrain;
         terrainData = terrain?.terrainData;
+        ChangeFloor(EFloorType.Home15EB);
     }
 
     // Update is called once per frame

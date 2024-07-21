@@ -713,6 +713,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 1
   audioPath: 
+  isAwakePlay: 0
 --- !u!82 &20401890
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4665,6 +4666,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 1
   audioPath: 
+  isAwakePlay: 0
 --- !u!114 &96371011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8844,6 +8846,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 1
   audioPath: 
+  isAwakePlay: 0
 --- !u!82 &196612603
 AudioSource:
   m_ObjectHideFlags: 0
@@ -11581,6 +11584,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 0.6
   audioPath: 
+  isAwakePlay: 0
 --- !u!1 &292997155
 GameObject:
   m_ObjectHideFlags: 0
@@ -13272,7 +13276,8 @@ MonoBehaviour:
   eventMgr: {fileID: 402160028}
   itemMgr: {fileID: 873903975}
   soundMgr: {fileID: 2083936560}
-  savedata: {fileID: 11400000, guid: 410c208ef7ef85c4b898e51033bc1e29, type: 2}
+  sceneMgr: {fileID: 0}
+  saveData: {fileID: 0}
   eFloorType: 0
   isClear12F: 0
   isClearLocked: 0
@@ -16151,6 +16156,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 1
   audioPath: 
+  isAwakePlay: 0
 --- !u!82 &401252026
 AudioSource:
   m_ObjectHideFlags: 0
@@ -16922,6 +16928,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 1
   audioPath: 
+  isAwakePlay: 0
 --- !u!82 &414426183
 AudioSource:
   m_ObjectHideFlags: 0
@@ -19796,6 +19803,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 0.6
   audioPath: 
+  isAwakePlay: 0
 --- !u!1 &506777754
 GameObject:
   m_ObjectHideFlags: 0
@@ -21174,6 +21182,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 0.5
   audioPath: 
+  isAwakePlay: 0
 --- !u!82 &539518655
 AudioSource:
   m_ObjectHideFlags: 0
@@ -21757,6 +21766,50 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &557089480
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 557089482}
+  - component: {fileID: 557089481}
+  m_Layer: 0
+  m_Name: SceneManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &557089481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 557089480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 009b47fa0dab0bf43964ea8bdd11e55f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &557089482
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 557089480}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 30
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &572278474
 GameObject:
   m_ObjectHideFlags: 0
@@ -21927,6 +21980,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 1
   audioPath: 
+  isAwakePlay: 0
 --- !u!82 &573774463
 AudioSource:
   m_ObjectHideFlags: 0
@@ -24732,6 +24786,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 1
   audioPath: 
+  isAwakePlay: 0
 --- !u!1 &685370227
 GameObject:
   m_ObjectHideFlags: 0
@@ -27748,6 +27803,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 1
   audioPath: 
+  isAwakePlay: 0
 --- !u!82 &766761140
 AudioSource:
   m_ObjectHideFlags: 0
@@ -40394,6 +40450,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 1
   audioPath: 
+  isAwakePlay: 0
 --- !u!82 &867431282
 AudioSource:
   m_ObjectHideFlags: 0
@@ -46475,6 +46532,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 1
   audioPath: 
+  isAwakePlay: 0
 --- !u!82 &885712823
 AudioSource:
   m_ObjectHideFlags: 0
@@ -47673,6 +47731,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 1
   audioPath: 
+  isAwakePlay: 0
 --- !u!82 &911926561
 AudioSource:
   m_ObjectHideFlags: 0
@@ -48498,6 +48557,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 1
   audioPath: 
+  isAwakePlay: 0
 --- !u!82 &937258530
 AudioSource:
   m_ObjectHideFlags: 0
@@ -50073,6 +50133,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 0.6
   audioPath: 
+  isAwakePlay: 0
 --- !u!1001 &992262335
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -50614,6 +50675,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 1
   audioPath: 
+  isAwakePlay: 0
 --- !u!82 &1002354413
 AudioSource:
   m_ObjectHideFlags: 0
@@ -51006,6 +51068,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 1
   audioPath: 
+  isAwakePlay: 0
 --- !u!82 &1017578734
 AudioSource:
   m_ObjectHideFlags: 0
@@ -54332,6 +54395,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 1
   audioPath: 
+  isAwakePlay: 0
 --- !u!82 &1125188037
 AudioSource:
   m_ObjectHideFlags: 0
@@ -55642,6 +55706,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 1
   audioPath: 
+  isAwakePlay: 0
 --- !u!82 &1154548480
 AudioSource:
   m_ObjectHideFlags: 0
@@ -55891,6 +55956,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 1
   audioPath: 
+  isAwakePlay: 0
 --- !u!82 &1168834787
 AudioSource:
   m_ObjectHideFlags: 0
@@ -57750,6 +57816,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 1
   audioPath: 
+  isAwakePlay: 0
 --- !u!82 &1232499396
 AudioSource:
   m_ObjectHideFlags: 0
@@ -60025,6 +60092,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 1
   audioPath: 
+  isAwakePlay: 0
 --- !u!114 &1307630075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69185,6 +69253,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 1
   audioPath: 
+  isAwakePlay: 0
 --- !u!114 &1418391250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73614,6 +73683,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 1
   audioPath: 
+  isAwakePlay: 0
 --- !u!82 &1556817154
 AudioSource:
   m_ObjectHideFlags: 0
@@ -74641,6 +74711,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 1
   audioPath: 
+  isAwakePlay: 0
 --- !u!82 &1597147921
 AudioSource:
   m_ObjectHideFlags: 0
@@ -75068,6 +75139,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 1
   audioPath: 
+  isAwakePlay: 0
 --- !u!82 &1621363161
 AudioSource:
   m_ObjectHideFlags: 0
@@ -78512,6 +78584,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 1
   audioPath: InsideRoomWalkSound
+  isAwakePlay: 0
 --- !u!82 &1735829900
 AudioSource:
   m_ObjectHideFlags: 0
@@ -79170,6 +79243,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 1
   audioPath: 
+  isAwakePlay: 0
 --- !u!82 &1746100756
 AudioSource:
   m_ObjectHideFlags: 0
@@ -79553,6 +79627,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 1
   audioPath: 
+  isAwakePlay: 0
 --- !u!114 &1765555933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82786,6 +82861,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 1
   audioPath: 
+  isAwakePlay: 0
 --- !u!137 &1791915934
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
@@ -86422,6 +86498,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 0.5
   audioPath: 
+  isAwakePlay: 0
 --- !u!82 &1905407506
 AudioSource:
   m_ObjectHideFlags: 0
@@ -88583,6 +88660,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 1
   audioPath: 
+  isAwakePlay: 0
 --- !u!82 &1963391595
 AudioSource:
   m_ObjectHideFlags: 0
@@ -89664,6 +89742,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 1
   audioPath: 
+  isAwakePlay: 0
 --- !u!82 &2019819823
 AudioSource:
   m_ObjectHideFlags: 0
@@ -90273,6 +90352,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 0.5
   audioPath: 
+  isAwakePlay: 0
 --- !u!82 &2041846219
 AudioSource:
   m_ObjectHideFlags: 0
@@ -90604,6 +90684,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 1
   audioPath: 
+  isAwakePlay: 0
 --- !u!1 &2052323296
 GameObject:
   m_ObjectHideFlags: 0
@@ -92149,6 +92230,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 1
   audioPath: 
+  isAwakePlay: 0
 --- !u!82 &2101904761
 AudioSource:
   m_ObjectHideFlags: 0
@@ -93087,6 +93169,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 1
   audioPath: 
+  isAwakePlay: 0
 --- !u!1 &2120351107
 GameObject:
   m_ObjectHideFlags: 0
@@ -94469,6 +94552,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 1
   audioPath: 
+  isAwakePlay: 0
 --- !u!82 &4079758768663593
 AudioSource:
   m_ObjectHideFlags: 0
@@ -94649,6 +94733,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 1
   audioPath: 
+  isAwakePlay: 0
 --- !u!82 &4158372548983443
 AudioSource:
   m_ObjectHideFlags: 0
@@ -95051,6 +95136,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 1
   audioPath: 
+  isAwakePlay: 0
 --- !u!82 &4848275496809531
 AudioSource:
   m_ObjectHideFlags: 0
@@ -96307,6 +96393,7 @@ MonoBehaviour:
   isLoop: 1
   volume: 0.8
   audioPath: 
+  isAwakePlay: 0
 --- !u!23 &36080863362932616
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -116345,6 +116432,7 @@ MonoBehaviour:
   isLoop: 1
   volume: 1
   audioPath: 
+  isAwakePlay: 0
 --- !u!95 &95900180632025677
 Animator:
   serializedVersion: 7
@@ -117274,6 +117362,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 1
   audioPath: 
+  isAwakePlay: 0
 --- !u!198 &198588742377090387
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -125538,6 +125627,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 1
   audioPath: 
+  isAwakePlay: 0
 --- !u!4 &2558390729299524724
 Transform:
   m_ObjectHideFlags: 0
@@ -133726,6 +133816,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 1
   audioPath: 
+  isAwakePlay: 0
 --- !u!4 &5018950054484298144
 Transform:
   m_ObjectHideFlags: 0
@@ -134222,6 +134313,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 1
   audioPath: 
+  isAwakePlay: 0
 --- !u!23 &5047835908869781713
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -135748,6 +135840,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 1
   audioPath: 
+  isAwakePlay: 0
 --- !u!82 &5638865034042214215
 AudioSource:
   m_ObjectHideFlags: 0
@@ -137336,6 +137429,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 1
   audioPath: 
+  isAwakePlay: 0
 --- !u!23 &6477818637759967141
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -140356,6 +140450,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 1
   audioPath: 
+  isAwakePlay: 0
 --- !u!23 &7821157024477035474
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -141663,6 +141758,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 1
   audioPath: 
+  isAwakePlay: 0
 --- !u!33 &8716701432026424530
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -141847,6 +141943,7 @@ MonoBehaviour:
   isLoop: 0
   volume: 1
   audioPath: 
+  isAwakePlay: 0
 --- !u!4 &8866694951237362683
 Transform:
   m_ObjectHideFlags: 0
