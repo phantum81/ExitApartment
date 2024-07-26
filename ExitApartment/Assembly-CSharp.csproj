@@ -89,8 +89,10 @@
     <Compile Include="Assets\Scripts\Ui\InGameUiShower.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerSlopeRay.cs" />
     <Compile Include="Assets\Particle Ribbon by Moonflower Carnivore\Scripts\randomParticleRotation.cs" />
+    <Compile Include="Assets\Scripts\LoadingSceneController.cs" />
     <Compile Include="Assets\Resources\DownAssets\ApartAsset\_BPS Basic Assets\Common\Scripts and Animations\First Person Player\SceneSwitchGen.cs" />
     <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\Components\DepthOfFieldComponent.cs" />
+    <Compile Include="Assets\Scripts\ButtonColorController.cs" />
     <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\Utils\ColorGradingCurve.cs" />
     <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\Utils\MaterialFactory.cs" />
     <Compile Include="Assets\Scripts\Binding\SerializableInputBinding.cs" />

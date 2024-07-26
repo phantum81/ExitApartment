@@ -8,5 +8,6 @@ public class GameData : ScriptableObject
     public string data;
     [Header("Ãş ÀúÀå")]
     public EFloorType eFloorData;
+    public string sceneToLoad;
 
 }

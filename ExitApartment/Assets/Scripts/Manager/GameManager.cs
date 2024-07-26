@@ -72,9 +72,7 @@ public class GameManager : MonoBehaviour
         if (_instance == null)
         {
             _instance = this;
-           
-            
-           // SceneManager.sceneLoaded += OnSceneLoaded;
+
         }
         else if (_instance != this)
         {
@@ -83,10 +81,8 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        //onGetForestHumanity += AddHumanityScore;
-        //itemMgr.Init();
-        //inputMgr.Init();
-        
+        ChangeFloorLevel(saveData.data.eFloorData);
+
     }
 
     
@@ -100,11 +96,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        // 씬이 로드된 후 참조를 갱신하는 로직을 여기에 작성합니다.
-        Init();
-    }
+
     public void Init()
     {
         if (unitMgr == null)

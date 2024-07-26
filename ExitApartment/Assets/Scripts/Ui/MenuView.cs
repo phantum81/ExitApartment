@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MenuView : MonoBehaviour, IMenuView
@@ -15,16 +16,21 @@ public class MenuView : MonoBehaviour, IMenuView
     public GameObject optionPanel;
     [Header("세이브데이터"),SerializeField]
     private SaveData saveData;
-
+    [Header("씬 변경 창"), SerializeField]
+    private GameObject sceneChangePanel;
     MenuPresent menuPresent;
-
+    private UiManager uiMgr;
+    
 
     void Awake()
     {
         menuPresent = new MenuPresent(this, saveData.data);
+        uiMgr = UiManager.Instance;
         newStartButton.onClick.AddListener(menuPresent.NewStartScene);
-        loadButton.onClick.AddListener(menuPresent.LoadScene);
+        loadButton.onClick.AddListener(menuPresent.LoadDataScene);
         optionButton.onClick.AddListener(menuPresent.OpenOption);
+        
+        
     }
     void Start()
     {
@@ -40,5 +46,15 @@ public class MenuView : MonoBehaviour, IMenuView
     public void ShowOptionPanel()
     {
         optionPanel.SetActive(true);
+    }
+
+    public void LoadInGameScene()
+    {
+        StartCoroutine(LoadSceneCorouutine());
+    }
+    private IEnumerator LoadSceneCorouutine()
+    {
+        yield return StartCoroutine(uiMgr.SetUiVisible(sceneChangePanel.transform, 1f, 0f));
+        SceneManager.LoadScene("InGameScene");
     }
 }

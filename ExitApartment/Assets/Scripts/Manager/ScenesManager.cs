@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class ScenesManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField]
+    private GameData data;
     private void Awake()
     {
         
@@ -43,5 +44,7 @@ public class ScenesManager : MonoBehaviour
 
 
     }
+
+
 
 }

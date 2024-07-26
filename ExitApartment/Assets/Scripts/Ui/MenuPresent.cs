@@ -7,24 +7,29 @@ public class MenuPresent
 {
     private IMenuView menuView;
     private MenuData data;
+    
     public MenuPresent(IMenuView _menuView, GameData _data)
     {
         menuView = _menuView;
         data = new MenuData(_data);
+        
     }
 
     public void NewStartScene()
     {
         data.DataReset();
-        SceneManager.LoadScene("InGameScene");
+        menuView.LoadInGameScene();
+        
     
     }
-    public void LoadScene()
+    public void LoadDataScene()
     {
-        SceneManager.LoadScene("InGameScene");
+        menuView.LoadInGameScene();
+        
     }
     public void OpenOption()
     {
+        
         menuView.ShowOptionPanel();
     }
 }
