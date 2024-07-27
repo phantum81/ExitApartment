@@ -40,6 +40,7 @@ public class ScenesManager : MonoBehaviour
         {
             // 특정 씬일 경우 호출할 함수를 실행합니다.
             GameManager.Instance.Init();
+            GameManager.Instance.SetGameState(EgameState.InGame);
         }
 
 

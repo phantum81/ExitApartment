@@ -53,6 +53,7 @@ public class CameraManager : MonoBehaviour
 
     EstageEventState eStageState = EstageEventState.None;
 
+    int sightMobCheckLayer = (1 << 9) | (1 << 8);
     private void Awake()
     {
         GameManager.Instance.cameraMgr = this;
@@ -155,13 +156,15 @@ public class CameraManager : MonoBehaviour
                 Vector3 directionToTarget = _target.transform.position - CurCamera.transform.position;
 
                 // 레이캐스트를 사용하여 장애물이 있는지 확인
-                if (Physics.Raycast(CurCamera.transform.position, directionToTarget, out RaycastHit hit, 20f ,1<<9))
+                if (Physics.Raycast(CurCamera.transform.position, directionToTarget, out RaycastHit hit, 20f, sightMobCheckLayer))
                 {
-                    // 레이캐스트가 대상 오브젝트에 닿았다면 true, 그렇지 않으면 false
-                    return false;
+                    if(hit.transform.gameObject.layer == 8)
+                        return true;
+                    else
+                        return false;
+
                 }
-                else 
-                    return true;
+
             }
         }
         return false;

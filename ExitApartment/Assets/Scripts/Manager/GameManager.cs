@@ -51,13 +51,14 @@ public class GameManager : MonoBehaviour
     public Action onNothingReset;
     public Action onEscapeReset;
 
-    public SaveData saveData;
-
+    //public SaveData saveData;
+    public GameData saveData;
 
     private int humanityScore = 0;
     public int HumanityScore => humanityScore;
 
     public EFloorType eFloorType = EFloorType.Home15EB;
+    public EgameState eGameState = EgameState.Menu;
     [HideInInspector]
     public bool isClear12F = false;
     [HideInInspector]
@@ -81,8 +82,17 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        ChangeFloorLevel(saveData.data.eFloorData);
-
+        if(SceneManager.GetActiveScene().name == "InGameScene")
+        {
+            eGameState = EgameState.InGame;
+            ChangeFloorLevel(saveData.eFloorData);
+        }
+        else
+        {
+            eGameState = EgameState.Menu;
+        }
+       
+        
     }
 
     
@@ -91,9 +101,10 @@ public class GameManager : MonoBehaviour
         if(isRest)
         {
             if(saveData != null)
-                ChangeFloorLevel(saveData.data.eFloorData);
+                ChangeFloorLevel(saveData.eFloorData);
             isRest= false;
         }
+
     }
 
 
@@ -152,14 +163,7 @@ public class GameManager : MonoBehaviour
                 inputMgr = _go.GetComponent<InputManager>();
             }
         }
-        if (saveData == null)
-        {
-            GameObject _go = GameObject.Find("SaveData");
-            if (_go != null)
-            {
-                saveData = _go.GetComponent<SaveData>();
-            }
-        }
+
         itemMgr.Init();
         inputMgr.Init();
         soundMgr.Init();
@@ -217,7 +221,9 @@ public class GameManager : MonoBehaviour
 
         }
         eFloorType = _type;
-        Save(_type);
+        if(saveData != null)
+            eventMgr.SetIsPumpkinEvent(saveData.isPumpkinEvent);
+        Save(_type, eventMgr.GetIsPumpkinEvent());
        
     }
 
@@ -256,13 +262,21 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    
+    public void SetGameState(EgameState _state)
+    {
+        eGameState = _state;
+    }
 
 
-    private void Save(EFloorType _type)
+    public void Save(EFloorType _type, bool _bool)
     {
         if(saveData != null)
-             saveData.data.eFloorData = _type;
+        {
+            saveData.eFloorData = _type;
+            saveData.isPumpkinEvent = _bool;
+        }
+             
+        
     }
     public void Restart()
     {

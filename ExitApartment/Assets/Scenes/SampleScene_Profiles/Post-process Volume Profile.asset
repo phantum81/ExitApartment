@@ -24,7 +24,7 @@ MonoBehaviour:
     value: 1
   size:
     overrideState: 1
-    value: 1.74
+    value: 0.43
   lumContrib:
     overrideState: 1
     value: 0.193
@@ -1589,10 +1589,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b94fcd11afffcb142908bfcb1e261fba, type: 3}
   m_Name: MotionBlur
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   enabled:
     overrideState: 1
-    value: 0
+    value: 1
   shutterAngle:
     overrideState: 1
     value: 360

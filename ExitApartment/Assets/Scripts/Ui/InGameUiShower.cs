@@ -69,6 +69,15 @@ public class InGameUiShower : MonoBehaviour
         if (inputMgr.InputDic[EuserAction.Inventory])
         {            
             ActiveUi(!inventoryPan.activeSelf, inventoryPan);
+            if (inventoryPan.activeSelf)
+            {
+                GameManager.Instance.SetGameState(EgameState.Menu);
+            }
+            else
+            {
+                GameManager.Instance.SetGameState(EgameState.InGame);
+            }
+            
         }
 
      
@@ -144,7 +153,16 @@ public class InGameUiShower : MonoBehaviour
     {
         if (curFloor_txt.text == writeFloor_txt.text || !elevatorCtr.IsClose)
         {
+            ActiveUi(true, elevatorError_txt.gameObject);
             ReWrite(elevatorError_txt, "같은 층 이다..");
+            StartCoroutine(uiMgr.SetUiInvisible(elevatorError_txt.transform, 2f, 2f));
+            return false;
+        }
+        else if (writeFloor_txt.text == string.Empty)
+        {
+            ActiveUi(true, elevatorError_txt.gameObject);
+            ReWrite(elevatorError_txt, "층을 입력해라..");
+            StartCoroutine(uiMgr.SetUiInvisible(elevatorError_txt.transform, 2f, 2f));
             return false;
         }
         else

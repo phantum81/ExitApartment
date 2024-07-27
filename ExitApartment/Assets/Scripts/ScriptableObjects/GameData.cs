@@ -9,5 +9,6 @@ public class GameData : ScriptableObject
     [Header("Ãş ÀúÀå")]
     public EFloorType eFloorData;
     public string sceneToLoad;
+    public bool isPumpkinEvent = false;
 
 }

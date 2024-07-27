@@ -42,6 +42,7 @@ public class TrapDoor : ZoomableItem
             onTrapDoor.Invoke(false);
             onShowPumpkin.Invoke(showTarget, false);
             GameManager.Instance.eventMgr.SetIsPumpkinEvent(true);
+            GameManager.Instance.Save(GameManager.Instance.eFloorType, true);
         }
 
         trapCount++;

@@ -182,24 +182,28 @@ public class ElevatorController : MonoBehaviour
             case UnitManager.HOME_FLOOR:
                 eCurFloor = EFloorType.Home15EB;
                 unitMgr.ChangeFloor(eCurFloor);
+                GameManager.Instance.cameraMgr.PostProcess.SetMotionBlur(true);
                 break;
             case UnitManager.LOCKED_FLOOR:
                 eCurFloor = EFloorType.Nothing436A;
                 unitMgr.ChangeFloor(eCurFloor);
                 GameManager.Instance.ChangeFloorLevel(eCurFloor);
-
+                GameManager.Instance.cameraMgr.PostProcess.SetMotionBlur(true);
                 break;
             case UnitManager.Fall_FLOOR:
                 eCurFloor = EFloorType.Mob122F;
                 unitMgr.ChangeFloor(eCurFloor);
+                GameManager.Instance.cameraMgr.PostProcess.SetMotionBlur(true);
                 break;
             case UnitManager.FOREST_FLOOR:
                 eCurFloor = EFloorType.Forest5ABC;
                 unitMgr.ChangeFloor(eCurFloor);
+                GameManager.Instance.cameraMgr.PostProcess.SetMotionBlur(false);
                 break;
             case UnitManager.ESCAPE_FLOOR:
                 eCurFloor = EFloorType.Escape888B;
                 unitMgr.ChangeFloor(eCurFloor);
+                GameManager.Instance.cameraMgr.PostProcess.SetMotionBlur(true);
                 break;
             default:
 

@@ -120,7 +120,11 @@ public enum EuserAction
 
 }
 
-
+public enum EgameState
+{
+    Menu,
+    InGame,
+}
 
 public enum EpostProcessType
 {

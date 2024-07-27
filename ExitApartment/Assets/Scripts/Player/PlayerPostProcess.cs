@@ -17,6 +17,7 @@ public class PlayerPostProcess : MonoBehaviour
     private Grain grain;
     private LensDistortion distortion;    
     private ChromaticAberration chromaticAber;
+    private MotionBlur motionBlur;
 
     
     private List<Coroutine> curCoroutine = new List<Coroutine>();
@@ -281,32 +282,7 @@ public class PlayerPostProcess : MonoBehaviour
         
 
     }
-    //public IEnumerator OpenCameraVignette(float _val, float _speed =1f, Color _col = default(Color))
-    //{
-    //    if (_col == default(Color))
-    //    {
-    //        _col = Color.black;
-    //    }
-    //    if (post != null && post.profile.TryGetSettings(out vignette))
-    //    {
-    //        while (true)
-    //        {
-    //            vignette.active = true;
-    //            vignette.color.value = _col;
-    //            vignette.center.value = new Vector2(0.5f, 0.5f);
-    //            vignette.intensity.value -= Time.deltaTime * _speed;
-    //            if (vignette.intensity.value <= _val)
-    //            {
-    //                vignette.intensity.value = _val;
-                    
-    //                break;
-    //            }
 
-    //            yield return null;
-    //        }
-    //    }
-
-    //}
 
     public void AllBlackCloseCamera()
     {
@@ -345,5 +321,11 @@ public class PlayerPostProcess : MonoBehaviour
 
         curCoroutine.Clear();
     }
-
+    public void SetMotionBlur(bool _bool)
+    {
+        if (post != null && post.profile.TryGetSettings(out motionBlur))
+        {
+            motionBlur.active = _bool;
+        }
+    }
 }

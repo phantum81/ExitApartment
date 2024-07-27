@@ -67,15 +67,31 @@ public class PlayerController : MonoBehaviour
 
     public void Move(Vector3 _inputDir, float _speed)
     {
-        Vector3 right= _inputDir.x * player.right;
-        Vector3 foward = _inputDir.z * player.forward;
-        Vector3 velocity = (right + foward).normalized;
+        //Vector3 right= _inputDir.x * player.right;
+        //Vector3 foward = _inputDir.z * player.forward;
+        //Vector3 velocity = (right + foward).normalized;
 
-        rigd.AddForce(velocity * _speed * Time.deltaTime, ForceMode.VelocityChange);
-        Vector3 lastVelo = new Vector3(0f, rigd.velocity.y, 0f);
-        Vector3 lastAngular = new Vector3(0f, rigd.angularVelocity.y, 0f);
-        rigd.velocity = lastVelo;
-        rigd.angularVelocity = lastAngular;
+        //rigd.AddForce(velocity * _speed * Time.deltaTime, ForceMode.VelocityChange);
+        //Vector3 lastVelo = new Vector3(0f, rigd.velocity.y, 0f);
+        //Vector3 lastAngular = new Vector3(0f, rigd.angularVelocity.y, 0f);
+        //rigd.velocity = lastVelo;
+        //rigd.angularVelocity = lastAngular;
+
+
+        Vector3 right = _inputDir.x * player.right;
+        Vector3 foward = _inputDir.z * player.forward;
+        Vector3 inputDir = (right + foward).normalized;
+
+        float fallSpeed = rigd.velocity.y;
+        if (inputDir != Vector3.zero)
+        {
+            inputDir *= _speed;
+        }
+        else
+            inputDir = Vector3.zero;
+
+        inputDir.y = fallSpeed; // 떨어지는 속도 초기화
+        rigd.velocity = inputDir;
         Rotate();
         
 
