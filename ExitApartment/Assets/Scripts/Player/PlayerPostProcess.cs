@@ -18,13 +18,16 @@ public class PlayerPostProcess : MonoBehaviour
     private LensDistortion distortion;    
     private ChromaticAberration chromaticAber;
     private MotionBlur motionBlur;
-
+    private UnitManager unitMgr;
     
     private List<Coroutine> curCoroutine = new List<Coroutine>();
     public List<Coroutine> CurCoroutine => curCoroutine;
 
 
-
+    private void Start()
+    {
+        unitMgr = GameManager.Instance.unitMgr;
+    }
 
     public void InitPostProcess()
     {
@@ -48,7 +51,7 @@ public class PlayerPostProcess : MonoBehaviour
             vignette.active = true;
             vignette.color.value = _col;
             vignette.center.value = new Vector2(0.5f, 0.5f);
-            curCoroutine.Add(StartCoroutine(LerpValue(value => vignette.intensity.value = value, vignette.intensity.value, _val, _speed, 1f)));
+            curCoroutine.Add(StartCoroutine(unitMgr.LerpValue(value => vignette.intensity.value = value, vignette.intensity.value, _val, _speed, 1f)));
 
             yield return null;
         }
@@ -64,13 +67,13 @@ public class PlayerPostProcess : MonoBehaviour
             
             if (!_bool)
             {
-                yield return StartCoroutine(LerpValue(value => grain.intensity.value = value, grain.intensity.value, 0, 2f, 1f));
+                yield return StartCoroutine(unitMgr.LerpValue(value => grain.intensity.value = value, grain.intensity.value, 0, 2f, 1f));
                 grain.active = _bool;
             }
             else
             {
                 grain.active = _bool;
-                yield return StartCoroutine(LerpValue(value => grain.intensity.value = value, grain.intensity.value, 1, 0.5f, 1f));
+                yield return StartCoroutine(unitMgr.LerpValue(value => grain.intensity.value = value, grain.intensity.value, 1, 0.5f, 1f));
                 
             }
         }
@@ -85,7 +88,7 @@ public class PlayerPostProcess : MonoBehaviour
             
             if (!_bool)
             {
-                yield return StartCoroutine(LerpValue(value => distortion.intensity.value = value, distortion.intensity.value, 0, 2f, 1f));
+                yield return StartCoroutine(unitMgr.LerpValue(value => distortion.intensity.value = value, distortion.intensity.value, 0, 2f, 1f));
 
                 distortion.active = _bool;
 
@@ -93,14 +96,36 @@ public class PlayerPostProcess : MonoBehaviour
             else
             {
                 distortion.active = _bool;                
-                yield return StartCoroutine(LerpValue(value => distortion.intensity.value = value, distortion.intensity.value, -40, 0.5f, 1f));
+                yield return StartCoroutine(unitMgr.LerpValue(value => distortion.intensity.value = value, distortion.intensity.value, -40, 0.5f, 1f));
                 
             }
                                    
         }
         
     }
+    public IEnumerator LensDistortionRandomValue(bool _bool)
+    {
 
+        if (post != null && post.profile.TryGetSettings(out distortion))
+        {
+
+            if (!_bool)
+            {
+                yield return StartCoroutine(unitMgr.LerpValue(value => distortion.intensity.value = value, distortion.intensity.value, 0f, 2f, 1f));
+
+                distortion.active = _bool;
+
+            }
+            else
+            {
+                distortion.active = _bool;
+                yield return StartCoroutine(unitMgr.RandomLerpValue(value => distortion.intensity.value = value, -70f, 22f, 0.5f, 1f));
+
+            }
+
+        }
+
+    }
 
 
 
@@ -112,7 +137,7 @@ public class PlayerPostProcess : MonoBehaviour
             
             if (!_bool)
             {
-                yield return StartCoroutine(LerpValue(value => chromaticAber.intensity.value = value, chromaticAber.intensity.value, 0, 2f, 1f));
+                yield return StartCoroutine(unitMgr.LerpValue(value => chromaticAber.intensity.value = value, chromaticAber.intensity.value, 0, 2f, 1f));
                 
                 chromaticAber.active = _bool;
            
@@ -120,7 +145,7 @@ public class PlayerPostProcess : MonoBehaviour
             else
             {
                 chromaticAber.active = _bool;
-                yield return StartCoroutine(LerpValue(value => chromaticAber.intensity.value = value, chromaticAber.intensity.value, 1, 0.5f, 1f));
+                yield return StartCoroutine(unitMgr.LerpValue(value => chromaticAber.intensity.value = value, chromaticAber.intensity.value, 1, 0.5f, 1f));
                 
             }
             
@@ -130,25 +155,25 @@ public class PlayerPostProcess : MonoBehaviour
 
 
 
-    IEnumerator LerpValue(Action<float> _value, float _min, float _max, float _inverseSpeed, float _lerpRatio)
-    {
-        yield return null;
-        float elapsedTime = 0f;
-        while (true)
-        {
-            _value(Mathf.Lerp(_min, _max, elapsedTime / (_inverseSpeed * _lerpRatio)));
+    //IEnumerator LerpValue(Action<float> _value, float _min, float _max, float _inverseSpeed, float _lerpRatio)
+    //{
+    //    yield return null;
+    //    float elapsedTime = 0f;
+    //    while (true)
+    //    {
+    //        _value(Mathf.Lerp(_min, _max, elapsedTime / (_inverseSpeed * _lerpRatio)));
 
             
-            if (elapsedTime >= _inverseSpeed)
-            {
-                break;
-            }
+    //        if (elapsedTime >= _inverseSpeed)
+    //        {
+    //            break;
+    //        }
 
-            elapsedTime += Time.deltaTime;
+    //        elapsedTime += Time.deltaTime;
 
-            yield return null;
-        }
-    }
+    //        yield return null;
+    //    }
+    //}
 
     public IEnumerator PostProccessEffectOff(EpostProcessType _type, float _max =0f, float _inverseSpeed = 2f, float _lerpRatio =1f)
     {
@@ -171,7 +196,7 @@ public class PlayerPostProcess : MonoBehaviour
 
                     if (post.profile.TryGetSettings(out grain))
                     {
-                        curCoroutine.Add(StartCoroutine(LerpValue(value => grain.intensity.value = value, grain.intensity.value, _max, _inverseSpeed, _lerpRatio)));
+                        curCoroutine.Add(StartCoroutine(unitMgr.LerpValue(value => grain.intensity.value = value, grain.intensity.value, _max, _inverseSpeed, _lerpRatio)));
                         
                     }                        
                     break;
@@ -181,7 +206,7 @@ public class PlayerPostProcess : MonoBehaviour
                     
                     if (post.profile.TryGetSettings(out chromaticAber))
                     {
-                        curCoroutine.Add(StartCoroutine(LerpValue(value => chromaticAber.intensity.value = value, chromaticAber.intensity.value, _max, _inverseSpeed, _lerpRatio)));
+                        curCoroutine.Add(StartCoroutine(unitMgr.LerpValue(value => chromaticAber.intensity.value = value, chromaticAber.intensity.value, _max, _inverseSpeed, _lerpRatio)));
                         
                     }                        
                     break;
@@ -191,7 +216,7 @@ public class PlayerPostProcess : MonoBehaviour
                     
                     if (post.profile.TryGetSettings(out distortion))
                     {
-                        curCoroutine.Add(StartCoroutine(LerpValue(value => distortion.intensity.value = value, distortion.intensity.value, _max, _inverseSpeed, _lerpRatio)));
+                        curCoroutine.Add(StartCoroutine(unitMgr.LerpValue(value => distortion.intensity.value = value, distortion.intensity.value, _max, _inverseSpeed, _lerpRatio)));
 
                        
                     }                        
@@ -220,7 +245,7 @@ public class PlayerPostProcess : MonoBehaviour
                     if (post.profile.TryGetSettings(out grain))
                     {                        
                         grain.active = true;
-                        curCoroutine.Add(StartCoroutine(LerpValue(value => grain.intensity.value = value, grain.intensity.value, _max, _inverseSpeed, _lerpRatio)   ));
+                        curCoroutine.Add(StartCoroutine(unitMgr.LerpValue(value => grain.intensity.value = value, grain.intensity.value, _max, _inverseSpeed, _lerpRatio)   ));
                     }
                     break;
 
@@ -229,7 +254,7 @@ public class PlayerPostProcess : MonoBehaviour
                     if (post.profile.TryGetSettings(out chromaticAber))
                     {
                         chromaticAber.active = true;
-                        curCoroutine.Add(StartCoroutine(LerpValue(value => chromaticAber.intensity.value = value, chromaticAber.intensity.value, _max, _inverseSpeed, _lerpRatio)));
+                        curCoroutine.Add(StartCoroutine(unitMgr.LerpValue(value => chromaticAber.intensity.value = value, chromaticAber.intensity.value, _max, _inverseSpeed, _lerpRatio)));
                     }
                     break;
 
@@ -238,7 +263,7 @@ public class PlayerPostProcess : MonoBehaviour
                     if  (post.profile.TryGetSettings(out distortion))
                     {
                         distortion.active = true;
-                        curCoroutine.Add(StartCoroutine(LerpValue(value => distortion.intensity.value = value, distortion.intensity.value, _max, _inverseSpeed, _lerpRatio)));
+                        curCoroutine.Add(StartCoroutine(unitMgr.LerpValue(value => distortion.intensity.value = value, distortion.intensity.value, _max, _inverseSpeed, _lerpRatio)));
                     }                                            
                     break;
             }

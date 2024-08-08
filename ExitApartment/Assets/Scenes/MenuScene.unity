@@ -494,7 +494,6 @@ GameObject:
   m_Component:
   - component: {fileID: 416752757}
   - component: {fileID: 416752756}
-  - component: {fileID: 416752755}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -502,18 +501,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &416752755
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 416752754}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c76f7c0a1122548489bd07247ee47bf9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &416752756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -533,7 +520,7 @@ MonoBehaviour:
   itemMgr: {fileID: 0}
   soundMgr: {fileID: 1350563378}
   sceneMgr: {fileID: 1475199687}
-  saveData: {fileID: 0}
+  saveData: {fileID: 11400000, guid: 410c208ef7ef85c4b898e51033bc1e29, type: 2}
   eFloorType: 0
   eGameState: 0
   isClear12F: 0

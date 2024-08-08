@@ -21,6 +21,7 @@ public class PlayerHFSMMachine : MonoBehaviour
     void Update()
     {
 
+
         if(cameraMgr.CurCamera == cameraMgr.CameraDic[0] && eventMgr.eStageState == EstageEventState.None)
         {
             if (inputMgr.InputDir != Vector3.zero)

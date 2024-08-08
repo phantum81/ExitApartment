@@ -34,8 +34,8 @@ public class PlayerInventory : MonoBehaviour
         {
             if(inventoryItemList[i].gameObject == _item.gameObject)
             {
-                inventoryItemList.RemoveAt(i);
                 
+                inventoryItemList.RemoveAt(i);
             }
         }
     }

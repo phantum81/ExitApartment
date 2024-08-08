@@ -64,3 +64,13 @@ public interface IMenuView
 
     void LoadInGameScene();
 }
+
+public interface IInGameMenuView
+{
+
+    void LoadMenuClick();
+
+    void CloseGameClick();
+
+    void ShowOptionPanel();
+}

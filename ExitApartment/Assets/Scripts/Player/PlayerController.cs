@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
     private GroundCheck groundCheck;
     public GroundCheck GrCheck=> groundCheck;
     private PlayerInventory playerInven;
+    public PlayerInventory PlayerInven => playerInven;
     private InputManager inputMgr;
     private CameraManager cameraMgr;
     private UnitManager unitMgr;
@@ -47,7 +48,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 origin;
 
     private EplayerState ePlayerState = EplayerState.None;
-
+    private Coroutine curCoroutine;
     #region 유니티 실행부
 
     private void  Start()
@@ -58,7 +59,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        InputDir = inputMgr.InputDir;        
+        InputDir = inputMgr.InputDir;
     }
     #endregion
 
@@ -156,6 +157,26 @@ public class PlayerController : MonoBehaviour
         playerInven.CurItem = null;
 
     }
+
+    public IEnumerator ChangeSpeed(float _multiply, float _useTime)
+    {
+        
+        if (curCoroutine == null)
+        {
+            float originWalkSpeed = _walkSpeed;
+            float originRunSpeed = _runSpeed;
+            _walkSpeed *= _multiply;
+            _runSpeed *= _multiply;
+            yield return new WaitForSeconds(_useTime);
+            _walkSpeed = originWalkSpeed;
+            _runSpeed = originRunSpeed;
+            
+            curCoroutine = null;
+
+        }
+
+    }
+
 
 
     #endregion

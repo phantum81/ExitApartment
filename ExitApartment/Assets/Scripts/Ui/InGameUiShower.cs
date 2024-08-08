@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
-public class InGameUiShower : MonoBehaviour
+public class InGameUiShower : MonoBehaviour, IInGameMenuView
 {
     [Header("상호작용 마크"),SerializeField]
     private GameObject pickMark;
@@ -18,11 +20,21 @@ public class InGameUiShower : MonoBehaviour
     [Header("시작검은 화면 판넬"), SerializeField]
     private GameObject startPanel;
 
+    [Header("메뉴 판넬"), SerializeField]
+    private GameObject menuPanel;
+
+    [Header("옵션 판넬"), SerializeField]
+    private GameObject optionPanel;
+
+    [Header("종료확인 판넬"), SerializeField]
+    private GameObject questionPanel;
 
     [Header("인벤토리 창"), SerializeField]
     private GameObject inventoryPan;
+
     [Header("층 입력 텍스트"), SerializeField]
     private TextMeshPro writeFloor_txt;
+
     [Header("현재 층 텍스트"), SerializeField]
     private TextMeshPro curFloor_txt;
 
@@ -37,6 +49,17 @@ public class InGameUiShower : MonoBehaviour
     private TextMeshProUGUI elevatorError_txt;
 
 
+    [Header("옵션 버튼"), SerializeField]
+    private Button optionBtn;
+    [Header("메인화면 버튼"), SerializeField]
+    private Button mainMenuBtn;
+    [Header("종료 버튼"), SerializeField]
+    private Button escBtn;
+    [Header("예 버튼"), SerializeField]
+    private Button yesBtn;
+    [Header("아니오 버튼"), SerializeField]
+    private Button noBtn;
+
 
 
     private InputManager inputMgr;
@@ -46,10 +69,12 @@ public class InGameUiShower : MonoBehaviour
     private EInteractionType hitType;
     private ElevatorController elevatorCtr;
     private UiManager uiMgr;
+    private MenuPresent menuPresent;
 
 
     void Start()
     {
+        menuPresent = new MenuPresent(this);
         elevatorCtr = GameManager.Instance.unitMgr.ElevatorCtr;
         playerInteraction = GameManager.Instance.unitMgr.PlayerCtr.gameObject.GetComponent<PlayerInteraction>();
         inputMgr = GameManager.Instance.inputMgr;
@@ -57,6 +82,9 @@ public class InGameUiShower : MonoBehaviour
         GameManager.Instance.onGetForestHumanity += ActiveHumanity;
         StartCoroutine(ResetScreen());
         StartCoroutine(uiMgr.SetUiInvisible(startPanel.transform, 1f, 0.5f));
+        optionBtn.onClick.AddListener(menuPresent.ShowOptionPanel);
+        escBtn.onClick.AddListener(menuPresent.CloseGameClick);
+        mainMenuBtn.onClick.AddListener(menuPresent.LoadMenuClick);
     }
 
     // Update is called once per frame
@@ -64,7 +92,28 @@ public class InGameUiShower : MonoBehaviour
     {
         ePlayerState = HFSM<EplayerState, PlayerPostProcess>.Instance.CurState;
 
-
+        if (inputMgr.InputDic[EuserAction.Ui_Menu])
+        {
+            ActiveUi(!menuPanel.activeSelf, menuPanel);
+            if (!menuPanel.activeSelf)
+            {
+                ActiveUi(false, optionPanel);
+                ActiveUi(false, questionPanel);
+                ActiveUi(false, optionPanel);
+            }
+            if (menuPanel.activeSelf)
+            {
+                GameManager.Instance.SetGameState(EgameState.Menu);
+                Time.timeScale = 0f;
+                AudioListener.pause = true; 
+            }
+            else
+            {
+                GameManager.Instance.SetGameState(EgameState.InGame);
+                Time.timeScale = 1f;
+                AudioListener.pause = false;
+            }
+        }
 
         if (inputMgr.InputDic[EuserAction.Inventory])
         {            
@@ -311,6 +360,39 @@ public class InGameUiShower : MonoBehaviour
         }
     }
 
+    public void LoadMenuScene()
+    {
+        
+        SceneManager.LoadScene("MenuScene");
+    }
 
+    public void CloseGame()
+    {
+        EditorApplication.isPlaying = false;
+        Application.Quit();
+    }
+
+    public void CloseGameClick()
+    {
+        ActiveUi(true, questionPanel.gameObject);
+        yesBtn.onClick.RemoveAllListeners();
+        noBtn.onClick.RemoveAllListeners();
+        noBtn.onClick.AddListener(() => { ActiveUi(false, questionPanel.gameObject); });
+        yesBtn.onClick.AddListener(() => CloseGame());
+    }
+    public void LoadMenuClick()
+    {
+        ActiveUi(true, questionPanel.gameObject);
+        yesBtn.onClick.RemoveAllListeners();
+        noBtn.onClick.RemoveAllListeners();
+        noBtn.onClick.AddListener(() => { ActiveUi(false, questionPanel.gameObject); });
+        yesBtn.onClick.AddListener(() => LoadMenuScene());
+
+    }
+
+    public void ShowOptionPanel()
+    {
+        ActiveUi(true, optionPanel.gameObject);
+    }
 
 }

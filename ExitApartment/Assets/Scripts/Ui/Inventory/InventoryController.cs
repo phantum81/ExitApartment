@@ -12,17 +12,6 @@ public class InventoryController : MonoBehaviour
     private Slot curSlot;
 
 
-    //private void OnValidate()
-    //{
-    //    if(slotList == null)
-    //    {
-    //        for (int i = 0; i < transform.GetComponentsInChildren<Slot>().Length; i++)
-    //        {
-    //            slotList.Add(transform.GetComponentsInChildren<Slot>()[i]);
-    //        }
-    //    }
-
-    //}
 
     public void AddItem(ItemData _data)
     {

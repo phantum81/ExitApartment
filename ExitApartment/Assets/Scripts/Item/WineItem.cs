@@ -22,8 +22,8 @@ public class WineItem : Item
 
     public override void OnUseItem()
     {
-
-
+        base.OnUseItem();
+        
 
     }
 

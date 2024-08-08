@@ -10,6 +10,7 @@ public class CursorController : MonoBehaviour
     private Vector2 hotSpot = Vector2.zero;
     private int previousScreenWidth = 0;
     private int previousScreenHeight = 0;
+
     void Start()
     {
         previousScreenWidth = Screen.width;

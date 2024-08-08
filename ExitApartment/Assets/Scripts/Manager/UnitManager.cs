@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 using Color = UnityEngine.Color;
 public class UnitManager : MonoBehaviour
 {
@@ -102,6 +104,7 @@ public class UnitManager : MonoBehaviour
         GameManager.Instance.onNothingFloor += ShowClearNothingFloor;
         GameManager.Instance.onFallFloor += ShowClearFallFloor;
         GameManager.Instance.onForestFloor += ShowClearForestFloor;
+        
         reserveGravity.Normalize();
         playerCtr.Init();
         terrain = Terrain.activeTerrain;
@@ -289,9 +292,79 @@ public class UnitManager : MonoBehaviour
         ChangeMaterial(apartInfoPaper.transform, apartPaperMatList[2]);
         StartCoroutine(ChangeMaterialColor(SkyBox, Color.red, SkyboxOringinColor, 4f));
     }
+
+    public IEnumerator LerpValue(Action<float> _value, float _min, float _max, float _inverseSpeed, float _lerpRatio)
+    {
+        yield return null;
+        float elapsedTime = 0f;
+        while (true)
+        {
+            _value(Mathf.Lerp(_min, _max, elapsedTime / (_inverseSpeed * _lerpRatio)));
+
+
+            if (elapsedTime >= _inverseSpeed)
+            {
+                break;
+            }
+
+            elapsedTime += Time.deltaTime;
+
+            yield return null;
+        }
+    }
+    public IEnumerator RandomLerpValue(Action<float> _value, float _min, float _max, float _inverseSpeed, float _lerpRatio)
+    {
+        yield return null;
+
+        float elapsedTime = 0f;
+
+        while (true)
+        {
+            // 매 프레임마다 랜덤 값 생성
+            float randomMin = Random.Range(_min, _max);
+            float randomMax = Random.Range(_min, _max);
+
+            // 생성된 랜덤 값이 항상 randomMin이 더 작도록 보장
+            if (randomMin > randomMax)
+            {
+                float temp = randomMin;
+                randomMin = randomMax;
+                randomMax = temp;
+            }
+
+            elapsedTime = 0f; // elapsedTime을 초기화
+
+            while (elapsedTime < _inverseSpeed)
+            {
+                float lerpValue = Mathf.Lerp(randomMin, randomMax, elapsedTime / (_inverseSpeed * _lerpRatio));
+                _value(lerpValue);
+
+                elapsedTime += Time.deltaTime;
+
+                yield return null; // 다음 프레임까지 대기
+            }
+
+            // 마지막 값 설정
+            _value(randomMax);
+        }
+    }
+
     void OnApplicationQuit()
     {
         skyBox.SetColor("_Tint", skyboxOringinColor);
     }
-    
+ 
+    public void Init()
+    {
+        skyBox.SetColor("_Tint", skyboxOringinColor);
+        foreach(var mob in notePaperDic.Values)
+        {
+            mob.gameObject.SetActive(false);
+        }
+        foreach(var floorNum in floorNumTextList)
+        {
+            floorNum.gameObject.SetActive(false);
+        }
+
+    }
 }

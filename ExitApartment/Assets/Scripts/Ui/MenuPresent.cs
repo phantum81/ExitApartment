@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class MenuPresent
 {
     private IMenuView menuView;
+    private IInGameMenuView inGameMenuView;
     private MenuData data;
     
     public MenuPresent(IMenuView _menuView, GameData _data)
@@ -14,7 +15,10 @@ public class MenuPresent
         data = new MenuData(_data);
         
     }
-
+    public MenuPresent(IInGameMenuView _menuView)
+    {
+        inGameMenuView = _menuView;
+    }
     public void NewStartScene()
     {
         data.DataReset();
@@ -28,8 +32,23 @@ public class MenuPresent
         
     }
     public void OpenOption()
-    {
-        
+    {        
         menuView.ShowOptionPanel();
+    }
+
+
+    public void CloseGameClick()
+    {
+        inGameMenuView.CloseGameClick();
+    }
+    public void LoadMenuClick()
+    {
+        inGameMenuView.LoadMenuClick();
+
+    }
+
+    public void ShowOptionPanel()
+    {
+        inGameMenuView.ShowOptionPanel();
     }
 }

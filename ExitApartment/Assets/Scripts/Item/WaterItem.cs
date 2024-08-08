@@ -1,14 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class WaterItem : Item
 {
+    
+    [Header("효과수치(스피드곱)"), SerializeField]
+    private float multiply;
+    [Header("지속시간"), SerializeField]
+    private float usingTime;
     public override void Init()
     {
 
         base.Init();
         eItemType = EItemType.Water;
+        
     }
 
 
@@ -22,8 +29,8 @@ public class WaterItem : Item
 
     public override void OnUseItem()
     {
-
-
+        base.OnUseItem();
+        GameManager.Instance.itemMgr.ChangeSpeed(multiply, usingTime);
 
     }
 

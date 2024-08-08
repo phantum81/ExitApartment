@@ -52,10 +52,10 @@ public class Item : MonoBehaviour, IInteraction, IUseItem, IGravityChange
     }
 
     public virtual void OnUseItem()
-    {
-
-
-
+    {        
+        UiManager.Instance.inGameCtr.InvenCtr.RemoveItem(soItemData);
+        GameManager.Instance.unitMgr.PlayerCtr.PlayerInven.RemoveList(transform);
+        transform.gameObject.SetActive(false);
     }
 
     public virtual void OnThrowItem()

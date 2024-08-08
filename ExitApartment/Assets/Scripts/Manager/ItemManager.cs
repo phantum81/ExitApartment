@@ -66,6 +66,17 @@ public class ItemManager : MonoBehaviour
 
     }
 
+    public void ChangeSpeed(float _multiply, float _useTime)
+    {
+        StartCoroutine(GameManager.Instance.unitMgr.PlayerCtr.ChangeSpeed(_multiply, _useTime));
+    }
+
+    public IEnumerator DrinkAlcohol()
+    {
+        yield return StartCoroutine(GameManager.Instance.cameraMgr.PostProcess.LensDistortionRandomValue(true));
+        StartCoroutine(GameManager.Instance.cameraMgr.PostProcess.LensDistortionRandomValue(false));
+    }
+
     public void Init()
     {
         GameObject[] objsInteraction = GameObject.FindGameObjectsWithTag("Iinteraction");

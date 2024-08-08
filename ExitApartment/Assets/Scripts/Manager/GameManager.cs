@@ -163,12 +163,13 @@ public class GameManager : MonoBehaviour
                 inputMgr = _go.GetComponent<InputManager>();
             }
         }
-
         itemMgr.Init();
         inputMgr.Init();
         soundMgr.Init();
+        InitAction();
         
         isRest = true;
+        
         onGetForestHumanity += AddHumanityScore;
     }
     public bool CheckInterection(Ray _ray, out RaycastHit _hit, float _maxDis, int _layer)
@@ -212,7 +213,7 @@ public class GameManager : MonoBehaviour
                 break;
             case EFloorType.Forest5ABC:
                 onForestFloor();
-
+                humanityScore = 1;
                 break;
             case EFloorType.Escape888B:
                 onEscapeFloor();
@@ -240,27 +241,7 @@ public class GameManager : MonoBehaviour
         isClearLocked = _clearFloor;
     }
 
-    public void RequestReset()
-    {
-        switch (unitMgr.ElevatorCtr.eCurFloor)
-        {
-            case EFloorType.Home15EB:
-                onHomeReset();
-                break;
-            case EFloorType.Nothing436A:
-                onNothingReset();
-                break;
-            case EFloorType.Mob122F:
-                onFallReset();
-                break;
-            case EFloorType.Forest5ABC:
-                onForestReset();
-                break;
-            case EFloorType.Escape888B:
-                onEscapeReset();
-                break;
-        }
-    }
+
 
     public void SetGameState(EgameState _state)
     {
@@ -278,8 +259,23 @@ public class GameManager : MonoBehaviour
              
         
     }
+    public void InitAction()
+    {
+        onGetForestHumanity = null;
+        onForestFloor = null;
+        onFallFloor = null;
+        onNothingFloor = null;
+        onEscapeFloor = null;
+
+        onHomeReset = null;
+        onForestReset = null;
+        onFallReset = null;
+        onNothingReset = null;
+        onEscapeReset = null;
+    }
     public void Restart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        
+        SceneManager.LoadScene("InGameScene");
     }
 }

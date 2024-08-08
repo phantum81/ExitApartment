@@ -78,8 +78,8 @@
     <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\PostProcessingBehaviour.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerInteraction.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraController.cs" />
-    <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\Models\BuiltinDebugViewsModel.cs" />
     <Compile Include="Assets\Scripts\CursorController.cs" />
+    <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\Models\BuiltinDebugViewsModel.cs" />
     <Compile Include="Assets\Scripts\Manager\CameraManager.cs" />
     <Compile Include="Assets\Resources\DownAssets\ApartAsset\_BPS Basic Assets\Common\Scripts and Animations\Doors\opencloseStallDoor.cs" />
     <Compile Include="Assets\Resources\DownAssets\Tensori\SkinlessZombie\Demo Scripts\AnimationController.cs" />
@@ -183,7 +183,6 @@
     <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\Components\ColorGradingComponent.cs" />
     <Compile Include="Assets\Scripts\Item\Item.cs" />
     <Compile Include="Assets\Resources\DownAssets\Mimic\Scripts\Movement.cs" />
-    <Compile Include="Assets\Resources\TestRestart.cs" />
     <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\Models\ScreenSpaceReflectionModel.cs" />
     <Compile Include="Assets\Scripts\Ui\InGameUiController.cs" />
     <Compile Include="Assets\Scripts\Binding\InputBinding.cs" />
@@ -218,7 +217,6 @@
     <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\Models\GrainModel.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerInventory.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerStateHFsm\PlayerStateMentalDamage.cs" />
-    <Compile Include="Assets\Resources\TestScripts.cs" />
     <Compile Include="Assets\Resources\DownAssets\Mimic\Scripts\Leg.cs" />
     <Compile Include="Assets\Scripts\Item\WaterItem.cs" />
     <Compile Include="Assets\Scripts\Ui\MenuPresent.cs" />

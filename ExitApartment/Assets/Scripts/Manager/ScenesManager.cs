@@ -42,6 +42,11 @@ public class ScenesManager : MonoBehaviour
             GameManager.Instance.Init();
             GameManager.Instance.SetGameState(EgameState.InGame);
         }
+        if(SceneManager.GetActiveScene().name == "MenuScene")
+        {
+            Time.timeScale = 1f;
+            AudioListener.pause = false;
+        }
 
 
     }
