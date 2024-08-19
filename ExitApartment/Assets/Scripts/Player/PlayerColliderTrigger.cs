@@ -43,4 +43,12 @@ public class PlayerColliderTrigger : MonoBehaviour, IGravityChange
         playerCtr.Rigd.useGravity = false;
         playerCtr.Player.GetComponent<Collider>().enabled = false;
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(Input.GetKey(KeyCode.P))
+        {
+            Debug.Log(collision.gameObject.name);
+        }
+    }
 }

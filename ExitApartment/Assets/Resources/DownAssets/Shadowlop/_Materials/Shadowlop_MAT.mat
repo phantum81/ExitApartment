@@ -219,7 +219,7 @@ Material:
     - _BUILTIN_QueueControl: 1
     - _BUILTIN_QueueOffset: 0
     - _BlendMode: 0
-    - _BumpScale: 1
+    - _BumpScale: 5
     - _Color_Intensity: 1
     - _Color_Strenght: 1
     - _Color_Strength: 1

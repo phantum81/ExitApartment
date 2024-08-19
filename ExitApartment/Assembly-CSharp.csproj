@@ -261,6 +261,7 @@
     <None Include="Assets\Resources\DownAssets\Mimic\Materials\Shaders\NoiseUtils.hlsl" />
     <None Include="Assets\Particle Ribbon by Moonflower Carnivore\Shaders\Particle Alpha Blend HDR.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
+    <None Include="Assets\Morgue Room PBR\info_morgueroom.txt" />
     <None Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Resources\Shaders\ColorGrading.cginc" />
     <None Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Editor Resources\Monitors\HistogramRender.shader" />
     <None Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Resources\Shaders\UberSecondPass.cginc" />
