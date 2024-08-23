@@ -13,6 +13,14 @@ public class BlinkLight : MonoBehaviour
     private bool isEnable = true;
     [Header("BlinkTime"), SerializeField]
     private float blinkTime = 1f;
+    [Header("SoundTime"), SerializeField]
+    private float soundTime = 0.1f;
+
+    //[Header("Random Intensity Min"),SerializeField]
+    //private float randomMin = 0.2f;
+    //[Header("Random Intensity Max"), SerializeField]
+    //private float randomMax = 0.8f;
+
 
     private float originIntensity;
     private float curIntensity;
@@ -35,7 +43,9 @@ public class BlinkLight : MonoBehaviour
 
     private void Start()
     {
+        
         soundCtr.AudioPath = GameManager.Instance.soundMgr.SoundList[52];
+        
     }
 
 
@@ -68,6 +78,7 @@ public class BlinkLight : MonoBehaviour
                     if (curIntensity <= randomIntensity)
                     {
                         curIntensity += Time.deltaTime * blinkTime;
+                        
                     }
                     else
                     {
@@ -76,7 +87,7 @@ public class BlinkLight : MonoBehaviour
                 }
                 else
                 {
-                    randomIntensity = Random.Range(0.2f, 0.8f);
+                    randomIntensity = Random.Range(originIntensity / 2, originIntensity);
                 }
                 
                 transLight.intensity = curIntensity;
@@ -92,7 +103,7 @@ public class BlinkLight : MonoBehaviour
         while(true)
         {
             soundCtr.Play();
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(soundTime);
         }
     }
 
@@ -106,6 +117,14 @@ public class BlinkLight : MonoBehaviour
         blinkTime= _blinkTime;
     }
 
-
-
+    public void TurnOff()
+    {
+        transLight.enabled = false;
+        isEnable = false;
+    }
+    public void TurnOn()
+    {
+        transLight.enabled = true;
+        isEnable = true;
+    }
 }

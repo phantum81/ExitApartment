@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class CloseDoorCollider : MonoBehaviour, IEventContect
+public class CloseDoorCollider : MonoBehaviour, ISOEventContect
 {
     public UnityEvent onClose;
     [SerializeField]

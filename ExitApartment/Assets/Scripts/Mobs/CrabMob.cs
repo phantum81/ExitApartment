@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class CrabMob : MonoBehaviour, IEnemyContect
+public class CrabMob : Mob
 {
     
     [Header("대기시간"), SerializeField]
@@ -18,10 +18,10 @@ public class CrabMob : MonoBehaviour, IEnemyContect
 
     private float timer;
     private NavMeshAgent agent;
-    private EenemyState state = EenemyState.Idle;
+    
     private Animator anim;
-    private UnitManager unitMgr;
-    private EventManager eventMgr;
+    
+    
     private Transform target;
     private Vector3 origin;
     private bool isEvent=false;
@@ -30,12 +30,14 @@ public class CrabMob : MonoBehaviour, IEnemyContect
 
     void Start()
     {
+        Init();
+
         anim = transform.GetComponent<Animator>();
-        eventMgr = GameManager.Instance.eventMgr;
-        unitMgr = GameManager.Instance.unitMgr;
+        
+        
         agent = GetComponent<NavMeshAgent>();
         timer = waitTime;
-        state = EenemyState.None;
+        eEnemyState = EenemyState.None;
         origin = transform.position;
 
     }
@@ -46,7 +48,7 @@ public class CrabMob : MonoBehaviour, IEnemyContect
         anim.SetFloat("Speed", agent.speed);
         UpdateTarget();
 
-        if (state != EenemyState.Attack || state != EenemyState.None)
+        if (eEnemyState != EenemyState.Attack || eEnemyState != EenemyState.None)
         {
             UpdateState();
         }
@@ -58,25 +60,25 @@ public class CrabMob : MonoBehaviour, IEnemyContect
     void UpdateTarget()
     {
         target = unitMgr.MobCtr.GetLookingTarget(transform, lookRadius, 1 << 7);
-        if (target && state == EenemyState.None)
-            state = EenemyState.Idle;
+        if (target && eEnemyState == EenemyState.None)
+            eEnemyState = EenemyState.Idle;
     }
 
     void UpdateState()
     {
         if (unitMgr.MobCtr.CheckTargetInSight(transform, target, viewAngle))
         {
-            state = EenemyState.Chase;
+            eEnemyState = EenemyState.Chase;
         }
-        else if (!target && state != EenemyState.None)
+        else if (!target && eEnemyState != EenemyState.None)
         {
-            state = EenemyState.Idle;
+            eEnemyState = EenemyState.Idle;
         }
     }
 
     void PerformActionBasedOnState()
     {
-        switch (state)
+        switch (eEnemyState)
         {
             case EenemyState.Idle:
                 HandleIdleState();
@@ -89,6 +91,7 @@ public class CrabMob : MonoBehaviour, IEnemyContect
             case EenemyState.Attack:
                 HandleAttackState();
                 break;
+                default: break;
         }
     }
 
@@ -109,20 +112,20 @@ public class CrabMob : MonoBehaviour, IEnemyContect
     void HandleAttackState()
     {
         anim.SetTrigger("Attack");
-        state = EenemyState.None;
+        eEnemyState = EenemyState.None;
     }
 
 
 
-    public void OnContect()
+    public override void OnContect()
     {
-        if(state != EenemyState.None)
+        if(eEnemyState != EenemyState.None)
         {
-            state = EenemyState.Attack;
+            eEnemyState = EenemyState.Attack;
             
             GameManager.Instance.unitMgr.SetContectTarget(deadView);
             eventMgr.ChangePlayerState(EplayerState.Die);
-            state = EenemyState.None;
+            eEnemyState = EenemyState.None;
         }
 
     }
@@ -156,5 +159,10 @@ public class CrabMob : MonoBehaviour, IEnemyContect
 
 
         }
+    }
+
+    protected override void Init()
+    {
+        base.Init();
     }
 }

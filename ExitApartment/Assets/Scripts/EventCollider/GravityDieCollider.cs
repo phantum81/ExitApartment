@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class GravityDieCollider : MonoBehaviour, IEventContect
+public class GravityDieCollider : MonoBehaviour, ISOEventContect
 {
 
     [Header("Á×À½ ÀÌº¥Æ®"), SerializeField]

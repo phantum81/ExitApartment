@@ -18,17 +18,21 @@ public class PlayerStateHFSMMachine : MonoBehaviour
     public EplayerState EPlayerCurState => ePlayerCurState;
 
     private float limitTime = 3f;
-    private float curTime = 0f;
 
 
+    private Coroutine curPumpkinTimer = null;
+    private Coroutine curOutsideTimer = null;
     private CameraManager cameraMgr;
     private UnitManager unitMgr;
-
     private GameObject seePoint;
+
+
+
 
     void Start()
     {
         Init();
+        
     }
 
     private void Update()
@@ -37,19 +41,37 @@ public class PlayerStateHFSMMachine : MonoBehaviour
         ePlayerCurState = statePostHFSM.CurState;
 
 
-        if (curTime > limitTime)
-        {
-            ChangePlayerState(EplayerState.Die);
-        }
+        //if (curTime > limitTime)
+        //{
+        //    ChangePlayerState(EplayerState.Die);
+        //}
+
+
+        //if (cameraMgr.CheckObjectInCamera(seePoint))
+        //{
+        //    ChangePlayerState(EplayerState.MentalDamage);
+        //    GameManager.Instance.Timer(limitTime, EplayerState.Die, ChangePlayerState);
+        //    curTime += Time.deltaTime;
+        //}
+        //else
+        //    curTime = 0f;
 
 
         if (cameraMgr.CheckObjectInCamera(seePoint))
         {
+
             ChangePlayerState(EplayerState.MentalDamage);
-            curTime += Time.deltaTime;
+            if (curPumpkinTimer == null)
+                curPumpkinTimer = StartCoroutine(GameManager.Instance.CoTimer(limitTime, EplayerState.Die, ChangePlayerState));
         }
-        else
-            curTime = 0f;
+        else if(curPumpkinTimer != null)
+        {
+            StopCoroutine(curPumpkinTimer);
+            curPumpkinTimer = null;
+        }
+            
+
+        
 
 
         statePostHFSM.Update(playerPost);
@@ -90,5 +112,19 @@ public class PlayerStateHFSMMachine : MonoBehaviour
         stateDeadCamHFSM.ChangeState(_state, deadCamCtr);
     }
 
+
+
+
+    public void OutSideEnter()
+    {
+        ChangePlayerState(EplayerState.MentalDamage);
+        if (curOutsideTimer == null)
+            curOutsideTimer = StartCoroutine(GameManager.Instance.CoTimer(limitTime, EplayerState.Die, ChangePlayerState));
+    }
+    public void OutSideExit()
+    {
+        StopCoroutine(curOutsideTimer);
+        curOutsideTimer = null;
+    }
 
 }

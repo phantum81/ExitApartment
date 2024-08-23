@@ -12,15 +12,11 @@ public class PlayerColliderTrigger : MonoBehaviour, IGravityChange
         playerCtr = GameManager.Instance.unitMgr.PlayerCtr;   
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
     private void OnTriggerEnter(Collider other)
     {
 
-        IEventContect col = other.GetComponent<IEventContect>();
+        ISOEventContect col = other.GetComponent<ISOEventContect>();
         IEnemyContect ecol = other.GetComponent<IEnemyContect>();
         IContect ncol = other.GetComponent<IContect>();
         col?.OnContect(ESOEventType.OnGravity);
@@ -29,11 +25,24 @@ public class PlayerColliderTrigger : MonoBehaviour, IGravityChange
         ncol?.OnContect();
     }
 
+
     private void OnTriggerExit(Collider other)
     {
         IContect ncol = other.GetComponent<IContect>();
         ncol?.OnExit();
     }
+
+
+    private void OnTriggerStay(Collider other)
+    {
+        IContect ncol = other.GetComponent<IContect>();
+        ncol?.OnStay();
+    }
+
+
+
+
+
     public void OnGravityChange()
     {
         playerCtr.ChangeGravity();
@@ -44,11 +53,11 @@ public class PlayerColliderTrigger : MonoBehaviour, IGravityChange
         playerCtr.Player.GetComponent<Collider>().enabled = false;
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(Input.GetKey(KeyCode.P))
-        {
-            Debug.Log(collision.gameObject.name);
-        }
-    }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if(Input.GetKey(KeyCode.P))
+    //    {
+    //        Debug.Log(collision.gameObject.name);
+    //    }
+    //}
 }

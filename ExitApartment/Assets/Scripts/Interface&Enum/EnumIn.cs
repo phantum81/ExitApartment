@@ -22,6 +22,7 @@ public enum EenemyState
     Patrol,
     Chase,
     Attack,
+    RunAway
 }
 
 
@@ -150,6 +151,7 @@ public enum EMobType
     Pumpkin,
     SkinLess,
     Crab,
+    Bat,
 
 }
 

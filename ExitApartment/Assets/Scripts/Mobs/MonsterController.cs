@@ -56,9 +56,9 @@ public class MonsterController : MonoBehaviour
             yield return new WaitForSeconds(appearTime);
 
             unitMgr.ShowObject(pumpkinTransform, true);
-            pumpkinTransform.transform.position = home_target.position;
-            pumpkinTransform.transform.rotation = home_target.rotation;
-
+            //pumpkinTransform.transform.position = home_target.position;
+            //pumpkinTransform.transform.rotation = home_target.rotation;
+            pumpkinTransform.SetPositionAndRotation(home_target.position, home_target.rotation);
 
             yield return new WaitForSeconds(disappearTime);
 
@@ -145,4 +145,7 @@ public class MonsterController : MonoBehaviour
         }
         return false;
     }
+
+
+    
 }

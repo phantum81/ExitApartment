@@ -5,7 +5,7 @@ using Unity.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class GravityCollider : MonoBehaviour, IEventContect
+public class GravityCollider : MonoBehaviour, ISOEventContect
 {
     
     public UnityEvent onGravityEvent;

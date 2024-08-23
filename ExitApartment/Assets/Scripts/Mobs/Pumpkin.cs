@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pumpkin : MonoBehaviour, IEnemyContect
+public class Pumpkin : MonoBehaviour
 {
     private EMobType eMobType = EMobType.Pumpkin;
 
@@ -10,10 +10,7 @@ public class Pumpkin : MonoBehaviour, IEnemyContect
     private GameObject seePoint;
     public GameObject SeePoint => seePoint;
 
-    public void OnContect()
-    {
 
-    }
 
 
 }

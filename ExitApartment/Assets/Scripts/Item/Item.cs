@@ -82,6 +82,8 @@ public class Item : MonoBehaviour, IInteraction, IUseItem, IGravityChange
     }
     protected virtual void OnTriggerEnter(Collider other)
     {
-
+        
+        ISOEventContect col = other.GetComponent<ISOEventContect>();
+        col?.OnContect(ESOEventType.OnClear12F);
     }
 }

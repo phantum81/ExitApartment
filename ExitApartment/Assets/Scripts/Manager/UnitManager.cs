@@ -68,6 +68,9 @@ public class UnitManager : MonoBehaviour
     public Material SkyBox=> skyBox;
 
 
+    
+
+
     //-----------µÒº≈≥ ∏Æ∑Œ ∫Ø∞Ê«“∞Õ.
 
 
@@ -91,6 +94,7 @@ public class UnitManager : MonoBehaviour
         mobDic.Add(EMobType.Pumpkin, mobList[1]);
         mobDic.Add(EMobType.SkinLess, mobList[2]);
         mobDic.Add(EMobType.Crab, mobList[3]);
+        mobDic.Add(EMobType.Bat, mobList[4]);
         notePaperDic.Add(ENoteType.Pumpkin, PaperList[0]);
         notePaperDic.Add(ENoteType.Forest, PaperList[1]);
         notePaperDic.Add(ENoteType.Mob12F, PaperList[2]);

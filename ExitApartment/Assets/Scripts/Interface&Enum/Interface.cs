@@ -14,6 +14,7 @@ public interface IContect
 
     void OnContect();
 
+    void OnStay();
     void OnExit();
 }
 
@@ -22,7 +23,7 @@ public interface IGravityChange
     void OnGravityChange();
 }
 
-public interface IEventContect
+public interface ISOEventContect
 {
 
     void OnContect(ESOEventType _type);

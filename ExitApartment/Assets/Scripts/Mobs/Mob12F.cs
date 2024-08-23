@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Mob12F : MonoBehaviour, IEnemyContect
+public class Mob12F : Mob
 {
     private int igonoreLayer = 1 << 8 | 1<<2;
 
     private Transform target;
-    private EenemyState eEnemyState = EenemyState.None;
+    
     private EMobType eMobType = EMobType.Mob12F;
-    private EventManager eventMgr;
+   
     private float chaseLimit = 3f;
     [Header("µ¥µåºä"),SerializeField]
     private Transform deadView;
@@ -18,7 +18,9 @@ public class Mob12F : MonoBehaviour, IEnemyContect
 
     void Start()
     {
-        eventMgr = GameManager.Instance.eventMgr;
+        Init();
+        eEnemyState= EenemyState.None;
+        
     }
 
     // Update is called once per frame
@@ -33,13 +35,11 @@ public class Mob12F : MonoBehaviour, IEnemyContect
             eEnemyState = EenemyState.Chase;
             eventMgr.ChangePlayerState(EplayerState.MentalDamage);
         }
-
-
         
 
     }
 
-    public void OnContect()
+    public override void OnContect()
     {
         GameManager.Instance.unitMgr.SetContectTarget(deadView);
 
@@ -69,5 +69,8 @@ public class Mob12F : MonoBehaviour, IEnemyContect
         Debug.DrawRay(transform.position, transform.forward * 17f, Color.green, 0.2f);
     }
 
-
+    protected override void Init()
+    {
+        base.Init();
+    }
 }

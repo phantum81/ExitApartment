@@ -56,4 +56,10 @@ public class SparrowBottleItem : Item
         base.OnCollisionEnter(other);
 
     }
+    protected override void OnTriggerEnter(Collider other)
+    {
+        base.OnTriggerEnter(other);
+
+
+    }
 }

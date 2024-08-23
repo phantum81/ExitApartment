@@ -79,8 +79,8 @@ public class LightStatueItem : Item
     protected override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
-        IEventContect col = other.GetComponent<IEventContect>();
-        col?.OnContect(ESOEventType.OnClear12F);
+        //IEventContect col = other.GetComponent<IEventContect>();
+        //col?.OnContect(ESOEventType.OnClear12F);
         
     }
 

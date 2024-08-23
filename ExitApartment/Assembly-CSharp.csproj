@@ -92,6 +92,7 @@
     <Compile Include="Assets\Scripts\LoadingSceneController.cs" />
     <Compile Include="Assets\Particle Ribbon by Moonflower Carnivore\Scripts\randomParticleRotation.cs" />
     <Compile Include="Assets\Resources\DownAssets\ApartAsset\_BPS Basic Assets\Common\Scripts and Animations\First Person Player\SceneSwitchGen.cs" />
+    <Compile Include="Assets\Scripts\PortalController.cs" />
     <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\Components\DepthOfFieldComponent.cs" />
     <Compile Include="Assets\Scripts\ButtonColorController.cs" />
     <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\Utils\ColorGradingCurve.cs" />
@@ -141,6 +142,7 @@
     <Compile Include="Assets\Resources\DownAssets\Mimic\Scripts\Mimic.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerPostProcess.cs" />
     <Compile Include="Assets\Scripts\Item\FlashLightItem.cs" />
+    <Compile Include="Assets\Scripts\Mobs\BatMob.cs" />
     <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\PostProcessingContext.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerStateHFsm\PlayerStateDie.cs" />
     <Compile Include="Assets\Scripts\Ui\MenuData.cs" />
@@ -159,6 +161,7 @@
     <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\Components\BloomComponent.cs" />
     <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\Models\EyeAdaptationModel.cs" />
     <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\Models\ChromaticAberrationModel.cs" />
+    <Compile Include="Assets\Scripts\Mobs\Mob.cs" />
     <Compile Include="Assets\Scripts\Item\ElevatorDoorButton.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerStateHFsm\PlayerStateHFSMMachine.cs" />
     <Compile Include="Assets\Resources\DownAssets\OfficeAsset\enviroment\Office building\scripts\evelator_controll.cs" />
@@ -166,6 +169,7 @@
     <Compile Include="Assets\Scripts\Camera\OnDeadCameraController.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\GameData.cs" />
     <Compile Include="Assets\Scripts\Item\SparrowBottleItem.cs" />
+    <Compile Include="Assets\Scripts\EventCollider\OutSideDieCollider.cs" />
     <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\Models\BloomModel.cs" />
     <Compile Include="Assets\Scripts\Item\ElevatorNumData.cs" />
     <Compile Include="Assets\Scripts\Item\ItemTrigger.cs" />
@@ -176,6 +180,7 @@
     <Compile Include="Assets\Scripts\Manager\UnitManager.cs" />
     <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\Utils\GraphicsUtils.cs" />
     <Compile Include="Assets\Scripts\Manager\InputManager.cs" />
+    <Compile Include="Assets\Resources\Materials\Materials\TestCode.cs" />
     <Compile Include="Assets\Resources\DownAssets\PlayerPack\DemoScene\Scripts\Akane_CameraScript.cs" />
     <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\Attributes\TrackballAttribute.cs" />
     <Compile Include="Assets\Scripts\Item\WineItem.cs" />
@@ -199,6 +204,7 @@
     <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\Components\FxaaComponent.cs" />
     <Compile Include="Assets\Resources\DownAssets\ApartAsset\Apartment Kit\Common\Scripts &amp; Animation\Slide\BRGlassDoor.cs" />
     <Compile Include="Assets\Scripts\Ui\InGameOnClick.cs" />
+    <Compile Include="Assets\Scripts\EventCollider\FakeRoomTriggerCollider.cs" />
     <Compile Include="Assets\Scripts\EventCollider\GravityDieCollider.cs" />
     <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\Components\AmbientOcclusionComponent.cs" />
     <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\Models\ColorGradingModel.cs" />
@@ -265,6 +271,7 @@
     <None Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Resources\Shaders\ColorGrading.cginc" />
     <None Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Editor Resources\Monitors\HistogramRender.shader" />
     <None Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Resources\Shaders\UberSecondPass.cginc" />
+    <None Include="Assets\Resources\Shaders\ScreenCutoutShader.shader" />
     <None Include="Assets\Resources\DownAssets\Magical Rock\Notes.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />

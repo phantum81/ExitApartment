@@ -4,7 +4,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using System;
 using UnityEngine.SceneManagement;
-
+using Unity.Android.Gradle.Manifest;
+using Action = System.Action;
 public class GameManager : MonoBehaviour
 {
 
@@ -278,4 +279,19 @@ public class GameManager : MonoBehaviour
         
         SceneManager.LoadScene("InGameScene");
     }
+
+
+    public IEnumerator CoTimer<T>(float _limitTime, T _param, Action<T> _callback )
+    {
+        
+        yield return new WaitForSeconds( _limitTime);
+        _callback.Invoke(_param);
+    }
+    public IEnumerator CoTimer(float _limitTime, Action _callback)
+    {
+        yield return new WaitForSeconds(_limitTime);
+        _callback.Invoke();
+    }
+
+
 }

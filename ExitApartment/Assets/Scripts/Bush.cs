@@ -22,7 +22,10 @@ public class Bush : MonoBehaviour, IContect
     {
         onLongGrass?.Invoke();
     }
-
+    public void OnStay()
+    {
+       
+    }
     public void OnExit()
     {
         onReturn?.Invoke();

@@ -220,17 +220,7 @@ public class CameraController : MonoBehaviour
 
     public IEnumerator CameraShake(Camera _cam, float _shakeTime, float _shakeAmount)
     {
-        //float _timer = 0;
-        //Vector3 originalPosition = _cam.transform.localPosition;
 
-        //while (_timer <= _shakeTime)
-        //{
-        //    _cam.transform.localPosition = originalPosition + Random.insideUnitSphere * _shakeAmount;
-        //    _timer += Time.deltaTime;
-        //    yield return null;
-        //}
-
-        //_cam.transform.localPosition = originalPosition;
         _cam.transform.parent = cameraMgr.ShakeObj;
         float _timer = 0;
         Vector3 originalPosition = _cam.transform.localPosition;
