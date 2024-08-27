@@ -142,23 +142,24 @@ public class CameraManager : MonoBehaviour
     }
 
     
-    public bool CheckObjectInCamera(GameObject _target)
+    public bool CheckObjectInCamera(Transform _target , float seeValue = 20f)
     {
 
-        if (_target.transform.parent.gameObject.activeSelf && GameManager.Instance.unitMgr.ElevatorCtr.eCurFloor == EFloorType.Home15EB)
+        if (_target.parent.gameObject.activeSelf && GameManager.Instance.unitMgr.ElevatorCtr.eCurFloor == EFloorType.Home15EB)
         {
-            Vector3 screenPoint = CurCamera.WorldToViewportPoint(_target.transform.position);
+            Vector3 screenPoint = CurCamera.WorldToViewportPoint(_target.position);
             bool isIn = screenPoint.z > 0 && screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1;
 
             if (isIn)
             {
                 // 카메라에서 대상 오브젝트까지의 방향 벡터 계산
-                Vector3 directionToTarget = _target.transform.position - CurCamera.transform.position;
-
+                Vector3 directionToTarget = _target.position - CurCamera.transform.position;
+                Debug.DrawRay(CurCamera.transform.position, directionToTarget * seeValue, Color.red);
                 // 레이캐스트를 사용하여 장애물이 있는지 확인
-                if (Physics.Raycast(CurCamera.transform.position, directionToTarget, out RaycastHit hit, 20f, sightMobCheckLayer))
+                if (Physics.Raycast(CurCamera.transform.position, directionToTarget, out RaycastHit hit, seeValue, sightMobCheckLayer))
                 {
-                    if(hit.transform.gameObject.layer == 8)
+                    
+                    if (hit.transform.gameObject.layer == 8)
                         return true;
                     else
                         return false;
@@ -178,7 +179,7 @@ public class CameraManager : MonoBehaviour
         _direct.playableAsset = _asset;
     }
 
-    
+
 
 
 }

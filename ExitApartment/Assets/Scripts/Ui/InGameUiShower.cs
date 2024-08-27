@@ -343,6 +343,7 @@ public class InGameUiShower : MonoBehaviour, IInGameMenuView
             EInteractionType.Open => "열다",
             EInteractionType.Close=> "닫다",
             EInteractionType.Press => "누르다",
+            EInteractionType.Write => "작성하기",
             _ => "줍기"
         };
     }

@@ -138,6 +138,13 @@ public class SoundManager : MonoBehaviour
         soundList.Add(103, "ManBreathe");
         soundList.Add(104, "ManHurtBreathe");
 
+
+        //----몬스터 관련 bgm-----
+
+
+        soundList.Add(150, "BatSound");
+
+
         //-----플레이어 효과음-----
 
 

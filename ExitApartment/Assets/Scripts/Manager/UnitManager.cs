@@ -13,6 +13,10 @@ public class UnitManager : MonoBehaviour
     public const string LOCKED_FLOOR = "436A";
     public const string FOREST_FLOOR = "5ABC";
     public const string ESCAPE_FLOOR = "888B";
+    public const string REASON_TEXT = "Fuck Off";
+    public const string NAME_TEXT = "kys";
+    public const string ADDRESS_TEXT = "15EB1";
+
 
     [Header("플레이어 컨트롤러"), SerializeField]
     private PlayerController playerCtr;
@@ -85,7 +89,8 @@ public class UnitManager : MonoBehaviour
     private Dictionary<ENoteType, GameObject> notePaperDic = new Dictionary<ENoteType, GameObject>();
     public Dictionary<ENoteType, GameObject> NotePaperDic => notePaperDic;
 
-
+    private Dictionary<ESeePoint, Transform> seePointsDic = new Dictionary<ESeePoint, Transform>();
+    public Dictionary<ESeePoint, Transform> SeePointsDic => seePointsDic;
 
     private void Awake()
     {
@@ -99,6 +104,7 @@ public class UnitManager : MonoBehaviour
         notePaperDic.Add(ENoteType.Forest, PaperList[1]);
         notePaperDic.Add(ENoteType.Mob12F, PaperList[2]);
         notePaperDic.Add(ENoteType.Last, PaperList[3]);
+
         skyboxOringinColor = skyBox.GetColor("_Tint");
     }
     void Start()
@@ -352,6 +358,8 @@ public class UnitManager : MonoBehaviour
             _value(randomMax);
         }
     }
+
+
 
     void OnApplicationQuit()
     {

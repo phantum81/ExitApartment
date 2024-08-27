@@ -61,7 +61,13 @@ public enum EstageEventState
     None,
     Eventing,
 };
-
+public enum EEscapeRoomEvent
+{
+    None,
+    FakeRoom,
+    PinkGarden,
+    ExitRoom,
+};
 
 /// <summary>
 /// 플레이어 상태 0:None 1:MentalDamage 2:Damage 3:Die
@@ -166,6 +172,7 @@ public enum EItemType
     LightStatue,
     Water,
     Wine,
+    CurBoard,
 }
 
 
@@ -195,6 +202,7 @@ public enum EInteractionType
     Open,
     Close,
     Press,
+    Write,
 }
 
 
@@ -228,4 +236,11 @@ public enum EDoorType
 {
     Closet,
     HomeDoor,
+    Locked,
+}
+
+public enum ESeePoint
+{
+    Pumpkin,
+    Bat,
 }

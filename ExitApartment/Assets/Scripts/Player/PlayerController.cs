@@ -197,5 +197,8 @@ public class PlayerController : MonoBehaviour
         unitMgr.OnChangeGravity(rigd,unitMgr.ReserveGravity,0f);
     }
 
-    
+    public void RotateModify(float _rot)
+    {
+        rotateY = _rot;
+    }
 }

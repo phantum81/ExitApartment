@@ -13,25 +13,22 @@ public class PortalController : MonoBehaviour
     public Transform otherPortal;
     private Transform portalCamera;  // 포탈 너머를 바라보는 카메라 트랜스폼
 
+    private Transform player;
     public RenderTexture renderTexture;
 
 
     public float viewValue = 1.2f;
 
-    Quaternion portalCameraInitialRotation;
-    Quaternion playerCameraInitialRotation;
+
 
     private void Start()
     {
         playerCamera = Camera.main.transform;
         portalCamera = this.transform;
-        
+        player = GameManager.Instance.unitMgr.PlayerCtr.Player;
         renderTexture.width = Screen.width;
         renderTexture.height = Screen.height;
 
-
-        portalCameraInitialRotation = portalCamera.rotation;
-        playerCameraInitialRotation = playerCamera.rotation;
 
     }
     void Update()
@@ -53,5 +50,18 @@ public class PortalController : MonoBehaviour
 
         portalCamera.position = globalOffset;
 
+    }
+    public void Teleport()
+    {
+        player.position = new Vector3(portal.position.x, player.position.y, portal.position.z);
+        GameManager.Instance.unitMgr.PlayerCtr.RotateModify(180f);
+        player.rotation = Quaternion.Euler (new Vector3(portal.rotation.x, 180f, portal.rotation.z));
+        playerCamera.position = new Vector3(portal.position.x, playerCamera.position.y, portal.position.z);
+        playerCamera.rotation = Quaternion.Euler(new Vector3(portal.rotation.x, 180f, portal.rotation.z));
+    }
+
+    public void ShowThePortal()
+    {
+        portal.parent.gameObject.SetActive(true);
     }
 }

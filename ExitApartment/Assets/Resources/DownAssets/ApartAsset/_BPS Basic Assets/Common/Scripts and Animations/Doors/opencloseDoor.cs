@@ -10,6 +10,7 @@ namespace SojaExiles
         public EDoorType eDoorType;
 		private Animator openandClose;
 		private bool isOpen;
+        
 		private InputManager inputMgr;
         private SoundController soundCtr;
 		void Start()
@@ -17,7 +18,10 @@ namespace SojaExiles
 
 		}
 
-
+        public void UnLockedDoor()
+        {
+            eDoorType = EDoorType.HomeDoor;
+        }
         public void Init()
         {
             openandClose = GetComponent<Animator>();
@@ -36,15 +40,21 @@ namespace SojaExiles
             {
                 if (inputMgr.InputDic[EuserAction.Interaction])
                 {
-                    StartCoroutine(opening());
+                    
                     switch (eDoorType)
                     {
                         case EDoorType.Closet:
                             soundCtr.AudioPath = GameManager.Instance.soundMgr.SoundList[32];
                             soundCtr.Play();
+                            StartCoroutine(opening());
                             break;
                         case EDoorType.HomeDoor:
                             soundCtr.AudioPath = GameManager.Instance.soundMgr.SoundList[30];
+                            soundCtr.Play();
+                            StartCoroutine(opening());
+                            break;
+                        case EDoorType.Locked:
+                            soundCtr.AudioPath = GameManager.Instance.soundMgr.SoundList[32];
                             soundCtr.Play();
                             break;
                     }
@@ -57,15 +67,21 @@ namespace SojaExiles
                 {
                     if (inputMgr.InputDic[EuserAction.Interaction])
                     {
-                        StartCoroutine(closing());
+                        
                         switch (eDoorType)
                         {
                             case EDoorType.Closet:
                                 soundCtr.AudioPath = GameManager.Instance.soundMgr.SoundList[33];
                                 soundCtr.Play();
+                                StartCoroutine(closing());
                                 break;
                             case EDoorType.HomeDoor:
                                 soundCtr.AudioPath = GameManager.Instance.soundMgr.SoundList[31];
+                                soundCtr.Play();
+                                StartCoroutine(closing());
+                                break;
+                            case EDoorType.Locked:
+                                soundCtr.AudioPath = GameManager.Instance.soundMgr.SoundList[32];
                                 soundCtr.Play();
                                 break;
                         }
@@ -109,7 +125,7 @@ namespace SojaExiles
     }
 
 
-    
+
 
 
 }

@@ -65,10 +65,12 @@
     <Compile Include="Assets\Scripts\Item\ElevatorPan.cs" />
     <Compile Include="Assets\Resources\DownAssets\ApartAsset\Apartment Kit\Common\Scripts &amp; Animation\TableFlip\TableFlipR.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerHFsm\PlayerNone.cs" />
+    <Compile Include="Assets\Scripts\EventCollider\FakeCurboardTriggerCollider.cs" />
     <Compile Include="Assets\Scripts\BgmController.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerHFsm\PlayerRun.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\ItemData.cs" />
     <Compile Include="Assets\Scripts\Item\NotePaperPan.cs" />
+    <Compile Include="Assets\Scripts\EventCollider\UnLockDoorCloseElevatorCollider.cs" />
     <Compile Include="Assets\Resources\DownAssets\Mimic\Scripts\CylinderMesh.cs" />
     <Compile Include="Assets\Resources\DownAssets\OfficeAsset\enviroment\Office building\scripts\pass_on_parent.cs" />
     <Compile Include="Assets\Resources\DownAssets\ApartAsset\Apartment Kit\Common\Scripts &amp; Animation\Z Axis -1\Drawer_Pull_Zopp.cs" />
@@ -87,6 +89,7 @@
     <Compile Include="Assets\Scripts\EventCollider\GravityCollider.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
     <Compile Include="Assets\Particle Ribbon by Moonflower Carnivore\Scripts\ReverseNormals.cs" />
+    <Compile Include="Assets\Scripts\EventCollider\TelePortCollider.cs" />
     <Compile Include="Assets\Scripts\Ui\InGameUiShower.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerSlopeRay.cs" />
     <Compile Include="Assets\Scripts\LoadingSceneController.cs" />
@@ -157,6 +160,7 @@
     <Compile Include="Assets\Scripts\Item\BlinkLight.cs" />
     <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\Attributes\MinAttribute.cs" />
     <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\Models\FogModel.cs" />
+    <Compile Include="Assets\Scripts\EventCollider\FakeCurboardHideTriggerCollider.cs" />
     <Compile Include="Assets\Scripts\Manager\ItemManager.cs" />
     <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\Components\BloomComponent.cs" />
     <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\Models\EyeAdaptationModel.cs" />
@@ -219,6 +223,7 @@
     <Compile Include="Assets\Scripts\Ui\MenuView.cs" />
     <Compile Include="Assets\Scripts\Ui\Inventory\InventoryController.cs" />
     <Compile Include="Assets\Resources\DownAssets\PlayerPack\DemoScene\Scripts\Akane_CharacterController.cs" />
+    <Compile Include="Assets\Scripts\Item\RealExitCurBoard.cs" />
     <Compile Include="Assets\Resources\DownAssets\Tensori\SkinlessZombie\Demo Scripts\AnimationItemData.cs" />
     <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\Models\GrainModel.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerInventory.cs" />

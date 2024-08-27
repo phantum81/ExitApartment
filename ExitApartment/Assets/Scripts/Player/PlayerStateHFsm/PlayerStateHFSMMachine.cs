@@ -24,8 +24,8 @@ public class PlayerStateHFSMMachine : MonoBehaviour
     private Coroutine curOutsideTimer = null;
     private CameraManager cameraMgr;
     private UnitManager unitMgr;
-    private GameObject seePoint;
-
+    
+    
 
 
 
@@ -57,13 +57,14 @@ public class PlayerStateHFSMMachine : MonoBehaviour
         //    curTime = 0f;
 
 
-        if (cameraMgr.CheckObjectInCamera(seePoint))
+        if (cameraMgr.CheckObjectInCamera(unitMgr.SeePointsDic[ESeePoint.Pumpkin]))
         {
-
             ChangePlayerState(EplayerState.MentalDamage);
             if (curPumpkinTimer == null)
                 curPumpkinTimer = StartCoroutine(GameManager.Instance.CoTimer(limitTime, EplayerState.Die, ChangePlayerState));
         }
+
+
         else if(curPumpkinTimer != null)
         {
             StopCoroutine(curPumpkinTimer);
@@ -96,15 +97,7 @@ public class PlayerStateHFSMMachine : MonoBehaviour
         playerPost = transform.GetComponent<PlayerPostProcess>();
         cameraMgr = GameManager.Instance.cameraMgr;
         unitMgr = GameManager.Instance.unitMgr;
-        seePoint = unitMgr.MobDic[EMobType.Pumpkin].GetComponent<Pumpkin>().SeePoint;
 
-        //Action onResetEvent = () => ChangePlayerState(EplayerState.None);
-
-        //GameManager.Instance.onHomeReset += onResetEvent;
-        //GameManager.Instance.onNothingReset += onResetEvent;
-        //GameManager.Instance.onFallReset += onResetEvent;
-        //GameManager.Instance.onForestReset += onResetEvent;
-        //GameManager.Instance.onEscapeReset += onResetEvent;
     }
     public void ChangePlayerState(EplayerState _state)
     {
