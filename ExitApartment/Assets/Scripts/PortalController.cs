@@ -16,6 +16,7 @@ public class PortalController : MonoBehaviour
     private Transform player;
     public RenderTexture renderTexture;
 
+    
 
     public float viewValue = 1.2f;
 
@@ -28,7 +29,7 @@ public class PortalController : MonoBehaviour
         player = GameManager.Instance.unitMgr.PlayerCtr.Player;
         renderTexture.width = Screen.width;
         renderTexture.height = Screen.height;
-
+        portal.parent.gameObject.SetActive(false);
 
     }
     void Update()

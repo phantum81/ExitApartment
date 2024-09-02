@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
     public Action onFallFloor;
     public Action onNothingFloor;
     public Action onEscapeFloor;
+    public Action onLobbyFloor;
 
     public Action onHomeReset;
     public Action onForestReset;
@@ -52,7 +53,7 @@ public class GameManager : MonoBehaviour
     public Action onNothingReset;
     public Action onEscapeReset;
 
-    //public SaveData saveData;
+    
     public GameData saveData;
 
     private int humanityScore = 0;
@@ -60,12 +61,19 @@ public class GameManager : MonoBehaviour
 
     public EFloorType eFloorType = EFloorType.Home15EB;
     public EgameState eGameState = EgameState.Menu;
+
     [HideInInspector]
     public bool isClear12F = false;
     [HideInInspector]
     public bool isClearLocked =false;
     [HideInInspector]
     public bool isClearForest = false ;
+    [HideInInspector]
+    public bool isClearEscapeRoom = false;
+
+    [HideInInspector]
+    public bool isCheckCurboard = false;
+
 
     private bool isRest =false;
     private void Awake()
@@ -86,7 +94,7 @@ public class GameManager : MonoBehaviour
         if(SceneManager.GetActiveScene().name == "InGameScene")
         {
             eGameState = EgameState.InGame;
-            ChangeFloorLevel(saveData.eFloorData);
+            //ChangeFloorLevel(saveData.eFloorData);
         }
         else
         {
@@ -167,8 +175,9 @@ public class GameManager : MonoBehaviour
         itemMgr.Init();
         inputMgr.Init();
         soundMgr.Init();
+        unitMgr.Init();
         InitAction();
-        
+        isCheckCurboard = false;
         isRest = true;
         
         onGetForestHumanity += AddHumanityScore;
@@ -218,7 +227,9 @@ public class GameManager : MonoBehaviour
                 break;
             case EFloorType.Escape888B:
                 onEscapeFloor();
-
+                break;
+            case EFloorType.Looby:
+                onLobbyFloor();
                 break;
 
         }
@@ -241,7 +252,10 @@ public class GameManager : MonoBehaviour
     {
         isClearLocked = _clearFloor;
     }
-
+    public void SetEscapeClearFloor(bool _clearFloor)
+    {
+        isClearEscapeRoom = _clearFloor;
+    }
 
 
     public void SetGameState(EgameState _state)
@@ -249,6 +263,10 @@ public class GameManager : MonoBehaviour
         eGameState = _state;
     }
 
+    public void SetIsCheckCurboard(bool _isCheckCurboard)
+    {
+        isCheckCurboard = _isCheckCurboard;
+    }
 
     public void Save(EFloorType _type, bool _bool)
     {

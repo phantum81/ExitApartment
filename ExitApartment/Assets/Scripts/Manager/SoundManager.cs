@@ -117,6 +117,7 @@ public class SoundManager : MonoBehaviour
         soundList.Add(51, "GlassSound");
         soundList.Add(52, "LightBlink");
         soundList.Add(53, "AnalogSound");
+        soundList.Add(54, "WriteSound");
 
         //---아이템 관련----
 
@@ -124,12 +125,13 @@ public class SoundManager : MonoBehaviour
         soundList.Add(71, "ZombieSound");
         soundList.Add(72, "ChaseSound");
         soundList.Add(73, "ZombieAttackSound");
-
+        
 
 
         soundList.Add(80, "ChaseBgm");
         soundList.Add(81, "Mob12FSound");
         soundList.Add(82, "Mob12FChase");
+        
 
         //----몬스터 관련 bgm-----
 
@@ -143,7 +145,7 @@ public class SoundManager : MonoBehaviour
 
 
         soundList.Add(150, "BatSound");
-
+        soundList.Add(151, "NockDoorSound");
 
         //-----플레이어 효과음-----
 
@@ -154,6 +156,9 @@ public class SoundManager : MonoBehaviour
 
 
         //----- Ui 사운드-----
+        soundList.Add(250, "EscapeSound");
+
+        //---맵 bgm ---
     }
     public void Init()
     {

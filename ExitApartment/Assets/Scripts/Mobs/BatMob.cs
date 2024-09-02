@@ -31,14 +31,17 @@ public class BatMob : Mob
     private Transform seePoint;
     public BlinkLight mobLight;
 
-    [Header("사운드"), SerializeField]
+    [Header("발자국 사운드"), SerializeField]
     private SoundController soundCtr;
+    [Header("등장 발자국 사운드"), SerializeField]
+    private SoundController showStepSoundCtr;
     private Animator anim;
 
     private CameraManager cameraMgr;
     
     private Transform target;
-    
+    private bool isPinkFake = false;
+    private bool isPinkExit = false;
     private EEscapeRoomEvent eEscapeRoomEventState;
     void Start()
     {
@@ -52,6 +55,7 @@ public class BatMob : Mob
         
         unitMgr.SeePointsDic.Add(ESeePoint.Bat, seePoint);
         soundCtr.AudioPath = GameManager.Instance.soundMgr.SoundList[150];
+        showStepSoundCtr.AudioPath = GameManager.Instance.soundMgr.SoundList[151];
     }
 
 
@@ -145,13 +149,23 @@ public class BatMob : Mob
 
     public void ShowBatInPinkGarden()
     {
+        if (isPinkFake)
+            return;
         eEscapeRoomEventState = EEscapeRoomEvent.PinkGarden;
         ShowBat(pinkGardenSpawn);
+        showStepSoundCtr.SetLoop(false);
+        showStepSoundCtr.Play();
+        isPinkFake = true;
     }
     public void ShowBatExitPinkGarden()
     {
+        if (isPinkExit)
+            return;
         eEscapeRoomEventState = EEscapeRoomEvent.ExitRoom;
         ShowBat(pinkGardenExitSpawn);
+        showStepSoundCtr.SetLoop(false);
+        showStepSoundCtr.Play();
+        isPinkExit = true;
     }
 
 

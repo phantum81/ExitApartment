@@ -28,13 +28,13 @@ public class SoundController : MonoBehaviour
 
     private void Awake()
     {
-          
-        
+        audioSource = GetComponent<AudioSource>();
+
     }
     void Start()
     {
 
-        audioSource= GetComponent<AudioSource>();
+        
         if (isAwakePlay)
         {
             Play();

@@ -11,6 +11,10 @@ public class InGameUiShower : MonoBehaviour, IInGameMenuView
 {
     [Header("상호작용 마크"),SerializeField]
     private GameObject pickMark;
+    [Header("센터 마크"), SerializeField]
+    private GameObject centerMark;
+
+
     [Header("상호작용 텍스트"), SerializeField]
     private TextMeshProUGUI interactionTxt;
 
@@ -70,7 +74,7 @@ public class InGameUiShower : MonoBehaviour, IInGameMenuView
     private ElevatorController elevatorCtr;
     private UiManager uiMgr;
     private MenuPresent menuPresent;
-
+    private CameraManager cameraMgr;
 
     void Start()
     {
@@ -85,6 +89,7 @@ public class InGameUiShower : MonoBehaviour, IInGameMenuView
         optionBtn.onClick.AddListener(menuPresent.ShowOptionPanel);
         escBtn.onClick.AddListener(menuPresent.CloseGameClick);
         mainMenuBtn.onClick.AddListener(menuPresent.LoadMenuClick);
+        cameraMgr = GameManager.Instance.cameraMgr;
     }
 
     // Update is called once per frame
@@ -129,26 +134,34 @@ public class InGameUiShower : MonoBehaviour, IInGameMenuView
             
         }
 
-     
-
-        if (playerInteraction.CheckInteraction())
+        if (cameraMgr.CurCamera == cameraMgr.CameraDic[0] || cameraMgr.CurCamera == cameraMgr.CameraDic[2])
         {
-            ActiveUi(true, pickMark);
-
-            if (playerInteraction.PreHit)
+            if (playerInteraction.CheckInteraction())
             {
-                hitType = playerInteraction.PreHit.GetComponent<IInteraction>().OnGetType();
-                
-                interactionAction = GetInteractionAction(hitType);
+                ActiveUi(true, pickMark);
 
-                ReWrite(interactionTxt, $"{interactionAction}({inputMgr.Inputbind.BindingDic[EuserAction.Interaction]})");
+                if (playerInteraction.PreHit)
+                {
+                    hitType = playerInteraction.PreHit.GetComponent<IInteraction>().OnGetType();
+
+                    interactionAction = GetInteractionAction(hitType);
+
+                    ReWrite(interactionTxt, $"{interactionAction}({inputMgr.Inputbind.BindingDic[EuserAction.Interaction]})");
+                }
             }
-            
+            else
+            {
+                ActiveUi(false, pickMark);
+
+            }
         }
         else
         {
             ActiveUi(false, pickMark);
+            ActiveUi(false, centerMark);
         }
+
+
 
         if (humanityText.gameObject.activeSelf)
         {
@@ -200,20 +213,21 @@ public class InGameUiShower : MonoBehaviour, IInGameMenuView
 
     public bool CheckRightFloor()
     {
-        if (curFloor_txt.text == writeFloor_txt.text || !elevatorCtr.IsClose)
+        if (!elevatorCtr.IsClose)
         {
-            ActiveUi(true, elevatorError_txt.gameObject);
-            ReWrite(elevatorError_txt, "같은 층 이다..");
-            StartCoroutine(uiMgr.SetUiInvisible(elevatorError_txt.transform, 2f, 2f));
+            ErrorMessage("문을 닫아야 할 것 같다...");
+            return false;
+        }
+        if (curFloor_txt.text == writeFloor_txt.text)
+        {
+            ErrorMessage("같은 층이다...");
             return false;
         }
         else if (writeFloor_txt.text == string.Empty)
         {
-            ActiveUi(true, elevatorError_txt.gameObject);
-            ReWrite(elevatorError_txt, "층을 입력해라..");
-            StartCoroutine(uiMgr.SetUiInvisible(elevatorError_txt.transform, 2f, 2f));
+            ErrorMessage("층을 입력하지 않았다...");
             return false;
-        }
+        }        
         else
         {
             switch(GameManager.Instance.eFloorType)
@@ -221,63 +235,51 @@ public class InGameUiShower : MonoBehaviour, IInGameMenuView
                 case EFloorType.Home15EB:
                     if (writeFloor_txt.text == UnitManager.LOCKED_FLOOR)
                     {
-                        RenewCurFloor(UnitManager.LOCKED_FLOOR);
-                        ClearText(writeFloor_txt);
+                        SetElevatorFloorText(UnitManager.LOCKED_FLOOR);
                         return true;
                     }
                     else if(writeFloor_txt.text == UnitManager.HOME_FLOOR)
                     {
-                        RenewCurFloor(UnitManager.HOME_FLOOR);
-                        ClearText(writeFloor_txt);
+                        SetElevatorFloorText(UnitManager.HOME_FLOOR);
                         return true;
                     }
                     if (!elevatorError_txt.gameObject.activeSelf)
                     {
-                        ActiveUi(true, elevatorError_txt.gameObject);
-                        ReWrite(elevatorError_txt, "갈 수 없는 듯 하다...");
-                        StartCoroutine(uiMgr.SetUiInvisible(elevatorError_txt.transform, 2f, 2f));
+                        ErrorMessage("갈 수 없는 듯 하다...");
                     }
 
                     return false;
                 case EFloorType.Nothing436A:
                     if(writeFloor_txt.text == UnitManager.HOME_FLOOR)
                     {
-                        RenewCurFloor(UnitManager.HOME_FLOOR);
-                        ClearText(writeFloor_txt);
+                        SetElevatorFloorText(UnitManager.HOME_FLOOR);
                         return true;
                     }
                     else if(writeFloor_txt.text == UnitManager.Fall_FLOOR)
                     {
-                        RenewCurFloor(UnitManager.Fall_FLOOR);
-                        ClearText(writeFloor_txt);
+                        SetElevatorFloorText(UnitManager.Fall_FLOOR);
                         return true;
                     }
                     if (!elevatorError_txt.gameObject.activeSelf)
                     {
-                        ActiveUi(true, elevatorError_txt.gameObject);
-                        ReWrite(elevatorError_txt, "갈 수 없는 듯 하다...");
-                        StartCoroutine(uiMgr.SetUiInvisible(elevatorError_txt.transform, 2f, 2f));
+                        ErrorMessage("갈 수 없는 듯 하다...");
                     }
                     return false;
                 case EFloorType.Mob122F:
 
                     if (writeFloor_txt.text == UnitManager.HOME_FLOOR)
                     {
-                        RenewCurFloor(UnitManager.HOME_FLOOR);
-                        ClearText(writeFloor_txt);
+                        SetElevatorFloorText(UnitManager.HOME_FLOOR);
                         return true;
                     }
                     else if (writeFloor_txt.text == UnitManager.FOREST_FLOOR)
                     {
-                        RenewCurFloor(UnitManager.FOREST_FLOOR);
-                        ClearText(writeFloor_txt);
+                        SetElevatorFloorText(UnitManager.FOREST_FLOOR);
                         return true;
                     }
                     if (!elevatorError_txt.gameObject.activeSelf)
                     {
-                        ActiveUi(true, elevatorError_txt.gameObject);
-                        ReWrite(elevatorError_txt, "갈 수 없는 듯 하다...");
-                        StartCoroutine(uiMgr.SetUiInvisible(elevatorError_txt.transform, 2f, 2f));
+                        ErrorMessage("갈 수 없는 듯 하다...");
                     }
                     return false;
 
@@ -285,38 +287,44 @@ public class InGameUiShower : MonoBehaviour, IInGameMenuView
                 case EFloorType.Forest5ABC:
                     if(writeFloor_txt.text == UnitManager.HOME_FLOOR)
                     {
-                        RenewCurFloor(UnitManager.HOME_FLOOR);
-                        ClearText(writeFloor_txt);
+                        SetElevatorFloorText(UnitManager.HOME_FLOOR);                        
                         return true;
                     }
                     else if(writeFloor_txt.text == UnitManager.ESCAPE_FLOOR)
                     {
-                        RenewCurFloor(UnitManager.ESCAPE_FLOOR);
-                        ClearText(writeFloor_txt);
+                        SetElevatorFloorText(UnitManager.ESCAPE_FLOOR);
                         return true;
                     }
                     if (!elevatorError_txt.gameObject.activeSelf)
                     {
-                        ActiveUi(true, elevatorError_txt.gameObject);
-                        ReWrite(elevatorError_txt, "갈 수 없는 듯 하다...");
-                        StartCoroutine(uiMgr.SetUiInvisible(elevatorError_txt.transform, 2f, 2f));
+                        ErrorMessage("갈 수 없는 듯 하다...");
                     }
                     return false;
                 case EFloorType.Escape888B:
+                    if (writeFloor_txt.text == UnitManager.LOBBY_FLOOR)
+                    {
+                        SetElevatorFloorText(UnitManager.LOBBY_FLOOR);
+                        return true;
+                    }
                     if (!elevatorError_txt.gameObject.activeSelf)
                     {
-                        ActiveUi(true, elevatorError_txt.gameObject);
-                        ReWrite(elevatorError_txt, "갈 수 없는 듯 하다...");
-                        StartCoroutine(uiMgr.SetUiInvisible(elevatorError_txt.transform, 2f, 2f));
+                        ErrorMessage("갈 수 없는 듯 하다...");
                     }
                     return false;
 
-                 default:
+                case EFloorType.Looby:
                     if (!elevatorError_txt.gameObject.activeSelf)
                     {
-                        ActiveUi(true, elevatorError_txt.gameObject);
-                        ReWrite(elevatorError_txt, "갈 수 없는 듯 하다...");
-                        StartCoroutine(uiMgr.SetUiInvisible(elevatorError_txt.transform, 2f, 2f));
+                        ErrorMessage("움직이지 않는다...");
+                    }
+
+                    return false;
+
+
+                default:
+                    if (!elevatorError_txt.gameObject.activeSelf)
+                    {
+                        ErrorMessage("갈 수 없는 듯 하다...");
                     }
                     return false;
             }
@@ -325,7 +333,17 @@ public class InGameUiShower : MonoBehaviour, IInGameMenuView
         
     }
 
-
+    public void ErrorMessage(string _value)
+    {
+        ActiveUi(true, elevatorError_txt.gameObject);
+        ReWrite(elevatorError_txt, _value);
+        StartCoroutine(uiMgr.SetUiInvisible(elevatorError_txt.transform, 2f, 2f));
+    }
+    private void SetElevatorFloorText(string _value)
+    {
+        RenewCurFloor(_value);
+        ClearText(writeFloor_txt);
+    }
     private void ReWrite(TextMeshProUGUI _text, string _main)
     {
         _text.text = _main;
@@ -359,6 +377,11 @@ public class InGameUiShower : MonoBehaviour, IInGameMenuView
             yield return StartCoroutine(uiMgr.SetUiVisible(diePanel.transform, 1f, 1f));
             GameManager.Instance.Restart();
         }
+    }
+    public void ScreenChange(float _time, float _wait)
+    {
+        ActiveUi(true, diePanel);
+        StartCoroutine(uiMgr.SetUiInvisible(diePanel.transform, _time, _wait));
     }
 
     public void LoadMenuScene()

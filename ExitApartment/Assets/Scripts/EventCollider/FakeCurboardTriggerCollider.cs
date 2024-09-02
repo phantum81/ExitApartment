@@ -10,6 +10,7 @@ public class FakeCurboardTriggerCollider : MonoBehaviour, IContect
     public void OnContect()
     {
         OnShowMob.Invoke();
+        GameManager.Instance.SetIsCheckCurboard(true);
         Debug.Log("OnContect called");
     }
 

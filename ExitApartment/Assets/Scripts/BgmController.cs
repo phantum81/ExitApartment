@@ -10,7 +10,7 @@ public class BgmController : MonoBehaviour
     void Start()
     {
         soundCtr = GetComponent<SoundController>();
-        GameManager.Instance.onForestFloor += OnForestClear;
+        GameManager.Instance.onForestFloor += StopBgm;
     }
 
     // Update is called once per frame
@@ -27,20 +27,23 @@ public class BgmController : MonoBehaviour
     }
 
 
-    public void BgmChange(string _path, bool _loop)
+    public void BgmChange(string _path, bool _loop, float _volume = 1f)
     {
         if(curPath != _path)
         {
             soundCtr.Stop();
             soundCtr.AudioPath = _path;
+            soundCtr.SetVolume(_volume);
             soundCtr.Play();
             soundCtr.SetLoop(_loop);
         }
 
     }
 
-    private void OnForestClear()
+    public void StopBgm()
     {
         soundCtr.Stop();
     }
+
+
 }

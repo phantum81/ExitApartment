@@ -6,6 +6,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using Color = UnityEngine.Color;
+using System.Linq;
+
 public class UnitManager : MonoBehaviour
 {
     public const string HOME_FLOOR = "15EB";
@@ -13,6 +15,7 @@ public class UnitManager : MonoBehaviour
     public const string LOCKED_FLOOR = "436A";
     public const string FOREST_FLOOR = "5ABC";
     public const string ESCAPE_FLOOR = "888B";
+    public const string LOBBY_FLOOR = "1";
     public const string REASON_TEXT = "Fuck Off";
     public const string NAME_TEXT = "kys";
     public const string ADDRESS_TEXT = "15EB1";
@@ -48,6 +51,10 @@ public class UnitManager : MonoBehaviour
     /// 임시
     /// </summary>
 
+    [Header("로비 플레이어"), SerializeField]
+    private LobbyPlayerController lobbyPlayer;
+    public LobbyPlayerController LobbyPlayer => lobbyPlayer;
+
     public List<GameObject> floorList;
 
 
@@ -72,12 +79,15 @@ public class UnitManager : MonoBehaviour
     public Material SkyBox=> skyBox;
 
 
-    
+    [Header("이스케이프 스카이박스"), SerializeField]
+    private Material escapeSkyBox;
+    public Material EscapeSkyBox => escapeSkyBox;
 
-
+    [Header("엘리베이터 스폰 위치"), SerializeField]
+    private List<FloorType> elevatorSpawnList = new List<FloorType>();
     //-----------딕셔너리로 변경할것.
 
-
+    
 
 
     private UnityEngine.Color skyboxOringinColor;
@@ -92,6 +102,8 @@ public class UnitManager : MonoBehaviour
     private Dictionary<ESeePoint, Transform> seePointsDic = new Dictionary<ESeePoint, Transform>();
     public Dictionary<ESeePoint, Transform> SeePointsDic => seePointsDic;
 
+    private Dictionary<EFloorType, Transform> elevatorSpawnDic = new Dictionary<EFloorType, Transform>();
+    public Dictionary<EFloorType, Transform> ElevatorSpawnDic => elevatorSpawnDic;
     private void Awake()
     {
         GameManager.Instance.unitMgr = this;
@@ -104,7 +116,7 @@ public class UnitManager : MonoBehaviour
         notePaperDic.Add(ENoteType.Forest, PaperList[1]);
         notePaperDic.Add(ENoteType.Mob12F, PaperList[2]);
         notePaperDic.Add(ENoteType.Last, PaperList[3]);
-
+        elevatorSpawnDic = elevatorSpawnList.ToDictionary(elevator => elevator.eFloorType, elevator => elevator.transform);
         skyboxOringinColor = skyBox.GetColor("_Tint");
     }
     void Start()
@@ -114,12 +126,17 @@ public class UnitManager : MonoBehaviour
         GameManager.Instance.onNothingFloor += ShowClearNothingFloor;
         GameManager.Instance.onFallFloor += ShowClearFallFloor;
         GameManager.Instance.onForestFloor += ShowClearForestFloor;
-        
+        GameManager.Instance.onEscapeFloor += ShowClearEscapeRoom;
+        GameManager.Instance.onLobbyFloor += ShowClearLobby;
+
+
         reserveGravity.Normalize();
         playerCtr.Init();
         terrain = Terrain.activeTerrain;
         terrainData = terrain?.terrainData;
         ChangeFloor(EFloorType.Home15EB);
+        SkyChange(skyBox);
+        
     }
 
     // Update is called once per frame
@@ -288,7 +305,8 @@ public class UnitManager : MonoBehaviour
     }
     private void ShowClearFallFloor()
     {
-
+        ShowClearNothingFloor();
+        
         floorNumTextList[1].gameObject.SetActive(true);
         notePaperDic[ENoteType.Mob12F].SetActive(true);
         ChangeMaterial(apartInfoPaper.transform, apartPaperMatList[1]);
@@ -297,11 +315,26 @@ public class UnitManager : MonoBehaviour
     }
     private void ShowClearForestFloor()
     {
+        ShowClearFallFloor();
         ShowObject(notePaperDic[ENoteType.Forest].transform, true);
         ShowObject(notePaperDic[ENoteType.Last].transform, true);
         ChangeMaterial(apartInfoPaper.transform, apartPaperMatList[2]);
         StartCoroutine(ChangeMaterialColor(SkyBox, Color.red, SkyboxOringinColor, 4f));
+        
     }
+    private void ShowClearEscapeRoom()
+    {
+        ShowClearForestFloor();
+        floorNumTextList[2].gameObject.SetActive(true);
+    }
+    private void ShowClearLobby()
+    {
+        foreach(var text in floorNumTextList)
+        {
+            text.gameObject.SetActive(false);
+        }
+    }
+
 
     public IEnumerator LerpValue(Action<float> _value, float _min, float _max, float _inverseSpeed, float _lerpRatio)
     {
@@ -378,5 +411,11 @@ public class UnitManager : MonoBehaviour
             floorNum.gameObject.SetActive(false);
         }
 
+    }
+
+    public void SkyChange(Material _skybox)
+    {
+        if(RenderSettings.skybox != _skybox)
+            RenderSettings.skybox = _skybox;
     }
 }

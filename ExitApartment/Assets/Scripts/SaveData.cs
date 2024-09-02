@@ -10,7 +10,7 @@ public class SaveData : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(this);
-        //GameManager.Instance.saveData = this;
+        
     }
     void Start()
     {

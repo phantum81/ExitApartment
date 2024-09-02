@@ -220,6 +220,7 @@ public enum EFloorType
     Mob122F,
     Forest5ABC,
     Escape888B,
+    Looby,
 
 }
 

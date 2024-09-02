@@ -15,6 +15,7 @@ public class FakeRoomTriggerCollider : MonoBehaviour, IContect
 
 
 
+
     public void OnContect()
     {
         if (wasIn) return;

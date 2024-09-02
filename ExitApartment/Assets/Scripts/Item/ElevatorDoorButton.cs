@@ -12,7 +12,8 @@ public class ElevatorDoorButton : MonoBehaviour, IInteraction
     private ElevatorController eleCtr;
     private SoundController soundCtr;
     private InGameUiShower uiShower;
-
+    private CameraManager cameraMgr;
+    private UnitManager unitMgr;
     private bool isLock = false;
     
 
@@ -31,9 +32,17 @@ public class ElevatorDoorButton : MonoBehaviour, IInteraction
         soundCtr.Play();
         if (buttonType == EElevatorButtonType.Open && eleCtr.eleWork != EElevatorWork.Locking)
         {
-            if (GameManager.Instance.isClear12F)
+            if (GameManager.Instance.isClear12F || GameManager.Instance.isClearForest )
             {
                 return;
+            }
+            if (eleCtr.eCurFloor == EFloorType.Looby)
+            {
+                cameraMgr.ChangeCamera(cameraMgr.CameraDic[4]);
+                unitMgr.PlayerCtr.gameObject.SetActive(false);
+                unitMgr.LobbyPlayer.gameObject.SetActive(true);
+               
+
             }
 
             if (eleCtr.eleWork == EElevatorWork.Closing && eleCtr.CurCoroutine != null)
@@ -75,6 +84,10 @@ public class ElevatorDoorButton : MonoBehaviour, IInteraction
             
             if (uiShower.CheckRightFloor() && eleCtr.IsClose)
             {
+                if (GameManager.Instance.isClearEscapeRoom)
+                {                    
+                    GameManager.Instance.SetEscapeClearFloor(false);
+                }
                 if (GameManager.Instance.isClearForest)
                 {
                     GameManager.Instance.ChangeFloorLevel(EFloorType.Forest5ABC);
@@ -97,6 +110,8 @@ public class ElevatorDoorButton : MonoBehaviour, IInteraction
                 if (eleCtr.CurCoroutine == null)
                 {
                     eleCtr.eleWork = EElevatorWork.Locking;
+                    if(UiManager.Instance.inGameCtr.InGameUiShower.GetCurFloor() == UnitManager.ESCAPE_FLOOR)
+                        UiManager.Instance.inGameCtr.InGameUiShower.ScreenChange(1f, 1f);
                     eleCtr.CurCoroutine = eleCtr.StartCoroutine(eleCtr.MoveFloor());
                 }
 
@@ -125,6 +140,8 @@ public class ElevatorDoorButton : MonoBehaviour, IInteraction
         soundCtr = gameObject.GetComponent<SoundController>();
         soundCtr.AudioPath = GameManager.Instance.soundMgr.SoundList[34];
         uiShower = UiManager.Instance.inGameCtr.InGameUiShower;
+        cameraMgr = GameManager.Instance.cameraMgr;
+        unitMgr = GameManager.Instance.unitMgr;
 
     }
 

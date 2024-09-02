@@ -18,41 +18,28 @@ public class ElevatorController : MonoBehaviour
     public EFloorType eCurFloor = EFloorType.Home15EB;
     private Coroutine curCoroutine;
     public Coroutine CurCoroutine { get; set; }
-    
+
     private SoundController soundCtr;
     private UnitManager unitMgr;
+    private CameraManager cameraMgr;
+    private SoundManager soundMgr;
     private bool isClose = true;
     public bool IsClose => isClose;
-    
+    private Vector3 originPos = Vector3.zero;
     void Start()
     {
         Init();
         //StartCoroutine(ShakeElevator(2f,0.005f));
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-       
-    }
 
+        
+    }
 
     public IEnumerator OpenDoor()
     {
-
-        //float elapsedTime = 0f;
-        //float duration = 5f;
-        //isClose = false;
-        //yield return new WaitForSeconds(0.5f);
-        //soundCtr.Play();
-        //while (elapsedTime < duration)
-        //{
-        //    doors[0].transform.position = Vector3.Lerp(doors[0].transform.position, origin[0] + Vector3.left * 0.8f, (elapsedTime / duration) * Time.fixedDeltaTime * speed);
-        //    doors[1].transform.position = Vector3.Lerp(doors[1].transform.position, origin[1] + Vector3.right * 0.8f, (elapsedTime / duration) * Time.fixedDeltaTime * speed);
-        //    elapsedTime += Time.deltaTime;
-        //    yield return null;
-        //}
-        //curCoroutine= null;
 
         float elapsedTime = 0f;
         float duration = 5f;
@@ -93,20 +80,7 @@ public class ElevatorController : MonoBehaviour
     public IEnumerator CloseDoor()
     {
 
-        //float elapsedTime = 0f;
-        //float duration = 5f;
-        //yield return new WaitForSeconds(0.5f);
-        //soundCtr.Play();
-        //while (elapsedTime < duration)
-        //{
 
-        //    doors[0].transform.position = Vector3.Lerp(doors[0].transform.position, origin[0], (elapsedTime / duration) * Time.fixedDeltaTime * speed);
-        //    doors[1].transform.position = Vector3.Lerp(doors[1].transform.position, origin[1], (elapsedTime / duration) * Time.fixedDeltaTime * speed);
-        //    elapsedTime += Time.deltaTime;
-        //    yield return null;
-        //}
-        //isClose = true;
-        //curCoroutine = null;
 
         float elapsedTime = 0f;
         float duration = 5f;
@@ -139,16 +113,23 @@ public class ElevatorController : MonoBehaviour
     }
     private void Init()
     {
-        for(int i =0; i < doors.Length;i++)
-        {
-            origin[i] = doors[i].transform.position;
-        }
+        DoorOriginInit();
         soundCtr = gameObject.GetComponent<SoundController>();
         soundCtr.AudioPath = GameManager.Instance.soundMgr.SoundList[35];
         unitMgr = GameManager.Instance.unitMgr;
+        cameraMgr = GameManager.Instance.cameraMgr;
+        originPos = transform.position;
+        soundMgr = GameManager.Instance.soundMgr;
+
     }
-
-
+    private void DoorOriginInit()
+    {
+        for (int i = 0; i < doors.Length; i++)
+        {
+            origin[i] = doors[i].transform.position;
+        }
+    }
+    
 
     public IEnumerator ShakeElevator(float _shakeTime, float _shakeAmount)
     {
@@ -167,9 +148,11 @@ public class ElevatorController : MonoBehaviour
     public IEnumerator MoveFloor()
     {
         yield return new WaitUntil(() => isClose == true);
-        StartCoroutine(ShakeElevator(2f, 0.005f));
+        
         string floor = UiManager.Instance.inGameCtr.InGameUiShower.GetCurFloor();
         UpdateCurFloor(floor);
+        DoorOriginInit();
+        StartCoroutine(ShakeElevator(2f, 0.005f));
         yield return new WaitForSeconds(2f);
         eleWork = EElevatorWork.Closing;
     }
@@ -177,38 +160,75 @@ public class ElevatorController : MonoBehaviour
 
     private void UpdateCurFloor(string _floor)
     {
+        unitMgr.PlayerCtr.Player.transform.parent = transform;
+        cameraMgr.CurCamera.transform.parent = transform;
+        
         switch (_floor)
         {
+
             case UnitManager.HOME_FLOOR:
-                eCurFloor = EFloorType.Home15EB;
+                eCurFloor = EFloorType.Home15EB;                
                 unitMgr.ChangeFloor(eCurFloor);
-                GameManager.Instance.cameraMgr.PostProcess.SetMotionBlur(true);
+                transform.position = originPos;                
+                cameraMgr.PostProcess.SetMotionBlur(true);
+                cameraMgr.PostProcess.OriginSetting();
+                soundMgr.BgmCtr.StopBgm();
+                unitMgr.SkyChange(unitMgr.SkyBox);
                 break;
             case UnitManager.LOCKED_FLOOR:
                 eCurFloor = EFloorType.Nothing436A;
                 unitMgr.ChangeFloor(eCurFloor);
+                transform.position = originPos;
                 GameManager.Instance.ChangeFloorLevel(eCurFloor);
-                GameManager.Instance.cameraMgr.PostProcess.SetMotionBlur(true);
+                cameraMgr.PostProcess.SetMotionBlur(true);
+                cameraMgr.PostProcess.OriginSetting();
+                soundMgr.BgmCtr.StopBgm();
+                unitMgr.SkyChange(unitMgr.SkyBox);
                 break;
             case UnitManager.Fall_FLOOR:
                 eCurFloor = EFloorType.Mob122F;
                 unitMgr.ChangeFloor(eCurFloor);
-                GameManager.Instance.cameraMgr.PostProcess.SetMotionBlur(true);
+                transform.position = unitMgr.ElevatorSpawnDic[eCurFloor].position;
+                cameraMgr.PostProcess.SetMotionBlur(true);
+                cameraMgr.PostProcess.OriginSetting();
+                soundMgr.BgmCtr.StopBgm();
+                unitMgr.SkyChange(unitMgr.SkyBox);
                 break;
             case UnitManager.FOREST_FLOOR:
                 eCurFloor = EFloorType.Forest5ABC;
                 unitMgr.ChangeFloor(eCurFloor);
-                GameManager.Instance.cameraMgr.PostProcess.SetMotionBlur(false);
+                transform.position = originPos;
+                cameraMgr.PostProcess.SetMotionBlur(false);
+                cameraMgr.PostProcess.OriginSetting();
+                soundMgr.BgmCtr.StopBgm();
+                unitMgr.SkyChange(unitMgr.SkyBox);
                 break;
             case UnitManager.ESCAPE_FLOOR:
-                eCurFloor = EFloorType.Escape888B;
+                eCurFloor = EFloorType.Escape888B;                
                 unitMgr.ChangeFloor(eCurFloor);
-                GameManager.Instance.cameraMgr.PostProcess.SetMotionBlur(true);
+                transform.position = unitMgr.ElevatorSpawnDic[eCurFloor].position;
+                cameraMgr.PostProcess.SetMotionBlur(true);
+                cameraMgr.PostProcess.EscapeSetting();
+                soundMgr.BgmCtr.BgmChange(soundMgr.SoundList[250], true, 0.1f);
+                unitMgr.SkyChange(unitMgr.EscapeSkyBox);
+                break;
+            case UnitManager.LOBBY_FLOOR:
+                eCurFloor = EFloorType.Looby;
+                unitMgr.ChangeFloor(eCurFloor);
+                transform.position = unitMgr.ElevatorSpawnDic[eCurFloor].position;
+                GameManager.Instance.ChangeFloorLevel(eCurFloor);
+                cameraMgr.PostProcess.SetMotionBlur(true);
+                cameraMgr.PostProcess.EscapeSetting();
+                cameraMgr.PostProcess.LobbySetting();
+                unitMgr.SkyChange(unitMgr.EscapeSkyBox);
+                soundMgr.BgmCtr.StopBgm();
                 break;
             default:
 
                 break;
         }
+        unitMgr.PlayerCtr.Player.transform.parent = unitMgr.PlayerCtr.transform;
+        cameraMgr.CurCamera.transform.parent = null;
     }
     public void OnCloseDoor()
     {

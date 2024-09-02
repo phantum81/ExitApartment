@@ -11,7 +11,8 @@ public class TelePortCollider : MonoBehaviour
         if(other.tag == "Player")
         {
             onTelePort.Invoke();
-
+            GameManager.Instance.SetEscapeClearFloor(true);
+            GameManager.Instance.ChangeFloorLevel(EFloorType.Escape888B);
         }
     }
 }

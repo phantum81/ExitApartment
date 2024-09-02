@@ -31,6 +31,9 @@ public class CameraManager : MonoBehaviour
     private ZoomCameraController zoomCamera;
     public ZoomCameraController ZoomCamera => zoomCamera;
 
+    [Header("엔딩 카메라"), SerializeField]
+    private Camera endCamera;
+
     [Header("타임라인 에셋"),SerializeField]
     private List<TimelineAsset> timelineAsset;
     public List<TimelineAsset> TimelineAssets=> timelineAsset;
@@ -62,6 +65,7 @@ public class CameraManager : MonoBehaviour
         camDic.Add(1, deadCamCtr.GetComponent<Camera>());
         camDic.Add(2, zoomCamera.GetComponent<Camera>());
         camDic.Add(3, uiCamera);
+        camDic.Add(4, endCamera);
 
         curCamera = camDic[0];
         foreach (Camera cam in camDic.Values)
@@ -144,8 +148,10 @@ public class CameraManager : MonoBehaviour
     
     public bool CheckObjectInCamera(Transform _target , float seeValue = 20f)
     {
+        if (!_target.parent.gameObject.activeSelf)
+            return false;
 
-        if (_target.parent.gameObject.activeSelf && GameManager.Instance.unitMgr.ElevatorCtr.eCurFloor == EFloorType.Home15EB)
+        if (GameManager.Instance.unitMgr.ElevatorCtr.eCurFloor == EFloorType.Home15EB || GameManager.Instance.unitMgr.ElevatorCtr.eCurFloor == EFloorType.Escape888B)
         {
             Vector3 screenPoint = CurCamera.WorldToViewportPoint(_target.position);
             bool isIn = screenPoint.z > 0 && screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1;
@@ -155,10 +161,11 @@ public class CameraManager : MonoBehaviour
                 // 카메라에서 대상 오브젝트까지의 방향 벡터 계산
                 Vector3 directionToTarget = _target.position - CurCamera.transform.position;
                 Debug.DrawRay(CurCamera.transform.position, directionToTarget * seeValue, Color.red);
+                
                 // 레이캐스트를 사용하여 장애물이 있는지 확인
                 if (Physics.Raycast(CurCamera.transform.position, directionToTarget, out RaycastHit hit, seeValue, sightMobCheckLayer))
                 {
-                    
+                    Debug.Log(hit.transform.gameObject.name);
                     if (hit.transform.gameObject.layer == 8)
                         return true;
                     else

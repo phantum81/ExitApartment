@@ -19,15 +19,28 @@ public class PlayerPostProcess : MonoBehaviour
     private ChromaticAberration chromaticAber;
     private MotionBlur motionBlur;
     private UnitManager unitMgr;
-    
+    private Bloom bloom;
+    private ColorGrading colorGrading;
     private List<Coroutine> curCoroutine = new List<Coroutine>();
     public List<Coroutine> CurCoroutine => curCoroutine;
 
-
+    private Color originColorGradingIntensity;
     private void Start()
     {
         unitMgr = GameManager.Instance.unitMgr;
+        SaveOrigin();
+        OriginSetting();
     }
+
+    private void SaveOrigin()
+    {
+        if (post != null && post.profile.TryGetSettings(out colorGrading))
+        {
+            originColorGradingIntensity = colorGrading.colorFilter.value;
+
+        }
+    }
+
 
     public void InitPostProcess()
     {
@@ -37,6 +50,7 @@ public class PlayerPostProcess : MonoBehaviour
         curCoroutine.Add(StartCoroutine(PostProccessEffectOff(EpostProcessType.Grain)));
         curCoroutine.Add(StartCoroutine(PostProccessEffectOff(EpostProcessType.ChromaticAberration)));
         curCoroutine.Add(StartCoroutine(PostProccessEffectOff(EpostProcessType.LensDistortion)));
+        
 
     }
     public IEnumerator VignetteOn(float _val=0.4f , float _speed =1f,Color _col = default(Color))
@@ -351,6 +365,55 @@ public class PlayerPostProcess : MonoBehaviour
         if (post != null && post.profile.TryGetSettings(out motionBlur))
         {
             motionBlur.active = _bool;
+        }
+    }
+    public void OriginSetting()
+    {
+        if (post != null && post.profile.TryGetSettings(out bloom))
+        {
+            bloom.intensity.value = 5f;
+            bloom.threshold.value = 1f;
+        }
+
+        if (post != null && post.profile.TryGetSettings(out colorGrading))
+        {
+            colorGrading.colorFilter.value = originColorGradingIntensity;
+            
+        }
+        
+    }
+
+    public void EscapeSetting()
+    {
+        if (post != null && post.profile.TryGetSettings(out bloom))
+        {
+            bloom.intensity.value = 0.25f;
+            bloom.threshold.value = 0.02f;
+
+           
+            
+        }
+    }
+    public void LobbySetting()
+    {
+        EscapeSetting();
+        if (post != null && post.profile.TryGetSettings(out colorGrading))
+        {
+            
+            Color currentColor = colorGrading.colorFilter.value;
+
+
+            // 색의 인텐시티를 높이기 위해 RGB 값을 조정합니다.
+            float intensityFactor = 2f; // 인텐시티를 높이는 비율 (1.0f은 변화 없음)
+            currentColor.r*= intensityFactor;
+            currentColor.g *= intensityFactor;
+            currentColor.b *= intensityFactor;
+            //currentColor.r = Mathf.Clamp(currentColor.r * intensityFactor, 0f, 1f);
+            //currentColor.g = Mathf.Clamp(currentColor.g * intensityFactor, 0f, 1f);
+            //currentColor.b = Mathf.Clamp(currentColor.b * intensityFactor, 0f, 1f);
+
+            colorGrading.colorFilter.value = currentColor;
+
         }
     }
 }
