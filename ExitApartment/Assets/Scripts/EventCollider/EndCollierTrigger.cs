@@ -2,21 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UIElements.Experimental;
 
-public class EndCollierTrigger : MonoBehaviour, IContect
+public class EndCollierTrigger : MonoBehaviour
 {
+    public UnityEvent onCloseDoor;
+    public UnityEvent<float,float> onScreenChange;
+    public UnityEvent onChangeScene;
+    private Coroutine screenChangeCoroutine;
+    private Coroutine changeSceneCoroutine;
 
-    public void OnContect()
+    private bool isDoit = false;
+
+    private void OnTriggerEnter(Collider other)
     {
+        if (!isDoit)
+        {
+            isDoit = true;
+            onCloseDoor.Invoke();
+            screenChangeCoroutine = StartCoroutine(GameManager.Instance.CoTimer(3f, OnEndGame));
 
+        }
     }
-    public void OnExit()
-    {
 
+    private void OnEndGame()
+    {
+        onScreenChange.Invoke(1f,1f);
+        changeSceneCoroutine = StartCoroutine(GameManager.Instance.CoTimer(5f, OnChangeScene));
     }
-    public void OnStay()
+    private void OnChangeScene()
     {
-
+        onChangeScene.Invoke();
     }
 }

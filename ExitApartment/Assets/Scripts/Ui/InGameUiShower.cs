@@ -378,12 +378,16 @@ public class InGameUiShower : MonoBehaviour, IInGameMenuView
             GameManager.Instance.Restart();
         }
     }
-    public void ScreenChange(float _time, float _wait)
+    public void ScreenChange(float _time =1f, float _wait = 1f)
     {
         ActiveUi(true, diePanel);
         StartCoroutine(uiMgr.SetUiInvisible(diePanel.transform, _time, _wait));
     }
-
+    public void ScreenVisibleChange(float _time = 1f, float _wait = 1f)
+    {
+        ActiveUi(true, diePanel);
+        StartCoroutine(uiMgr.SetUiVisible(diePanel.transform, _time, _wait));
+    }
     public void LoadMenuScene()
     {
         
@@ -392,7 +396,7 @@ public class InGameUiShower : MonoBehaviour, IInGameMenuView
 
     public void CloseGame()
     {
-        EditorApplication.isPlaying = false;
+        //EditorApplication.isPlaying = false;
         Application.Quit();
     }
 

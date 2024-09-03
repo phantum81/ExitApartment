@@ -11,4 +11,10 @@ public class GameData : ScriptableObject
     public string sceneToLoad;
     public bool isPumpkinEvent = false;
 
+
+    public void ResetData()
+    {
+        eFloorData = EFloorType.Home15EB;
+        isPumpkinEvent= false;
+    }
 }

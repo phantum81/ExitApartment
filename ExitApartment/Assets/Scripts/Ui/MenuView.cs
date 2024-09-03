@@ -57,4 +57,5 @@ public class MenuView : MonoBehaviour, IMenuView
         yield return StartCoroutine(uiMgr.SetUiVisible(sceneChangePanel.transform, 1f, 0f));
         SceneManager.LoadScene("InGameScene");
     }
+    
 }

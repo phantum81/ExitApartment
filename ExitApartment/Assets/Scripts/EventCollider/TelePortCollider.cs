@@ -3,16 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class TelePortCollider : MonoBehaviour
+public class TelePortCollider : MonoBehaviour, IContect
 {
     public UnityEvent onTelePort;
-    private void OnTriggerEnter(Collider other)
+
+
+
+    public void OnContect()
     {
-        if(other.tag == "Player")
-        {
-            onTelePort.Invoke();
-            GameManager.Instance.SetEscapeClearFloor(true);
-            GameManager.Instance.ChangeFloorLevel(EFloorType.Escape888B);
-        }
+        onTelePort.Invoke();
+        GameManager.Instance.SetEscapeClearFloor(true);
+        GameManager.Instance.ChangeFloorLevel(EFloorType.Escape888B);
+        
     }
+
+    public void OnStay()
+    {
+
+
+    }
+
+    public void OnExit()
+    {
+       
+    }
+
 }

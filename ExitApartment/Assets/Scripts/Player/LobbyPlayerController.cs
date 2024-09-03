@@ -34,9 +34,17 @@ public class LobbyPlayerController : MonoBehaviour
         UpdateShader();
         Move();
         if (inputMgr.InputDir != Vector3.zero)
+        {
+            if (!soundCtr.CheckPlaying())
+                soundCtr.Play();
             anim.SetBool("Walk", true);
+        }
         else
+        {
+            if (soundCtr.CheckPlaying())
+                soundCtr.Stop();
             anim.SetBool("Walk", false);
+        }
     }
 
     private void Init()
@@ -94,8 +102,6 @@ public class LobbyPlayerController : MonoBehaviour
         float fallSpeed = rigd.velocity.y;
         if (inputDir != Vector3.zero)
         {
-            if(!soundCtr.CheckPlaying())
-                soundCtr.Play();
             inputDir *= speed;
             Quaternion targetRotation = Quaternion.LookRotation(inputDir);
 
@@ -110,5 +116,5 @@ public class LobbyPlayerController : MonoBehaviour
         
     }
 
-
+    
 }

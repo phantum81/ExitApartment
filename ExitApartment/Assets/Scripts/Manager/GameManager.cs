@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using System;
 using UnityEngine.SceneManagement;
-using Unity.Android.Gradle.Manifest;
+
 using Action = System.Action;
 public class GameManager : MonoBehaviour
 {

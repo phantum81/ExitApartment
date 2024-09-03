@@ -19,6 +19,7 @@ public class ElevatorController : MonoBehaviour
     private Coroutine curCoroutine;
     public Coroutine CurCoroutine { get; set; }
 
+
     private SoundController soundCtr;
     private UnitManager unitMgr;
     private CameraManager cameraMgr;
@@ -230,11 +231,13 @@ public class ElevatorController : MonoBehaviour
         unitMgr.PlayerCtr.Player.transform.parent = unitMgr.PlayerCtr.transform;
         cameraMgr.CurCamera.transform.parent = null;
     }
-    public void OnCloseDoor()
+    public void OnEndGame()
     {
-        StartCoroutine(CloseDoor());
+        StartCoroutine(CloseDoor());       
+
     }
 
 
 
+    
 }

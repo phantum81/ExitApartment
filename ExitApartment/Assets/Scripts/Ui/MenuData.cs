@@ -11,8 +11,7 @@ public class MenuData
     }
     public void DataReset()
     {
-        data.eFloorData = EFloorType.Home15EB;
-        data.isPumpkinEvent = false;
+        data.ResetData();
     }
 
 }
