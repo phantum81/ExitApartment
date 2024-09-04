@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: GameData
   m_EditorClassIdentifier: 
   data: 
-  eFloorData: 3
+  eFloorData: 0
   sceneToLoad: 
   isPumpkinEvent: 0

@@ -29,8 +29,9 @@ public class SkinZombie : Mob
 
     
     private Animator anim;
-   
-    
+
+    [Header("스텝사운드컨트롤러"),SerializeField]
+    private SoundController stepSoundCtr;
     private Transform target;
     private SoundController soundCtr;
     [SerializeField]
@@ -41,8 +42,9 @@ public class SkinZombie : Mob
     {
         Init();
         anim = transform.GetComponent<Animator>();
-        
-        
+        stepSoundCtr.AudioPath = GameManager.Instance.soundMgr.SoundList[106];
+
+
         agent = GetComponent<NavMeshAgent>();
         timer = waitTime;
         eEnemyState = EenemyState.Idle;
@@ -51,6 +53,7 @@ public class SkinZombie : Mob
         soundCtr.AudioPath = GameManager.Instance.soundMgr.SoundList[71];
         chaseSoundCtr.AudioPath = GameManager.Instance.soundMgr.SoundList[72];
         soundCtr.Play();
+
         //soundCtr.StartCoroutine(soundCtr.PlayingRandomTimeSound(8f, 14f));
     }
 
@@ -178,5 +181,9 @@ public class SkinZombie : Mob
         base.Init();
     }
 
+    private void ZombieStepSound()
+    {
+        stepSoundCtr.Play();
+    }
 
 }

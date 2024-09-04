@@ -175,6 +175,7 @@ public class ElevatorController : MonoBehaviour
                 cameraMgr.PostProcess.OriginSetting();
                 soundMgr.BgmCtr.StopBgm();
                 unitMgr.SkyChange(unitMgr.SkyBox);
+
                 break;
             case UnitManager.LOCKED_FLOOR:
                 eCurFloor = EFloorType.Nothing436A;
@@ -189,7 +190,8 @@ public class ElevatorController : MonoBehaviour
             case UnitManager.Fall_FLOOR:
                 eCurFloor = EFloorType.Mob122F;
                 unitMgr.ChangeFloor(eCurFloor);
-                transform.position = unitMgr.ElevatorSpawnDic[eCurFloor].position;
+                transform.position = originPos;
+                
                 cameraMgr.PostProcess.SetMotionBlur(true);
                 cameraMgr.PostProcess.OriginSetting();
                 soundMgr.BgmCtr.StopBgm();
@@ -198,7 +200,7 @@ public class ElevatorController : MonoBehaviour
             case UnitManager.FOREST_FLOOR:
                 eCurFloor = EFloorType.Forest5ABC;
                 unitMgr.ChangeFloor(eCurFloor);
-                transform.position = originPos;
+                transform.position = unitMgr.ElevatorSpawnDic[eCurFloor].position;
                 cameraMgr.PostProcess.SetMotionBlur(false);
                 cameraMgr.PostProcess.OriginSetting();
                 soundMgr.BgmCtr.StopBgm();
@@ -210,7 +212,7 @@ public class ElevatorController : MonoBehaviour
                 transform.position = unitMgr.ElevatorSpawnDic[eCurFloor].position;
                 cameraMgr.PostProcess.SetMotionBlur(true);
                 cameraMgr.PostProcess.EscapeSetting();
-                soundMgr.BgmCtr.BgmChange(soundMgr.SoundList[250], true, 0.1f);
+                soundMgr.BgmCtr.BgmChange(soundMgr.SoundList[250], true, 0.2f);
                 unitMgr.SkyChange(unitMgr.EscapeSkyBox);
                 break;
             case UnitManager.LOBBY_FLOOR:

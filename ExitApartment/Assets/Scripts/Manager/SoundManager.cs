@@ -139,6 +139,8 @@ public class SoundManager : MonoBehaviour
         soundList.Add(102, "FallScream");
         soundList.Add(103, "ManBreathe");
         soundList.Add(104, "ManHurtBreathe");
+        soundList.Add(105, "CrabStepSound");
+        soundList.Add(106, "MonsterGrassSound");
 
 
         //----몬스터 관련 bgm-----

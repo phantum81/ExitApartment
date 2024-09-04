@@ -285,16 +285,27 @@ public class GameManager : MonoBehaviour
         onFallFloor = null;
         onNothingFloor = null;
         onEscapeFloor = null;
+        onLobbyFloor = null; 
 
         onHomeReset = null;
         onForestReset = null;
         onFallReset = null;
         onNothingReset = null;
         onEscapeReset = null;
+
+        isCheckCurboard= false;
+        isClearLocked= false;
+        isClearForest= false;
+        isClear12F = false;
+        isClearEscapeRoom= false;
+        
+
+
     }
     public void Restart()
     {
         
+        unitMgr.SkyBox.SetColor("_Tint", unitMgr.SkyboxOringinColor);
         SceneManager.LoadScene("InGameScene");
     }
 

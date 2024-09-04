@@ -17,6 +17,9 @@ public class BatMob : Mob
     [Header("핑크가든탈출  생성지점"), SerializeField]
     private Transform pinkGardenExitSpawn;
 
+    [Header("포탈에 비친 본인"), SerializeField]
+    private Transform portalDisapearTransform;
+
 
     [Header("걷기 속력"), SerializeField]
     private float speed;
@@ -29,6 +32,8 @@ public class BatMob : Mob
     private Transform deadView;
     [Header("보이는 포인트"), SerializeField]
     private Transform seePoint;
+
+
     public BlinkLight mobLight;
 
     [Header("발자국 사운드"), SerializeField]
@@ -36,6 +41,11 @@ public class BatMob : Mob
     [Header("등장 발자국 사운드"), SerializeField]
     private SoundController showStepSoundCtr;
     private Animator anim;
+
+    [Header("파티클"), SerializeField]
+    private ParticleSystem particle;
+
+
 
     private CameraManager cameraMgr;
     
@@ -62,7 +72,14 @@ public class BatMob : Mob
     void Update()
     {
         anim.SetFloat("Speed", agent.speed);
+        if(GameManager.Instance.eFloorType == EFloorType.Escape888B)
+        {
+            if(cameraMgr.CheckObjectInCamera(portalDisapearTransform, 100f))
+            {
+                Disapear();
+            }
 
+        }
 
         switch (eEnemyState)
         {
@@ -97,6 +114,7 @@ public class BatMob : Mob
         switch (eEscapeRoomEventState)
         {
             case EEscapeRoomEvent.None:
+
                 break;
             case EEscapeRoomEvent.FakeRoom:
 
@@ -219,6 +237,17 @@ public class BatMob : Mob
 
     }
 
-
-
+    public void AgentTargetInit()
+    {
+        eEscapeRoomEventState = EEscapeRoomEvent.None;
+        eEnemyState = EenemyState.Idle;
+        agent.isStopped = true;
+        
+    }
+    public void Disapear()
+    {
+        particle.transform.SetPositionAndRotation(transform.position, transform.rotation);
+        particle.Play();
+        transform.gameObject.SetActive(false);
+    }
 }

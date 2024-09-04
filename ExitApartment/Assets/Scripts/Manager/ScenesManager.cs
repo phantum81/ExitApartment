@@ -46,6 +46,7 @@ public class ScenesManager : MonoBehaviour
         {
             Time.timeScale = 1f;
             AudioListener.pause = false;
+            GameManager.Instance.SetGameState(EgameState.Menu);
             if (GameManager.Instance.eFloorType == EFloorType.Looby)
             {
                 data.ResetData();

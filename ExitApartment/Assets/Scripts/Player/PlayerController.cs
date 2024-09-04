@@ -60,6 +60,8 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         InputDir = inputMgr.InputDir;
+
+
     }
     #endregion
 

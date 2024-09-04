@@ -32,7 +32,7 @@ public class ElevatorDoorButton : MonoBehaviour, IInteraction
         soundCtr.Play();
         if (buttonType == EElevatorButtonType.Open && eleCtr.eleWork != EElevatorWork.Locking)
         {
-            if (GameManager.Instance.isClear12F || GameManager.Instance.isClearForest )
+            if (GameManager.Instance.isClear12F || GameManager.Instance.isClearForest ) 
             {
                 return;
             }
@@ -111,7 +111,7 @@ public class ElevatorDoorButton : MonoBehaviour, IInteraction
                 {
                     eleCtr.eleWork = EElevatorWork.Locking;
                     if(UiManager.Instance.inGameCtr.InGameUiShower.GetCurFloor() == UnitManager.ESCAPE_FLOOR)
-                        UiManager.Instance.inGameCtr.InGameUiShower.ScreenChange(1f, 1f);
+                        UiManager.Instance.inGameCtr.InGameUiShower.ScreenChange(1f, 0f);
                     eleCtr.CurCoroutine = eleCtr.StartCoroutine(eleCtr.MoveFloor());
                 }
 

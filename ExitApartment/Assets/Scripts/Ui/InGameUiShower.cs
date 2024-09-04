@@ -380,8 +380,8 @@ public class InGameUiShower : MonoBehaviour, IInGameMenuView
     }
     public void ScreenChange(float _time =1f, float _wait = 1f)
     {
-        ActiveUi(true, diePanel);
-        StartCoroutine(uiMgr.SetUiInvisible(diePanel.transform, _time, _wait));
+        ActiveUi(true, startPanel);
+        StartCoroutine(uiMgr.SetUiInvisible(startPanel.transform, _time, _wait));
     }
     public void ScreenVisibleChange(float _time = 1f, float _wait = 1f)
     {

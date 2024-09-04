@@ -319,8 +319,8 @@ public class UnitManager : MonoBehaviour
         ShowObject(notePaperDic[ENoteType.Forest].transform, true);
         ShowObject(notePaperDic[ENoteType.Last].transform, true);
         ChangeMaterial(apartInfoPaper.transform, apartPaperMatList[2]);
-        StartCoroutine(ChangeMaterialColor(SkyBox, Color.red, SkyboxOringinColor, 4f));
-        
+        skyBox.SetColor("_Tint", skyboxOringinColor);
+
     }
     private void ShowClearEscapeRoom()
     {

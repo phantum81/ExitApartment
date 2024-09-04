@@ -15,10 +15,11 @@ public class CrabMob : Mob
     [Header("시야반경"), SerializeField]
     private float viewAngle;
 
+    private SoundController soundCtr;
 
     private float timer;
     private NavMeshAgent agent;
-    
+    private SoundManager soundMgr;
     private Animator anim;
     
     
@@ -33,12 +34,13 @@ public class CrabMob : Mob
         Init();
 
         anim = transform.GetComponent<Animator>();
-        
-        
+        soundCtr = GetComponent<SoundController>();
+        soundMgr = GameManager.Instance.soundMgr;
         agent = GetComponent<NavMeshAgent>();
         timer = waitTime;
         eEnemyState = EenemyState.None;
         origin = transform.position;
+        soundCtr.AudioPath = soundMgr.SoundList[105];
 
     }
     void Update()
@@ -164,5 +166,11 @@ public class CrabMob : Mob
     protected override void Init()
     {
         base.Init();
+    }
+
+    private void CrabStepSound()
+    {
+        soundCtr.Play();
+        
     }
 }
