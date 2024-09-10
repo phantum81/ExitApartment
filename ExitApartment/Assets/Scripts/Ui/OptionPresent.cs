@@ -1,14 +1,72 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public class OptionPresent
 {
-    IOptionMenuView optionView;
-    OptionData optiondata;
-    public OptionPresent(IOptionMenuView _optionView, SettingData _data)
+
+    IOptionMenuView optionMenu;
+    SettingData settingData;
+
+    public OptionPresent( SettingData _data, IOptionMenuView _optionMenu)
     {
-        optionView = _optionView;
-        optiondata = new OptionData(_data);
+        optionMenu = _optionMenu;
+        settingData = _data;
     }
+    #region 사운드
+    public void SetBgm(float _value)
+    {
+        optionMenu.SetBgmVolume(_value);
+
+    }
+    public void SetEffect(float _value)
+    {
+        optionMenu.SetEffectVolume(_value);
+
+    }
+
+    public void SaveSoundVolume()
+    {
+        (float bgm, float effect) = optionMenu.GetSoundVolume();
+        settingData.SetBgmData(bgm);
+        settingData.SetEffectData(effect);
+        optionMenu.CloseParentPanel();
+
+    }
+
+    public void NoSaveSoundVolume()
+    {
+        optionMenu.SetSoundVolume(settingData.BgmValue, settingData.EffectSoundValue);
+        optionMenu.CloseParentPanel();
+    }
+    #endregion
+
+    #region 감마
+    public void SetGamma(float _value)
+    {
+        optionMenu.SetGammaValue(_value);
+
+    }
+
+    public void SaveGamma()
+    {
+        float value = optionMenu.GetGammaValue();
+        if (value == -1) return;
+
+        settingData.SetGammaData(value);
+        optionMenu.CloseParentPanel();
+    }
+
+    public void NoSaveGamma()
+    {
+        optionMenu.SetGammaValue(settingData.GammaValue);
+        optionMenu.CloseParentPanel();
+    }
+    #endregion
+    public void Init()
+    {
+        optionMenu.LoadData(settingData.BgmValue, settingData.EffectSoundValue);
+    }
+       
 }

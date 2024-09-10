@@ -2,13 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OptionData 
+public class OptionData
 {
-    private SettingData settingData;
+    public SettingData settingData;
 
-    public OptionData(SettingData _data)
+    public OptionData(SettingData _data )
     {
         settingData = _data;
     }
-
 }

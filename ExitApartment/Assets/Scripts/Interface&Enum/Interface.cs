@@ -78,5 +78,30 @@ public interface IInGameMenuView
 
 public interface IOptionMenuView
 {
+    public void LoadData(float _bgm, float _effect);
+    public void SetBgmVolume(float _value);
 
+    public void SetEffectVolume(float _value);
+
+    /// <summary>
+    /// 첫번쨰 bgm 두번째 effect
+    /// </summary>
+    /// <returns></returns>
+    public (float, float) GetSoundVolume();
+
+    public void SetSoundVolume(float _bgm, float _effecet);
+
+
+    public void SetGammaValue(float _value);
+
+    public float GetGammaValue();
+
+
+
+    public void CloseParentPanel();
+
+    //public void ShowSoundOption();
+    //public void ShowKeySettingOption();
+
+    //public void ShowBrightOption();
 }

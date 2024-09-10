@@ -53,7 +53,13 @@ public class GameManager : MonoBehaviour
     public Action onNothingReset;
     public Action onEscapeReset;
 
-    
+
+
+
+    [Header("세팅데이터"),SerializeField]
+    private SettingData settingData;
+    public SettingData SetData => settingData;
+
     public GameData saveData;
 
     private int humanityScore = 0;
@@ -322,5 +328,8 @@ public class GameManager : MonoBehaviour
         _callback.Invoke();
     }
 
+    private void SettingData()
+    {
 
+    }
 }

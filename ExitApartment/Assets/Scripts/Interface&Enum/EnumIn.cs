@@ -132,7 +132,13 @@ public enum EgameState
     Menu,
     InGame,
 }
-
+public enum EUiButtonType
+{
+    Bgm,
+    Effect,
+    Gamma,
+    
+}
 public enum EpostProcessType
 {
     Vignette,
