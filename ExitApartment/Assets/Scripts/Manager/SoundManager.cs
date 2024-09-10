@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.Audio;
+using static UnityEngine.Rendering.DebugUI;
 
 public class SoundManager : MonoBehaviour
 {
@@ -18,6 +20,20 @@ public class SoundManager : MonoBehaviour
     [Header("Bgm ÄÁÆ®·Ñ·¯"),SerializeField]
     private BgmController bgmCtr;
     public BgmController BgmCtr => bgmCtr;
+
+
+
+    [Header("¿Àµð¿À¹Í¼­"),SerializeField]
+    private AudioMixer audioMixer;
+    public AudioMixer AudioMixer => audioMixer;
+
+    [Header("BGM¹Í¼­"),SerializeField]
+    private AudioMixerGroup bgmMixer;
+    public AudioMixerGroup BgmMixer => bgmMixer;
+    [Header("Effect¹Í¼­"), SerializeField]
+    private AudioMixerGroup effectMixer;
+    public AudioMixerGroup EffectMixer => effectMixer;
+
 
     private void Awake()
     {
@@ -85,7 +101,18 @@ public class SoundManager : MonoBehaviour
 
        
     }
-    
+
+    public void SetBgmVolume(float _value)
+    {
+        AudioMixer.SetFloat("Bgm", Mathf.Log10(_value) * 20);
+    }
+
+    public void SetEffectVolume(float _value)
+    {
+        AudioMixer.SetFloat("Effect", Mathf.Log10(_value) * 20);
+    }
+
+
 
     private void SoundInit()
     {

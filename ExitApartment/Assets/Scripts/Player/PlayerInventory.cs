@@ -28,13 +28,22 @@ public class PlayerInventory : MonoBehaviour
     }
 
 
+    public void AddList(Transform _item)
+    {
+        inventoryItemList.Add(_item.gameObject);
+        Item pickItme = _item.GetComponent<Item>();
+        if(!pickItme.isCoPlaying)
+            StartCoroutine(pickItme.CoInitPosition());
+    }
+
+
     public void RemoveList(Transform _item)
     {
         for(int i =0; i < inventoryItemList.Count; i++)
         {
             if(inventoryItemList[i].gameObject == _item.gameObject)
             {
-                
+                inventoryItemList[i].transform.parent = null;
                 inventoryItemList.RemoveAt(i);
             }
         }
@@ -87,4 +96,6 @@ public class PlayerInventory : MonoBehaviour
 
 
     }
+
+
 }

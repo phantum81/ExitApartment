@@ -6,7 +6,7 @@ public class FlashLightItem : Item
 {
     private GameObject lightGo;
 
-
+    private EFloorType eFloorType = EFloorType.Home15EB;
 
     public override void Init()
     {
@@ -63,4 +63,26 @@ public class FlashLightItem : Item
 
 
     }
+
+    private void InitPosition()
+    {
+        if (transform.position != originPos && transform.parent == null)
+        {
+            transform.position = originPos;
+            transform.rotation = originRotate;
+            transform.gameObject.SetActive(true);
+        }
+    }
+
+    public override IEnumerator CoInitPosition()
+    {
+        isCoPlaying = true;
+        while (true)
+        {
+            yield return new WaitUntil(() => eFloorType != GameManager.Instance.unitMgr.ElevatorCtr.eCurFloor);
+            InitPosition();
+            eFloorType = GameManager.Instance.unitMgr.ElevatorCtr.eCurFloor;
+        }
+    }
+    
 }

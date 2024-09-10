@@ -98,6 +98,7 @@
     <Compile Include="Assets\Resources\DownAssets\ApartAsset\_BPS Basic Assets\Common\Scripts and Animations\First Person Player\SceneSwitchGen.cs" />
     <Compile Include="Assets\Scripts\PortalController.cs" />
     <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\Components\DepthOfFieldComponent.cs" />
+    <Compile Include="Assets\Scripts\Ui\OptionPresent.cs" />
     <Compile Include="Assets\Scripts\ButtonColorController.cs" />
     <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\Utils\ColorGradingCurve.cs" />
     <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\Utils\MaterialFactory.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="Assets\Scripts\Player\PlayerHFsm\PlayerFall.cs" />
     <Compile Include="Assets\Scripts\Mobs\CrabMob.cs" />
     <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\Attributes\TrackballGroupAttribute.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\SettingData.cs" />
     <Compile Include="Assets\Resources\DownAssets\ApartAsset\_BPS Basic Assets\Common\Scripts and Animations\Doors\opencloseDoor.cs" />
     <Compile Include="Assets\Resources\DownAssets\ApartAsset\Apartment Kit\Common\Scripts &amp; Animation\Slide\opencloseSlide.cs" />
     <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\Models\AntialiasingModel.cs" />
@@ -172,6 +174,7 @@
     <Compile Include="Assets\Scripts\Player\PlayerStateHFsm\PlayerStateHFSMMachine.cs" />
     <Compile Include="Assets\Resources\DownAssets\OfficeAsset\enviroment\Office building\scripts\evelator_controll.cs" />
     <Compile Include="Assets\Resources\DownAssets\ApartAsset\Apartment Kit\Common\Scripts &amp; Animation\TableFlip\TableFlipL.cs" />
+    <Compile Include="Assets\Scripts\Ui\OptionView.cs" />
     <Compile Include="Assets\Scripts\Camera\OnDeadCameraController.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\GameData.cs" />
     <Compile Include="Assets\Scripts\Item\SparrowBottleItem.cs" />
@@ -212,9 +215,11 @@
     <Compile Include="Assets\Scripts\Ui\InGameOnClick.cs" />
     <Compile Include="Assets\Scripts\EventCollider\FakeRoomTriggerCollider.cs" />
     <Compile Include="Assets\Scripts\EventCollider\GravityDieCollider.cs" />
+    <Compile Include="Assets\Scripts\Ui\OptionData.cs" />
     <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\Components\AmbientOcclusionComponent.cs" />
     <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\Models\ColorGradingModel.cs" />
     <Compile Include="Assets\Scripts\GroundCheck.cs" />
+    <Compile Include="Assets\Scripts\LightMapChanger.cs" />
     <Compile Include="Assets\Resources\DownAssets\Magical Rock\Scripts\IMRock.cs" />
     <Compile Include="Assets\Resources\DownAssets\ApartAsset\_BPS Basic Assets\Common\Scripts and Animations\Drawer\Z Axis\Drawer_Pull_Z.cs" />
     <Compile Include="Assets\Resources\DownAssets\Rusty Flashlight\Scripts\FlashlightToggle.cs" />
@@ -230,6 +235,7 @@
     <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\Models\GrainModel.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerInventory.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerStateHFsm\PlayerStateMentalDamage.cs" />
+    <Compile Include="Assets\Scripts\Player\StepHeight.cs" />
     <Compile Include="Assets\Resources\DownAssets\Mimic\Scripts\Leg.cs" />
     <Compile Include="Assets\Scripts\Item\WaterItem.cs" />
     <Compile Include="Assets\Scripts\Ui\MenuPresent.cs" />

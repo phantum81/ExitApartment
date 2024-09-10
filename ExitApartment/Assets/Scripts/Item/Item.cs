@@ -14,11 +14,14 @@ public class Item : MonoBehaviour, IInteraction, IUseItem, IGravityChange
     protected ItemData soItemData;
     public ItemData SOItemData => soItemData;
 
-
+    protected Vector3 originPos = Vector3.zero;
+    protected Quaternion originRotate;
 
     [Header("아이템 타입"),SerializeField]
     protected EItemType eItemType;
     public EItemType EItemType => eItemType;
+
+    public bool isCoPlaying = false;
 
     public virtual void Init()
     {
@@ -26,6 +29,8 @@ public class Item : MonoBehaviour, IInteraction, IUseItem, IGravityChange
         GameManager.Instance.itemMgr.InitInteractionItem(ref curMaterial, ref originColor, transform);
         rigd = GetComponent<Rigidbody>();
         soundCtr = gameObject.GetComponent<SoundController>();
+        originPos = transform.position;
+        originRotate = transform.rotation;
     }
 
     public virtual void OnRayHit(Color _color)
@@ -85,5 +90,11 @@ public class Item : MonoBehaviour, IInteraction, IUseItem, IGravityChange
         
         ISOEventContect col = other.GetComponent<ISOEventContect>();
         col?.OnContect(ESOEventType.OnClear12F);
+    }
+
+
+    public virtual IEnumerator CoInitPosition()
+    {
+        yield return null;
     }
 }

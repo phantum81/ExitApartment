@@ -25,6 +25,8 @@ public class PlayerPostProcess : MonoBehaviour
     public List<Coroutine> CurCoroutine => curCoroutine;
 
     private Color originColorGradingIntensity;
+
+    Vector4 originGamma;
     private void Start()
     {
         unitMgr = GameManager.Instance.unitMgr;
@@ -413,6 +415,20 @@ public class PlayerPostProcess : MonoBehaviour
             //currentColor.b = Mathf.Clamp(currentColor.b * intensityFactor, 0f, 1f);
 
             colorGrading.colorFilter.value = currentColor;
+
+        }
+    }
+
+
+    public void SetGammaValue(float _value)
+    {
+        if (post != null && post.profile.TryGetSettings(out colorGrading))
+        {
+
+            originGamma = new Vector4(colorGrading.gamma.value.x, colorGrading.gamma.value.y, colorGrading.gamma.value.z, 0f);
+
+            originGamma *= _value;
+
 
         }
     }

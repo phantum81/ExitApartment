@@ -366,7 +366,7 @@ public class InGameUiShower : MonoBehaviour, IInGameMenuView
         };
     }
 
-    //SetUiInvisible
+    
 
     private IEnumerator ResetScreen()
     {

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class SoundController : MonoBehaviour
 {
@@ -26,19 +27,15 @@ public class SoundController : MonoBehaviour
     [Header("어웨이크 실행"), SerializeField]
     private bool isAwakePlay = false;
 
+    private SoundManager soundMgr;
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
-
+        soundMgr = GameManager.Instance.soundMgr;
     }
     void Start()
     {
-
-        
-        if (isAwakePlay)
-        {
-            Play();
-        }
+        Init();
     }
 
     private void Update()
@@ -51,6 +48,25 @@ public class SoundController : MonoBehaviour
 
     }
 
+    private void Init()
+    {
+
+
+        switch (eSoundType)
+        {
+            case ESoundType.Bgm:
+                audioSource.outputAudioMixerGroup = soundMgr.BgmMixer;
+                break;
+            case ESoundType.Effect:
+                audioSource.outputAudioMixerGroup = soundMgr.EffectMixer;
+                break;
+        }
+
+        if (isAwakePlay)
+        {
+            Play();
+        }
+    }
     public void Play()
     {
         GameManager.Instance.soundMgr.PlayAudio(audioPath, audioSource, eSoundType);

@@ -9,6 +9,7 @@ public class MenuPresent
     private IInGameMenuView inGameMenuView;
     private MenuData data;
     
+    
     public MenuPresent(IMenuView _menuView, GameData _data)
     {
         menuView = _menuView;
@@ -19,6 +20,8 @@ public class MenuPresent
     {
         inGameMenuView = _menuView;
     }
+
+
     public void NewStartScene()
     {
         data.DataReset();

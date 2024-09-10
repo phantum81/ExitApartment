@@ -21,6 +21,9 @@ public class UnitManager : MonoBehaviour
     public const string ADDRESS_TEXT = "15EB1";
 
 
+    [Header("손전등"), SerializeField]
+    private GameObject flashLight;
+
     [Header("플레이어 컨트롤러"), SerializeField]
     private PlayerController playerCtr;
     public PlayerController PlayerCtr => playerCtr;
@@ -118,10 +121,11 @@ public class UnitManager : MonoBehaviour
         notePaperDic.Add(ENoteType.Last, PaperList[3]);
         elevatorSpawnDic = elevatorSpawnList.ToDictionary(elevator => elevator.eFloorType, elevator => elevator.transform);
         skyboxOringinColor = skyBox.GetColor("_Tint");
+        
     }
     void Start()
     {
-
+        flashLight.SetActive(false);
         GameManager.Instance.onGetForestHumanity += OnForestHumanity;
         GameManager.Instance.onNothingFloor += ShowClearNothingFloor;
         GameManager.Instance.onFallFloor += ShowClearFallFloor;
@@ -302,6 +306,7 @@ public class UnitManager : MonoBehaviour
     private void ShowClearNothingFloor()
     {
         floorNumTextList[0].gameObject.SetActive(true);
+        flashLight.SetActive(true);
     }
     private void ShowClearFallFloor()
     {
@@ -418,4 +423,6 @@ public class UnitManager : MonoBehaviour
         if(RenderSettings.skybox != _skybox)
             RenderSettings.skybox = _skybox;
     }
+
+    
 }

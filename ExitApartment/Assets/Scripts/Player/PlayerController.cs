@@ -20,8 +20,8 @@ public class PlayerController : MonoBehaviour
     public float RunSpeed => _runSpeed;
     [Header("던지는 힘"), SerializeField]
     private float throwPower = 8f;
-    [Header("슬로프 제한"), SerializeField]
-    private float slopLimit = 30f;
+
+    public float limitSlope = 10f;
 
 
     private Rigidbody rigd;
@@ -34,6 +34,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private GroundCheck groundCheck;
     public GroundCheck GrCheck=> groundCheck;
+    [Header("단차체커"),SerializeField]
+    private StepHeight stepHeight;
+
+
+
+
     private PlayerInventory playerInven;
     public PlayerInventory PlayerInven => playerInven;
     private InputManager inputMgr;
@@ -60,7 +66,14 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         InputDir = inputMgr.InputDir;
+        if (playerSlopRay.IsSlope && groundCheck.IsGround)
+            rigd.useGravity = false;
+        else
+            rigd.useGravity = true;
+        
 
+        if(playerSlopRay.GroundAngle > limitSlope)
+            stepHeight.StepHeightMove(rigd);
 
     }
     #endregion
@@ -116,7 +129,7 @@ public class PlayerController : MonoBehaviour
         if(UiManager.Instance.inGameCtr.InvenCtr.CheckInventoryEmpty() || playerInven.CurItem ==null)
         {
             playerInven.CurItem = _target;
-            playerInven.InventoryItemList.Add(_target.gameObject);
+            playerInven.AddList(_target);
             UiManager.Instance.inGameCtr.InvenCtr.AddItem(_data);
         }
         else if(UiManager.Instance.inGameCtr.InvenCtr.CheckInventoryFull())
@@ -125,8 +138,8 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            
-            playerInven.InventoryItemList.Add(_target.gameObject);
+
+            playerInven.AddList(_target);
             UiManager.Instance.inGameCtr.InvenCtr.AddItem(_data);
             _target.gameObject.SetActive(false);
         }

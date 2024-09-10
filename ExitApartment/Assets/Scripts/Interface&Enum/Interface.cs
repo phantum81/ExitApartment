@@ -75,3 +75,8 @@ public interface IInGameMenuView
 
     void ShowOptionPanel();
 }
+
+public interface IOptionMenuView
+{
+
+}

@@ -16,6 +16,8 @@ public class ElevatorController : MonoBehaviour
 
     public EElevatorWork eleWork = EElevatorWork.Closing;
     public EFloorType eCurFloor = EFloorType.Home15EB;
+
+
     private Coroutine curCoroutine;
     public Coroutine CurCoroutine { get; set; }
 
@@ -30,6 +32,7 @@ public class ElevatorController : MonoBehaviour
     void Start()
     {
         Init();
+        //UpdateCurFloor(UnitManager.HOME_FLOOR);
         //StartCoroutine(ShakeElevator(2f,0.005f));
     }
 
@@ -170,7 +173,7 @@ public class ElevatorController : MonoBehaviour
             case UnitManager.HOME_FLOOR:
                 eCurFloor = EFloorType.Home15EB;                
                 unitMgr.ChangeFloor(eCurFloor);
-                transform.position = originPos;                
+                transform.position = unitMgr.ElevatorSpawnDic[eCurFloor].position;
                 cameraMgr.PostProcess.SetMotionBlur(true);
                 cameraMgr.PostProcess.OriginSetting();
                 soundMgr.BgmCtr.StopBgm();
@@ -180,7 +183,7 @@ public class ElevatorController : MonoBehaviour
             case UnitManager.LOCKED_FLOOR:
                 eCurFloor = EFloorType.Nothing436A;
                 unitMgr.ChangeFloor(eCurFloor);
-                transform.position = originPos;
+                transform.position = unitMgr.ElevatorSpawnDic[eCurFloor].position;
                 GameManager.Instance.ChangeFloorLevel(eCurFloor);
                 cameraMgr.PostProcess.SetMotionBlur(true);
                 cameraMgr.PostProcess.OriginSetting();
@@ -191,7 +194,7 @@ public class ElevatorController : MonoBehaviour
                 eCurFloor = EFloorType.Mob122F;
                 unitMgr.ChangeFloor(eCurFloor);
                 transform.position = originPos;
-                
+
                 cameraMgr.PostProcess.SetMotionBlur(true);
                 cameraMgr.PostProcess.OriginSetting();
                 soundMgr.BgmCtr.StopBgm();
