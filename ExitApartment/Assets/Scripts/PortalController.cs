@@ -61,4 +61,11 @@ public class PortalController : MonoBehaviour
     {
         portal.parent.gameObject.SetActive(true);
     }
+
+
+    private void ContectAngle()
+    {
+        
+
+    }
 }

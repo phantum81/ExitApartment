@@ -15,7 +15,7 @@ public class MonsterController : MonoBehaviour
     [Header("홈 이벤트 타겟 위치"), SerializeField]
     private Transform home_target;
     [Header("펌프킨 노래"), SerializeField]
-    private AudioSource pumpkinSource;
+    private SoundController pumpkinSource;
     private float randomEventTime;
     private float appearTime = 3f;
     private float disappearTime = 5f;
@@ -51,7 +51,7 @@ public class MonsterController : MonoBehaviour
             yield return new WaitForSeconds(randomEventTime);
 
             SetBlinkEvent(true);
-            pumpkinSource.pitch = 0.5f;
+            pumpkinSource.SetPitch(0.5f);
 
             yield return new WaitForSeconds(appearTime);
 
@@ -64,7 +64,7 @@ public class MonsterController : MonoBehaviour
 
             SetBlinkEvent(false);
             unitMgr.ShowObject(pumpkinTransform, false);
-            pumpkinSource.pitch = 1f;
+            pumpkinSource.SetPitch(1f);
 
             yield return null;
 

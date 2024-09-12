@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    [Header("플레이어 컨트롤러"), SerializeField]
-    private PlayerController playerCtr;
+    //[Header("플레이어 컨트롤러"), SerializeField]
+    //private PlayerController playerCtr;
 
 
     Vector3 inputDir;
@@ -23,11 +23,12 @@ public class InputManager : MonoBehaviour
 
     private void Awake()
     {
-        GameManager.Instance.inputMgr = this;
+        //GameManager.Instance.inputMgr = this;
     }
     // Update is called once per frame
     private void Start()
     {
+        Init();
         CheckInputKeys();
     }
     void Update()
@@ -65,7 +66,8 @@ public class InputManager : MonoBehaviour
 
     public void Init()
     {
-
+        if (inputDic.Count > 0)
+            return;
         for(int i = 0; i < inputDic.Count; i++)
         {            
             inputDic.Add((EuserAction)i, false);

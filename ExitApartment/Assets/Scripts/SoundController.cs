@@ -18,6 +18,10 @@ public class SoundController : MonoBehaviour
     private float volume = 1f;
     [Header("오디오 이름"),SerializeField]
     private string audioPath;
+    [Header("오디오 피치"), SerializeField]
+    private float pitch =1f;
+
+
     public string AudioPath { get { return audioPath; } set { audioPath = value; } }
     private bool isPlaying = false;
     public bool IsPlaying => isPlaying;
@@ -44,7 +48,7 @@ public class SoundController : MonoBehaviour
         audioSource.volume = volume;
         isPlaying = audioSource.isPlaying;
         audioTime = audioSource.time;
-        
+        audioSource.pitch = pitch;
 
     }
 
@@ -69,7 +73,7 @@ public class SoundController : MonoBehaviour
     }
     public void Play()
     {
-        GameManager.Instance.soundMgr.PlayAudio(audioPath, audioSource, eSoundType);
+        GameManager.Instance.soundMgr.PlayAudio(audioPath, audioSource, eSoundType, pitch);
     }
 
     public void Stop()
@@ -125,7 +129,10 @@ public class SoundController : MonoBehaviour
     {
         volume = _val;
     }
-
+    public void SetPitch(float _val)
+    {
+        pitch = _val;
+    }
 
     public void ChangeSound(string _path, bool _loop = false)
     {

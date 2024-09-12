@@ -9,7 +9,7 @@ public class FakeRoomTriggerCollider : MonoBehaviour, IContect
     public UnityEvent showBat;
     public UnityEvent hideBat;
     public UnityEvent soundOn;
-    
+    public UnityEvent stepSoundOn;
     private bool wasIn = false;
     private bool wasOut = false;
 
@@ -21,6 +21,7 @@ public class FakeRoomTriggerCollider : MonoBehaviour, IContect
         if (wasIn) return;
         showBat?.Invoke();
         soundOn?.Invoke();
+        stepSoundOn?.Invoke();
         wasIn = true;
     }
     public void OnExit()

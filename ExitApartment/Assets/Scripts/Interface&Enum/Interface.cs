@@ -78,7 +78,7 @@ public interface IInGameMenuView
 
 public interface IOptionMenuView
 {
-    public void LoadData(float _bgm, float _effect);
+    public void LoadData(float _bgm, float _effect, float _gamma, float _sensitivity);
     public void SetBgmVolume(float _value);
 
     public void SetEffectVolume(float _value);
@@ -96,6 +96,14 @@ public interface IOptionMenuView
 
     public float GetGammaValue();
 
+    public void SetGammaSliderValue(float _value);
+
+    public void SetSensitivityValue(float _value);
+
+    public void SetInputValue(float _value);
+
+
+    public float GetSensitivityValue();
 
 
     public void CloseParentPanel();

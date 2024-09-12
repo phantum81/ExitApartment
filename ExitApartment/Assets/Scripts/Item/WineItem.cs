@@ -60,6 +60,7 @@ public class WineItem : Item
         {
             transform.position = originPos;
             transform.rotation = originRotate;
+            transform.parent = parent;
             transform.gameObject.SetActive(true);
             transform.GetComponent<Collider>().enabled = true;
         }
@@ -67,11 +68,23 @@ public class WineItem : Item
     public override IEnumerator CoInitPosition()
     {
         isCoPlaying = true;
+        bool isplay = true;
         while (true)
         {
-            yield return new WaitUntil(() => eFloorType != GameManager.Instance.unitMgr.ElevatorCtr.eCurFloor);
-            InitPosition();
-            eFloorType = GameManager.Instance.unitMgr.ElevatorCtr.eCurFloor;
+            if (EFloorType.Home15EB == GameManager.Instance.unitMgr.ElevatorCtr.eCurFloor && !isplay)
+            {
+                InitPosition();
+                isplay = true;
+            }
+
+            if(EFloorType.Home15EB != GameManager.Instance.unitMgr.ElevatorCtr.eCurFloor)
+            {
+                isplay = false;
+            }
+
+
+            yield return null;
+
         }
     }
 }

@@ -40,6 +40,7 @@ public class ElevatorDoorButton : MonoBehaviour, IInteraction
             {
                 cameraMgr.ChangeCamera(cameraMgr.CameraDic[4]);
                 unitMgr.PlayerCtr.gameObject.SetActive(false);
+                cameraMgr.CameraDic[0].gameObject.SetActive(false);
                 unitMgr.LobbyPlayer.gameObject.SetActive(true);
                
 

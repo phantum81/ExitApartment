@@ -16,7 +16,7 @@ public class Item : MonoBehaviour, IInteraction, IUseItem, IGravityChange
 
     protected Vector3 originPos = Vector3.zero;
     protected Quaternion originRotate;
-
+    protected Transform parent;
     [Header("아이템 타입"),SerializeField]
     protected EItemType eItemType;
     public EItemType EItemType => eItemType;
@@ -31,6 +31,7 @@ public class Item : MonoBehaviour, IInteraction, IUseItem, IGravityChange
         soundCtr = gameObject.GetComponent<SoundController>();
         originPos = transform.position;
         originRotate = transform.rotation;
+        parent = gameObject.transform.parent;
     }
 
     public virtual void OnRayHit(Color _color)
@@ -60,6 +61,8 @@ public class Item : MonoBehaviour, IInteraction, IUseItem, IGravityChange
     {        
         UiManager.Instance.inGameCtr.InvenCtr.RemoveItem(soItemData);
         GameManager.Instance.unitMgr.PlayerCtr.PlayerInven.RemoveList(transform);
+        GameManager.Instance.unitMgr.PlayerCtr.PlayerInven.CurItem = null;
+        GameManager.Instance.unitMgr.SetShadowCast(gameObject, true);
         transform.gameObject.SetActive(false);
     }
 

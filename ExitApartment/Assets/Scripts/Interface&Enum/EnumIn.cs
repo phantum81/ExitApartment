@@ -134,8 +134,8 @@ public enum EgameState
 }
 public enum EUiButtonType
 {
-    Bgm,
-    Effect,
+    Sound,
+    Input,
     Gamma,
     
 }

@@ -11,7 +11,7 @@ public class WaterItem : Item
     [Header("지속시간"), SerializeField]
     private float usingTime;
 
-    EFloorType eFloorType = EFloorType.Home15EB;
+    
 
     public override void Init()
     {
@@ -66,18 +66,30 @@ public class WaterItem : Item
         {
             transform.position = originPos;
             transform.rotation = originRotate;
+            transform.parent = parent;
             transform.gameObject.SetActive(true);
             transform.GetComponent<Collider>().enabled = true;
         }
     }
     public override IEnumerator CoInitPosition()
     {
+
         isCoPlaying = true;
+        bool isplay = false;
         while (true)
         {
-            yield return new WaitUntil(() => eFloorType != GameManager.Instance.unitMgr.ElevatorCtr.eCurFloor);
-            InitPosition();
-            eFloorType = GameManager.Instance.unitMgr.ElevatorCtr.eCurFloor;
+            if (EFloorType.Home15EB == GameManager.Instance.unitMgr.ElevatorCtr.eCurFloor && !isplay)
+            {
+                InitPosition();
+                isplay = true;
+            }
+
+            if (EFloorType.Home15EB != GameManager.Instance.unitMgr.ElevatorCtr.eCurFloor)
+            {
+                isplay = false;
+            }
+            yield return null;
+
         }
     }
 

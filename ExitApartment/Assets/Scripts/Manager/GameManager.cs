@@ -170,16 +170,17 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (inputMgr == null)
-        {
-            GameObject _go = GameObject.Find("InputManager");
-            if (_go != null)
-            {
-                inputMgr = _go.GetComponent<InputManager>();
-            }
-        }
+        //if (inputMgr == null)
+        //{
+        //    GameObject _go = GameObject.Find("InputManager");
+        //    if (_go != null)
+        //    {
+        //        inputMgr = _go.GetComponent<InputManager>();
+        //    }
+        //}
+
         itemMgr.Init();
-        inputMgr.Init();
+        //inputMgr.Init();
         soundMgr.Init();
         unitMgr.Init();
         InitAction();

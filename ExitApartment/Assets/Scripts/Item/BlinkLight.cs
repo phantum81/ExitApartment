@@ -30,7 +30,11 @@ public class BlinkLight : MonoBehaviour
     private Coroutine soundCoroutine;
     private Light transLight;
     private SoundController soundCtr;
+
+    [Header("Intensity"), SerializeField]
+    private float intensity = 1f;
     
+
     private void Awake()
     {
 
@@ -87,7 +91,7 @@ public class BlinkLight : MonoBehaviour
                 }
                 else
                 {
-                    randomIntensity = Random.Range(originIntensity / 2, originIntensity);
+                    randomIntensity = Random.Range(originIntensity / 2, originIntensity * intensity);
                 }
                 
                 transLight.intensity = curIntensity;

@@ -92,8 +92,8 @@ public class CameraController : MonoBehaviour
     
     void Update()
     {
-        
-        
+
+        sensitivity = GetSensitivity();
 
 
         switch ((int)cameraMgr.ECameraState)
@@ -283,21 +283,7 @@ public class CameraController : MonoBehaviour
 
     #endregion
 
-    #region 그외 기능
-    public bool CheckInterection(Ray _ray , out RaycastHit _hit, float _maxDis, int _layer )
-    {
-        
-        if(Physics.Raycast(_ray, out _hit, _maxDis, _layer))
-        {
-            return true;
-        }
-        else
-            return false;
-    }
-
-
-
-    #endregion
+    
 
     #region 이벤트 코루틴
 
@@ -332,5 +318,24 @@ public class CameraController : MonoBehaviour
     {
         StartCoroutine(OnCameraShake());
     }
+    #endregion
+
+    #region  그외 기능
+    public bool CheckInterection(Ray _ray , out RaycastHit _hit, float _maxDis, int _layer )
+    {
+        
+        if(Physics.Raycast(_ray, out _hit, _maxDis, _layer))
+        {
+            return true;
+        }
+        else
+            return false;
+    }
+
+    public float GetSensitivity()
+    {
+        return GameManager.Instance.SetData.Sensitivity;
+    }
+
     #endregion
 }

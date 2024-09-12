@@ -16,10 +16,12 @@ public class PlayerInventory : MonoBehaviour
     public Transform CurItem { get {return curItem ; } set { curItem = value; } }
 
     private InputManager inputMgr;
+    
 
     private void Start()
     {
         inputMgr = GameManager.Instance.inputMgr;
+        
     }
 
     private void Update()
@@ -44,6 +46,7 @@ public class PlayerInventory : MonoBehaviour
             if(inventoryItemList[i].gameObject == _item.gameObject)
             {
                 inventoryItemList[i].transform.parent = null;
+                
                 inventoryItemList.RemoveAt(i);
             }
         }
@@ -57,11 +60,12 @@ public class PlayerInventory : MonoBehaviour
             {
                 if(curItem != null)
                 {
-                    curItem.gameObject.SetActive(false);
                     
+                    curItem.gameObject.SetActive(false);
                 }
 
                 curItem = inventoryItemList[i].transform;
+                
                 curItem.gameObject.SetActive(true);
                 
 
@@ -69,9 +73,8 @@ public class PlayerInventory : MonoBehaviour
             else if (!UiManager.Instance.inGameCtr.InvenCtr.SlotList[_num].Data)
             {
                 if (curItem != null)
-                {
+                {                    
                     curItem.gameObject.SetActive(false);
-                    
                 }
             }
             
@@ -89,7 +92,8 @@ public class PlayerInventory : MonoBehaviour
             EuserAction action = (EuserAction)(i + 9); // EuserAction.One부터 EuserAction.Nine까지
             if (inputMgr.InputDic.ContainsKey(action) && inputMgr.InputDic[action])
             {
-                ChangeItem(i);                
+                ChangeItem(i);
+                
                 break; 
             }
         }

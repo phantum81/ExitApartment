@@ -165,7 +165,7 @@ public class CameraManager : MonoBehaviour
                 // 레이캐스트를 사용하여 장애물이 있는지 확인
                 if (Physics.Raycast(CurCamera.transform.position, directionToTarget, out RaycastHit hit, seeValue, sightMobCheckLayer))
                 {
-                    Debug.Log(hit.transform.gameObject.name);
+                   // Debug.Log(hit.transform.gameObject.name);
                     if (hit.transform.gameObject.layer == 8)
                         return true;
                     else

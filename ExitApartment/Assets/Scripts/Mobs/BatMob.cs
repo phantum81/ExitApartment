@@ -199,7 +199,11 @@ public class BatMob : Mob
         unitMgr.ShowObject(transform, true);
     }
 
-
+    public void ShowSound()
+    {
+        showStepSoundCtr.SetLoop(false);
+        showStepSoundCtr.Play();
+    }
 
 
 

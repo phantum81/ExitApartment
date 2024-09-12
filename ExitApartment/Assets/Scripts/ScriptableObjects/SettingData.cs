@@ -15,6 +15,11 @@ public class SettingData : ScriptableObject
     private float gammaValue;
     public float GammaValue => gammaValue;
 
+    [SerializeField]
+    private float sensitivity;
+    public float Sensitivity => sensitivity;
+
+
     public void SetBgmData(float _bgm)
     {
         bgmValue= _bgm;
@@ -29,5 +34,8 @@ public class SettingData : ScriptableObject
     {
         gammaValue= _value;
     }
-
+    public void SetSensitivityData(float _value)
+    {
+        sensitivity = _value;
+    }
 }

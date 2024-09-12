@@ -7,48 +7,66 @@ using static UnityEngine.Rendering.DebugUI;
 public class GammaController : MonoBehaviour
 {
     [SerializeField]
-    private PostProcessVolume post;
-    private ColorGrading colorGrading;
+    private PostProcessVolume settingPost;
+    [SerializeField]
+    private PostProcessVolume menuPost;
+    [SerializeField]
+    private PostProcessVolume inGamePost;
 
-    private void Start()
-    {
+    private ColorGrading settingColorGrading;
+    private ColorGrading menuColorGrading;
+    private ColorGrading inGameColorGrading;
 
-    }
 
-    private void Update()
-    {
-        
-    }
+
 
     public void SetGammaValue(float _value)
     {
-        if (post != null && post.profile.TryGetSettings(out colorGrading))
+        if (settingPost != null && settingPost.profile.TryGetSettings(out settingColorGrading))
         {
 
-            if (colorGrading != null)
+            if (settingColorGrading != null)
             {
                 // 감마 값을 업데이트
-                colorGrading.gamma.value = new Vector4(colorGrading.gamma.value.x, colorGrading.gamma.value.y, colorGrading.gamma.value.z, _value);
+                settingColorGrading.gamma.value = new Vector4(settingColorGrading.gamma.value.x, settingColorGrading.gamma.value.y, settingColorGrading.gamma.value.z, _value);
                
             }
 
 
 
         }
-        else
+
+        if(menuPost != null && menuPost.profile.TryGetSettings(out menuColorGrading))
         {
-            Debug.LogWarning("Post-processing profile or ColorGrading settings are missing.");
+            if (menuColorGrading != null)
+            {
+                // 감마 값을 업데이트
+                menuColorGrading.gamma.value = new Vector4(settingColorGrading.gamma.value.x, settingColorGrading.gamma.value.y, settingColorGrading.gamma.value.z, _value);
+
+            }
+        }
+        if (inGamePost != null && inGamePost.profile.TryGetSettings(out inGameColorGrading))
+        {
+            if (inGameColorGrading != null)
+            {
+                // 감마 값을 업데이트
+                inGameColorGrading.gamma.value = new Vector4(inGameColorGrading.gamma.value.x, settingColorGrading.gamma.value.y, settingColorGrading.gamma.value.z, _value);
+
+            }
         }
     }
     public float GetGammaValue()
     {
-        if (post != null && post.profile.TryGetSettings(out colorGrading))
+        if (settingPost != null && settingPost.profile.TryGetSettings(out settingColorGrading))
         {
 
-            return colorGrading.gamma.value.w;
+            return settingColorGrading.gamma.value.w;
 
 
         }
         return -1f;
     }
+
+
+
 }

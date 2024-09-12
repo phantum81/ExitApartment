@@ -424,5 +424,23 @@ public class UnitManager : MonoBehaviour
             RenderSettings.skybox = _skybox;
     }
 
-    
+    public void SetShadowCast(GameObject _obj ,bool _bool)
+    {
+        Renderer[] renderers = _obj.GetComponentsInChildren<Renderer>();
+
+        if (renderers.Length == 0)
+        {
+            Debug.LogWarning("·»´õ·¯°¡ ¾ø´Ù ½¦µµ¿ì");
+            return;
+        }
+
+        
+        foreach (Renderer renderer in renderers)
+        {
+            if (_bool)
+                renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
+            else
+                renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+        }
+    }
 }

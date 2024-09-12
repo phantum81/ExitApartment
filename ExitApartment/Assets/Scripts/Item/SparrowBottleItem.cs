@@ -5,15 +5,15 @@ using UnityEngine;
 public class SparrowBottleItem : Item
 {
     private EFloorType eFloorType = EFloorType.Home15EB;
-    private Transform originParent;
+    
     private Vector3 originParentPos ; 
     public override void Init()
     {
         
         base.Init();
         eItemType = EItemType.Bottle;
-        originParent = transform.parent;
-        originParentPos = originParent.position;
+        
+        originParentPos = parent.position;
     }
     public override void OnRayHit(Color _color)
     {
@@ -71,16 +71,16 @@ public class SparrowBottleItem : Item
     {
         if (transform.position != originPos && transform.parent == null)
         {
-            if(originParent.position != originParentPos)
+            if(parent.position != originParentPos)
             {
-                Vector3 distance = originParent.position - originParentPos;
+                Vector3 distance = parent.position - originParentPos;
                 transform.position = originPos;
                 transform.position += distance;
             }
             else
                 transform.position = originPos;
 
-            transform.parent = originParent;
+            transform.parent = parent;
             transform.rotation = originRotate;            
             transform.GetComponent<Collider>().enabled = true;
         }
@@ -88,11 +88,21 @@ public class SparrowBottleItem : Item
     public override IEnumerator CoInitPosition()
     {
         isCoPlaying = true;
+        bool isplay = false;
         while (true)
         {
-            yield return new WaitUntil(() => eFloorType != GameManager.Instance.unitMgr.ElevatorCtr.eCurFloor);
-            InitPosition();
-            eFloorType = GameManager.Instance.unitMgr.ElevatorCtr.eCurFloor;
+            if (EFloorType.Home15EB == GameManager.Instance.unitMgr.ElevatorCtr.eCurFloor && !isplay)
+            {
+                InitPosition();
+                isplay = true;
+            }
+
+            if (EFloorType.Home15EB != GameManager.Instance.unitMgr.ElevatorCtr.eCurFloor)
+            {
+                isplay = false;
+            }
+            yield return null;
+
         }
     }
 

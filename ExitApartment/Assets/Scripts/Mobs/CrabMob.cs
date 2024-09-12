@@ -113,7 +113,7 @@ public class CrabMob : Mob
 
     void HandleAttackState()
     {
-        anim.SetTrigger("Attack");
+        anim.CrossFade("Attack", 0.1f);
         eEnemyState = EenemyState.None;
     }
 

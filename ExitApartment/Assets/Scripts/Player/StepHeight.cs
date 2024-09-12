@@ -21,14 +21,14 @@ public class StepHeight : MonoBehaviour
         
     }
 
-    public void StepHeightMove(Rigidbody _rigd)
+    public void StepHeightMove(Rigidbody _rigd, Vector3 _inputdir)
     {
         //RaycastHit limitHitted;
         Vector3 limitHeight = transform.position + Vector3.up * limitHeightMultiply;
         // 발 높이에서 단차 감지
-        if (Physics.Raycast(transform.position, transform.forward, out hitLower, 0.2f, ~expectLayer))
+        if (Physics.Raycast(transform.position, _inputdir, out hitLower, 0.2f, ~expectLayer))
         {
-            if(Physics.Raycast(limitHeight, transform.forward, 0.2f, ~expectLayer))
+            if(Physics.Raycast(limitHeight, _inputdir, 0.3f, ~expectLayer))
             {
                 return;
             }
@@ -56,7 +56,7 @@ public class StepHeight : MonoBehaviour
         Gizmos.color = Color.red; // Gizmo 색상 설정
 
         // RayOrigin에서 Forward 방향으로 Raycast를 그림
-        Gizmos.DrawRay(transform.position + Vector3.up * limitHeightMultiply, transform.forward * 0.2f);
+        Gizmos.DrawRay(transform.position + Vector3.up * limitHeightMultiply, transform.forward * 0.3f);
 
         // Ray가 충돌한 위치에 구를 그림
         //if (hitLower.collider != null)

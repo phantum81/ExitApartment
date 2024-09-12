@@ -76,7 +76,7 @@ public class ElevatorController : MonoBehaviour
         doors[0].transform.position = door0TargetPos;
         doors[1].transform.position = door1TargetPos;
 
-        isClose = true;
+        isClose = false;
         curCoroutine = null;
 
     }

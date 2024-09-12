@@ -1,8 +1,9 @@
 using NUnit.Framework.Constraints;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.Experimental.GraphView;
+
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.EventSystems;
@@ -15,7 +16,7 @@ public class OptionView : MonoBehaviour, IOptionMenuView
 {
 
     SoundManager soundMgr;
-
+    
     [Header("감마 컨트롤러"), SerializeField]
     private GammaController gammaCtr;
 
@@ -29,10 +30,16 @@ public class OptionView : MonoBehaviour, IOptionMenuView
     private Button exitBtn;
 
 
+    [Header("전체 옵션창"), SerializeField]
+    private GameObject optionPanel;
+    public GameObject OptionPanel => optionPanel;
+
+    [Header("미니 옵션창"), SerializeField]
+    private GameObject optionMiniPanel;
 
     [Header("사운드옵션 판넬"), SerializeField]
     private GameObject soundOptionPanel;
-    [Header("키 세팅 판넬"), SerializeField]
+    [Header("입력 세팅 판넬"), SerializeField]
     private GameObject keySettingPanel;
     [Header("밝기 판넬"), SerializeField]
     private GameObject brightOptionPanel;
@@ -41,39 +48,57 @@ public class OptionView : MonoBehaviour, IOptionMenuView
     private Button[] applyBtn = new Button[3];
     [Header("취소"),SerializeField]
     private Button[] cancelBtn = new Button[3];
+
     [Header("배경음 슬라이드"), SerializeField]
     private Slider bgmSlider;
     [Header("효과음 슬라이드"), SerializeField]
     private Slider effectSoundSlider;
     [Header("밝기 슬라이드"), SerializeField]
     private Slider brightSlider;
+    [Header("감도 슬라이드"), SerializeField]
+    private Slider sensitivitySlider;
+
+
     [Header("배경음 퍼센트"), SerializeField]
     private TextMeshProUGUI bgmTxt;
     [Header("효과음 퍼센트"), SerializeField]
     private TextMeshProUGUI effectTxt;
     [Header("밝기 퍼센트"), SerializeField]
     private TextMeshProUGUI brightTxt;
+    [Header("감도 퍼센트"), SerializeField]
+    private TextMeshProUGUI sensitivityTxt;
 
     private OptionPresent optionPresent;
+    private InputManager inputMgr;
+    
     void Awake()
     {
-        soundMgr = GameManager.Instance.soundMgr;
+
+        
         optionPresent = new(GameManager.Instance.SetData, this);
-
-
-        InitButton();
-        InitSlider();
-        optionPresent.Init();
+        
         
     }
     void Start()
     {
+        soundMgr = GameManager.Instance.soundMgr;
+        inputMgr = GameManager.Instance.inputMgr;
+        InitButton();
+        InitSlider();
+        optionPresent.Init();
+       // GameManager.Instance.sceneMgr.onSceneUnload += () => GameManager.Instance.sceneMgr.SetMenuObject(optionPanel, transform);
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (inputMgr.InputDic[EuserAction.Ui_Menu])
+        {
+            EscClose();
+            optionPresent.NoSaveSoundVolume();
+            optionPresent.NoSaveGamma();
+        }
     }
 
     #region 사운드 관련
@@ -106,7 +131,7 @@ public class OptionView : MonoBehaviour, IOptionMenuView
 
     #endregion
 
-
+    #region 감마관련
     public void SetGammaValue(float _value)
     {
         gammaCtr.SetGammaValue(_value);
@@ -116,13 +141,53 @@ public class OptionView : MonoBehaviour, IOptionMenuView
 
     public float GetGammaValue()
     {
-        return gammaCtr.GetGammaValue();  
+        return brightSlider.value;  
     }
+
+    public void SetGammaSliderValue(float _value)
+    {
+        brightSlider.value = _value;
+    }
+
+    #endregion
+
+    #region 입력 관련
+    public void SetSensitivityValue(float _value)
+    {
+        
+        string value = (_value).ToString("F1");
+        sensitivityTxt.text = $"{value}";
+    }
+    public float GetSensitivityValue()
+    {
+        return sensitivitySlider.value;
+    }
+
+    public void SetInputValue(float _value)
+    {
+        sensitivitySlider.value = _value;
+    }
+    #endregion
+
+
 
     public void CloseParentPanel()
     {
-        GameObject clickObjParent = EventSystem.current.currentSelectedGameObject.transform.parent.gameObject;
-        clickObjParent.SetActive(false);
+
+
+        GameObject clickObj = EventSystem.current?.currentSelectedGameObject;
+
+        if (clickObj != null)
+        {
+            GameObject clickObjParent = clickObj.transform.parent?.gameObject;
+
+            // 부모가 있는 경우에만 처리
+            if (clickObjParent != null && clickObjParent.name != "MenuPan" && clickObj.name != "MenuPan")
+            {
+                clickObjParent.SetActive(false);
+            }
+        }
+
     }
 
     private void ShowSoundOption()
@@ -138,7 +203,14 @@ public class OptionView : MonoBehaviour, IOptionMenuView
         brightOptionPanel.SetActive(true);
     }
 
-
+    private void EscClose()
+    {
+        brightOptionPanel.SetActive(false);
+        keySettingPanel.SetActive(false);
+        soundOptionPanel.SetActive(false);
+        optionMiniPanel.SetActive(false);
+        
+    }
 
 
     private void InitButton()
@@ -147,12 +219,9 @@ public class OptionView : MonoBehaviour, IOptionMenuView
         soundOptionBtn.onClick.AddListener(ShowSoundOption);
         keySettingBtn.onClick.AddListener(ShowKeySettingOption);
         brightOptionBtn.onClick.AddListener(ShowBrightOption);
-        for(int i = 0; i < applyBtn.Length; i++)
-        {
-            
-            applyBtn[i].onClick.AddListener(optionPresent.SaveSoundVolume);
-            cancelBtn[i].onClick.AddListener(optionPresent.NoSaveSoundVolume);
-        }
+
+        AddButtonArrayListener(applyBtn, optionPresent.SaveSoundVolume, optionPresent.SaveGamma, optionPresent.SaveInput);
+        AddButtonArrayListener(cancelBtn, optionPresent.NoSaveSoundVolume, optionPresent.NoSaveGamma, optionPresent.NoSaveInput);
     }
 
     private void InitSlider()
@@ -160,11 +229,39 @@ public class OptionView : MonoBehaviour, IOptionMenuView
         bgmSlider.onValueChanged.AddListener(optionPresent.SetBgm);
         effectSoundSlider.onValueChanged.AddListener(optionPresent.SetEffect);
         brightSlider.onValueChanged.AddListener(optionPresent.SetGamma);
+        sensitivitySlider.onValueChanged.AddListener(optionPresent.SetSensitivity);
+
     }
 
-    public void LoadData(float _bgm, float _effect)
+    public void LoadData(float _bgm, float _effect, float _gamma, float _sensitivity)
     {
         bgmSlider.value = _bgm;
         effectSoundSlider.value = _effect;
+        brightSlider.value = _gamma;
+        sensitivitySlider.value = _sensitivity;
     }
+
+
+
+    void AddButtonArrayListener(Button[] _buttons, Action _saveSoundVolume, Action _saveGamma, Action _saveInput)
+    {
+        for (int i = 0; i < _buttons.Length; i++)
+        {
+            EUiButtonType buttonType = _buttons[i].GetComponent<UiButtonType>().eUiButtonType;
+
+            switch (buttonType)
+            {
+                case EUiButtonType.Sound:
+                    _buttons[i].onClick.AddListener(() => _saveSoundVolume());
+                    break;
+                case EUiButtonType.Input:
+                    _buttons[i].onClick.AddListener(() => _saveInput());
+                    break;
+                case EUiButtonType.Gamma:
+                    _buttons[i].onClick.AddListener(() => _saveGamma());
+                    break;
+            }
+        }
+    }
+
 }

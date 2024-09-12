@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
     public PlayerSound PSound => playerSound;
 
     private Vector3 origin;
-
+    private float groundAngle;
     private EplayerState ePlayerState = EplayerState.None;
     private Coroutine curCoroutine;
     #region 유니티 실행부
@@ -65,15 +65,22 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        InputDir = inputMgr.InputDir;
-        if (playerSlopRay.IsSlope && groundCheck.IsGround)
+        InputDir = InputLocalize(inputMgr.InputDir);
+        groundAngle = playerSlopRay.CalculateGroundAngle(InputDir);
+
+
+        if (groundAngle>0 && groundCheck.IsGround)
+        {
             rigd.useGravity = false;
+            rigd.velocity = new Vector3(rigd.velocity.x, 0f, rigd.velocity.z);
+        }
         else
             rigd.useGravity = true;
-        
 
-        if(playerSlopRay.GroundAngle > limitSlope)
-            stepHeight.StepHeightMove(rigd);
+
+        stepHeight.StepHeightMove(rigd, InputDir);
+
+       
 
     }
     #endregion
@@ -83,31 +90,18 @@ public class PlayerController : MonoBehaviour
 
     public void Move(Vector3 _inputDir, float _speed)
     {
-        //Vector3 right= _inputDir.x * player.right;
-        //Vector3 foward = _inputDir.z * player.forward;
-        //Vector3 velocity = (right + foward).normalized;
 
-        //rigd.AddForce(velocity * _speed * Time.deltaTime, ForceMode.VelocityChange);
-        //Vector3 lastVelo = new Vector3(0f, rigd.velocity.y, 0f);
-        //Vector3 lastAngular = new Vector3(0f, rigd.angularVelocity.y, 0f);
-        //rigd.velocity = lastVelo;
-        //rigd.angularVelocity = lastAngular;
-
-
-        Vector3 right = _inputDir.x * player.right;
-        Vector3 foward = _inputDir.z * player.forward;
-        Vector3 inputDir = (right + foward).normalized;
 
         float fallSpeed = rigd.velocity.y;
-        if (inputDir != Vector3.zero)
+        if (_inputDir != Vector3.zero)
         {
-            inputDir *= _speed;
+            _inputDir *= _speed;
         }
         else
-            inputDir = Vector3.zero;
+            _inputDir = Vector3.zero;
 
-        inputDir.y = fallSpeed; // 떨어지는 속도 초기화
-        rigd.velocity = inputDir;
+        _inputDir.y = fallSpeed; // 떨어지는 속도 초기화
+        rigd.velocity = _inputDir;
         Rotate();
         
 
@@ -118,6 +112,13 @@ public class PlayerController : MonoBehaviour
         rotateY = rotateY + inputMgr.CameraInputDir.y * cameraMgr.CameraCtr.Sensitivity;
         Quaternion quat = Quaternion.Euler(new Vector3(0, rotateY, 0));
         player.rotation = quat;
+    }
+    private Vector3 InputLocalize(Vector3 _inputdir)
+    {
+        Vector3 right = _inputdir.x * player.right;
+        Vector3 foward = _inputdir.z * player.forward;
+        Vector3 inputDir = (right + foward).normalized;
+        return inputDir;
     }
     #endregion
 
@@ -156,6 +157,7 @@ public class PlayerController : MonoBehaviour
         _target.GetComponent<Rigidbody>().useGravity = false;
         _target.GetComponent<Rigidbody>().isKinematic = true;
         _target.GetComponent<Collider>().enabled = false;
+        unitMgr.SetShadowCast(_target.gameObject, false);
     }
 
 
@@ -170,6 +172,7 @@ public class PlayerController : MonoBehaviour
         rd.AddForce(_dir.normalized * 40f * throwPower * Time.fixedDeltaTime);
         playerInven.RemoveList(playerInven.CurItem);
         playerInven.CurItem = null;
+        unitMgr.SetShadowCast(_target.gameObject, true);
 
     }
 
@@ -191,7 +194,6 @@ public class PlayerController : MonoBehaviour
         }
 
     }
-
 
 
     #endregion

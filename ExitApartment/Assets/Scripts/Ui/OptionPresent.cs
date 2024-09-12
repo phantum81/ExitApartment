@@ -61,12 +61,37 @@ public class OptionPresent
     public void NoSaveGamma()
     {
         optionMenu.SetGammaValue(settingData.GammaValue);
+        optionMenu.SetGammaSliderValue(settingData.GammaValue);
         optionMenu.CloseParentPanel();
     }
     #endregion
+
+    #region ют╥б
+
+    public void SetSensitivity(float _value)
+    {
+        optionMenu.SetSensitivityValue(_value);
+        
+    }
+
+    public void SaveInput()
+    {
+        float value = optionMenu.GetSensitivityValue();
+        settingData.SetSensitivityData(value);
+
+        optionMenu.CloseParentPanel();
+    }
+
+    public void NoSaveInput()
+    {
+        optionMenu.SetInputValue(settingData.Sensitivity);        
+        optionMenu.CloseParentPanel(); 
+    }
+    #endregion
+
     public void Init()
     {
-        optionMenu.LoadData(settingData.BgmValue, settingData.EffectSoundValue);
+        optionMenu.LoadData(settingData.BgmValue, settingData.EffectSoundValue, settingData.GammaValue, settingData.Sensitivity);
     }
        
 }
