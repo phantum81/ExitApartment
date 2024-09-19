@@ -63,6 +63,8 @@ public interface IMenuView
 {
     void ShowOptionPanel();
 
+    void ClickExitButton();
+
     void LoadInGameScene();
 }
 

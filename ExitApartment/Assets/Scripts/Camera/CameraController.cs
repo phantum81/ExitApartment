@@ -25,7 +25,7 @@ public class CameraController : MonoBehaviour
 
     //카메라 회전관련 각도설정
     
-    private float maxXAngle = 70f;
+    private float maxXAngle = 80f;
     
     private float minXAngle = -90f;
     private float rotateX = 0f;

@@ -38,7 +38,10 @@ public class MenuPresent
     {        
         menuView.ShowOptionPanel();
     }
-
+    public void ClickExit()
+    {
+        menuView.ClickExitButton();
+    }
 
     public void CloseGameClick()
     {

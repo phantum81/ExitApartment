@@ -41,11 +41,15 @@ public class CrabMob : Mob
         eEnemyState = EenemyState.None;
         origin = transform.position;
         soundCtr.AudioPath = soundMgr.SoundList[105];
+        
+        
 
     }
     void Update()
     {
         if (!isEvent) return;
+
+        
 
         anim.SetFloat("Speed", agent.speed);
         UpdateTarget();
@@ -68,6 +72,7 @@ public class CrabMob : Mob
 
     void UpdateState()
     {
+
         if (unitMgr.MobCtr.CheckTargetInSight(transform, target, viewAngle))
         {
             eEnemyState = EenemyState.Chase;

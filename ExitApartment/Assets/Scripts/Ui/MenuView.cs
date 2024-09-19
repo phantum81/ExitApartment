@@ -18,6 +18,17 @@ public class MenuView : MonoBehaviour, IMenuView
     private SaveData saveData;
     [Header("씬 변경 창"), SerializeField]
     private GameObject sceneChangePanel;
+
+    [Header("종료버튼"), SerializeField]
+    private Button exitButton;
+
+    [Header("동의 버튼"), SerializeField]
+    private Button applyButton;
+    [Header("취소 버튼"), SerializeField]
+    private Button cancelButton;
+    [Header("취소 버튼"), SerializeField]
+    private GameObject warningPan;
+
     MenuPresent menuPresent;
     private UiManager uiMgr;
     
@@ -29,7 +40,7 @@ public class MenuView : MonoBehaviour, IMenuView
         newStartButton.onClick.AddListener(menuPresent.NewStartScene);
         loadButton.onClick.AddListener(menuPresent.LoadDataScene);
         optionButton.onClick.AddListener(menuPresent.OpenOption);
-        
+        exitButton.onClick.AddListener(menuPresent.ClickExit);
         
     }
     void Start()
@@ -57,5 +68,20 @@ public class MenuView : MonoBehaviour, IMenuView
         yield return StartCoroutine(uiMgr.SetUiVisible(sceneChangePanel.transform, 1f, 0f));
         SceneManager.LoadScene("InGameScene");
     }
+    private void ExitGame()
+    {
+        Application.Quit();
+    }
+    private void Cancel()
+    {
+        warningPan.SetActive(false);
+    }
+    public void ClickExitButton()
+    {
+        warningPan.SetActive(true);
+        applyButton.onClick.AddListener(ExitGame);
+        cancelButton.onClick.AddListener(Cancel);
+    }
+    
     
 }

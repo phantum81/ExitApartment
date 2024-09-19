@@ -132,6 +132,7 @@ public class SoundController : MonoBehaviour
     public void SetPitch(float _val)
     {
         pitch = _val;
+        audioSource.pitch = _val;
     }
 
     public void ChangeSound(string _path, bool _loop = false)

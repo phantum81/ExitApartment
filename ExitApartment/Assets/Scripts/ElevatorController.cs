@@ -215,7 +215,7 @@ public class ElevatorController : MonoBehaviour
                 transform.position = unitMgr.ElevatorSpawnDic[eCurFloor].position;
                 cameraMgr.PostProcess.SetMotionBlur(true);
                 cameraMgr.PostProcess.EscapeSetting();
-                soundMgr.BgmCtr.BgmChange(soundMgr.SoundList[250], true, 0.2f);
+                soundMgr.BgmCtr.BgmChange(soundMgr.SoundList[250], true, 0.3f);
                 unitMgr.SkyChange(unitMgr.EscapeSkyBox);
                 break;
             case UnitManager.LOBBY_FLOOR:

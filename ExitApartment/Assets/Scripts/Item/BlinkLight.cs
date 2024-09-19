@@ -39,15 +39,16 @@ public class BlinkLight : MonoBehaviour
     {
 
         transLight = GetComponent<Light>();
-        curIntensity = transLight.intensity;
-        originIntensity = transLight.intensity;
-        curRange = transLight.range;
+
         soundCtr= GetComponent<SoundController>();
     }
 
     private void Start()
     {
-        
+        curIntensity = transLight.intensity;
+        originIntensity = transLight.intensity;
+        curRange = transLight.range;
+        randomIntensity = Random.Range(originIntensity / 2, originIntensity * intensity);
         soundCtr.AudioPath = GameManager.Instance.soundMgr.SoundList[52];
         
     }
@@ -76,22 +77,25 @@ public class BlinkLight : MonoBehaviour
         {
             while(true)
             {
-                if (Mathf.Abs(randomIntensity - curIntensity) > 0.01f)
-                {                    
-
+                
+                if (Mathf.Abs(randomIntensity - curIntensity) > 0.05f)
+                {
+                    Debug.Log($" Random Intensity: {randomIntensity}");
                     if (curIntensity <= randomIntensity)
                     {
-                        curIntensity += Time.deltaTime * blinkTime;
+                        curIntensity += Time.fixedDeltaTime * blinkTime;
                         
                     }
                     else
                     {
-                        curIntensity -= Time.deltaTime * blinkTime;
+                        curIntensity -= Time.fixedDeltaTime * blinkTime;
                     }
                 }
                 else
                 {
-                    randomIntensity = Random.Range(originIntensity / 2, originIntensity * intensity);
+                    Debug.Log($"ÃÖÀú: {originIntensity / 2},  ¸Æ½º: {originIntensity * intensity}");
+                    randomIntensity = Random.Range(0.1f, originIntensity * intensity);
+                    Debug.Log($" Random Intensity: {randomIntensity}");
                 }
                 
                 transLight.intensity = curIntensity;
