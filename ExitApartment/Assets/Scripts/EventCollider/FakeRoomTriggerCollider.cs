@@ -18,15 +18,20 @@ public class FakeRoomTriggerCollider : MonoBehaviour, IContect
 
     public void OnContect()
     {
-        if (wasIn) return;
-        showBat?.Invoke();
-        soundOn?.Invoke();
-        stepSoundOn?.Invoke();
-        wasIn = true;
+        if (!GameManager.Instance.unitMgr.MobDic[EMobType.Bat].gameObject.activeSelf)
+        {
+            if (wasIn) return;
+            showBat?.Invoke();
+            soundOn?.Invoke();
+            stepSoundOn?.Invoke();
+            wasIn = true;
+        }
+
     }
     public void OnExit()
     {
         if (wasOut) return;
+        if(!wasIn) return;
         hideBat?.Invoke();
         wasOut = true;
     }
