@@ -60,9 +60,9 @@ public class ItemManager : MonoBehaviour
         GameManager.Instance.unitMgr.PlayerCtr.PickItem(_target, _angle, _data);
     }
 
-    public void ThrowItem(Transform _target)
+    public void ThrowItem(Transform _target, float _time)
     {
-        GameManager.Instance.unitMgr.PlayerCtr.ThrowItem(_target);
+        GameManager.Instance.unitMgr.PlayerCtr.ThrowItem(_target, _time);
 
     }
 

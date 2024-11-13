@@ -41,13 +41,14 @@ public class SparrowBottleItem : Item
     public override void OnUseItem()
     {
 
-        
+        soundCtr.AudioPath = GameManager.Instance.soundMgr.SoundList[55];
+        soundCtr.Play();
 
     }
 
-    public override void OnThrowItem()
+    public override void OnThrowItem(float _time)
     {
-        base.OnThrowItem();
+        base.OnThrowItem(_time);
     }
 
 

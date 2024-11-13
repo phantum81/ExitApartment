@@ -41,21 +41,6 @@ public class PlayerStateHFSMMachine : MonoBehaviour
         ePlayerCurState = statePostHFSM.CurState;
 
 
-        //if (curTime > limitTime)
-        //{
-        //    ChangePlayerState(EplayerState.Die);
-        //}
-
-
-        //if (cameraMgr.CheckObjectInCamera(seePoint))
-        //{
-        //    ChangePlayerState(EplayerState.MentalDamage);
-        //    GameManager.Instance.Timer(limitTime, EplayerState.Die, ChangePlayerState);
-        //    curTime += Time.deltaTime;
-        //}
-        //else
-        //    curTime = 0f;
-
 
         if (cameraMgr.CheckObjectInCamera(unitMgr.SeePointsDic[ESeePoint.Pumpkin]))
         {

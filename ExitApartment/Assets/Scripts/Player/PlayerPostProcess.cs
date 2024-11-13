@@ -10,9 +10,10 @@ using UnityEngine.Rendering.PostProcessing;
 
 public class PlayerPostProcess : MonoBehaviour
 {
-    [Header("포스트 프로세싱"),SerializeField]
+    [Header("포스트 프로세스 볼륨"),SerializeField]
     private PostProcessVolume post;
 
+    #region 포스트프로세스 변수
     private Vignette vignette;
     private Grain grain;
     private LensDistortion distortion;    
@@ -21,6 +22,7 @@ public class PlayerPostProcess : MonoBehaviour
     private UnitManager unitMgr;
     private Bloom bloom;
     private ColorGrading colorGrading;
+    #endregion
     private List<Coroutine> curCoroutine = new List<Coroutine>();
     public List<Coroutine> CurCoroutine => curCoroutine;
 
@@ -55,6 +57,7 @@ public class PlayerPostProcess : MonoBehaviour
         
 
     }
+    #region 포스트프로세스 기본조작 기능
     public IEnumerator VignetteOn(float _val=0.4f , float _speed =1f,Color _col = default(Color))
     {
         if (_col == default(Color))
@@ -171,25 +174,7 @@ public class PlayerPostProcess : MonoBehaviour
 
 
 
-    //IEnumerator LerpValue(Action<float> _value, float _min, float _max, float _inverseSpeed, float _lerpRatio)
-    //{
-    //    yield return null;
-    //    float elapsedTime = 0f;
-    //    while (true)
-    //    {
-    //        _value(Mathf.Lerp(_min, _max, elapsedTime / (_inverseSpeed * _lerpRatio)));
 
-            
-    //        if (elapsedTime >= _inverseSpeed)
-    //        {
-    //            break;
-    //        }
-
-    //        elapsedTime += Time.deltaTime;
-
-    //        yield return null;
-    //    }
-    //}
 
     public IEnumerator PostProccessEffectOff(EpostProcessType _type, float _max =0f, float _inverseSpeed = 2f, float _lerpRatio =1f)
     {
@@ -288,14 +273,117 @@ public class PlayerPostProcess : MonoBehaviour
         }
     }
 
-
-
-    public IEnumerator CameraChange()
+    public void SetGammaValue(float _value)
     {
-        yield return StartCoroutine(CloseCameraVignette());
-       // StartCoroutine(VignetteOn(1f,Color.black));
+        if (post != null && post.profile.TryGetSettings(out colorGrading))
+        {
+
+            originGamma = new Vector4(colorGrading.gamma.value.x, colorGrading.gamma.value.y, colorGrading.gamma.value.z, 0f);
+
+            originGamma *= _value;
+
+
+        }
     }
 
+
+    public void SetMotionBlur(bool _bool)
+    {
+        if (post != null && post.profile.TryGetSettings(out motionBlur))
+        {
+            motionBlur.active = _bool;
+        }
+    }
+
+    #endregion
+
+
+
+    #region 특정 씬 프로세스 세팅
+
+
+    public void MentalDamagePostProccess()
+    {
+        StopAllCoroutinesInList();
+        CurCoroutine.Add(StartCoroutine(PostProccessEffectOn(EpostProcessType.Grain)));
+        CurCoroutine.Add(StartCoroutine(PostProccessEffectOn(EpostProcessType.LensDistortion, -40f)));
+        CurCoroutine.Add(StartCoroutine(PostProccessEffectOn(EpostProcessType.ChromaticAberration)));
+    }
+
+
+
+
+    public void OriginSetting()
+    {
+        if (post != null && post.profile.TryGetSettings(out bloom))
+        {
+            bloom.intensity.value = 5f;
+            bloom.threshold.value = 1f;
+        }
+
+        if (post != null && post.profile.TryGetSettings(out colorGrading))
+        {
+            colorGrading.colorFilter.value = originColorGradingIntensity;
+            
+        }
+        
+    }
+
+    public void EscapeSetting()
+    {
+        if (post != null && post.profile.TryGetSettings(out bloom))
+        {
+            bloom.intensity.value = 0.25f;
+            bloom.threshold.value = 0.02f;
+
+           
+            
+        }
+    }
+    public void LobbySetting()
+    {
+        EscapeSetting();
+        if (post != null && post.profile.TryGetSettings(out colorGrading))
+        {
+            
+            Color currentColor = colorGrading.colorFilter.value;
+
+
+           
+            float intensityFactor = 2f; // 인텐시티를 높이는 비율 (1.0f은 변화 없음)
+            currentColor.r*= intensityFactor;
+            currentColor.g *= intensityFactor;
+            currentColor.b *= intensityFactor;
+            //currentColor.r = Mathf.Clamp(currentColor.r * intensityFactor, 0f, 1f);
+            //currentColor.g = Mathf.Clamp(currentColor.g * intensityFactor, 0f, 1f);
+            //currentColor.b = Mathf.Clamp(currentColor.b * intensityFactor, 0f, 1f);
+
+            colorGrading.colorFilter.value = currentColor;
+
+        }
+    }
+
+    #endregion
+
+
+
+
+    public void StopAllCoroutinesInList()
+    {
+        foreach(var coroutine in curCoroutine)
+        {
+            StopCoroutine(coroutine);
+        }
+
+        curCoroutine.Clear();
+    }
+
+    public void On12FDeadState()
+    {
+        
+        GrainOn(true);
+        
+    }
     public IEnumerator CloseCameraVignette(float _speed = 1f, Color _col = default(Color))
     {
 
@@ -336,100 +424,6 @@ public class PlayerPostProcess : MonoBehaviour
     }
 
 
-    public void MentalDamagePostProccess()
-    {
-        StopAllCoroutinesInList();
-        CurCoroutine.Add(StartCoroutine(PostProccessEffectOn(EpostProcessType.Grain)));
-        CurCoroutine.Add(StartCoroutine(PostProccessEffectOn(EpostProcessType.LensDistortion, -40f)));
-        CurCoroutine.Add(StartCoroutine(PostProccessEffectOn(EpostProcessType.ChromaticAberration)));
-    }
-
-    public void On12FDeadState()
-    {
-        
-        GrainOn(true);
-        
-    }
 
 
-
-    public void StopAllCoroutinesInList()
-    {
-        foreach(var coroutine in curCoroutine)
-        {
-            StopCoroutine(coroutine);
-        }
-
-        curCoroutine.Clear();
-    }
-    public void SetMotionBlur(bool _bool)
-    {
-        if (post != null && post.profile.TryGetSettings(out motionBlur))
-        {
-            motionBlur.active = _bool;
-        }
-    }
-    public void OriginSetting()
-    {
-        if (post != null && post.profile.TryGetSettings(out bloom))
-        {
-            bloom.intensity.value = 5f;
-            bloom.threshold.value = 1f;
-        }
-
-        if (post != null && post.profile.TryGetSettings(out colorGrading))
-        {
-            colorGrading.colorFilter.value = originColorGradingIntensity;
-            
-        }
-        
-    }
-
-    public void EscapeSetting()
-    {
-        if (post != null && post.profile.TryGetSettings(out bloom))
-        {
-            bloom.intensity.value = 0.25f;
-            bloom.threshold.value = 0.02f;
-
-           
-            
-        }
-    }
-    public void LobbySetting()
-    {
-        EscapeSetting();
-        if (post != null && post.profile.TryGetSettings(out colorGrading))
-        {
-            
-            Color currentColor = colorGrading.colorFilter.value;
-
-
-            // 색의 인텐시티를 높이기 위해 RGB 값을 조정합니다.
-            float intensityFactor = 2f; // 인텐시티를 높이는 비율 (1.0f은 변화 없음)
-            currentColor.r*= intensityFactor;
-            currentColor.g *= intensityFactor;
-            currentColor.b *= intensityFactor;
-            //currentColor.r = Mathf.Clamp(currentColor.r * intensityFactor, 0f, 1f);
-            //currentColor.g = Mathf.Clamp(currentColor.g * intensityFactor, 0f, 1f);
-            //currentColor.b = Mathf.Clamp(currentColor.b * intensityFactor, 0f, 1f);
-
-            colorGrading.colorFilter.value = currentColor;
-
-        }
-    }
-
-
-    public void SetGammaValue(float _value)
-    {
-        if (post != null && post.profile.TryGetSettings(out colorGrading))
-        {
-
-            originGamma = new Vector4(colorGrading.gamma.value.x, colorGrading.gamma.value.y, colorGrading.gamma.value.z, 0f);
-
-            originGamma *= _value;
-
-
-        }
-    }
 }

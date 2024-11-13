@@ -9,7 +9,7 @@ public class PlayerInteraction : MonoBehaviour
     private float maxDis = 2f;
 
     private Ray ray;
-    private int interectionLayer = 1 << 6;    
+    private int interectionLayer = 6;    
     private bool isInteraction = false;
     private Color selectColor = Color.green;
     private CameraManager cameraMgr;
@@ -17,14 +17,15 @@ public class PlayerInteraction : MonoBehaviour
     private PlayerInventory playerInven;
     private RaycastHit preHit;
     public Transform PreHit => preHit.transform;
-    
 
+    private TimeChecker timer; 
 
     void Start()
     {
         playerInven = gameObject.GetComponent<PlayerInventory>();
         cameraMgr = GameManager.Instance.cameraMgr;        
         inputMgr = GameManager.Instance.inputMgr;
+        timer = new TimeChecker(3f); 
     }
 
     // Update is called once per frame
@@ -56,9 +57,18 @@ public class PlayerInteraction : MonoBehaviour
             {
                 playerInven.CurItem.GetComponent<IUseItem>()?.OnUseItem();
             }
+
+            if (inputMgr.InputDic[EuserAction.Charge])
+            {
+                
+                timer.Start(Time.deltaTime);
+                
+            }
+
             if (inputMgr.InputDic[EuserAction.Throw])
             {
-                playerInven.CurItem.GetComponent<IUseItem>()?.OnThrowItem();
+                playerInven.CurItem.GetComponent<IUseItem>()?.OnThrowItem(timer.CurTime());
+                timer = new TimeChecker(3f);
             }
         }
 

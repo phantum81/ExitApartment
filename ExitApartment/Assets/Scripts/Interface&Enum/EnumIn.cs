@@ -106,6 +106,7 @@ public enum EuserAction
     Run,
 
     Interaction,
+    Charge,
     Throw,
     UseItem,
 

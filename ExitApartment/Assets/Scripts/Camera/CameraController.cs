@@ -323,13 +323,19 @@ public class CameraController : MonoBehaviour
     #region  그외 기능
     public bool CheckInterection(Ray _ray , out RaycastHit _hit, float _maxDis, int _layer )
     {
-        
-        if(Physics.Raycast(_ray, out _hit, _maxDis, _layer))
+        if (Physics.Raycast(_ray, out _hit, _maxDis))
         {
-            return true;
+            if(_hit.transform.gameObject.layer == _layer)
+            {
+                return true;
+            }
+            else
+                return false;
         }
         else
             return false;
+
+
     }
 
     public float GetSensitivity()

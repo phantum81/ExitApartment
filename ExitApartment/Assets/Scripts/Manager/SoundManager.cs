@@ -145,6 +145,7 @@ public class SoundManager : MonoBehaviour
         soundList.Add(52, "LightBlink");
         soundList.Add(53, "AnalogSound");
         soundList.Add(54, "WriteSound");
+        soundList.Add(55, "SparrowSound");
 
         //---아이템 관련----
 

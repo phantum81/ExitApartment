@@ -66,9 +66,9 @@ public class Item : MonoBehaviour, IInteraction, IUseItem, IGravityChange
         transform.gameObject.SetActive(false);
     }
 
-    public virtual void OnThrowItem()
+    public virtual void OnThrowItem(float _time)
     {
-        GameManager.Instance.itemMgr.ThrowItem(this.transform);
+        GameManager.Instance.itemMgr.ThrowItem(this.transform, _time);
         UiManager.Instance.inGameCtr.InvenCtr.RemoveItem(soItemData);
 
     }
@@ -86,7 +86,10 @@ public class Item : MonoBehaviour, IInteraction, IUseItem, IGravityChange
     protected virtual void OnCollisionEnter(Collision other)
     {
         if(other.gameObject.layer != 7)
+        {
+            soundCtr.AudioPath = GameManager.Instance.soundMgr.SoundList[9];
             soundCtr?.Play();
+        }
     }
     protected virtual void OnTriggerEnter(Collider other)
     {

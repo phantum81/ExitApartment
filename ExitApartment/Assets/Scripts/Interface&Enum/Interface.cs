@@ -42,7 +42,7 @@ public interface IUseItem
 {
     void OnUseItem();
 
-    void OnThrowItem();
+    void OnThrowItem(float _time);
 }
 
 public interface IInteraction

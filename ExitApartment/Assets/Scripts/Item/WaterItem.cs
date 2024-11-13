@@ -37,9 +37,9 @@ public class WaterItem : Item
 
     }
 
-    public override void OnThrowItem()
+    public override void OnThrowItem(float _time)
     {
-        base.OnThrowItem();
+        base.OnThrowItem(_time);
     }
     public override EInteractionType OnGetType()
     {

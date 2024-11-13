@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
@@ -100,14 +101,15 @@ public class MonsterController : MonoBehaviour
     public Transform GetOverlaptarget(Transform _origin, float _radius, int _layMaks)
     {
         Collider[] col = Physics.OverlapSphere(_origin.position, _radius, _layMaks);
-
-        if (col != null)
+        
+        if (col.Length > 0)
         {
-            foreach (Collider collider in col)
-            {
-                return collider.transform;
-            }
-            return null;
+
+            Collider nearestCollider = col
+                .OrderBy(collider => Vector3.Distance(_origin.position, collider.transform.position))
+                .FirstOrDefault();
+
+            return nearestCollider.transform;
         }
         return null;
 

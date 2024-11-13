@@ -159,17 +159,21 @@ public class PlayerController : MonoBehaviour
         _target.GetComponent<Collider>().enabled = false;
         unitMgr.SetShadowCast(_target.gameObject, false);
     }
+    
 
-
-    public void ThrowItem(Transform _target)
+    public void ThrowItem(Transform _target, float _time)
     {
-        Vector3 _dir = transform.forward;
+        Vector3 _dir = player.forward + player.up;
         Rigidbody rd = _target.GetComponent<Rigidbody>();
         _target.GetComponent<Collider>().enabled = true;
         _target.parent = null;        
         rd.useGravity = true;
         rd.isKinematic = false;
-        rd.AddForce(_dir.normalized * 40f * throwPower * Time.fixedDeltaTime);
+        if(_time < 1f)
+        {
+            _time = 1f;
+        }
+        rd.AddForce(_dir.normalized * 40f * _time * throwPower * Time.fixedDeltaTime);
         playerInven.RemoveList(playerInven.CurItem);
         playerInven.CurItem = null;
         unitMgr.SetShadowCast(_target.gameObject, true);

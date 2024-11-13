@@ -12,7 +12,7 @@ public class Diamond : MonoBehaviour, IInteraction
     private GameObject [] turnOffObj = new GameObject[2];
     private UnitManager unitMgr;
     private SoundController soundCtr;
-
+    private bool isDone = false;
     
 
     void Start()
@@ -35,23 +35,30 @@ public class Diamond : MonoBehaviour, IInteraction
     public virtual void OnInteraction(Vector3 _angle)
     {
 
-        StartCoroutine(ShowObject());
-        for(int i = 0; turnOffObj.Length > i; i++)
-        {
-            turnOffObj[i].SetActive(false);
-        }
-        onMagicStone.Invoke();
-        transform.GetComponent<MeshRenderer>().enabled= false;
-        soundCtr.Stop();
-        soundCtr.AudioPath = GameManager.Instance.soundMgr.SoundList[70];
-        soundCtr.SetLoop(false);
-        soundCtr.Play();
 
-        if(GameManager.Instance.onGetForestHumanity != null)
+        if(!isDone)
         {
-            GameManager.Instance.onGetForestHumanity();
-            
+            StartCoroutine(ShowObject());
+            for (int i = 0; turnOffObj.Length > i; i++)
+            {
+                turnOffObj[i].SetActive(false);
+            }
+            onMagicStone.Invoke();
+            transform.GetComponent<MeshRenderer>().enabled = false;
+            soundCtr.Stop();
+            soundCtr.AudioPath = GameManager.Instance.soundMgr.SoundList[70];
+            soundCtr.SetLoop(false);
+            soundCtr.Play();
+
+            if (GameManager.Instance.onGetForestHumanity != null)
+            {
+                GameManager.Instance.onGetForestHumanity();
+
+            }
+            transform.GetComponent<Collider>().enabled = false;
+            isDone = true;
         }
+
         
 
         

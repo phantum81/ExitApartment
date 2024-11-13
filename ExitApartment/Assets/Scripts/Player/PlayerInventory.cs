@@ -89,7 +89,7 @@ public class PlayerInventory : MonoBehaviour
 
         for (int i = 0; i < 9; i++)
         {
-            EuserAction action = (EuserAction)(i + 9); // EuserAction.One부터 EuserAction.Nine까지
+            EuserAction action = (EuserAction)(i + 10); // EuserAction.One부터 EuserAction.Nine까지
             if (inputMgr.InputDic.ContainsKey(action) && inputMgr.InputDic[action])
             {
                 ChangeItem(i);

@@ -38,6 +38,8 @@ public class SkinZombie : Mob
     private SoundController chaseSoundCtr;
     [Header("µ¥µåºä"), SerializeField]
     private Transform deadView;
+
+    private LayerMask layer = 1 << 7 | 1 << 6;
     void Start()
     {
         Init();
@@ -64,13 +66,24 @@ public class SkinZombie : Mob
         if (EenemyState.None == eEnemyState)
             return;
 
-        target = unitMgr.MobCtr.GetOverlaptarget(transform, hearRadius, 1 << 7);
+        target = unitMgr.MobCtr.GetOverlaptarget(transform, hearRadius, layer);
         if(target != null)
         {
-            if (!target.parent.gameObject.GetComponent<AudioSource>().isPlaying)
+            if(target.gameObject.layer == 7)
             {
-                target = null;
+                if (!target.parent.gameObject.GetComponent<AudioSource>().isPlaying)
+                {
+                    target = null;
+                }
             }
+            else
+            {
+                if (!target.gameObject.GetComponent<AudioSource>().isPlaying)
+                {
+                    target = null;
+                }
+            }
+
                             
         }
 

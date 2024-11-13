@@ -30,9 +30,9 @@ public class RopeItem : Item
 
     }
 
-    public override void OnThrowItem()
+    public override void OnThrowItem(float _time)
     {
-        base.OnThrowItem();
+        base.OnThrowItem(_time) ;
     }
 
 

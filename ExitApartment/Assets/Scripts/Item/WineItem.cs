@@ -35,9 +35,9 @@ public class WineItem : Item
         return EInteractionType.Pick;
     }
 
-    public override void OnThrowItem()
+    public override void OnThrowItem(float _time)
     {
-        base.OnThrowItem();
+        base.OnThrowItem(_time);
     }
 
 
