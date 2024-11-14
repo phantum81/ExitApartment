@@ -94,6 +94,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        saveData.LoadData();
     }
     void Start()
     {
@@ -218,15 +219,15 @@ public class GameManager : MonoBehaviour
         switch (_type)
         {
             case EFloorType.Home15EB:
-
+                humanityScore = 0;
                 break;
             case EFloorType.Nothing436A:
                 onNothingFloor();
-
+                humanityScore = 0;
                 break;
             case EFloorType.Mob122F:
                 onFallFloor();
-
+                humanityScore = 0;
                 break;
             case EFloorType.Forest5ABC:
                 onForestFloor();
@@ -279,8 +280,7 @@ public class GameManager : MonoBehaviour
     {
         if(saveData != null)
         {
-            saveData.eFloorData = _type;
-            saveData.isPumpkinEvent = _bool;
+            saveData.SaveData(_type, _bool);
         }
              
         

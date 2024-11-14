@@ -63,8 +63,8 @@ public class SkinZombie : Mob
     void Update()
     {
         anim.SetFloat("Speed", agent.speed);
-        if (EenemyState.None == eEnemyState)
-            return;
+        //if (EenemyState.None == eEnemyState)
+        //    return;
 
         target = unitMgr.MobCtr.GetOverlaptarget(transform, hearRadius, layer);
         if(target != null)
@@ -88,7 +88,7 @@ public class SkinZombie : Mob
         }
 
 
-        if (EenemyState.Idle != eEnemyState && EenemyState.Attack != eEnemyState)
+        if (EenemyState.None != eEnemyState && EenemyState.Attack != eEnemyState)
         {
             eEnemyState = target ? EenemyState.Chase : EenemyState.Patrol;
 
@@ -99,10 +99,21 @@ public class SkinZombie : Mob
         switch (eEnemyState)
         {
             case EenemyState.None:
-
+                agent.speed = 0f;
+                AnimatorStateInfo ani = anim.GetCurrentAnimatorStateInfo(0);
+                if (ani.IsName("Attack"))
+                {
+                    if (ani.normalizedTime > 0.9f)
+                        eEnemyState = EenemyState.Idle;
+                }
+                else
+                {
+                    return;
+                }
                 break;
 
             case EenemyState.Idle:
+                
                 eEnemyState = EenemyState.Patrol;
                 break;
 
@@ -118,6 +129,7 @@ public class SkinZombie : Mob
 
             case EenemyState.Attack:
                 anim.SetTrigger("Attack");
+                agent.speed = 0f;
                 eEnemyState = EenemyState.None;
                 break;
 
@@ -199,4 +211,16 @@ public class SkinZombie : Mob
         stepSoundCtr.Play();
     }
 
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.layer == 6)
+        {
+            if (eEnemyState == EenemyState.None) return;
+            eEnemyState = EenemyState.Attack;            
+            soundCtr.AudioPath = GameManager.Instance.soundMgr.SoundList[73];
+            soundCtr.Play();
+            other.gameObject.SetActive(false);
+        }
+    }
 }

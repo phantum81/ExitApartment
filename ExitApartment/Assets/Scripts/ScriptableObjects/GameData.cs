@@ -16,5 +16,30 @@ public class GameData : ScriptableObject
     {
         eFloorData = EFloorType.Home15EB;
         isPumpkinEvent= false;
+
+        SaveData(eFloorData, isPumpkinEvent);
+    }
+
+    public void SaveData(EFloorType _type, bool _bol)
+    {
+        int ispump = 0;
+        if(_bol)
+        {
+            ispump = 1;
+        }
+        
+        PlayerPrefs.SetInt("EFloorType", (int)_type);
+        PlayerPrefs.SetInt("IsPumpKinEvent", ispump);
+    }
+
+    public void LoadData()
+    {
+        eFloorData = (EFloorType)PlayerPrefs.GetInt("EFloorType");
+        if (PlayerPrefs.GetInt("IsPumpKinEvent") == 0)
+        {
+            isPumpkinEvent = false;
+        }
+        else
+            isPumpkinEvent= true;
     }
 }

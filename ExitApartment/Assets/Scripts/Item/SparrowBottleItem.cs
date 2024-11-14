@@ -40,9 +40,12 @@ public class SparrowBottleItem : Item
 
     public override void OnUseItem()
     {
+        if (!soundCtr.IsPlaying)
+        {
+            soundCtr.AudioPath = GameManager.Instance.soundMgr.SoundList[55];
+            soundCtr.Play();
+        }
 
-        soundCtr.AudioPath = GameManager.Instance.soundMgr.SoundList[55];
-        soundCtr.Play();
 
     }
 
