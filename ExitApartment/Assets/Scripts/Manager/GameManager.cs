@@ -95,6 +95,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
         saveData.LoadData();
+        eventMgr.SetIsPumpkinEvent(saveData.isPumpkinEvent);
     }
     void Start()
     {

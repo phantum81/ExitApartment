@@ -26,7 +26,7 @@ public class TrapDoor : ZoomableItem
     public override void OnInteraction(Vector3 _angle)
     {
         base.OnInteraction(_angle);
-        
+        if (GameManager.Instance.eventMgr.GetIsPumpkinEvent()) return;
         if(trapCount == 1 )
         {
             onTrapDoor.Invoke(true);

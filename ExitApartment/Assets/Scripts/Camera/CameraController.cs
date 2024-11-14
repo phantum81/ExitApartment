@@ -30,7 +30,7 @@ public class CameraController : MonoBehaviour
     private float minXAngle = -90f;
     private float rotateX = 0f;
 
-
+    private LayerMask layMask = ~(1<<2);
     [Space, Header("타겟"),SerializeField]
     private Transform target;
     [Header("타겟 머리 위치"), SerializeField]
@@ -323,7 +323,7 @@ public class CameraController : MonoBehaviour
     #region  그외 기능
     public bool CheckInterection(Ray _ray , out RaycastHit _hit, float _maxDis, int _layer )
     {
-        if (Physics.Raycast(_ray, out _hit, _maxDis))
+        if (Physics.Raycast(_ray, out _hit, _maxDis, layMask))
         {
             if(_hit.transform.gameObject.layer == _layer)
             {
