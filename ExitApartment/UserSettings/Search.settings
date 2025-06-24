@@ -13,6 +13,11 @@ scopes = {
 	"last_search.0B486DF2" = "cloth"
 	"OpenInspectorPreview.0B486DF2" = "0"
 	"currentGroup.0B486DF2" = "presets_provider"
+	"picker_window_position_offset.45F317DD" = "204;273;320;550"
+	"picker_search_text.45F317DD" = "co"
+	"last_search.45F317DD" = "co"
+	"OpenInspectorPreview.45F317DD" = "0"
+	"currentGroup.45F317DD" = null
 }
 providers = {
 	log = {
@@ -65,10 +70,22 @@ providers = {
 		priority = -10
 		defaultAction = null
 	}
+	st = {
+		active = true
+		priority = 100
+		defaultAction = null
+	}
+	at = {
+		active = true
+		priority = 100
+		defaultAction = null
+	}
 }
 objectSelectors = {
 }
 recentSearches = [
+	"ap"
+	""
 ]
 searchItemFavorites = [
 ]

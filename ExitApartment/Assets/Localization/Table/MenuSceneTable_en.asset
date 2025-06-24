@@ -1,0 +1,103 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: MenuSceneTable_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 381826ea73927c6418d44e3d2fbb00c1, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 74666487808
+    m_Localized: Continue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 77233401856
+    m_Localized: NewGame
+    m_Metadata:
+      m_Items: []
+  - m_Id: 80446238720
+    m_Localized: Setting
+    m_Metadata:
+      m_Items: []
+  - m_Id: 107554025472
+    m_Localized: Exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 112352309248
+    m_Localized: Do you want to exit the game?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 121713995776
+    m_Localized: Yes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 124192829440
+    m_Localized: No
+    m_Metadata:
+      m_Items: []
+  - m_Id: 126055100416
+    m_Localized: Brightness
+    m_Metadata:
+      m_Items: []
+  - m_Id: 130836606976
+    m_Localized: Apply
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1436745740288
+    m_Localized: Cancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 129171468288
+    m_Localized: Brightness Setting
+    m_Metadata:
+      m_Items: []
+  - m_Id: 127623770112
+    m_Localized: Please make the number 1 in the first line very faint.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5661676548096
+    m_Localized: Input Setting
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5710062039040
+    m_Localized: Mouse Sensitivity
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5712599592960
+    m_Localized: Sound Setting
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5714591887360
+    m_Localized: Bgm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6761079123968
+    m_Localized: Effect
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6763671203840
+    m_Localized: Option
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6766577856512
+    m_Localized: Sound
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7772917215232
+    m_Localized: Input
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

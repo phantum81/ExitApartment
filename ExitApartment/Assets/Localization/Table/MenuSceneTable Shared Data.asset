@@ -1,0 +1,108 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: MenuSceneTable Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: MenuSceneTable
+  m_TableCollectionNameGuidString: 381826ea73927c6418d44e3d2fbb00c1
+  m_Entries:
+  - m_Id: 74666487808
+    m_Key: Continue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 77233401856
+    m_Key: NewGame
+    m_Metadata:
+      m_Items: []
+  - m_Id: 80446238720
+    m_Key: Setting
+    m_Metadata:
+      m_Items: []
+  - m_Id: 107554025472
+    m_Key: Exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 112352309248
+    m_Key: Warning
+    m_Metadata:
+      m_Items: []
+  - m_Id: 121713995776
+    m_Key: Yes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 124192829440
+    m_Key: No
+    m_Metadata:
+      m_Items: []
+  - m_Id: 126055100416
+    m_Key: Bright
+    m_Metadata:
+      m_Items: []
+  - m_Id: 127623770112
+    m_Key: BrightnessExplain
+    m_Metadata:
+      m_Items: []
+  - m_Id: 129171468288
+    m_Key: BrightSetting
+    m_Metadata:
+      m_Items: []
+  - m_Id: 130836606976
+    m_Key: Apply
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1436745740288
+    m_Key: Cancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5661676548096
+    m_Key: InputSetting
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5710062039040
+    m_Key: MouseSensitivity
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5712599592960
+    m_Key: SoundOption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5714591887360
+    m_Key: Bgm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6761079123968
+    m_Key: EffectSound
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6763671203840
+    m_Key: Option
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6766577856512
+    m_Key: Sound
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7772917215232
+    m_Key: Input
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 8318289670792806400
+  references:
+    version: 2
+    RefIds:
+    - rid: 8318289670792806400
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1750257690114
