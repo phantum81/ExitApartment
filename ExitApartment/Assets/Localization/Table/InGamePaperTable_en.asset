@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97269afb30aa84742ae3f3342603618a, type: 3}
+  m_Name: InGamePaperTable_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: bf6a0c7a9c9759c44804c09195464849, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 481532648632320
+    m_Localized: '93bbba3a8d2c89b459d48ea3024f3427[NotePaperLastEng]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 481534255050752
+    m_Localized: '2d417f1a67ce3384a817268b63e69674[NotePaperPumpKinEng]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 481536964571136
+    m_Localized: '40bf0b1ba8aa16d48bebf480dd335303[NotePaperToolEng]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 481538550018048
+    m_Localized: '1debcf2538e164f458f4e2dfc42814c9[NotePaperWaterEng]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 481540206768128
+    m_Localized: '8d41d32de6d2d1043962741621c2c5fd[PaperMemo1Eng]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 481541729300480
+    m_Localized: 'faca0cd971568d64b8d4966bbc473f94[apartInfo1Eng]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 481543633514496
+    m_Localized: '0739019beccd222488ac01a10c7a25bf[ApartInfo2Eng]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 481545197989888
+    m_Localized: '72e58577c6f354c4d97faccc680a640b[ApartInfoLastEng]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 481530870247424
+    m_Localized: 'c29220f985e27f7449b5fe63107804e4[NotePaperForestEng]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 481526017437696
+    m_Localized: 'f6a3494ee1080284a9e5c5fade2a3a67[NotePaper436Eng]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 481528873758720
+    m_Localized: '4be3373ae2a2eb249ac12bfa29dd822d[NotePaperBegginer''sGuideEng]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 481523748319232
+    m_Localized: '775d3dee6bbf45f409cc1d811f1a7e03[NotePaper12fEng]'
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

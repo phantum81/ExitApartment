@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Localization-Assets-English (en)
+  m_EditorClassIdentifier: 
+  m_GroupName: Localization-Assets-English (en)
+  m_Data:
+    m_SerializedData: []
+  m_GUID: d4f90cab3bf484944b32c4fe6d515a49
+  m_SerializeEntries:
+  - m_GUID: 93bbba3a8d2c89b459d48ea3024f3427
+    m_Address: NotePaperLastEng
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2d417f1a67ce3384a817268b63e69674
+    m_Address: NotePaperPumpKinEng
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 40bf0b1ba8aa16d48bebf480dd335303
+    m_Address: NotePaperToolEng
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1debcf2538e164f458f4e2dfc42814c9
+    m_Address: NotePaperWaterEng
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8d41d32de6d2d1043962741621c2c5fd
+    m_Address: PaperMemo1Eng
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: faca0cd971568d64b8d4966bbc473f94
+    m_Address: apartInfo1Eng
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0739019beccd222488ac01a10c7a25bf
+    m_Address: ApartInfo2Eng
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 72e58577c6f354c4d97faccc680a640b
+    m_Address: ApartInfoLastEng
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c29220f985e27f7449b5fe63107804e4
+    m_Address: NotePaperForestEng
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4be3373ae2a2eb249ac12bfa29dd822d
+    m_Address: NotePaperBegginer'sGuideEng
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f6a3494ee1080284a9e5c5fade2a3a67
+    m_Address: NotePaper436Eng
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 775d3dee6bbf45f409cc1d811f1a7e03
+    m_Address: NotePaper12fEng
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 1
+  m_Settings: {fileID: 11400000, guid: 2cf5d1e606eeb63408da393a5192ea7f, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 82b635facb88cda4ead650fca282bb5a, type: 2}
+    - {fileID: 11400000, guid: 7218e7d717dc59e4c85d45b2156f0428, type: 2}

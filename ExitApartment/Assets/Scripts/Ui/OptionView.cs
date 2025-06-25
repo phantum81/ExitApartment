@@ -7,6 +7,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.EventSystems;
+using UnityEngine.Localization.Settings;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.UI;
 
@@ -14,9 +15,10 @@ using UnityEngine.UI;
 
 public class OptionView : MonoBehaviour, IOptionMenuView
 {
-
-    SoundManager soundMgr;
-    
+    bool isChanging = false;
+    private SoundManager soundMgr;
+    private LanguageManager languageMgr;
+    private InputManager inputMgr;
     [Header("감마 컨트롤러"), SerializeField]
     private GammaController gammaCtr;
 
@@ -26,6 +28,8 @@ public class OptionView : MonoBehaviour, IOptionMenuView
     private Button keySettingBtn;
     [Header("밝기 설정 버튼"), SerializeField]
     private Button brightOptionBtn;
+    [Header("언어 버튼"), SerializeField]
+    private Button languageBtn;
     [Header("나가기"), SerializeField]
     private Button exitBtn;
 
@@ -69,7 +73,7 @@ public class OptionView : MonoBehaviour, IOptionMenuView
     private TextMeshProUGUI sensitivityTxt;
 
     private OptionPresent optionPresent;
-    private InputManager inputMgr;
+    
     
     void Awake()
     {
@@ -83,6 +87,7 @@ public class OptionView : MonoBehaviour, IOptionMenuView
     {
         soundMgr = GameManager.Instance.soundMgr;
         inputMgr = GameManager.Instance.inputMgr;
+        languageMgr = GameManager.Instance.languageMgr;
         InitButton();
         InitSlider();
         optionPresent.Init();
@@ -169,6 +174,35 @@ public class OptionView : MonoBehaviour, IOptionMenuView
     }
     #endregion
 
+    #region 언어 관련
+    public void SetLanguage()
+    {
+        int value = GetNextLanguage();
+        languageMgr.SetLanguage((ELanguage)value);
+        ChangeLocale(value);
+
+    }
+
+    public int GetNextLanguage()
+    {
+        int value = ((int)languageMgr.Elanguage + 1) % Enum.GetValues(typeof(ELanguage)).Length;
+        
+        return value;
+    }
+    #endregion
+
+    public async void ChangeLocale(int _index)
+    {
+        if (isChanging)
+            return;
+
+        isChanging = true;
+
+        await LocalizationSettings.InitializationOperation.Task;
+        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[_index];
+
+        isChanging = false;
+    }
 
 
     public void CloseParentPanel()
@@ -181,7 +215,7 @@ public class OptionView : MonoBehaviour, IOptionMenuView
         {
             GameObject clickObjParent = clickObj.transform.parent?.gameObject;
 
-            // 부모가 있는 경우에만 처리
+            
             if (clickObjParent != null && clickObjParent.name != "MenuPan" && clickObj.name != "MenuPan")
             {
                 clickObjParent.SetActive(false);
@@ -219,6 +253,7 @@ public class OptionView : MonoBehaviour, IOptionMenuView
         soundOptionBtn.onClick.AddListener(ShowSoundOption);
         keySettingBtn.onClick.AddListener(ShowKeySettingOption);
         brightOptionBtn.onClick.AddListener(ShowBrightOption);
+        languageBtn.onClick.AddListener(SetLanguage);
 
         AddButtonArrayListener(applyBtn, optionPresent.SaveSoundVolume, optionPresent.SaveGamma, optionPresent.SaveInput);
         AddButtonArrayListener(cancelBtn, optionPresent.NoSaveSoundVolume, optionPresent.NoSaveGamma, optionPresent.NoSaveInput);

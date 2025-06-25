@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     public ItemManager itemMgr;
     public SoundManager soundMgr;
     public ScenesManager sceneMgr;
+    public LanguageManager languageMgr;
 
     public Action onGetForestHumanity;
     public Action onForestFloor;

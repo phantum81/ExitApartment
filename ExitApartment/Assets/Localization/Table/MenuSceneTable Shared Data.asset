@@ -95,6 +95,23 @@ MonoBehaviour:
     m_Key: Input
     m_Metadata:
       m_Items: []
+  - m_Id: 2041322444173312
+    m_Key: Menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2041377955786752
+    m_Key: Main
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2533587349417984
+    m_Key: InGameScene/Floor 15/Floor15/Map/Room/RoomObject/partition wall Prefab/partition
+      wall/NotePaper (1)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2547774842744832
+    m_Key: Language
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

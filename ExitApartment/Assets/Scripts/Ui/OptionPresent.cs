@@ -89,6 +89,17 @@ public class OptionPresent
     }
     #endregion
 
+
+    #region ¾ð¾î
+    public void SetLanguage()
+    {
+        optionMenu.SetLanguage();
+
+    }
+
+    #endregion
+
+
     public void Init()
     {
         optionMenu.LoadData(settingData.BgmValue, settingData.EffectSoundValue, settingData.GammaValue, settingData.Sensitivity);

@@ -75,6 +75,7 @@
     <Compile Include="Assets\Particle Ribbon by Moonflower Carnivore\Scripts\randomParticleRotation.cs" />
     <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\Components\DepthOfFieldComponent.cs" />
     <Compile Include="Assets\Scripts\Ui\OptionPresent.cs" />
+    <Compile Include="Assets\Scripts\Manager\LanguageManager.cs" />
     <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\Utils\ColorGradingCurve.cs" />
     <Compile Include="Assets\Scripts\Binding\SerializableInputBinding.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerHFsm\PlayerFall.cs" />
@@ -127,6 +128,7 @@
     <Compile Include="Assets\Resources\Materials\Materials\TestCode.cs" />
     <Compile Include="Assets\Resources\DownAssets\PlayerPack\DemoScene\Scripts\Akane_CameraScript.cs" />
     <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\Components\ColorGradingComponent.cs" />
+    <Compile Include="Assets\Scripts\Localization\LocalzationTextureChanger.cs" />
     <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\Models\ScreenSpaceReflectionModel.cs" />
     <Compile Include="Assets\Scripts\Binding\InputBinding.cs" />
     <Compile Include="Assets\Scripts\Mobs\SkinZombie.cs" />

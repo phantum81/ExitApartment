@@ -169,6 +169,12 @@ public enum EMobType
 }
 
 
+public enum ELanguage
+{
+    English,
+    Korean,
+}
+
 
 public enum EItemType
 {

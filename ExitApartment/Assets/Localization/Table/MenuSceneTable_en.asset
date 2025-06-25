@@ -98,6 +98,22 @@ MonoBehaviour:
     m_Localized: Input
     m_Metadata:
       m_Items: []
+  - m_Id: 2041322444173312
+    m_Localized: Menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2041377955786752
+    m_Localized: MainScene
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2533587349417984
+    m_Localized: 
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2547774842744832
+    m_Localized: English
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

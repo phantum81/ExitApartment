@@ -110,6 +110,9 @@ public interface IOptionMenuView
 
     public void CloseParentPanel();
 
+    public void SetLanguage();
+
+
     //public void ShowSoundOption();
     //public void ShowKeySettingOption();
 

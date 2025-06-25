@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: InGameTable Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: InGameTable
+  m_TableCollectionNameGuidString: 87e6aebfbcf2cfe47928bb55bf67ad34
+  m_Entries:
+  - m_Id: 22111858688
+    m_Key: Number
+    m_Metadata:
+      m_Items: []
+  - m_Id: 61349572608
+    m_Key: Reason
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64432386048
+    m_Key: Signature
+    m_Metadata:
+      m_Items: []
+  - m_Id: 82518224896
+    m_Key: MoveOutForm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 402749140992
+    m_Key: Red Light
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 8318289828935368807
+  references:
+    version: 2
+    RefIds:
+    - rid: 8318289828935368807
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1750863490281
