@@ -200,6 +200,7 @@ public enum ENoteType
     Pumpkin,
     Forest,
     Mob12F,
+    R436,
     Last,
 
 }

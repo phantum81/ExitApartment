@@ -118,7 +118,8 @@ public class UnitManager : MonoBehaviour
         notePaperDic.Add(ENoteType.Pumpkin, PaperList[0]);
         notePaperDic.Add(ENoteType.Forest, PaperList[1]);
         notePaperDic.Add(ENoteType.Mob12F, PaperList[2]);
-        notePaperDic.Add(ENoteType.Last, PaperList[3]);
+        notePaperDic.Add(ENoteType.R436, PaperList[3]);
+        notePaperDic.Add(ENoteType.Last, PaperList[4]);
         elevatorSpawnDic = elevatorSpawnList.ToDictionary(elevator => elevator.eFloorType, elevator => elevator.transform);
         skyboxOringinColor = skyBox.GetColor("_Tint");
         
@@ -307,7 +308,11 @@ public class UnitManager : MonoBehaviour
     {
         floorNumTextList[0].gameObject.SetActive(true);
         flashLight.SetActive(true);
+        notePaperDic[ENoteType.R436].SetActive(true);
     }
+
+
+
     private void ShowClearFallFloor()
     {
         ShowClearNothingFloor();
@@ -315,7 +320,9 @@ public class UnitManager : MonoBehaviour
         floorNumTextList[1].gameObject.SetActive(true);
         notePaperDic[ENoteType.Mob12F].SetActive(true);
         ChangeMaterial(apartInfoPaper.transform, apartPaperMatList[1]);
-        
+        LocalzationTextureChanger apart = apartInfoPaper.GetComponent<LocalzationTextureChanger>();
+        apart.ChangeTableKey(apart.TableName, "ApartInfo2");
+
 
     }
     private void ShowClearForestFloor()
@@ -324,8 +331,10 @@ public class UnitManager : MonoBehaviour
         ShowObject(notePaperDic[ENoteType.Forest].transform, true);
         ShowObject(notePaperDic[ENoteType.Last].transform, true);
         ChangeMaterial(apartInfoPaper.transform, apartPaperMatList[2]);
+        LocalzationTextureChanger apart = apartInfoPaper.GetComponent<LocalzationTextureChanger>();
+        apart.ChangeTableKey(apart.TableName, "ApartInfoLast");
         skyBox.SetColor("_Tint", skyboxOringinColor);
-
+       
     }
     private void ShowClearEscapeRoom()
     {

@@ -8,14 +8,19 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class LocalzationTextureChanger : MonoBehaviour
 {
-    public Renderer targetRenderer;
-    public LocalizedAsset<Sprite> localizedSprite; 
+    
+    private Renderer targetRenderer;
+    [Header("로컬라이즈에셋"),SerializeField]
+    private LocalizedAsset<Sprite> localizedSprite; 
     private Material _materialInstance;
+    private string _tableName;
+    public string TableName => _tableName;
+
 
     private void Start()
     {
         targetRenderer = GetComponent<Renderer>();
-        
+        _tableName = localizedSprite.TableReference;
     }
     private void OnEnable()
     {
@@ -28,14 +33,38 @@ public class LocalzationTextureChanger : MonoBehaviour
         localizedSprite.AssetChanged -= OnSpriteChanged;
     }
 
-    private void OnSpriteChanged(Sprite newSprite)
+    private void OnSpriteChanged(Sprite _newSprite)
     {
-        if (newSprite == null || targetRenderer == null) return;
+        if (_newSprite == null || targetRenderer == null) return;
 
-        // 마테리얼 인스턴스화 (주의: 공유 마테리얼을 직접 바꾸면 전체가 바뀜)
+        
         if (_materialInstance == null)
             _materialInstance = targetRenderer.material;
 
-        _materialInstance.SetTexture("_MainTex", newSprite.texture);
+        _materialInstance.SetTexture("_MainTex", _newSprite.texture);
     }
+
+    public void ChangeTableKey(string _table, string _key)
+    {
+       
+        localizedSprite.AssetChanged -= OnSpriteChanged;
+        localizedSprite.SetReference(_table, _key);
+
+        localizedSprite.LoadAssetAsync().Completed += handle =>
+        {
+            if (handle.Status == AsyncOperationStatus.Succeeded)
+            {
+                Sprite sprite = handle.Result;
+                OnSpriteChanged(sprite);
+                localizedSprite.AssetChanged += OnSpriteChanged;
+            }
+        };
+
+
+
+    }
+
+
+    
+
 }
