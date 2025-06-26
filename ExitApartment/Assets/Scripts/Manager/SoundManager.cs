@@ -176,6 +176,7 @@ public class SoundManager : MonoBehaviour
 
         soundList.Add(150, "BatSound");
         soundList.Add(151, "NockDoorSound");
+        soundList.Add(152, "MentalWhispering");
 
         //-----플레이어 효과음-----
 

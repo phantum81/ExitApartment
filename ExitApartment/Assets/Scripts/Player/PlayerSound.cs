@@ -24,9 +24,17 @@ public class PlayerSound : MonoBehaviour
         soundCtr.ChangeSound(soundMgr.SoundList[102]);
         soundCtr.SetVolume(0.7f);
         
+        
     }
 
 
+    public void OnMentalSound()
+    {
+        soundCtr.ChangeSound(soundMgr.SoundList[152], true);
+        soundCtr.SetVolume(1f);
+       
+
+    }
 
     public void On12FDeadSound()
     {
