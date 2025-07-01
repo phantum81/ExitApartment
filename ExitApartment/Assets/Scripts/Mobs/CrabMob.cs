@@ -28,6 +28,10 @@ public class CrabMob : Mob
     private bool isEvent=false;
     [Header("µ¥µåºä"), SerializeField]
     private Transform deadView;
+    private CameraController cameraCtr;
+
+    private Coroutine coShakeRoutine;
+
 
     void Start()
     {
@@ -41,8 +45,9 @@ public class CrabMob : Mob
         eEnemyState = EenemyState.None;
         origin = transform.position;
         soundCtr.AudioPath = soundMgr.SoundList[105];
-        
-        
+        cameraCtr = GameManager.Instance.cameraMgr.CameraCtr;
+
+
 
     }
     void Update()
@@ -153,8 +158,12 @@ public class CrabMob : Mob
 
 
         Gizmos.color = Color.red;
-        if(target)
+        if (target)
+        {
             Gizmos.DrawRay(transform.position, (target.position - transform.position).normalized);
+            Gizmos.DrawLine(transform.position, target.position);
+           
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -178,4 +187,39 @@ public class CrabMob : Mob
         soundCtr.Play();
         
     }
+    private void CrabCameraShake()
+    {
+        float shakeAmount = 0f;
+        float minDis = 1f;
+        float maxDis = 39f;
+        float minAmount = 0.02f;
+        float maxAmount = 0.2f;
+        if (coShakeRoutine!= null)
+        {
+            return;
+        }
+
+        if(target != null)
+        {
+            
+            float dis = Vector3.Distance(target.position, transform.position);
+            float normalize = 1- Mathf.InverseLerp(minDis, maxDis, dis);
+
+            shakeAmount = Mathf.Lerp(minAmount, maxAmount, Mathf.Clamp01(normalize));
+        }
+
+
+        coShakeRoutine = StartCoroutine(CoCameraShake(shakeAmount));
+
+    }
+
+    private IEnumerator CoCameraShake(float _shakeAmount)
+    {
+        
+
+        yield return cameraCtr.CameraShake(GameManager.Instance.cameraMgr.CameraDic[0], 0.5f, _shakeAmount);
+
+        coShakeRoutine = null;
+    }
+
 }

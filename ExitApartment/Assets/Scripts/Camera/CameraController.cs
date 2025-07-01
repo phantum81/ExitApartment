@@ -227,12 +227,17 @@ public class CameraController : MonoBehaviour
         Vector3 shakePos = _cam.transform.parent.localPosition;
         while (_timer <= _shakeTime)
         {
+            if (Time.timeScale == 0f)
+            {
+                yield return null;
+                continue;
+            }
             _cam.transform.parent.position = shakePos + Random.insideUnitSphere * _shakeAmount;
             _timer += Time.deltaTime;
             yield return null;
         }
 
-        _cam.transform.localPosition = originalPosition;
+        //_cam.transform.localPosition = originalPosition;
         _cam.transform.parent = null;
 
     }

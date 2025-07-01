@@ -281,8 +281,15 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.11272843
+      - time: 0.13472843
         functionName: CrabStepSound
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.21371661
+        functionName: CrabCameraShake
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
