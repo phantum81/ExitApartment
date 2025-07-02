@@ -54,7 +54,18 @@ public class ItemManager : MonoBehaviour
             }
         }
     }
+    public void SetLayerRecursively(GameObject _obj, int _newLayer)
+    {
+        if (_obj == null) return;
 
+        _obj.layer = _newLayer;
+
+        foreach (Transform child in _obj.transform)
+        {
+            if (child != null)
+                SetLayerRecursively(child.gameObject, _newLayer);
+        }
+    }
     public void PickItem(Transform _target, Vector3 _angle, ItemData _data)
     {
         GameManager.Instance.unitMgr.PlayerCtr.PickItem(_target, _angle, _data);

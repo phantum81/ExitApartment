@@ -38,6 +38,13 @@ public class OptionView : MonoBehaviour, IOptionMenuView
     private GameObject optionPanel;
     public GameObject OptionPanel => optionPanel;
 
+    [Header("밝기 권고메인창"), SerializeField]
+    private GameObject MainrecommendPanel;
+
+    [Header("밝기 권고창 텍스트"), SerializeField]
+    private TextMeshProUGUI recommendtxt;
+
+
     [Header("미니 옵션창"), SerializeField]
     private GameObject optionMiniPanel;
 
@@ -91,8 +98,8 @@ public class OptionView : MonoBehaviour, IOptionMenuView
         InitButton();
         InitSlider();
         optionPresent.Init();
-       // GameManager.Instance.sceneMgr.onSceneUnload += () => GameManager.Instance.sceneMgr.SetMenuObject(optionPanel, transform);
-
+        // GameManager.Instance.sceneMgr.onSceneUnload += () => GameManager.Instance.sceneMgr.SetMenuObject(optionPanel, transform);
+        StartCoroutine(StartGame());
     }
 
     // Update is called once per frame
@@ -299,4 +306,16 @@ public class OptionView : MonoBehaviour, IOptionMenuView
         }
     }
 
+
+
+    private IEnumerator StartGame()
+    {
+        //Time.timeScale = 0f;
+        yield return UiManager.Instance.SetUiVisible(recommendtxt.transform, 2f, 0.2f);
+        yield return UiManager.Instance.SetUiInvisible(recommendtxt.transform, 2f, 1f);
+        yield return UiManager.Instance.SetUiInvisible(MainrecommendPanel.transform, 2f, 1f);
+
+
+        //Time.timeScale = 1;
+    }
 }

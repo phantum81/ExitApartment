@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour
     private InputManager inputMgr;
     private CameraManager cameraMgr;
     private UnitManager unitMgr;
+    private ItemManager itemMgr;
     private SoundController soundCtr;
     public SoundController SoundCtr => soundCtr;
     [Header("플레이어 사운드"),SerializeField]
@@ -154,6 +155,7 @@ public class PlayerController : MonoBehaviour
         _target.parent = playerInven.PickTransform;
         _target.transform.localPosition = new Vector3(0f, 0f, 0f);
         _target.localRotation = Quaternion.Euler(_angle);
+        itemMgr.SetLayerRecursively(_target.gameObject, 12);
         _target.GetComponent<Rigidbody>().useGravity = false;
         _target.GetComponent<Rigidbody>().isKinematic = true;
         _target.GetComponent<Collider>().enabled = false;
@@ -166,7 +168,8 @@ public class PlayerController : MonoBehaviour
         Vector3 _dir = player.forward + player.up;
         Rigidbody rd = _target.GetComponent<Rigidbody>();
         _target.GetComponent<Collider>().enabled = true;
-        _target.parent = null;        
+        _target.parent = null;
+        itemMgr.SetLayerRecursively(_target.gameObject, 6);
         rd.useGravity = true;
         rd.isKinematic = false;
         if(_time < 1f)
@@ -209,6 +212,7 @@ public class PlayerController : MonoBehaviour
         inputMgr = GameManager.Instance.inputMgr;
         cameraMgr = GameManager.Instance.cameraMgr;
         unitMgr = GameManager.Instance.unitMgr;
+        itemMgr = GameManager.Instance.itemMgr;
         soundCtr = GetComponent<SoundController>();
         playerInven = gameObject.GetComponent<PlayerInventory>();
         origin = player.position;

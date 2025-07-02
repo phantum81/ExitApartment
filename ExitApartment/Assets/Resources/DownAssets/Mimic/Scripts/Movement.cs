@@ -79,8 +79,10 @@ namespace MimicSpace
 
         IEnumerator Clear12F()
         {
+            GameManager.Instance.Set12FClearFloor(true);
+            GameManager.Instance.ChangeFloorLevel(EFloorType.Mob122F);
             WaitUntil openWait =  new WaitUntil(() => GameManager.Instance.unitMgr.ElevatorCtr.eleWork == EElevatorWork.Opening);
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(4f);
             soundCtr.Play();
             while (Vector3.Distance(transform.position, route1.position)> validDis)
             {

@@ -306,7 +306,7 @@ public class CameraController : MonoBehaviour
 
     IEnumerator OnCameraShake()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(4.5f);
         StartCoroutine(CameraShake(main_cam, 1.3f, 0.3f));
 
     }
