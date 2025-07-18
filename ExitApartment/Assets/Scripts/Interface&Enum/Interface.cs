@@ -103,7 +103,7 @@ public interface IOptionMenuView
     public void SetSensitivityValue(float _value);
 
     public void SetInputValue(float _value);
-
+    public void StartRecommandPanel(bool _isStart);
 
     public float GetSensitivityValue();
 

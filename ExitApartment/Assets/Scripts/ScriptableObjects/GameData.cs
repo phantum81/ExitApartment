@@ -30,6 +30,7 @@ public class GameData : ScriptableObject
         
         PlayerPrefs.SetInt("EFloorType", (int)_type);
         PlayerPrefs.SetInt("IsPumpKinEvent", ispump);
+        PlayerPrefs.Save();
     }
 
     public void LoadData()
@@ -41,5 +42,6 @@ public class GameData : ScriptableObject
         }
         else
             isPumpkinEvent= true;
+        
     }
 }

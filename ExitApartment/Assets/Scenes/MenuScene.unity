@@ -368,7 +368,7 @@ MonoBehaviour:
   languageBtn: {fileID: 424726355}
   exitBtn: {fileID: 1299896389}
   optionPanel: {fileID: 444178651}
-  MainrecommendPanel: {fileID: 81026791}
+  mainRecommendPanel: {fileID: 81026791}
   recommendtxt: {fileID: 740056565}
   optionMiniPanel: {fileID: 1733449826}
   soundOptionPanel: {fileID: 933072063}

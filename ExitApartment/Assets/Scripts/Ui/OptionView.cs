@@ -9,6 +9,7 @@ using UnityEngine.Audio;
 using UnityEngine.EventSystems;
 using UnityEngine.Localization.Settings;
 using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -39,7 +40,7 @@ public class OptionView : MonoBehaviour, IOptionMenuView
     public GameObject OptionPanel => optionPanel;
 
     [Header("밝기 권고메인창"), SerializeField]
-    private GameObject MainrecommendPanel;
+    private GameObject mainRecommendPanel;
 
     [Header("밝기 권고창 텍스트"), SerializeField]
     private TextMeshProUGUI recommendtxt;
@@ -97,9 +98,11 @@ public class OptionView : MonoBehaviour, IOptionMenuView
         languageMgr = GameManager.Instance.languageMgr;
         InitButton();
         InitSlider();
+        //GameManager.Instance.sceneMgr.onSceneUnload += () => GameManager.Instance.sceneMgr.SetMenuObject(optionPanel, transform);
         optionPresent.Init();
-        // GameManager.Instance.sceneMgr.onSceneUnload += () => GameManager.Instance.sceneMgr.SetMenuObject(optionPanel, transform);
-        StartCoroutine(StartGame());
+
+       
+        
     }
 
     // Update is called once per frame
@@ -198,6 +201,19 @@ public class OptionView : MonoBehaviour, IOptionMenuView
     }
     #endregion
 
+
+    public void StartRecommandPanel(bool _isStart)
+    {
+        if (SceneManager.GetActiveScene().name == "MenuScene")
+        {
+            if (!_isStart)
+                StartCoroutine(StartGame());
+            else
+                mainRecommendPanel.SetActive(false);
+        }
+    }
+
+
     public async void ChangeLocale(int _index)
     {
         if (isChanging)
@@ -210,6 +226,8 @@ public class OptionView : MonoBehaviour, IOptionMenuView
 
         isChanging = false;
     }
+
+
 
 
     public void CloseParentPanel()
@@ -313,7 +331,7 @@ public class OptionView : MonoBehaviour, IOptionMenuView
         //Time.timeScale = 0f;
         yield return UiManager.Instance.SetUiVisible(recommendtxt.transform, 2f, 0.2f);
         yield return UiManager.Instance.SetUiInvisible(recommendtxt.transform, 2f, 1f);
-        yield return UiManager.Instance.SetUiInvisible(MainrecommendPanel.transform, 2f, 1f);
+        yield return UiManager.Instance.SetUiInvisible(mainRecommendPanel.transform, 2f, 1f);
 
 
         //Time.timeScale = 1;

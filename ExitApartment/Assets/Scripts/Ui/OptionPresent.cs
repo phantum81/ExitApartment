@@ -102,7 +102,12 @@ public class OptionPresent
 
     public void Init()
     {
+        settingData.LoadData();
         optionMenu.LoadData(settingData.BgmValue, settingData.EffectSoundValue, settingData.GammaValue, settingData.Sensitivity);
+        optionMenu.StartRecommandPanel(settingData.IsStart);
+        settingData.SetIsStartData(true);
+
     }
-       
+    
+    // 저장 데이터로 처음킨건지 아닌건지 확인하고 끌때는 리셋시키고 (혹은 저장데이터에 포함을 안시키고) 실행시키기
 }

@@ -83,6 +83,9 @@ public class GameManager : MonoBehaviour
 
 
     private bool isRest =false;
+    private bool _isRecommandPanel = false;
+    public bool IsRecommandPanel => _isRecommandPanel;
+
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -96,7 +99,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
         saveData.LoadData();
-        
+      
     }
     void Start()
     {
@@ -332,8 +335,11 @@ public class GameManager : MonoBehaviour
         _callback.Invoke();
     }
 
-    private void SettingData()
+
+    void OnApplicationQuit()
     {
+        
+        settingData.SetIsStartData(false); 
 
     }
 }

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e80767d693ee6004797490bc4b27ee8b, type: 3}
   m_Name: SOSettingData
   m_EditorClassIdentifier: 
-  bgmValue: 0.5
-  effectSoundValue: 0.5
-  gammaValue: 0
+  bgmValue: 0.49826965
+  effectSoundValue: 0.4975425
+  gammaValue: 0.009836197
   sensitivity: 1
+  isStart: 0
