@@ -268,7 +268,6 @@
     <None Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Resources\Shaders\FXAA3.cginc" />
     <None Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Resources\Shaders\EyeAdaptation.shader" />
     <None Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Utilities\CustomMotionTexture\Shaders\CustomMotionVectorTexture.shader" />
-    <None Include="Assets\AddressableAssetsData\link.xml" />
     <None Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Editor Resources\UI\CurveBackground.shader" />
     <None Include="Assets\Particle Ribbon by Moonflower Carnivore\readme_Simple_Particle_Ribbon.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
@@ -295,6 +294,7 @@
     <None Include="Assets\Resources\Shaders\ScreenCutoutShader.shader" />
     <None Include="Assets\Resources\DownAssets\Magical Rock\Notes.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
+    <None Include="Assets\AddressableAssetsData\link.xml" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
     <None Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Resources\Bluenoise64\LICENSE.txt" />

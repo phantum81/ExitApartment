@@ -189,7 +189,7 @@ public class OptionView : MonoBehaviour, IOptionMenuView
     {
         int value = GetNextLanguage();
         languageMgr.SetLanguage((ELanguage)value);
-        ChangeLocale(value);
+        languageMgr.ChangeLocale(value);
 
     }
 
@@ -214,18 +214,18 @@ public class OptionView : MonoBehaviour, IOptionMenuView
     }
 
 
-    public async void ChangeLocale(int _index)
-    {
-        if (isChanging)
-            return;
+    //public async void ChangeLocale(int _index)
+    //{
+    //    if (isChanging)
+    //        return;
 
-        isChanging = true;
+    //    isChanging = true;
 
-        await LocalizationSettings.InitializationOperation.Task;
-        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[_index];
+    //    await LocalizationSettings.InitializationOperation.Task;
+    //    LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[_index];
 
-        isChanging = false;
-    }
+    //    isChanging = false;
+    //}
 
 
 

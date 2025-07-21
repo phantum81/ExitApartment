@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Localization;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -75,7 +76,7 @@ public class InGameUiShower : MonoBehaviour, IInGameMenuView
     private UiManager uiMgr;
     private MenuPresent menuPresent;
     private CameraManager cameraMgr;
-
+    private LanguageManager languageMgr;
     void Start()
     {
         menuPresent = new MenuPresent(this);
@@ -90,6 +91,7 @@ public class InGameUiShower : MonoBehaviour, IInGameMenuView
         escBtn.onClick.AddListener(menuPresent.CloseGameClick);
         mainMenuBtn.onClick.AddListener(menuPresent.LoadMenuClick);
         cameraMgr = GameManager.Instance.cameraMgr;
+        languageMgr = GameManager.Instance.languageMgr;
     }
 
     // Update is called once per frame
@@ -348,22 +350,16 @@ public class InGameUiShower : MonoBehaviour, IInGameMenuView
     {
         _text.text = _main;
     }
-    string GetInteractionAction(EInteractionType hitType)
+    string GetInteractionAction(EInteractionType _hitType)
     {
-        return hitType switch
-        {
-            EInteractionType.Pick => "줍기",
-            EInteractionType.See => "보기",
-            EInteractionType.Use => "사용",
-            EInteractionType.Find => "찾다",
-            EInteractionType.Pull => "당기다",
-            EInteractionType.Push => "밀다",
-            EInteractionType.Open => "열다",
-            EInteractionType.Close=> "닫다",
-            EInteractionType.Press => "누르다",
-            EInteractionType.Write => "작성하기",
-            _ => "줍기"
-        };
+
+        if(languageMgr.LocalizedCache.TryGetValue(_hitType, out string localizedActionString))
+            return localizedActionString;
+
+
+        return localizedActionString;
+        
+
     }
 
     

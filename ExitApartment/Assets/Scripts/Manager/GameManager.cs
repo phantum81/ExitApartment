@@ -92,14 +92,15 @@ public class GameManager : MonoBehaviour
         if (_instance == null)
         {
             _instance = this;
-
+            
         }
         else if (_instance != this)
         {
             Destroy(gameObject);
         }
         saveData.LoadData();
-      
+        
+
     }
     void Start()
     {
