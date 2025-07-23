@@ -203,6 +203,7 @@ public class ElevatorController : MonoBehaviour
             case UnitManager.FOREST_FLOOR:
                 eCurFloor = EFloorType.Forest5ABC;
                 unitMgr.ChangeFloor(eCurFloor);
+                
                 transform.position = unitMgr.ElevatorSpawnDic[eCurFloor].position;
                 cameraMgr.PostProcess.SetMotionBlur(false);
                 cameraMgr.PostProcess.OriginSetting();
@@ -233,6 +234,17 @@ public class ElevatorController : MonoBehaviour
 
                 break;
         }
+        if(eCurFloor == EFloorType.Forest5ABC && !GameManager.Instance.SoundIgnore)
+        {
+            GameManager.Instance.OnEnterForestFloor();
+        }
+        else if(!GameManager.Instance.SoundIgnore)
+        {
+            GameManager.Instance.OnExitForestFloor();
+        }
+
+
+
         unitMgr.PlayerCtr.Player.transform.parent = unitMgr.PlayerCtr.transform;
         cameraMgr.CurCamera.transform.parent = null;
     }

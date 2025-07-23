@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    #region 매니저
     public UnitManager unitMgr;
     public CameraManager cameraMgr;
     public InputManager inputMgr;
@@ -40,7 +41,10 @@ public class GameManager : MonoBehaviour
     public SoundManager soundMgr;
     public ScenesManager sceneMgr;
     public LanguageManager languageMgr;
+    public AchievementController achievementCtr;
+    #endregion
 
+    #region 각 층 이벤트 액션 & 리셋 액션
     public Action onGetForestHumanity;
     public Action onForestFloor;
     public Action onFallFloor;
@@ -53,9 +57,9 @@ public class GameManager : MonoBehaviour
     public Action onFallReset;
     public Action onNothingReset;
     public Action onEscapeReset;
+    #endregion
 
-
-
+    #region 세이브 데이터
 
     [Header("세팅데이터"),SerializeField]
     private SettingData settingData;
@@ -63,9 +67,31 @@ public class GameManager : MonoBehaviour
 
     public GameData saveData;
 
+    [Header("업적 데이터"), SerializeField]
+    private AchievementData achieveData;
+    public AchievementData AchieveData => achieveData;
+    #endregion
+
+
+
+
+
     private int humanityScore = 0;
     public int HumanityScore => humanityScore;
 
+    #region 업적데이터
+
+
+    private int dieCount = 0;
+    private float forestTime = 0f;
+    private bool soundIgnore = false;
+    public bool SoundIgnore => soundIgnore;
+    private float forestLimitTime = 600f;
+
+
+    private Coroutine forestTimerCoroutine;
+
+    #endregion
     public EFloorType eFloorType = EFloorType.Home15EB;
     public EgameState eGameState = EgameState.Menu;
 
@@ -80,6 +106,7 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector]
     public bool isCheckCurboard = false;
+
 
 
     private bool isRest =false;
@@ -99,7 +126,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
         saveData.LoadData();
-        
+        achieveData.LoadData();
 
     }
     void Start()
@@ -128,7 +155,39 @@ public class GameManager : MonoBehaviour
             isRest= false;
         }
 
+
+
+
     }
+
+    public void OnEnterForestFloor()
+    {
+        if (forestTimerCoroutine == null)
+            forestTimerCoroutine = StartCoroutine(ForestTimer());
+    }
+
+    public void OnExitForestFloor()
+    {
+        if (forestTimerCoroutine != null)
+        {
+            StopCoroutine(forestTimerCoroutine);
+            forestTimerCoroutine = null;
+            forestTime = 0f;
+        }
+    }
+
+    private IEnumerator ForestTimer()
+    {
+        forestTime = 0f;
+        while (forestTime < 10f)
+        {
+            forestTime += Time.deltaTime;
+            yield return null;
+        }
+        soundIgnore = true;
+        achievementCtr.Unlock(ConstBundle.FOREST_LOST);
+    }
+
 
 
     public void Init()
@@ -197,6 +256,9 @@ public class GameManager : MonoBehaviour
         
         onGetForestHumanity += AddHumanityScore;
     }
+
+
+    #region 전달 함수
     public bool CheckInterection(Ray _ray, out RaycastHit _hit, float _maxDis, int _layer)
     {
         return cameraMgr.CameraCtr.CheckInterection(_ray, out _hit ,_maxDis, _layer);
@@ -212,7 +274,9 @@ public class GameManager : MonoBehaviour
         cameraMgr.ZoomCamera.StartCoroutine(cameraMgr.ZoomCamera.ZoomMove(_zoomCam, _col, _dis));
     }
 
-    
+    #endregion
+
+
     public void AddHumanityScore()
     {
         humanityScore++;
@@ -221,6 +285,8 @@ public class GameManager : MonoBehaviour
     {
         return humanityScore;
     }
+
+
     public void ChangeFloorLevel(EFloorType _type)
     {
         switch (_type)
@@ -255,6 +321,7 @@ public class GameManager : MonoBehaviour
        
     }
 
+
     public void Set12FClearFloor(bool _clearFloor)
     {
         isClear12F = _clearFloor;
@@ -271,6 +338,7 @@ public class GameManager : MonoBehaviour
     {
         isClearEscapeRoom = _clearFloor;
     }
+
 
 
     public void SetGameState(EgameState _state)
@@ -316,14 +384,24 @@ public class GameManager : MonoBehaviour
 
 
     }
+
+
+
+
     public void Restart()
-    {
-        
+    {        
         unitMgr.SkyBox.SetColor("_Tint", unitMgr.SkyboxOringinColor);
         SceneManager.LoadScene("InGameScene");
     }
+    
+    public void IncreaseDieCountAndSave()
+    {
+        dieCount++;
+        achieveData.SaveData(dieCount);
+    }
 
 
+    
     public IEnumerator CoTimer<T>(float _limitTime, T _param, Action<T> _callback )
     {
         

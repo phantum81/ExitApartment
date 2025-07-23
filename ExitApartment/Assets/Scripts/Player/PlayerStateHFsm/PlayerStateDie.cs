@@ -27,6 +27,11 @@ public class PlayerStateDie<T> : IState<T> where T : MonoBehaviour
             _deadCam.StartCoroutine(_deadCam.DeadCam());
         }
         GameManager.Instance.eventMgr.ChangeStageState(1);
+        GameManager.Instance.IncreaseDieCountAndSave();
+        if(GameManager.Instance.AchieveData.DieCount >= 5)
+        {
+            GameManager.Instance.achievementCtr.Unlock(ConstBundle.DIE_5);
+        }
     }
 
     public void OperateUpdate(T _send)

@@ -92,6 +92,7 @@
     <Compile Include="Assets\Scripts\Mobs\MobContect.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerHFsm\PlayerHFSMMachine.cs" />
     <Compile Include="Assets\Scripts\Manager\ScenesManager.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\AchievementData.cs" />
     <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\Models\UserLutModel.cs" />
     <Compile Include="Assets\Resources\DownAssets\OfficeAsset\enviroment\Office building\scripts\DoorAction.cs" />
     <Compile Include="Assets\Scripts\Manager\GameManager.cs" />
@@ -116,6 +117,7 @@
     <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\Components\BloomComponent.cs" />
     <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\Models\ChromaticAberrationModel.cs" />
     <Compile Include="Assets\Scripts\Item\ElevatorDoorButton.cs" />
+    <Compile Include="Assets\Scripts\ConstBundle.cs" />
     <Compile Include="Assets\Resources\DownAssets\OfficeAsset\enviroment\Office building\scripts\evelator_controll.cs" />
     <Compile Include="Assets\Resources\DownAssets\ApartAsset\Apartment Kit\Common\Scripts &amp; Animation\TableFlip\TableFlipL.cs" />
     <Compile Include="Assets\Scripts\Camera\OnDeadCameraController.cs" />
@@ -187,6 +189,7 @@
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
     <Compile Include="Assets\Scripts\EventCollider\TelePortCollider.cs" />
     <Compile Include="Assets\Particle Ribbon by Moonflower Carnivore\Scripts\ReverseNormals.cs" />
+    <Compile Include="Assets\Scripts\Steam\SteamInit.cs" />
     <Compile Include="Assets\Resources\DownAssets\ApartAsset\_BPS Basic Assets\Common\Scripts and Animations\First Person Player\SceneSwitchGen.cs" />
     <Compile Include="Assets\Scripts\PortalController.cs" />
     <Compile Include="Assets\Scripts\ButtonColorController.cs" />
@@ -218,6 +221,7 @@
     <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\Components\MotionBlurComponent.cs" />
     <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\Models\MotionBlurModel.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\GameEvent.cs" />
+    <Compile Include="Assets\Scripts\Steam\AchievementController.cs" />
     <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\Models\FogModel.cs" />
     <Compile Include="Assets\Scripts\EventCollider\FakeCurboardHideTriggerCollider.cs" />
     <Compile Include="Assets\Scripts\UiButtonType.cs" />
@@ -294,7 +298,6 @@
     <None Include="Assets\Resources\Shaders\ScreenCutoutShader.shader" />
     <None Include="Assets\Resources\DownAssets\Magical Rock\Notes.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
-    <None Include="Assets\AddressableAssetsData\link.xml" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
     <None Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Resources\Bluenoise64\LICENSE.txt" />
@@ -613,6 +616,9 @@
     </Reference>
     <Reference Include="ReportGeneratorMerged">
       <HintPath>Library\PackageCache\com.unity.testtools.codecoverage@1.2.4\lib\ReportGenerator\ReportGeneratorMerged.dll</HintPath>
+    </Reference>
+    <Reference Include="Facepunch.Steamworks.Win64">
+      <HintPath>Assets\Plugins\FacePunch\Facepunch.Steamworks.Win64.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.8.0\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
