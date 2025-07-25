@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -33,6 +34,20 @@ public class LanguageManager : MonoBehaviour
 
 
 
+
+    private Dictionary<EErrorType, string> errorKeyMap = new()
+    {
+        { EErrorType.NotClose,  "Ele_close" },
+        { EErrorType.NotGo,   "Ele_not_go" },
+        { EErrorType.NotWork,   "Ele_not_move" },
+        { EErrorType.NotPress,  "Ele_not_press" },
+        { EErrorType.NotWrite,  "Paper_wirte" },
+        { EErrorType.Same,  "Ele_same" },
+
+    };
+    private Dictionary<EErrorType, string> errorlocalizedCache = new Dictionary<EErrorType, string>();
+    public Dictionary<EErrorType, string> ErrorLocalizedCache => errorlocalizedCache;
+
     private void Awake()
     {
         if(!GameManager.Instance.SetData.IsStart)
@@ -59,26 +74,28 @@ public class LanguageManager : MonoBehaviour
                 break;
         }
         ChangeLocale((int)eLanguage);
-        InitLocalization();
-
+        InitLocalization(InGameTable, keyMap, localizedCache);
+        InitLocalization(InGameTable, errorKeyMap, errorlocalizedCache);
     }
-    private async void InitLocalization()
+    private async void InitLocalization<T>(string _table, Dictionary<T, string> _key, Dictionary<T, string> _cache) where T : Enum
     {
-        await LocalizationSettings.InitializationOperation.Task; 
+        await LocalizationSettings.InitializationOperation.Task;
 
-        localizedCache.Clear();
+        _cache.Clear();
         Locale currentLanguage = LocalizationSettings.SelectedLocale;
     
-        foreach (var pair in keyMap)
+        foreach (var pair in _key)
         {
-            string result = LocalizationSettings.StringDatabase.GetLocalizedString(InGameTable, pair.Value, currentLanguage);
-            localizedCache[pair.Key] = result;
+            string result = LocalizationSettings.StringDatabase.GetLocalizedString(_table, pair.Value, currentLanguage);
+            _cache[pair.Key] = result;
         }
         
       
         
 
     }
+
+    
 
     public void SetLanguage(ELanguage _eLanguage)
     {
@@ -93,7 +110,8 @@ public class LanguageManager : MonoBehaviour
 
         await LocalizationSettings.InitializationOperation.Task;
         LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[_index];
-        InitLocalization();
+        InitLocalization(InGameTable, keyMap, localizedCache);
+        InitLocalization(InGameTable, errorKeyMap, errorlocalizedCache);
         isChanging = false;
     }
 }

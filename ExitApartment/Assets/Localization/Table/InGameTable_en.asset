@@ -78,6 +78,30 @@ MonoBehaviour:
     m_Localized: Write
     m_Metadata:
       m_Items: []
+  - m_Id: 10793277095161856
+    m_Localized: Please select a floor...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10793274830237696
+    m_Localized: "It\u2019s not working..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10793621413965824
+    m_Localized: Same Floor...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10793271613206528
+    m_Localized: "Looks like it\u2019s inaccessible..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10793623427231744
+    m_Localized: I think I need to close the door enough...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10793679601545216
+    m_Localized: What am I supposed to write?
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

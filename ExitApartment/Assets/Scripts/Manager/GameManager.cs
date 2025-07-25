@@ -179,7 +179,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator ForestTimer()
     {
         forestTime = 0f;
-        while (forestTime < 10f)
+        while (forestTime < forestLimitTime)
         {
             forestTime += Time.deltaTime;
             yield return null;
@@ -254,7 +254,7 @@ public class GameManager : MonoBehaviour
         isCheckCurboard = false;
         isRest = true;
         
-        onGetForestHumanity += AddHumanityScore;
+        //onGetForestHumanity += AddHumanityScore;
     }
 
 

@@ -218,7 +218,15 @@ public enum EInteractionType
     Press,
     Write,
 }
-
+public enum EErrorType
+{
+    NotWork,
+    NotGo,
+    NotPress,
+    Same,
+    NotClose,
+    NotWrite,
+}
 
 public enum EFloorState
 {

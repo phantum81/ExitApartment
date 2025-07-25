@@ -277,6 +277,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\Resources\DownAssets\Quirky Series - Birds Bundle\_Shader\SoftSurface.shader" />
     <None Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Resources\Shaders\BuiltinDebugViews.shader" />
+    <None Include="Assets\AddressableAssetsData\link.xml" />
     <None Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Resources\Shaders\EyeAdaptation.cginc" />
     <None Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Resources\Shaders\LutGen.shader" />
     <None Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Resources\Shaders\EyeHistogram.compute" />

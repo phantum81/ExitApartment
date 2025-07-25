@@ -15,13 +15,16 @@ public class RealExitCurBoard : Item
     private TextMeshPro nameText;
 
     public UnityEvent onChaseBat;
-    
-    
+
+    private InGameUiShower inGameShower;
+    private LanguageManager languageMgr;
     public override void Init()
     {
         base.Init();
         eItemType = EItemType.CurBoard;
         soundCtr.AudioPath = GameManager.Instance.soundMgr.SoundList[250];
+        inGameShower = UiManager.Instance.inGameCtr.InGameUiShower;
+        languageMgr = GameManager.Instance.languageMgr;
     }
     public override void OnRayHit(Color _color)
     {
@@ -35,7 +38,7 @@ public class RealExitCurBoard : Item
     {
         if (!GameManager.Instance.isCheckCurboard)
         {
-            UiManager.Instance.inGameCtr.InGameUiShower.ErrorMessage("뭐라 적어야하지...?");
+            inGameShower.ErrorMessage(inGameShower.GetTextIngameTable(EErrorType.NotClose, languageMgr.ErrorLocalizedCache));
             return;
         }
 

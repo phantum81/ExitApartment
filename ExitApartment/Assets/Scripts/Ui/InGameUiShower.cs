@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -84,7 +85,7 @@ public class InGameUiShower : MonoBehaviour, IInGameMenuView
         playerInteraction = GameManager.Instance.unitMgr.PlayerCtr.gameObject.GetComponent<PlayerInteraction>();
         inputMgr = GameManager.Instance.inputMgr;
         uiMgr = UiManager.Instance;
-        GameManager.Instance.onGetForestHumanity += ActiveHumanity;
+        //GameManager.Instance.onGetForestHumanity += ActiveHumanity;
         StartCoroutine(ResetScreen());
         StartCoroutine(uiMgr.SetUiInvisible(startPanel.transform, 1f, 0.5f));
         optionBtn.onClick.AddListener(menuPresent.ShowOptionPanel);
@@ -146,7 +147,7 @@ public class InGameUiShower : MonoBehaviour, IInGameMenuView
                 {
                     hitType = playerInteraction.PreHit.GetComponent<IInteraction>().OnGetType();
 
-                    interactionAction = GetInteractionAction(hitType);
+                    interactionAction = GetTextIngameTable(hitType,languageMgr.LocalizedCache);
 
                     ReWrite(interactionTxt, $"{interactionAction}({inputMgr.Inputbind.BindingDic[EuserAction.Interaction]})");
                 }
@@ -217,17 +218,17 @@ public class InGameUiShower : MonoBehaviour, IInGameMenuView
     {
         if (!elevatorCtr.IsClose)
         {
-            ErrorMessage("문을 닫아야 할 것 같다...");
+            ErrorMessage(GetTextIngameTable(EErrorType.NotClose, languageMgr.ErrorLocalizedCache));
             return false;
         }
         if (curFloor_txt.text == writeFloor_txt.text)
         {
-            ErrorMessage("같은 층이다...");
+            ErrorMessage(GetTextIngameTable(EErrorType.Same, languageMgr.ErrorLocalizedCache));
             return false;
         }
         else if (writeFloor_txt.text == string.Empty)
         {
-            ErrorMessage("층을 입력하지 않았다...");
+            ErrorMessage(GetTextIngameTable(EErrorType.NotPress, languageMgr.ErrorLocalizedCache));
             return false;
         }        
         else
@@ -247,7 +248,7 @@ public class InGameUiShower : MonoBehaviour, IInGameMenuView
                     }
                     if (!elevatorError_txt.gameObject.activeSelf)
                     {
-                        ErrorMessage("갈 수 없는 듯 하다...");
+                        ErrorMessage(GetTextIngameTable(EErrorType.NotGo, languageMgr.ErrorLocalizedCache));
                     }
 
                     return false;
@@ -264,7 +265,7 @@ public class InGameUiShower : MonoBehaviour, IInGameMenuView
                     }
                     if (!elevatorError_txt.gameObject.activeSelf)
                     {
-                        ErrorMessage("갈 수 없는 듯 하다...");
+                        ErrorMessage(GetTextIngameTable(EErrorType.NotGo, languageMgr.ErrorLocalizedCache));
                     }
                     return false;
                 case EFloorType.Mob122F:
@@ -281,7 +282,7 @@ public class InGameUiShower : MonoBehaviour, IInGameMenuView
                     }
                     if (!elevatorError_txt.gameObject.activeSelf)
                     {
-                        ErrorMessage("갈 수 없는 듯 하다...");
+                        ErrorMessage(GetTextIngameTable(EErrorType.NotGo, languageMgr.ErrorLocalizedCache));
                     }
                     return false;
 
@@ -299,7 +300,7 @@ public class InGameUiShower : MonoBehaviour, IInGameMenuView
                     }
                     if (!elevatorError_txt.gameObject.activeSelf)
                     {
-                        ErrorMessage("갈 수 없는 듯 하다...");
+                        ErrorMessage(GetTextIngameTable(EErrorType.NotGo, languageMgr.ErrorLocalizedCache));
                     }
                     return false;
                 case EFloorType.Escape888B:
@@ -310,14 +311,14 @@ public class InGameUiShower : MonoBehaviour, IInGameMenuView
                     }
                     if (!elevatorError_txt.gameObject.activeSelf)
                     {
-                        ErrorMessage("갈 수 없는 듯 하다...");
+                        ErrorMessage(GetTextIngameTable(EErrorType.NotGo, languageMgr.ErrorLocalizedCache));
                     }
                     return false;
 
                 case EFloorType.Looby:
                     if (!elevatorError_txt.gameObject.activeSelf)
                     {
-                        ErrorMessage("움직이지 않는다...");
+                        ErrorMessage(GetTextIngameTable(EErrorType.NotWork, languageMgr.ErrorLocalizedCache));
                     }
 
                     return false;
@@ -326,7 +327,7 @@ public class InGameUiShower : MonoBehaviour, IInGameMenuView
                 default:
                     if (!elevatorError_txt.gameObject.activeSelf)
                     {
-                        ErrorMessage("갈 수 없는 듯 하다...");
+                        ErrorMessage(GetTextIngameTable(EErrorType.NotGo, languageMgr.ErrorLocalizedCache));
                     }
                     return false;
             }
@@ -350,10 +351,10 @@ public class InGameUiShower : MonoBehaviour, IInGameMenuView
     {
         _text.text = _main;
     }
-    string GetInteractionAction(EInteractionType _hitType)
+    public string GetTextIngameTable<T>(T _hitType, Dictionary<T, string> _cache) where T : Enum
     {
 
-        if(languageMgr.LocalizedCache.TryGetValue(_hitType, out string localizedActionString))
+        if(_cache.TryGetValue(_hitType, out string localizedActionString))
             return localizedActionString;
 
 
@@ -362,7 +363,6 @@ public class InGameUiShower : MonoBehaviour, IInGameMenuView
 
     }
 
-    
 
     private IEnumerator ResetScreen()
     {
