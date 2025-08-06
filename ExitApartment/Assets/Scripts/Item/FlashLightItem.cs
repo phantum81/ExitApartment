@@ -64,15 +64,9 @@ public class FlashLightItem : Item
 
     }
 
-    private void InitPosition()
+    public override void InitPosition()
     {
-        if (transform.position != originPos && transform.parent == null)
-        {
-            transform.position = originPos;
-            transform.rotation = originRotate;
-            transform.parent = parent;
-            transform.gameObject.SetActive(true);
-        }
+        base.InitPosition();
     }
 
     public override IEnumerator CoInitPosition()

@@ -98,6 +98,18 @@ public class Item : MonoBehaviour, IInteraction, IUseItem, IGravityChange
         col?.OnContect(ESOEventType.OnClear12F);
     }
 
+    public virtual void InitPosition()
+    {
+        if (transform.position != originPos && transform.parent == null)
+        {
+            transform.position = originPos;
+            transform.rotation = originRotate;
+            transform.parent = parent;
+            transform.gameObject.SetActive(true);
+            GameManager.Instance.itemMgr.SetLayerRecursively(gameObject, 6);
+            transform.GetComponent<Collider>().enabled = true;
+        }
+    }
 
     public virtual IEnumerator CoInitPosition()
     {

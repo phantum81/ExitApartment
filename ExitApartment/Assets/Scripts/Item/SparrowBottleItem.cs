@@ -71,11 +71,16 @@ public class SparrowBottleItem : Item
 
     }
 
-    public void InitPosition()
+    public override void InitPosition()
     {
         if (transform.position != originPos && transform.parent == null)
         {
-            if(parent.position != originParentPos)
+            if(gameObject.activeSelf == false)
+            {
+                gameObject.SetActive(true);
+                soundCtr.Stop();
+            }
+            if (parent.position != originParentPos)
             {
                 Vector3 distance = parent.position - originParentPos;
                 transform.position = originPos;
@@ -85,7 +90,7 @@ public class SparrowBottleItem : Item
                 transform.position = originPos;
 
             transform.parent = parent;
-            transform.rotation = originRotate;            
+            transform.rotation = originRotate;     
             transform.GetComponent<Collider>().enabled = true;
         }
     }

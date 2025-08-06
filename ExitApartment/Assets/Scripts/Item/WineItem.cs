@@ -54,16 +54,10 @@ public class WineItem : Item
         base.OnCollisionEnter(other);
     }
 
-    public void InitPosition()
+    public override void InitPosition()
     {
-        if (transform.position != originPos && transform.parent == null)
-        {
-            transform.position = originPos;
-            transform.rotation = originRotate;
-            transform.parent = parent;
-            transform.gameObject.SetActive(true);
-            transform.GetComponent<Collider>().enabled = true;
-        }
+
+        base.InitPosition();
     }
     public override IEnumerator CoInitPosition()
     {
