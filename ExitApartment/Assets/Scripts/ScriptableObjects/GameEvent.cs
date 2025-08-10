@@ -10,7 +10,7 @@ public class GameEvent : ScriptableObject
     public List<EventListener> die12FListener = new List<EventListener>();
     public List<EventListener> alive12FListener = new List<EventListener>();
     public List<EventListener> magicStoneListener = new List<EventListener>();
-
+    public List<EventListener> Clear12FListener = new List<EventListener>();
     public void magicStoneRaise()
     {
         for (int i = magicStoneListener.Count - 1; i >= 0; i--)
@@ -29,7 +29,21 @@ public class GameEvent : ScriptableObject
 
 
 
-
+    public void Clear12FRaise()
+    {
+        for (int i = magicStoneListener.Count - 1; i >= 0; i--)
+        {
+            Clear12FListener[i].OnEventRaise();
+        }
+    }
+    public void Clear12FRegisterListener(EventListener _listener)
+    {
+        Clear12FListener.Add(_listener);
+    }
+    public void Clear12FUnregisterListener(EventListener _listener)
+    {
+        Clear12FListener.Remove(_listener);
+    }
 
     public void GravityRaise()
     {

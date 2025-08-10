@@ -26,6 +26,9 @@ public class EventListener : MonoBehaviour
             case ESOEventType.OnMagicStone:
                 eventSo.magicStoneRegisterListener(this);
                 break;
+            case ESOEventType.OnClearChangeState12F:
+                eventSo.Clear12FRegisterListener(this);
+                break;
 
         }
 
@@ -46,6 +49,9 @@ public class EventListener : MonoBehaviour
                 break;
             case ESOEventType.OnMagicStone:
                 eventSo.magicStoneUnregisterListener(this);
+                break;
+            case ESOEventType.OnClearChangeState12F:
+                eventSo.Clear12FUnregisterListener(this);
                 break;
         }
     }

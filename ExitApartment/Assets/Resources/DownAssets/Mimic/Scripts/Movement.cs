@@ -79,10 +79,10 @@ namespace MimicSpace
 
         IEnumerator Clear12F()
         {
-            GameManager.Instance.Set12FClearFloor(true);
-            GameManager.Instance.ChangeFloorLevel(EFloorType.Mob122F);
+            //GameManager.Instance.Set12FClearFloor(true);
+            //GameManager.Instance.ChangeFloorLevel(EFloorType.Mob122F);
             WaitUntil openWait =  new WaitUntil(() => GameManager.Instance.unitMgr.ElevatorCtr.eleWork == EElevatorWork.Opening);
-            yield return new WaitForSeconds(4f);
+            yield return new WaitForSeconds(1f);
             soundCtr.Play();
             while (Vector3.Distance(transform.position, route1.position)> validDis)
             {
@@ -91,7 +91,7 @@ namespace MimicSpace
             }
 
             soundCtr.Play();
-            StartCoroutine(cameraMgr.CameraCtr.CameraShake(cameraMgr.CurCamera, 4f, 0.05f));
+            StartCoroutine(cameraMgr.CameraCtr.CameraShake(cameraMgr.CurCamera, 2f, 0.4f));
             soundMgr.BgmCtr.BgmChange(soundMgr.SoundList[82], false);
             while (true)
             {

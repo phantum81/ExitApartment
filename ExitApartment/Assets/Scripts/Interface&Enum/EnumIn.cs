@@ -90,8 +90,9 @@ public enum ESOEventType
     OnDie12F,
     OnClear12F,
     OnMagicStone,
-    
-    
+    OnClearChangeState12F,
+
+
 };
 
 /// <summary>

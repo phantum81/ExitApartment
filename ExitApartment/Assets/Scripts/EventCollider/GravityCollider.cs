@@ -9,8 +9,7 @@ public class GravityCollider : MonoBehaviour, ISOEventContect
 {
     [Header("중력 이벤트"), SerializeField]
     private UnityEvent onGravityEvent;
-    [Header("생존 이벤트"), SerializeField]
-    private UnityEvent onClear12F;
+
     public void OnContect(ESOEventType _type)
     {
         switch (_type)
@@ -20,12 +19,7 @@ public class GravityCollider : MonoBehaviour, ISOEventContect
                 GameManager.Instance.eventMgr.ChangeEventType((int)_type);
                 GameManager.Instance.eventMgr.ChangeStageState(1);
                 break;
-            case ESOEventType.OnClear12F:
-                OnClear12F();
-                GameManager.Instance.eventMgr.ChangeEventType((int)_type);
-                GameManager.Instance.eventMgr.ChangeStageState(0);
-                transform.GetComponent<Collider>().enabled = false;
-                break;
+
             default:                
                 break;
         }
@@ -38,10 +32,7 @@ public class GravityCollider : MonoBehaviour, ISOEventContect
     {
         onGravityEvent.Invoke();
     }
-    public void OnClear12F()
-    {
-        onClear12F.Invoke();
-    }
+
 
     private void OnTriggerEnter(Collider other)
     {
