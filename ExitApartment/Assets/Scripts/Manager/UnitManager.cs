@@ -347,6 +347,7 @@ public class UnitManager : MonoBehaviour
         {
             text.gameObject.SetActive(false);
         }
+        GameManager.Instance.cameraMgr.CameraDic[0].GetComponent<AudioListener>().enabled = false;
     }
 
 
@@ -424,6 +425,7 @@ public class UnitManager : MonoBehaviour
         {
             floorNum.gameObject.SetActive(false);
         }
+        floorNumTextList[3].gameObject.SetActive(true);
 
     }
 

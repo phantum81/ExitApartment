@@ -27,7 +27,8 @@ public class GameData : ScriptableObject
         {
             ispump = 1;
         }
-        
+        eFloorData = _type;
+        isPumpkinEvent = _bol;
         PlayerPrefs.SetInt("EFloorType", (int)_type);
         PlayerPrefs.SetInt("IsPumpKinEvent", ispump);
         PlayerPrefs.Save();

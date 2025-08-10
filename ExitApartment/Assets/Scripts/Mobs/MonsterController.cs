@@ -29,6 +29,10 @@ public class MonsterController : MonoBehaviour
         eventMgr = GameManager.Instance.eventMgr;
         unitMgr= GameManager.Instance.unitMgr;
         StartCoroutine(PumpkinEvent());
+        if (eventMgr.GetIsPumpkinEvent())
+        {
+            unitMgr.NotePaperDic[ENoteType.Pumpkin].transform.gameObject.SetActive(true);
+        }
     }
 
     // Update is called once per frame
