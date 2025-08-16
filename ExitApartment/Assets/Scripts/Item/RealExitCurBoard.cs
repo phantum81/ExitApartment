@@ -38,7 +38,7 @@ public class RealExitCurBoard : Item
     {
         if (!GameManager.Instance.isCheckCurboard)
         {
-            inGameShower.ErrorMessage(inGameShower.GetTextIngameTable(EErrorType.NotClose, languageMgr.ErrorLocalizedCache));
+            inGameShower.ErrorMessage(inGameShower.GetTextIngameTable(EErrorType.NotWrite, languageMgr.ErrorLocalizedCache));
             return;
         }
 

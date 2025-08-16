@@ -7,6 +7,7 @@ public class UnLockDoorCloseElevatorCollider : MonoBehaviour, IContect
 {
     public UnityEvent onUnlockDoor;
     public UnityEvent onCloseElevator;
+    public UnityEvent onHideWelcome;
     private bool isDoit = false;
     public void OnContect()
     {
@@ -14,7 +15,8 @@ public class UnLockDoorCloseElevatorCollider : MonoBehaviour, IContect
         {
             onUnlockDoor.Invoke();
             onCloseElevator.Invoke();
-            isDoit= true;
+            onHideWelcome.Invoke();
+            isDoit = true;
         }
 
     }

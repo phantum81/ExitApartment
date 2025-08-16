@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 
 public class ElevatorDoorButton : MonoBehaviour, IInteraction
@@ -15,9 +16,9 @@ public class ElevatorDoorButton : MonoBehaviour, IInteraction
     private CameraManager cameraMgr;
     private UnitManager unitMgr;
     private bool isLock = false;
-    
 
-
+    public UnityEvent onSetOffcrabMob;
+    public UnityEvent onSetOffzombieMob;
     public void OnRayHit(Color _color)
     {
         foreach (Material mat in curMaterial)
@@ -64,6 +65,7 @@ public class ElevatorDoorButton : MonoBehaviour, IInteraction
         else if (buttonType == EElevatorButtonType.Close && eleCtr.eleWork != EElevatorWork.Locking)
         {
             
+
             if (eleCtr.eleWork == EElevatorWork.Opening && eleCtr.CurCoroutine != null)
             {
                 eleCtr.StopCoroutine(eleCtr.CurCoroutine);
@@ -76,7 +78,11 @@ public class ElevatorDoorButton : MonoBehaviour, IInteraction
                 eleCtr.CurCoroutine = eleCtr.StartCoroutine(eleCtr.CloseDoor());
             }
 
-
+            if (GameManager.Instance.isClearForest)
+            {
+                onSetOffcrabMob.Invoke();
+                onSetOffzombieMob.Invoke();
+            }
 
 
         }

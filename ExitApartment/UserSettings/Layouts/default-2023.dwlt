@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Hierarchy
+  m_Title: Game
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -214,7 +214,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 380
     y: 0
-    width: 345
+    width: 298
     height: 676
   m_MinSize: {x: 277, y: 71}
   m_MaxSize: {x: 4002, y: 4021}
@@ -239,9 +239,9 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 725
+    x: 678
     y: 0
-    width: 393
+    width: 395
     height: 676
   m_MinSize: {x: 102, y: 121}
   m_MaxSize: {x: 4002, y: 4021}
@@ -265,9 +265,9 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 1118
+    x: 1073
     y: 0
-    width: 802
+    width: 847
     height: 676
   m_MinSize: {x: 101, y: 121}
   m_MaxSize: {x: 4001, y: 4021}
@@ -326,9 +326,9 @@ MonoBehaviour:
     m_TextWithWhitespace: "Game\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 1118
+    x: 1073
     y: 73
-    width: 801
+    width: 846
     height: 655
   m_SerializedDataModeController:
     m_DataMode: 0
@@ -383,10 +383,10 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 21
-      width: 801
+      width: 846
       height: 634
-    m_Scale: {x: 0.4171875, y: 0.4171875}
-    m_Translation: {x: 400.5, y: 317}
+    m_Scale: {x: 0.440625, y: 0.440625}
+    m_Translation: {x: 423, y: 317}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
@@ -394,12 +394,12 @@ MonoBehaviour:
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
       x: -960
-      y: -759.85016
+      y: -719.4326
       width: 1920
-      height: 1519.7003
+      height: 1438.8652
     m_MinimalGUI: 1
-  m_defaultScale: 0.4171875
-  m_LastWindowPixelSize: {x: 801, y: 655}
+  m_defaultScale: 0.440625
+  m_LastWindowPixelSize: {x: 846, y: 655}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000000
@@ -493,7 +493,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 380
     y: 73
-    width: 343
+    width: 296
     height: 655
   m_SerializedDataModeController:
     m_DataMode: 0
@@ -576,9 +576,9 @@ MonoBehaviour:
     m_TextWithWhitespace: "Scene\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 725
+    x: 678
     y: 73
-    width: 391
+    width: 393
     height: 655
   m_SerializedDataModeController:
     m_DataMode: 0
@@ -725,7 +725,7 @@ MonoBehaviour:
       collapsed: 0
       displayed: 0
       snapOffset: {x: -391, y: -106}
-      snapOffsetDelta: {x: 24, y: 0}
+      snapOffsetDelta: {x: 22, y: 0}
       snapCorner: 3
       id: Scene View/Cloth Collisions
       index: 2
@@ -920,7 +920,7 @@ MonoBehaviour:
       collapsed: 0
       displayed: 0
       snapOffset: {x: -356, y: -181}
-      snapOffsetDelta: {x: 0, y: 0}
+      snapOffsetDelta: {x: 220, y: 0}
       snapCorner: 3
       id: UnityEditor.SceneViewCameraOverlay
       index: 0
@@ -957,7 +957,7 @@ MonoBehaviour:
       scrollOffset: 0
     m_OverlaysVisible: 1
   m_WindowGUID: 9a291ed708ee56540a2d350a8fb7fee0
-  m_Gizmos: 0
+  m_Gizmos: 1
   m_OverrideSceneCullingMask: 6917529027641081856
   m_SceneIsLit: 1
   m_SceneLighting: 1
@@ -966,9 +966,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -848.7422, y: -4.2661643, z: 2.23353}
+    m_Target: {x: -144.77356, y: 822.6701, z: 250.04164}
     speed: 2
-    m_Value: {x: -848.7422, y: -4.2661643, z: 2.23353}
+    m_Value: {x: -144.77356, y: 822.6701, z: 250.04164}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1014,13 +1014,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.0713439, y: 0.9002009, z: -0.16131444, w: -0.39820728}
+    m_Target: {x: 0.13718669, y: 0.32600942, z: -0.047866687, w: 0.93415767}
     speed: 2
-    m_Value: {x: -0.07134237, y: 0.9001816, z: -0.16131099, w: -0.39819872}
+    m_Value: {x: -0.13718669, y: -0.32600942, z: 0.047866687, w: -0.93415767}
   m_Size:
-    m_Target: 10
+    m_Target: 1060.4469
     speed: 2
-    m_Value: 10
+    m_Value: 1060.4469
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1351,7 +1351,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/ScriptableObjects
+    - Assets/Scenes
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -1361,16 +1361,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Scripts/ScriptableObjects
+  - Assets/Scenes
   m_LastFoldersGridSize: 16
   m_LastProjectPath: D:\project\UnityReposi\ExitApartment\ExitApartment
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 274}
-    m_SelectedIDs: 5ea80000
-    m_LastClickedID: 43102
-    m_ExpandedIDs: 0000000002a8000004a8000006a8000008a800000aa800000ca800000ea8000010a8000054a8000000ca9a3b
+    scrollPos: {x: 0, y: 198}
+    m_SelectedIDs: 52a80000
+    m_LastClickedID: 43090
+    m_ExpandedIDs: 0000000002a8000004a8000006a8000008a800000aa800000ca800000ea8000010a8000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1476,9 +1476,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 764
+    y: 749
     width: 1920
-    height: 227
+    height: 242
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
