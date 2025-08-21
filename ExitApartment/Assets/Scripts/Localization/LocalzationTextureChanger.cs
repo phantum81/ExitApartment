@@ -21,6 +21,11 @@ public class LocalzationTextureChanger : MonoBehaviour
     {
         targetRenderer = GetComponent<Renderer>();
         _tableName = localizedSprite.TableReference;
+        localizedSprite.LoadAssetAsync().Completed += handle =>
+        {
+            if (handle.Result != null)
+                OnSpriteChanged(handle.Result);
+        };
     }
     private void OnEnable()
     {

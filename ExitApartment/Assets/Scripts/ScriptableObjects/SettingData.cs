@@ -23,6 +23,11 @@ public class SettingData : ScriptableObject
     private bool isStart;
     public bool IsStart => isStart;
 
+    [SerializeField]
+    private ELanguage eLanguage;
+    public ELanguage ELanguage => eLanguage;
+
+
     public void SetBgmData(float _bgm)
     {
         bgmValue= _bgm;
@@ -50,9 +55,14 @@ public class SettingData : ScriptableObject
     public void SetIsStartData(bool _value)
     {
         isStart = _value;
-        
+        PlayerPrefs.SetInt("isStart", _value ? 1 : 0);
     }
 
+    public void SetLanguageData(ELanguage _language)
+    {
+        eLanguage = _language;
+        PlayerPrefs.SetInt("language", (int)_language);
+    }
 
     public void LoadData()
     {
@@ -60,6 +70,7 @@ public class SettingData : ScriptableObject
         effectSoundValue = PlayerPrefs.GetFloat("effectSoundValue", 0.5f);
         gammaValue = PlayerPrefs.GetFloat("gammaValue", 0f);
         sensitivity = PlayerPrefs.GetFloat("sensitivity", 1.0f);
-        
+        eLanguage = (ELanguage)PlayerPrefs.GetInt("language", 0);
+        isStart = PlayerPrefs.GetInt("isStart", 0) == 1;
     }
 }

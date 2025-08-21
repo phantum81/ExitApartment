@@ -50,12 +50,19 @@ public class LanguageManager : MonoBehaviour
 
     private void Awake()
     {
-        if(!GameManager.Instance.SetData.IsStart)
+        
+
+
+        if (!GameManager.Instance.SetData.IsStart)
             Init();
+
 
         
     }
-
+    private void Update()
+    {
+        eLanguage = GameManager.Instance.SetData.ELanguage;
+    }
 
     public void Init()
     {
@@ -73,7 +80,9 @@ public class LanguageManager : MonoBehaviour
                 eLanguage = ELanguage.English;
                 break;
         }
+        
         ChangeLocale((int)eLanguage);
+        
         InitLocalization(InGameTable, keyMap, localizedCache);
         InitLocalization(InGameTable, errorKeyMap, errorlocalizedCache);
     }
@@ -105,6 +114,7 @@ public class LanguageManager : MonoBehaviour
     {
         if (isChanging)
             return;
+        GameManager.Instance.SetData.SetLanguageData(eLanguage);
 
         isChanging = true;
 

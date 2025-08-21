@@ -391,7 +391,9 @@ public class GameManager : MonoBehaviour
     public void Restart()
     {        
         unitMgr.SkyBox.SetColor("_Tint", unitMgr.SkyboxOringinColor);
+        
         SceneManager.LoadScene("InGameScene");
+
     }
     
     public void IncreaseDieCountAndSave()

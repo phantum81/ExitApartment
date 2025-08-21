@@ -338,7 +338,6 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
     <None Include="Assets\Resources\DownAssets\Quirky Series - Birds Bundle\_Shader\ToonRamp.shader" />
-    <None Include="Assets\AddressableAssetsData\link.xml" />
     <None Include="Assets\Resources\DownAssets\ApartAsset\Apartment Kit\Scenes\BPS Apartment Kit.txt" />
     <None Include="Assets\Resources\DownAssets\OfficeAsset\enviroment\Office building\Read me.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
