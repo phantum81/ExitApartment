@@ -99,6 +99,10 @@ MonoBehaviour:
     m_Key: Paper_wirte
     m_Metadata:
       m_Items: []
+  - m_Id: 20545985236279296
+    m_Key: CloseDoor
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

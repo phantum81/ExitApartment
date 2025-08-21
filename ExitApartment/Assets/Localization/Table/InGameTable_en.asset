@@ -102,6 +102,10 @@ MonoBehaviour:
     m_Localized: What am I supposed to write?
     m_Metadata:
       m_Items: []
+  - m_Id: 20545985236279296
+    m_Localized: The other door has been unlocked
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
