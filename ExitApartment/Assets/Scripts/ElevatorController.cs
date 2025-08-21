@@ -98,14 +98,38 @@ public class ElevatorController : MonoBehaviour
         Vector3 door0Velocity = Vector3.zero;
         Vector3 door1Velocity = Vector3.zero;
 
+        //while (elapsedTime < duration)
+        //{
+        //    doors[0].transform.position = Vector3.SmoothDamp(doors[0].transform.position, origin[0], ref door0Velocity, smoothTime);
+        //    doors[1].transform.position = Vector3.SmoothDamp(doors[1].transform.position, origin[1], ref door1Velocity, smoothTime);
+        //    elapsedTime += Time.deltaTime;
+        //    yield return null;
+        //}
         while (elapsedTime < duration)
         {
-            doors[0].transform.position = Vector3.SmoothDamp(doors[0].transform.position, origin[0], ref door0Velocity, smoothTime);
-            doors[1].transform.position = Vector3.SmoothDamp(doors[1].transform.position, origin[1], ref door1Velocity, smoothTime);
+            // Door 0
+            Vector3 newPos0 = Vector3.SmoothDamp(
+                doors[0].transform.position, origin[0], ref door0Velocity, smoothTime
+            );
+            if (Vector3.Distance(newPos0, origin[0]) < 0.005f)
+                newPos0 = origin[0];
+            doors[0].transform.position = newPos0;
+
+            // Door 1
+            Vector3 newPos1 = Vector3.SmoothDamp(
+                doors[1].transform.position, origin[1], ref door1Velocity, smoothTime
+            );
+            if (Vector3.Distance(newPos1, origin[1]) < 0.005f)
+            {
+
+                newPos1 = origin[1];
+                break;
+            }
+            doors[1].transform.position = newPos1;
+
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-
         // Ensure the doors are exactly at the target position at the end
         doors[0].transform.position = origin[0];
         doors[1].transform.position = origin[1];
