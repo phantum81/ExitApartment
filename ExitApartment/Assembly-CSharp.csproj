@@ -203,6 +203,7 @@
     <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\Models\VignetteModel.cs" />
     <Compile Include="Assets\Resources\DownAssets\ApartAsset\Apartment Kit\Scenes\Quitgame.cs" />
     <Compile Include="Assets\Resources\DownAssets\ApartAsset\_BPS Basic Assets\Common\Scripts and Animations\First Person Player\MouseLook.cs" />
+    <Compile Include="Assets\Scripts\Ui\KeyInput\InputUiKeyBindingController.cs" />
     <Compile Include="Assets\Resources\DownAssets\ApartAsset\Apartment Kit\Common\Scripts &amp; Animation\OvenOpen\OvenFlip.cs" />
     <Compile Include="Assets\Scripts\Item\TrapDoor.cs" />
     <Compile Include="Assets\Scripts\ElevatorController.cs" />
@@ -239,6 +240,7 @@
     <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\Attributes\TrackballAttribute.cs" />
     <Compile Include="Assets\Scripts\Item\WineItem.cs" />
     <Compile Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Runtime\Components\EyeAdaptationComponent.cs" />
+    <Compile Include="Assets\Scripts\Ui\KeyInput\InputKeyButton.cs" />
     <Compile Include="Assets\Scripts\Item\Item.cs" />
     <Compile Include="Assets\Resources\DownAssets\Mimic\Scripts\Movement.cs" />
     <Compile Include="Assets\Scripts\Ui\InGameUiController.cs" />

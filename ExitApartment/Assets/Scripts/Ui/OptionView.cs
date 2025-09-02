@@ -61,6 +61,11 @@ public class OptionView : MonoBehaviour, IOptionMenuView
     [Header("취소"),SerializeField]
     private Button[] cancelBtn = new Button[3];
 
+    [Header("초기화"), SerializeField]
+    private Button initBtn;
+
+
+
     [Header("배경음 슬라이드"), SerializeField]
     private Slider bgmSlider;
     [Header("효과음 슬라이드"), SerializeField]
@@ -79,10 +84,11 @@ public class OptionView : MonoBehaviour, IOptionMenuView
     private TextMeshProUGUI brightTxt;
     [Header("감도 퍼센트"), SerializeField]
     private TextMeshProUGUI sensitivityTxt;
+    [Header("인풋바인딩 컨트롤러"), SerializeField]
+    private InputUiKeyBindingController inputUiCtr;
 
     private OptionPresent optionPresent;
-    
-    
+
     void Awake()
     {
 
@@ -108,11 +114,12 @@ public class OptionView : MonoBehaviour, IOptionMenuView
     // Update is called once per frame
     void Update()
     {
-        if (inputMgr.InputDic[EuserAction.Ui_Menu])
+        if (inputMgr.InputDic[EuserAction.Ui_Menu] && !inputUiCtr.IsWaitingForKey)
         {
             EscClose();
             optionPresent.NoSaveSoundVolume();
             optionPresent.NoSaveGamma();
+            optionPresent.NoSaveInput();
         }
     }
 
@@ -279,7 +286,7 @@ public class OptionView : MonoBehaviour, IOptionMenuView
         keySettingBtn.onClick.AddListener(ShowKeySettingOption);
         brightOptionBtn.onClick.AddListener(ShowBrightOption);
         languageBtn.onClick.AddListener(SetLanguage);
-
+        initBtn.onClick.AddListener(OnClickInitButton);
         AddButtonArrayListener(applyBtn, optionPresent.SaveSoundVolume, optionPresent.SaveGamma, optionPresent.SaveInput);
         AddButtonArrayListener(cancelBtn, optionPresent.NoSaveSoundVolume, optionPresent.NoSaveGamma, optionPresent.NoSaveInput);
     }
@@ -316,6 +323,7 @@ public class OptionView : MonoBehaviour, IOptionMenuView
                     break;
                 case EUiButtonType.Input:
                     _buttons[i].onClick.AddListener(() => _saveInput());
+                    
                     break;
                 case EUiButtonType.Gamma:
                     _buttons[i].onClick.AddListener(() => _saveGamma());
@@ -335,5 +343,22 @@ public class OptionView : MonoBehaviour, IOptionMenuView
 
 
         //Time.timeScale = 1;
+    }
+
+
+    public void NoSaveInput()
+    {
+        inputUiCtr.LoadOriginInputBinding();
+        inputUiCtr.UpdateAllButtonTexts();
+    }
+
+    public void SaveInput()
+    {
+        inputUiCtr.SaveInputBinding();
+    }
+    public void OnClickInitButton()
+    {
+        inputUiCtr.InitViewerInputBinding();
+        inputUiCtr.UpdateAllButtonTexts();
     }
 }

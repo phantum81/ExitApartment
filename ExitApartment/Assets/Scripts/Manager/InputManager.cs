@@ -14,7 +14,7 @@ public class InputManager : MonoBehaviour
     public Vector3 CameraInputDir => cameraInputDir;
 
 
-    private InputBinding inputBind =new InputBinding();
+    private InputBinding inputBind = new InputBinding();
 
     public InputBinding Inputbind => inputBind;
 
@@ -24,6 +24,7 @@ public class InputManager : MonoBehaviour
     private void Awake()
     {
         //GameManager.Instance.inputMgr = this;
+        inputBind.LoadFile();
     }
     // Update is called once per frame
     private void Start()
@@ -66,6 +67,8 @@ public class InputManager : MonoBehaviour
 
     public void Init()
     {
+        //inputBind.ResetAll();
+
         if (inputDic.Count > 0)
             return;
         for(int i = 0; i < inputDic.Count; i++)

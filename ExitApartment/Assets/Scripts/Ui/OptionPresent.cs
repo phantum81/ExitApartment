@@ -78,14 +78,16 @@ public class OptionPresent
     {
         float value = optionMenu.GetSensitivityValue();
         settingData.SetSensitivityData(value);
-
+        optionMenu.SaveInput();
         optionMenu.CloseParentPanel();
     }
 
     public void NoSaveInput()
     {
         optionMenu.SetInputValue(settingData.Sensitivity);        
-        optionMenu.CloseParentPanel(); 
+        optionMenu.NoSaveInput();
+        optionMenu.CloseParentPanel();
+
     }
     #endregion
 

@@ -1,10 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using Unity.VisualScripting;
 using UnityEngine;
-using System;
 using UnityEngine.SceneManagement;
-
 using Action = System.Action;
 public class GameManager : MonoBehaviour
 {
@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
     public AchievementData AchieveData => achieveData;
     #endregion
 
-
+    public string keyfilePath;
 
 
 
@@ -127,7 +127,7 @@ public class GameManager : MonoBehaviour
         }
         saveData.LoadData();
         achieveData.LoadData();
-
+        keyfilePath = Path.Combine(Application.persistentDataPath, "inputBinding.json");
     }
     void Start()
     {

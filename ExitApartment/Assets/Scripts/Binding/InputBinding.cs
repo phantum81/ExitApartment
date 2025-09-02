@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
+using UnityEditor;
 
 [Serializable]
 public class InputBinding
@@ -9,12 +11,14 @@ public class InputBinding
     private Dictionary<EuserAction, KeyCode> bindingDic;
     public Dictionary<EuserAction, KeyCode> BindingDic => bindingDic;
 
+
+    
+
     public InputBinding()
     {
         bindingDic = new Dictionary<EuserAction, KeyCode>();
 
-        
-        ResetAll();
+               
     }
 
     public InputBinding( SerializableInputBinding _sib)
@@ -25,15 +29,22 @@ public class InputBinding
             bindingDic[pair.key] = pair.value;
         }
     }
+    
+    public void ApplyNewBindings(SerializableInputBinding _newBinding)
+    {
+        bindingDic.Clear();
 
+        foreach (var pair in _newBinding.bindPairs)
+        {
+            
+            Bind(pair.key, pair.value, false);
+        }
+    }
 
-    //public void ApplyNewBindings(InputBinding _newBinding)
-    //{
-    //    bindingDic = new Dictionary<EuserAction, KeyCode>(_newBinding.bindingDic);
-    //}
 
     public void Bind(in EuserAction _action, in KeyCode _key, bool _allowOverlap = false)
     {
+        
         if(!_allowOverlap && bindingDic.ContainsValue(_key))
         {
             Dictionary<EuserAction, KeyCode> copy = new Dictionary<EuserAction, KeyCode>(bindingDic);
@@ -87,6 +98,52 @@ public class InputBinding
         SerializableInputBinding sib = new SerializableInputBinding(this);
         string js = JsonUtility.ToJson(sib);
 
+        LocalFileIOHandler.Save(js, GameManager.Instance.keyfilePath);
+
+        LoadFile();
+
+    }
+    public void SaveFile(SerializableInputBinding _sib)
+    {
         
+        string js = JsonUtility.ToJson(_sib);
+
+        LocalFileIOHandler.Save(js, GameManager.Instance.keyfilePath);
+
+        LoadFile();
+
+    }
+
+    public void LoadFile()
+    {
+
+        string jsonStr = LocalFileIOHandler.Load(GameManager.Instance.keyfilePath);
+        if (string.IsNullOrEmpty(jsonStr))
+        {
+            ResetAll();
+            return;
+        }
+
+        SerializableInputBinding sib = JsonUtility.FromJson<SerializableInputBinding>(jsonStr);
+        ApplyNewBindings(sib);
+
+
+
+
+    }
+}
+
+public static class LocalFileIOHandler
+{
+    public static void Save(string jsonStr, string filePath)
+    {
+        File.WriteAllText(filePath, jsonStr);
+    }
+
+    public static string Load(string filePath)
+    {
+        if (File.Exists(filePath))
+            return File.ReadAllText(filePath);
+        return null;
     }
 }

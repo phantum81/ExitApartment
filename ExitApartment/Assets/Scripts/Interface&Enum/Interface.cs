@@ -113,6 +113,11 @@ public interface IOptionMenuView
     public void SetLanguage();
 
 
+
+    public void SaveInput();
+
+    public void NoSaveInput();
+
     //public void ShowSoundOption();
     //public void ShowKeySettingOption();
 
