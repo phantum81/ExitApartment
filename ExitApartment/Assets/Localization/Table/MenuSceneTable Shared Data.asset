@@ -116,6 +116,82 @@ MonoBehaviour:
     m_Key: Recommend
     m_Metadata:
       m_Items: []
+  - m_Id: 27565217786470400
+    m_Key: MoveForward
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27565221259354112
+    m_Key: MoveBack
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27565229320806400
+    m_Key: MoveLeft
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27565232693026816
+    m_Key: MoveRight
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27565237118017536
+    m_Key: Run
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27565238632161280
+    m_Key: Interaction
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27565240599289856
+    m_Key: Throw
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27565242574807040
+    m_Key: Use
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27565245405962240
+    m_Key: Inventory
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27565246748139520
+    m_Key: Slot 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27565250183274496
+    m_Key: Slot 2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27565255761698816
+    m_Key: Slot 3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27565257548472320
+    m_Key: Slot 4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27565259410743296
+    m_Key: Slot 5
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27565261147185152
+    m_Key: Slot 6
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27565270634700800
+    m_Key: Slot 7
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27565274573152256
+    m_Key: Slot 8
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27565278008287232
+    m_Key: Slot 9
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27567761250164736
+    m_Key: Default
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

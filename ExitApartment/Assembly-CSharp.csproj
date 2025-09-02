@@ -266,6 +266,7 @@
     <Compile Include="Assets\Scripts\Manager\UiManager.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\AddressableAssetsData\link.xml" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\Resources\DownAssets\GreenForest\PostProcessing\Resources\Shaders\ScreenSpaceReflection.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
